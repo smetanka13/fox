@@ -1,0 +1,62 @@
+.container h1 {
+    text-align: center;
+}
+.container textarea {
+    width: 100%;
+}
+
+.cnt_all h1{
+
+	font-size: 18px;
+	color: #F7931E;
+	text-align: left;
+	margin-bottom: 10px;
+}
+
+.cnt_all input {
+
+	height: 30px;
+	margin: 20px 0;
+	border-radius: 2px;
+	border:1px solid #F7931E;
+	padding: 5px;
+}
+
+.cnt_all button {
+
+	margin-bottom: 40px;
+	width: 200px;
+	height: 35px;
+}
+
+.cnt_all select {
+
+	height: 30px;
+	margin-bottom: 20px;
+	border-radius: 2px;
+	border-color: #F7931E;
+}
+
+.cnt_all textarea {
+
+	border-radius: 2px;
+	border:1px solid #F7931E;
+	padding: 5px;
+}
+
+.btn-group {
+
+	width: 100%;
+}
+.order {
+	padding: 0 !important;
+}
+.ord_but {
+	height: 100%;
+	width: 100%;
+	border-radius: 0px;
+}
+.cf_ord {
+	display: none;
+	padding-top: 20px;
+}

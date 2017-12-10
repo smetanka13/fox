@@ -1,0 +1,73 @@
+#message_whole {
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(51, 51, 51, 0.5);
+	z-index: 100;
+	cursor: pointer;
+}
+#message_block {
+	font-size: 1.4em;
+	line-height: 135%;
+	width: 100%;
+	height: auto;
+	padding: 20px;
+	z-index: inherit;
+	background-color: #f7f7f7;
+	float: left;
+	text-align: center;
+	position: relative;
+
+}
+#message_cnt {
+	display: none;
+	border-radius: 50px;
+	margin-left: -150px;
+	left: 50%;
+	top: -300px;
+	float: left;
+	width: 300px;
+	height: auto;
+	position: absolute;
+	overflow: hidden;
+	z-index: 101;
+	transition: top 0.3s cubic-bezier(.31,.85,.46,1.12);
+}
+#ajax_load {
+	position: fixed;
+	width: 40px;
+	height: 40px;
+	top: 100%;
+	left: calc(50% - 20px);
+	opacity: 0.8;
+	z-index: 13;
+	display: none;
+	transition: all 0.2s ease;
+}
+
+#ajax_error {
+	display: none;
+	padding: 10px 0;
+	text-align: center;
+	color: #fafafa;
+	z-index: 1000;
+	width: 300px;
+	position: fixed;
+	height: auto;
+	background: #c0392b;
+	border-bottom-right-radius: 5px;
+	font-size: 16px;
+	min-height: 40px;
+}
+
+@media (max-width: 400px) {
+    #to_top {
+		bottom: 60px;
+		right: 10px;
+	}
+	#ajax_error {
+		width: 100%;
+		border-bottom-right-radius: 0;
+	}
+}

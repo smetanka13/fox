@@ -1,0 +1,630 @@
+.header {
+
+	margin-bottom: 0;
+   	z-index: 50 !important;
+}
+
+#header_menu {
+
+	box-shadow: 0px 0px 7px 0px #333333;
+}
+
+.color_head {
+
+	background: #f7a64f; /* Old browsers */
+	background: #f4b673; /* Old browsers */
+	background: -moz-linear-gradient(top, #f4b673 25%, #f4a449 56%, #f7931e 81%, #ea8c27 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #f4b673 25%,#f4a449 56%,#f7931e 81%,#ea8c27 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #f4b673 25%,#f4a449 56%,#f7931e 81%,#ea8c27 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f4b673', endColorstr='#ea8c27',GradientType=0 ); /* IE6-9 */
+}
+
+
+/*FOR MOBILE MENU_HEADER*/
+.menu_icon {
+
+	width: 35px;
+	height: 35px;
+}
+
+/*FOR LINK PAGES*/
+.nav_bar_pages {
+
+	width: 65%;
+	margin-left: 5%;
+	float: left;
+}
+
+.nav_bar_pages2 {
+
+	width: 70%;
+	margin: 0 5%;
+}
+
+.nav_bar_pages2 a {
+
+	color: #F7931E;
+	text-shadow: none !important;
+}
+.nav_bar_pages a,.nav_bar_pages2 a {
+
+	font-weight: bold;
+}
+
+.nav_bar_pages a:hover ,.nav_bar_pages2 a:hover{
+
+	color: #fafafa;
+}
+
+/*FOR OIL PARCE*/
+.oil_parce {
+
+	height: 50px;
+	width: 15%;
+	background: #d3d3d3; /* Old browsers */
+	background: #8e8e8e; /* Old browsers */
+	background: -moz-linear-gradient(top, #8e8e8e 1%, #6b6b6b 35%, #4f4f4f 64%, #333333 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #8e8e8e 1%,#6b6b6b 35%,#4f4f4f 64%,#333333 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #8e8e8e 1%,#6b6b6b 35%,#4f4f4f 64%,#333333 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8e8e8e', endColorstr='#333333',GradientType=0 ); /* IE6-9 */
+	border-radius: 0 20px 20px 0;
+	line-height: 50px;
+	float: left;
+	position: relative;
+}
+
+.oil_parce span {
+
+	display: block;
+	color: #fafafa;
+	text-align: center;
+}
+
+.oil_parce span:hover {
+
+	color: #F7931E;
+}
+
+.oil_parce img {
+
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	top: 15px;
+	right: -17px;
+	transition: all 0.3s ease; 
+}
+.oil_parce:hover img {
+	transform: scale(1.1) translateY(5px);
+}
+
+/*FOR BASKET CASH*/
+.cart {
+
+	width: 10%;
+	height: 40px;
+	border-radius: 20px;
+	background: #fafafa;
+	box-shadow: 0px 0px 7px 0px #333333 inset;
+	margin: 5px 2.5%;
+	float: left;
+	transition: all 0.3s ease;
+}
+
+.cart div {
+
+	width: 30px;
+	height: 30px;
+	background: url('../images/icons/cart.svg');
+	margin: 5px 0;
+	margin-left: 15px;
+	background-size: cover;
+	float: left;
+	position: relative;
+}
+
+.cart span {
+
+	border-radius: 50%;
+	background: #fafafa;
+	border: 1px solid #F7931E;
+	color: #333333;
+	position: absolute;
+	right: -20px;
+}
+
+.cart ul {
+
+	width: calc(100% - 95px);
+	margin: 0;
+	margin-left: 50px;
+	float: right;
+}
+
+.cart ul li {
+
+	font-weight: bold;
+}
+
+.cart p {
+
+	margin-left: 100px;
+	margin-bottom: 20px;
+	line-height: 40px;
+	float: left;
+}
+.cart:hover {
+	box-shadow: 0px 0px 50px -12px #333333 inset;
+}
+/*FOR SECOND PART OF HEADER*/
+.sec_head {
+
+	width: 100%;
+	height: 250px;
+	float: left;
+	background: #d3d3d3; /* Old browsers */
+	background: #8e8e8e; /* Old browsers */
+	background: -moz-linear-gradient(top, #8e8e8e 1%, #6b6b6b 35%, #4f4f4f 64%, #333333 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #8e8e8e 1%,#6b6b6b 35%,#4f4f4f 64%,#333333 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #8e8e8e 1%,#6b6b6b 35%,#4f4f4f 64%,#333333 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8e8e8e', endColorstr='#333333',GradientType=0 ); /* IE6-9 */
+}
+
+.white_part {
+
+	height: 200px;
+}
+
+.logo {
+
+	width: 15%;
+	height: 150px;
+	margin: 25px 2.5%;
+	background: url('../images/main/logo_all.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	float: left;
+	transition: all 0.3s ease;
+}
+.logo:hover {
+	transform: scale(0.9);
+}
+.white_part_back {
+
+	width: 80%;
+	height: 200px;
+	background: #fafafa;
+	background-image: url('../images/main/oil_splash.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	border-radius: 0 0 200px 0;
+	box-shadow: 0px 0px 7px 0px #333333 inset;
+	overflow: hidden;
+	float: left;
+}
+
+.sec_head form {
+
+	width: 15%;
+	margin-right: 5%;
+	float: left;
+}
+
+.sec_head form div {
+
+	position: relative;
+}
+
+.sec_head form div input {
+
+	border-radius: 20px;
+}
+
+.sec_head form div img {
+
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	right: -8px;
+	top: -1px;
+	cursor: pointer;
+}
+
+.head_inf {
+
+	width: 70%;
+	height: 100%;
+	float: left;
+}
+
+.head_inf table {
+
+	width: 80%;
+	height: 100px;
+	margin: 40px 10%;
+}
+
+.head_inf table tbody tr td {
+
+	border: none;
+	color: #333;
+	font-weight: bold;
+	position: relative;
+}
+
+.head_inf table tbody tr td input {
+
+	width: 180px;
+	height: 30px;
+	border-radius: 20px;
+	padding-left: 30px;
+	position: absolute;
+	left: -25px;
+	top: 3px;
+}
+
+.head_inf table tbody tr td img {
+
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	left: -33px;
+	top: 3px;
+}
+
+#call_back {
+
+	z-index: 10;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+#call_back:hover,#sch_icn:hover {
+	transform: scale(1.1) rotate(360deg);
+}
+#sch_icn {
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+.sec_inf_part {
+
+	width: 30%;
+	height: 100%;
+	float: left;
+}
+
+.reglog {
+
+	width: 220px;
+	height: 80px;
+	padding-left: 30px;
+	padding-top: 15px;
+	background: #f5f5f5;
+	border-radius: 0 0 0 200px;
+	box-shadow: 0px 0px 7px 0px #333333 inset;
+	float: right;
+	cursor: pointer;
+	transition: box-shadow 0.3s ease;
+}
+
+.reglog:hover {
+
+	box-shadow: 0px 0px 74px -12px #333333 inset;
+}
+
+.reglog img {
+
+	width: 30px;
+	height: 30px;
+	margin-top: 5px;
+	float: left;
+}
+
+.reglog span {
+
+	line-height: 40px;
+	text-align: center;
+	font-weight: bold;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+/*FOR XS DISP*/ 
+/*SEARCH*/
+.xs_form {
+
+	width: 100%;
+	float: left;
+	position: relative;
+}
+
+.xs_form div input {
+
+	width: 90%;
+	height: 40px;
+	margin: 0px 5%;
+	margin-top: 20px;
+	border-radius: 20px;
+	box-shadow: 0px 0px 7px 0px #333333 inset;
+}
+
+.xs_form div img {
+
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 20px;
+	right: 30px;
+}
+
+.tel img {
+
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 80px !important;
+	right: 30px;
+}
+
+#mb_reg {
+
+	display: none;
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	left: 12px;
+	top: 18px;
+
+	background-image: url('../images/icons/user.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+
+#logo_mob {
+
+	display: none;
+	width: 100px;
+	height: 50px;
+	position: absolute;
+	left:calc(50% - 50px) ;
+	top: 13px;
+
+	background-image: url('../images/logos/main_logo.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+/*RESPONSIVE*/
+@media(min-width: 1920px) {
+
+	/*FOR LINK PAGES*/
+	.nav_bar_pages {
+
+		width: 60%;
+		margin-left: 5%;
+	}
+
+	.nav_bar_pages a ,.nav_bar_pages2 a {
+
+		font-size: 18px;
+	}
+
+	/*FOR OIL PARCE*/
+	.oil_parce span {
+
+		font-size: 18px;
+	}
+}
+
+@media(min-width: 1680px) {
+
+	/*FOR BASKET CASH*/
+	.cart {
+
+		width: 15%;
+		margin: 5px 2.5%;
+		float: right;
+	}
+}
+
+@media(min-width: 1200px) {
+	
+	/*FOR LINK PAGES*/
+	.nav_bar_pages {
+
+		width: 55%;
+		margin-left: 5%;
+	}
+
+	/*FOR BASKET CASH*/
+	.cart {
+
+		width: 230px;
+		margin: 5px 30px;
+		float: right;
+	}
+}
+
+@media(max-width: 1200px) {
+
+	/*FOR OIL PARCE*/
+	.oil_parce span {
+
+		font-size: 12px;
+	}
+
+	/*FOR BASKET CASH*/
+	.cart {
+
+		width: 70px;
+		margin: 5px 20px;
+		float: right;
+	}
+
+	.cart ul {
+
+		display: none;
+	}
+
+	/*FOR LINK PAGES*/
+	.nav_bar_pages2  {
+
+		width: 80% ;
+		margin: 0;
+	}
+
+	/*FOR HEAD INFO*/
+	.head_inf table tbody tr td {
+
+		font-size: 12px;
+	}
+
+	.head_inf table tbody tr td input{
+
+		width: 120px;
+		height: 25px;
+		font-size: 10px;
+	}
+
+	.head_inf table tbody tr td img {
+
+		width: 25px;
+		height: 25px;
+	}
+}
+
+@media(max-width: 992px) {
+
+	/*FOR OIL PARCE*/
+	.oil_parce span {
+
+		font-size: 10px;
+	}
+
+	.oil_parce img {
+
+		width: 30px;
+		height: 30px;
+		top: 15px;
+		right: -15px;
+	}
+
+	/*FOR LINK PAGES*/
+	.nav_bar_pages {
+
+		width: 68%;
+		margin-left: 2%;
+	}
+
+	.nav_bar_pages a ,.nav_bar_pages2 a {
+
+		font-size: 12px;
+	}
+
+	.nav_bar_pages2 a {
+
+		padding: 10px 10px !important;
+	}
+
+	/*FOR HEAD INFO*/
+	.head_inf table tbody tr td {
+
+		font-size: 10px;
+	}
+
+	.head_inf table tbody tr td input{
+
+		width: 120px;
+		height: 25px;
+		font-size: 10px;
+	}
+
+	.head_inf table tbody tr td img {
+
+		width: 25px;
+		height: 25px;
+	}
+}
+
+@media(max-width: 800px) {
+
+	/*FOR LINK PAGES*/
+	.nav_bar_pages {
+
+		width: 68%;
+		margin-left: 2%;
+	}
+
+	.nav_bar_pages a ,.nav_bar_pages2 a {
+
+		font-size: 11px;
+	}
+}
+
+/*FOR COLLAPSE VARIANT*/
+@media(max-width: 767px) {
+
+	/*FOR LINK PAGES*/
+	.nav_bar_pages {
+
+		width: 100%;
+	}
+
+	.nav_bar_pages a, .nav_bar_pages2 a {
+
+		font-size: 16px;
+	}
+
+	/*FOR OIL PARCE*/
+	.oil_parce {
+
+		width: 100%;
+		border-radius: 0;
+	}
+
+	.oil_parce span {
+
+		font-size: 14px;
+	}
+
+	.oil_parce img {
+
+		display: none;
+	}
+
+	/*FOR BASKET CASH*/
+	.cart {
+
+		width: 90%;
+		margin: 5px 5%;
+	}
+
+	/*FOR SECOND PART OF HEADER*/
+	.sec_head {
+
+		display: none;
+	}
+
+	#mb_reg {
+
+		display: block;
+	}
+
+	#logo_mob {
+
+		display: block;
+	}
+}
+
+@media(max-width: 600px) {
+
+	.xs_form div img {
+
+		right: 18px;
+	}
+}
+

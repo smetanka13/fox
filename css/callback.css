@@ -1,0 +1,142 @@
+.com_bt {
+
+	margin-bottom: 50px;
+}
+
+.com_bt button{
+
+	width: 200px;
+	line-height: 25px;
+	color: #333;
+	font-weight: bold;
+}
+.com_bt img {
+
+	width: auto;
+	height: 20px;
+	position: relative;
+	left: -10px;
+}
+
+.com_bl {
+
+	width: 100%;
+	max-width: 1000px;
+	min-height: 100px;
+	margin-bottom: 30px;
+	border-bottom: 1px solid #F7931E;
+	position: relative;
+	float: left;
+}
+
+.fst_com {
+
+	width: 200px;
+	float: left;
+}
+
+.fst_com ul li {
+
+	padding: 5px;
+	color: #7f7f7f;
+}
+
+.cal_img {
+
+	height: 20px;
+	width: 20px;
+	background-image: url("../images/icons/calendar.svg");
+	background-size: 80%;
+	background-position: center left;
+	background-repeat: no-repeat;
+	float: left;
+}
+
+.sc_com {
+
+	width: calc(100% - 200px);
+	height: auto;
+	padding: 15px;
+	float: left;
+}
+
+.c_stars i {
+
+	font-size: 1.6em;
+	color: #F7931E;
+}
+
+.read_more,.read_less {
+
+	height: 20px;
+	position: absolute;
+	bottom: 0;
+	right: 10px;
+	display: none;
+	color: #F7931E;
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+
+	transition: color 0.3s ease;
+}
+
+.read_more:hover,.read_less:hover {
+
+	color: #7f7f7f;
+}
+
+.cm_stars {
+
+	color: #F7931E;
+	margin-top: 10px;
+}
+
+.com_txa {
+
+	width: 100%;
+	height: 100px;
+}
+
+.plms p{
+
+	font-size: 12px;
+	font-weight: bold;
+	cursor: pointer;
+	float: left;
+}
+
+.plms label {
+
+	width: 100%;
+}
+
+.plms textarea {
+
+	height: 50px;
+}
+
+.cr_pl {
+
+	width: 10px;
+	height: 10px;
+	margin-top: 5px;
+}
+
+@media(max-width: 500px) {
+
+	.com_bl {
+
+		min-height: 200px;
+	}
+
+	.fst_com {
+
+		width: 100%;
+	}
+
+	.sc_com {
+
+		width: 100%;
+	}
+}
