@@ -10,6 +10,7 @@ $permitted_actions = [
 	'Product::get',
 	'Product::update',
 	'Product::upload',
+	'Product::getByCookie',
 	'Input::excelUpload',
 	'Category::getCategories',
 	'Category::getParams',

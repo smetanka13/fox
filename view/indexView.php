@@ -2,15 +2,9 @@
 <link rel="stylesheet" type="text/css" href="css/slick.css">
 
 <div id="slider_cnt">
-	<div style="background-image: url(aimages/slider/qwe.jpeg)">
-		<span>Hello</span>
-	</div>
-	<div style="background-image: url(aimages/slider/asd.jpg)">
-		<span></span>
-	</div>
-	<div style="background-image: url(aimages/slider/zxc.jpg)">
-		<span></span>
-	</div>
+	<div style="background-image: url(images/slider/qwe.jpeg)"></div>
+	<div style="background-image: url(images/slider/asd.jpg)"></div>
+	<div style="background-image: url(images/slider/zxc.jpg)"></div>
 </div>
 
 <div id="logo_cnt">
@@ -46,7 +40,7 @@
 <script type="text/javascript" src="js/slick.min.js"></script>
 
 <script type="text/javascript">
-		$(document).ready(function(){
+		$(document).ready(function() {
 
 			var rightArr = $('#s_rg');
 			var leftArr = $('#s_lf');
@@ -57,7 +51,6 @@
 
 			// $('.img_cnt ul li').length;
 			rightArr.click(function(){
-				alert();
 				if (offset >= maxOffset) return;
 				offset += 100;
 				contSl.css('left','-' + offset + '%');
@@ -69,11 +62,6 @@
 				contSl.css('left','-' + offset + '%');
 			});
 
-			if ($('body').css('width') <= 767) {
-
-				n=4;
-			}
-
 			/* --- SLIDER SENSOR --- */
 			var size = window.innerWidth;
 			$('#slider_cnt').slick({
@@ -82,6 +70,7 @@
 				autoplay: true,
 				infinite: true
 			});
+		});
 </script>
 
 <!-- <script type="text/javascript">

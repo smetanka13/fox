@@ -34,10 +34,10 @@
                 </ul>
 
             <a href="cart"><div class="cart">
-                <div><span class="badge">50</span></div>
+                <div><span class="badge">0</span></div>
                 <ul class="list-unstyled">
                     <li>Корзина</li>
-                    <li>UAH:0</li>
+                    <li>UAH: 0</li>
                 </ul>
                 <p class="visible-xs">UAH:0</p>
             </div></a>
@@ -111,6 +111,8 @@
 <script type="text/javascript">
     $( document ).ready(function() {
 
+        updateCartVisual();
+
     	$('#callback').mask("+38 (099) 999-99-99", {autoclear: false});
 
         $(window).scroll(function(){
@@ -139,7 +141,7 @@
             }
         });
 
-        // ДЛЯ ОПОВЕЩЕНИЯ ОБ ОБРАТНОЙ СВЯЗИ 
+        // ДЛЯ ОПОВЕЩЕНИЯ ОБ ОБРАТНОЙ СВЯЗИ
         $('#call_back').click(function(){
             $('#callback_modal').modal('show');
             setTimeout(function(){

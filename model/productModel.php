@@ -195,7 +195,7 @@ class Product {
         }
 
     }
-    public static function get($category, $str) {
+    public static function getApprox($category, $str) {
 
         require_once 'model/searchModel.php';
 
@@ -210,5 +210,11 @@ class Product {
         } else {
             return Search::find($str, $category)[0];
         }
+    }
+    public static function getByCookie($cookie) {
+
+        $cookie = json_decode($cookie, JSON_UNESCAPED_UNICODE);
+
+        return self::selectFromDiffCategories($cookie);
     }
 }

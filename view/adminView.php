@@ -4,9 +4,9 @@
 <script>
     function callback(data) {
         if(data.status == true) {
-            alert('OK');
+            showMessage('Успешная операция.');
         } else {
-            alert('ERROR');
+            showMessage('Ошибка.');
         }
     }
     function getProd(data) {
@@ -183,7 +183,7 @@
             if($('#upload #category').val() != 'Не выбрано' && $('#upload #id').val() != '') {
                 ajaxController({
                     model: 'product',
-                    method: 'get',
+                    method: 'getApprox',
                     callback: getProd,
                     category: $('#upload #category').val(),
                     id: $('#upload #id').val()
@@ -266,6 +266,45 @@
                 excel: $('#excel #file')
             })">Загрузить</button>
         </div>
+        <div id="upload" class="col-md-12 cnt_all">
+            <h1 class="main_title">Оформить товар</h1>
+            <div class="alert alert-danger" role="alert" style="display: none">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Товара с таким идентификатором не найдено.
+            </div>
+            <div class="alert alert-success" role="alert" style="display: none">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                Найден товар: <a href=""></a>
+            </div>
+            <div class="container-fluid">
+                <select id="category">
+                    <option>Не выбрано</option>
+                    <?php
+                        $categories = Category::getCategories();
+
+                        for($i = 0; isset($categories[$i]); $i++) {
+                            echo "<option>".$categories[$i]."</option>";
+                        }
+                    ?>
+                </select>
+            </div>
+            <input type="hidden" id="found_id" value="">
+            <input type="text" id="id" placeholder="НАЗВАНИЕ / АРТИКУЛ">
+            <input type="number" id="quantity" placeholder="Кол-во">
+            <input type="number" id="price" placeholder="Цена">
+            <textarea style="resize: both" id="text" placeholder="Описание"></textarea>
+            Фото товара <br><input type="file" id="img" accept="image/jpeg,image/png">
+            <div id="values"></div>
+            <button class="wth_boot_but confirm_but" onclick="upload()">Оформить</button>
+        </div>
+        <div id="" class="col-md-12 cnt_all">
+            <h1 class="main_title">Добавить статью</h1>
+            <input type="text" id="" placeholder="Заголовок">
+            <textarea style="resize: both" id="" placeholder="Описание статьи"></textarea>
+            Выберите одну или несколько фотографий <br><input type="file" id="" accept="image/jpeg,image/png">
+            <div id="values"></div>
+            <button class="wth_boot_but confirm_but" onclick="upload()">Опубликовать</button>
+        </div>
         <div id="newcategory" class="col-md-12 cnt_all">
             <h1 class="main_title">Новая категория</h1>
             <input type="text" id="name" placeholder="Название категории">
@@ -313,45 +352,6 @@
             </div>
             <div id="values_cnt"></div>
             <button class="wth_boot_but confirm_but" onclick="valuesParse()">Добавить</button>
-        </div>
-        <div id="upload" class="col-md-12 cnt_all">
-            <h1 class="main_title">Оформить товар</h1>
-            <div class="alert alert-danger" role="alert" style="display: none">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                Товара с таким идентификатором не найдено.
-            </div>
-            <div class="alert alert-success" role="alert" style="display: none">
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                Найден товар: <a href=""></a>
-            </div>
-            <div class="container-fluid">
-                <select id="category">
-                    <option>Не выбрано</option>
-                    <?php
-                        $categories = Category::getCategories();
-
-                        for($i = 0; isset($categories[$i]); $i++) {
-                            echo "<option>".$categories[$i]."</option>";
-                        }
-                    ?>
-                </select>
-            </div>
-            <input type="hidden" id="found_id" value="">
-            <input type="text" id="id" placeholder="НАЗВАНИЕ / АРТИКУЛ">
-            <input type="number" id="quantity" placeholder="Кол-во">
-            <input type="number" id="price" placeholder="Цена">
-            <textarea style="resize: both" id="text" placeholder="Описание"></textarea>
-            Фото товара <br><input type="file" id="img" accept="image/jpeg,image/png">
-            <div id="values"></div>
-            <button class="wth_boot_but confirm_but" onclick="upload()">Оформить</button>
-        </div>
-        <div id="" class="col-md-12 cnt_all">
-            <h1 class="main_title">Добавить статью</h1>
-            <input type="text" id="" placeholder="Заголовок">
-            <textarea style="resize: both" id="" placeholder="Описание статьи"></textarea>
-            Выберите одну или несколько фотографий <br><input type="file" id="" accept="image/jpeg,image/png">
-            <div id="values"></div>
-            <button class="wth_boot_but confirm_but" onclick="upload()">Опубликовать</button>
         </div>
     </div>
 </div>
