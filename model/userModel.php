@@ -28,9 +28,9 @@ class User {
         if (preg_match("/'\{\}\[\]\(\)\`\"/", $login))
             throw new InvalidArgumentException("Некоторые символы в логине не позволены.");
         if(strlen($login) <= 6)
-            throw new InvalidArgumentException("Длинна пароля должна первышать 6 символа.");
+            throw new InvalidArgumentException("Длинна пароля должна превышать 6 символов.");
         if(strlen($login) > 32)
-            throw new InvalidArgumentException("Длинна логина не должна первышать 32 символа.");
+            throw new InvalidArgumentException("Длинна логина не должна превышать 32 символов.");
 
         if($confirm != $pass)
             throw new InvalidArgumentException("Повторите пароль верно.");
