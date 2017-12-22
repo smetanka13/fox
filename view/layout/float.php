@@ -160,26 +160,31 @@
                         <h4 class="modal-title main_title">Регистрация</h4>
                 </div>
                     <div class="modal-body">
+                        <h4 class="none_css empty_err">Заполните все поля !</h4>
                       <div class="form-group">
                         <label for="inputEmail" class="enter_reg_lable"><i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i> Email:</label>
                         <input type="email" class="form-control" id="inputEmail" name="mail" placeholder="Введите email">
                       </div>
                       <div class="form-group">
                         <label for="inputText" class="enter_reg_lable"><i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i> Логин:</label>
+                        <i id="lg_lh" class="none_css fa fa-question-circle fa-lg inf_inp" aria-hidden="true" data-toggle="tooltip" data-placement="auto left" title="Длина логина должна быть от 6 до 32 символов !"></i>
                         <input type="text" class="form-control" id="inputLogin" name="login" placeholder="Введите логин">
                       </div>
                       <div class="form-group">
                         <label for="inputPassword" class="enter_reg_lable"><i class="fa fa-unlock-alt fa-lg fa-fw" aria-hidden="true"></i> Пароль:</label>
+                        <i id="ps_lh" class="none_css fa fa-question-circle fa-lg inf_inp" aria-hidden="true" data-toggle="tooltip" data-placement="auto left" title="Длина пароля должна быть от 4 до 32 символов !"></i>
                         <input type="password" class="form-control" id="inputPassword" name="pass" placeholder="Введите пароль">
                       </div>
                       <div class="form-group">
-                        <label for="inputPassword" class="enter_reg_lable"><i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i> Подтвердите пароль:</label>
+                        <label for="confirmPassword" class="enter_reg_lable"><i class="fa fa-lock fa-lg fa-fw" aria-hidden="true"></i> Подтвердите пароль:</label>
+                        <!-- <i id="ps_rp" class="none_css fa fa-question-circle fa-lg inf_inp" aria-hidden="true" data-toggle="tooltip" data-placement="auto left" title="Повторите пароль !"></i> -->
+                        <i id="ps_rptr" class="none_css fa fa-question-circle fa-lg inf_inp" aria-hidden="true" data-toggle="tooltip" data-placement="auto left" title="Повторите пароль верно !"></i>
                         <input type="password" class="form-control" id="confirmPassword" name="cpass" placeholder="Введите пароль">
                       </div>
 
                         <input type="text" style="display: none" name="role" value="14">
 
-                      <button class="btn confirm_but" onclick="ajaxController({
+                      <button id="bt_reg" class="btn confirm_but" onclick="ajaxController({
                           model: 'user',
                           method: 'registrate',
                           callback: foo,
@@ -240,12 +245,80 @@
     function foo() {
         
     }
-
     // for modals
     $('#no_reg').click(function(){
         $('#signin_modal').modal('hide');
     });
     $('.pass_get').click(function(){
         $('#signin_modal').modal('hide');
+    });
+
+    $('#bt_reg').click(function(){
+
+        var empty_val = false;
+
+        // проверяем поля на пустоту
+        if ($('#regist_modal #inputEmail').val() == '') {
+            $('#regist_modal #inputEmail').addClass('alert-danger');
+            empty_val = true;
+        }else{
+            $('#regist_modal #inputEmail').removeClass('alert-danger');
+            empty_val = false;
+        }
+        if ($('#regist_modal #inputLogin').val() == '') {
+            $('#regist_modal #inputLogin').addClass('alert-danger');
+            empty_val = true;
+        }else{
+            $('#regist_modal #inputLogin').removeClass('alert-danger');
+            empty_val = false;
+        }
+        if ($('#regist_modal #inputPassword').val() == '') {
+            $('#regist_modal #inputPassword').addClass('alert-danger');
+            empty_val = true;
+        }else{
+            $('#regist_modal #inputPassword').removeClass('alert-danger');
+            empty_val = false;
+        }
+        if ($('#regist_modal #confirmPassword').val() == '') {
+            $('#regist_modal #confirmPassword').addClass('alert-danger');
+            empty_val = true;
+        }else{
+            $('#regist_modal #confirmPassword').removeClass('alert-danger');
+            empty_val = false;
+        }
+        if (empty_val) {
+            $('#regist_modal .modal-body .empty_err').addClass('block_css');
+        }else{
+           $('#regist_modal .modal-body .empty_err').removeClass('block_css');
+        }
+        // for login check
+        if (($('#regist_modal #inputLogin').val().length < 6)||($('#regist_modal #inputLogin').val().length > 32)) {
+            $('#regist_modal #inputLogin').addClass('alert-danger');
+            $('#regist_modal #lg_lh').addClass('block_inl');
+        }else{
+            $('#regist_modal #inputLogin').removeClass('alert-danger');
+            $('#regist_modal #lg_lh').removeClass('block_inl');
+        }
+        // for password check
+        if (($('#regist_modal #inputPassword').val().length < 4)||($('#regist_modal #inputPassword').val().length > 32)) {
+            $('#regist_modal #inputPassword').addClass('alert-danger');
+            $('#regist_modal #ps_lh').addClass('block_inl');
+        }else{
+            $('#regist_modal #inputPassword').removeClass('alert-danger');
+            $('#regist_modal #ps_lh').removeClass('block_inl');
+        }
+        // for pass and confirm val
+        var pass_val = $('#regist_modal #inputPassword').val();
+        if ((pass_val != '')&&($('#regist_modal #confirmPassword').val() != pass_val)) {
+            $('#regist_modal #confirmPassword').addClass('alert-danger');
+            $('#regist_modal #ps_rptr').addClass('block_inl');
+        }else if ((pass_val != '')&&($('#regist_modal #confirmPassword').val() == pass_val)){
+            $('#regist_modal #confirmPassword').removeClass('alert-danger');
+            $('#regist_modal #ps_rptr').removeClass('block_inl');
+        }
+        else{
+            $('#regist_modal #confirmPassword').removeClass('alert-danger');
+            $('#regist_modal #ps_rptr').removeClass('block_inl');
+        }
     });
 </script>

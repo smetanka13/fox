@@ -15,11 +15,14 @@
 <div class="pr_main_crd container-fluid">
 
 	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-		<div class="pr_img"><img class="img-responsive" src="<?=
+		<a href="<?=!empty($product['image']) ?'catalog/'.$product['category'].'/'.$product['image'] :'images/icons/no_photo.svg'
+		?>" data-lightbox="image-1">
+			<div class="pr_img"><img src="<?=
 			!empty($product['image']) ?
 			'catalog/'.$product['category'].'/'.$product['image'] :
 			'images/icons/no_photo.svg'
 		?>"></div>
+		</a>
 	</div>
 
 	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pr_description">

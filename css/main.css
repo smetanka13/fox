@@ -245,6 +245,9 @@ li > a:focus {
 .modal-body{
     padding: 30px;
 }
+.modal-dialog .form-group{
+    position: relative;
+}
 
 /*FOR ANIMATE CSS*/
 .hidden_css {
@@ -256,11 +259,16 @@ li > a:focus {
     opacity:1;
 }
 
-.none_css {
-
-    display: none;
+.none_css{
+    display: none !important;
 }
-
+.block_css{
+    display: block !important;
+}
+.block_inl
+{
+    display: inline-block !important;
+}
 
 /*FOR REGIST AND SIGN*/
 
@@ -352,6 +360,18 @@ li > a:focus {
     border-radius: 5px;
     padding: 20px;
     float: left;
+}
+
+/*for inf_marker inputs*/
+.inf_inp{
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: absolute;
+    left: -20px;
+    top: 60%;
+}
+.inf_inp:hover{
+    color: #333;
 }
 
 @media(max-width: 767px) {

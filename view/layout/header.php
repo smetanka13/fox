@@ -85,7 +85,6 @@
                 <li><a href="#">Стеклоочистители</a></li>
                 <li><a href="#">Аккумуляторы</a></li>
             </ul>
-
             <form>
               <div class="form-group">
                 <input type="search" class="form-control"  placeholder="Нажмите для поиска">
