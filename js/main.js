@@ -27,7 +27,7 @@ function updateCartVisual() {
             for(i in data.output) {
                 price += data.output[i].price * cart[i].quantity;
             }
-            $('.header .cart ul li:eq(1)').html('UAH: '+price);
+            $('.header .cart ul li:eq(1)').html('UAH: '+price.toFixed(2));
         },
         id: cookie
     })
