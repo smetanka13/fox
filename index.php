@@ -23,7 +23,8 @@ $pages = [
     'callback',
     'search2',
     'pick',
-    'new'
+    'new',
+    'privacy'
 ];
 
 define('URI', $_GET['uri']);

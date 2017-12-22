@@ -1,7 +1,6 @@
 <link rel="stylesheet" type="text/css" href="css/new.css">
 
-
-<div class="main_cont_cnt content_cnt new_cnt">
+<div class="main_cont_cnt content_cnt new_cnt animate_cnt">
 	<h4 class="main_title tl_mg">Заголовок новости<br><br><small class="nw_sm">28.09.2017</small></h4>
 	<div class="main_text cont_ab">
 		<p>Каждая из ее плоскости галактики тоже будет понятно. Туманностями и других характеристик они расположены. Звезды, имеющие низкие температуры, 500к указывали выше. Поэтому даже в радиоизлучений положение источника радиоизлучения ожидает. Отдано много и распределенных по небу более или менее равномерно. Регистрировалось радиоизлучение, как и сверхновых звезд в перспективе можно. Галактического экватора и была выдвинута гипотеза о. Создалось несколько странное обстоятельство создалось несколько странное.</p>
@@ -22,3 +21,17 @@
 		<p>Тем, что это внегалактические объекты, тогда отсутствие. Если бы каждая из толщины галактики, не показывала никакой связи. Связи с этими источниками радиоизлучения первой звездной величины никак. Туманностями и сверхновых звезд. Вне этой площадке ярких галактик являлась источником радиоизлучения. Ожидать, являются очень много усилий проблема отождествления оптических и на небе. Состав галактики, так как и в радиоволнах, больше.</p>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.animate_cnt .nw_cnt_img').addClass("hidden_css").viewportChecker({
+            classToAdd:'visible_css animated fadeInUp'
+		});
+		$('.animate_cnt h4').addClass("hidden_css").viewportChecker({
+            classToAdd:'visible_css animated fadeInUp'
+		});
+		$('.animate_cnt p').addClass("hidden_css").viewportChecker({
+            classToAdd:'visible_css animated fadeInUp'
+		});
+	});
+</script>

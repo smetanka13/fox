@@ -1,14 +1,14 @@
 <?php
 
 class User {
-
+ 
     private static $data = [
         'logged' => FALSE
     ];
 
     public static function registrate($login, $email, $pass, $confirm) {
 
-        if(!preg_match("/^([a-z0-9_\.\-]{1,20})@([a-z0-9\.\-]{1,20})\.([a-z]{2,4})$/is", $email))
+        if(!preg_match("/^([a-z0-9_\.\-]{1,20})@([a-z0-9\.\-]{1,20})\.([a-z]{2,4})$/is", $email)) //
             throw new Exception("Неверный формат email.");
 
         if(Main::select("
@@ -23,14 +23,14 @@ class User {
         if(strlen($pass) > 32)
             throw new InvalidArgumentException("Длинна пароля не должна первышать 32 символа.");
         if (preg_match("/'\{\}\[\]\(\)\`\"/", $pass))
-            throw new InvalidArgumentException("Некоторые символы в пароле не позволены.");
+            throw new InvalidArgumentException("Некоторые символы в пароле не позволены."); //
 
         if (preg_match("/'\{\}\[\]\(\)\`\"/", $login))
-            throw new InvalidArgumentException("Некоторые символы в логине не позволены.");
+            throw new InvalidArgumentException("Некоторые символы в логине не позволены."); //
         if(strlen($login) <= 6)
-            throw new InvalidArgumentException("Длинна пароля должна первышать 6 символа.");
+            throw new InvalidArgumentException("Длинна логина должна превышать 6 символов.");
         if(strlen($login) > 32)
-            throw new InvalidArgumentException("Длинна логина не должна первышать 32 символа.");
+            throw new InvalidArgumentException("Длинна логина не должна превышать 32 символов.");
 
         if($confirm != $pass)
             throw new InvalidArgumentException("Повторите пароль верно.");

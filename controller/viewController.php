@@ -26,10 +26,15 @@
 	<link href="https://fonts.googleapis.com/css?family=Concert+One|Inconsolata|Roboto" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="library/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="library/bootstrap/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
 	<link href="css/main.css" rel="stylesheet" type="text/css"/>
+
 	<!-- for i icons -->
 	<script src="https://use.fontawesome.com/d5e6561c97.js"></script>
-
+	<!-- LIGHTBOX -->
+	<script type="text/javascript" src="library/lightbox2/src/js/lightbox.js"></script>
+	<link rel="stylesheet" type="text/css" href="library/lightbox2/src/css/lightbox.css">
+	
 	<?php
 		$GLOBALS['_TITLE'] = NAME;
 		$_TITLE_MARKER = '<title></title>';
@@ -62,5 +67,9 @@
 <script src="js/jquery.cookie.js"></script>
 <script type="text/javascript" src="library/bootstrap/js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
-
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>
 <?= preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1'.$GLOBALS['_TITLE'].'$3', $_TITLE_MARKER) ?>

@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="css/delivery.css">
 
 
-<div class="main_cont_cnt content_cnt">
+<div class="main_cont_cnt content_cnt animate_cnt">
 	<h4 class="main_title tl_mg">Условия доставки и оплаты</h4>
 	<div class="cont_ads">
 		<div class="main_text cont_ab">
@@ -54,7 +54,6 @@
 				<li>Черкасская область</li>
 				<li>Черновицкая область</li>
 			</ul>
-
 			<h4 class="main_title del_ttl"><i class="fa fa-info fa-fw" aria-hidden="true"></i> Дополнительная информация о доставке и оплате : </h4>
 			<p>Заказы с оплатой при получении, отправляем только после, подтверждения по телефону.</p>
 			<p>Отправка осуществляется в течении 1-5 рабочих дней или по договоренности.</p>
@@ -66,3 +65,20 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.animate_cnt i').addClass("hidden_css").viewportChecker({
+            classToAdd:'visible_css animated fadeInLeft'
+		});
+		$('.animate_cnt h4').addClass("hidden_css").viewportChecker({
+            classToAdd:'visible_css animated fadeInUp'
+		});
+		$('.animate_cnt p').addClass("hidden_css").viewportChecker({
+            classToAdd:'visible_css animated fadeInUp'
+		});
+		$('.animate_cnt ul').addClass("hidden_css").viewportChecker({
+            classToAdd:'visible_css animated fadeInUp'
+		});
+	});
+</script>

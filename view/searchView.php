@@ -127,33 +127,33 @@
 </div> -->
 
 
-
-<div class="sprod_desk_bl">
-    <?php
-        foreach ($prods as $prod) {
-            $img = $prod['image'];
-    ?>
-        <div class="prods_cnt" style="margin-bottom: 50px;">
-            <div class="prods_wrapper">
-                <h3 class="title"><?= $prod['title'] ?></h3>
-                <div class="prods_img_cnt"><img src="<?= "catalog/$category/$img" ?>"></div>
-                <p>
-                <?php
-                    for($j = 0; isset($list_params[$j]); $j++) {
-                        if(empty($prod[$list_params[$j]])) continue;
-                        echo $list_params[$j].': '.$prod[$list_params[$j]].'</br>';
-                    }
-                ?>
-                </p>
-                <div class="prods_bottom">
-                    <a href="<?= 'product?category='.$prod['category'].'&id='.$prod['id'] ?>"><button>КУПИТЬ</button></a>
-                    <h4><?= $prod['price'] ?> грн.</h4>
+<div class="sch_cnt">
+    <div class="sprod_desk_bl">
+        <?php
+            foreach ($prods as $prod) {
+                $img = $prod['image'];
+        ?>
+            <div class="prods_cnt" style="margin-bottom: 50px;">
+                <div class="prods_wrapper">
+                    <h3 class="title"><?= $prod['title'] ?></h3>
+                    <div class="prods_img_cnt"><img src="<?= "catalog/$category/$img" ?>"></div>
+                    <p>
+                    <?php
+                        for($j = 0; isset($list_params[$j]); $j++) {
+                            if(empty($prod[$list_params[$j]])) continue;
+                            echo $list_params[$j].': '.$prod[$list_params[$j]].'</br>';
+                        }
+                    ?>
+                    </p>
+                    <div class="prods_bottom">
+                        <a href="<?= 'product?category='.$prod['category'].'&id='.$prod['id'] ?>"><button>КУПИТЬ</button></a>
+                        <h4><?= $prod['price'] ?> грн.</h4>
+                    </div>
                 </div>
             </div>
-        </div>
-    <?php } ?>
+        <?php } ?>
+    </div>
 </div>
-
 <script type="text/javascript">
     function openCat(num) {
         var type = $("#stype"+num);
