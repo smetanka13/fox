@@ -21,9 +21,11 @@ class Order {
             throw new InvalidArgumentException("Введите адрес.");
         if(empty($phone))
             throw new InvalidArgumentException("Введите ваш номер телефона.");
+        if(!preg_match("/^(\+([0-9]{1,2}) (\([0-9]{3}\)) ([0-9]{3})\-([0-9]{2})\-([0-9]{2}))$/is", $phone))
+            throw new InvalidArgumentException("Неверный формат номера.");
 
         Main::query("
-            INSERT INTO `buyers` (
+            INSERT INTO `order` (
                 `public`, `pay_way`, `delivery_way`,
                 `city`, `address`, `email`,
                 `phone`, `text`, `date`
@@ -33,6 +35,8 @@ class Order {
                 '$phone', '$text', '".TIME."'
             )
         ");
+
+        // setcookie('cart', NULL, TIME, '/');
     }
     public static function check() {
         Main::query("

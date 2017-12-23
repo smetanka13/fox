@@ -34,7 +34,7 @@
 	<!-- LIGHTBOX -->
 	<script type="text/javascript" src="library/lightbox2/src/js/lightbox.js"></script>
 	<link rel="stylesheet" type="text/css" href="library/lightbox2/src/css/lightbox.css">
-	
+
 	<?php
 		$GLOBALS['_TITLE'] = NAME;
 		$_TITLE_MARKER = '<title></title>';
@@ -68,8 +68,8 @@
 <script type="text/javascript" src="library/bootstrap/js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
 <script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip(); 
-});
+	$(document).ready(function(){
+	    $('[data-toggle="tooltip"]').tooltip();
+	});
 </script>
 <?= preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1'.$GLOBALS['_TITLE'].'$3', $_TITLE_MARKER) ?>

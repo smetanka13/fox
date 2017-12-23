@@ -110,7 +110,7 @@
 <script type="text/javascript">
     $( document ).ready(function() {
 
-        updateCartVisual();
+        Cart.updateCartVisual();
 
     	$('#callback').mask("+38 (099) 999-99-99", {autoclear: false});
 
@@ -142,10 +142,21 @@
 
         // ДЛЯ ОПОВЕЩЕНИЯ ОБ ОБРАТНОЙ СВЯЗИ
         $('#call_back').click(function(){
-            $('#callback_modal').modal('show');
-            setTimeout(function(){
-                $('#callback_modal').modal('hide');
-            }, 1000);
+            ajaxController({
+    			model: 'callback',
+    			method: 'add',
+    			callback: function(data) {
+    				if(data.status) {
+                        $('#callback_modal').modal('show');
+                        setTimeout(function(){
+                            $('#callback_modal').modal('hide');
+                        }, 1000);
+    				} else {
+    					console.log('ERROR');
+    				}
+    			},
+    			phone: $('#callback').val()
+    		});
         });
     });
 </script>

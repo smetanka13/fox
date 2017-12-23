@@ -2,15 +2,25 @@
 
 require_once 'model/jsonModel.php';
 
+define('DEBUG', TRUE);
+
 $permitted_actions = [
 	'User::saveLogged',
 	'User::verifyEmail',
 	'User::registrate',
-	// ADMIN
+	'Order::add',
+	'Callback::add',
+	'Product::getByCookie'
+];
+
+$logged_actions = [
+
+];
+
+$admin_actions = [
 	'Product::get',
 	'Product::update',
 	'Product::upload',
-	'Product::getByCookie',
 	'Input::excelUpload',
 	'Category::getCategories',
 	'Category::getParams',
@@ -19,14 +29,6 @@ $permitted_actions = [
 	'Category::addValues',
 	'Category::addParams',
 	'Category::newCategory'
-];
-
-$logged_actions = [
-
-];
-
-$admin_actions = [
-
 ];
 
 $logged_actions = array_merge($logged_actions, $admin_actions);

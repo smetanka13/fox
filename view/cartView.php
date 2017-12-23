@@ -9,7 +9,7 @@
 	<div class="reg_prod_cnt">
 		<h4 class="main_title">Оформление заказа</h4>
 		<form>
-			<div class="form-group">
+			<div class="form-group" id="pay_way">
 			  <select class="form-control">
 			    <option>Выберите способ оплаты</option>
 			    <option>1</option>
@@ -17,7 +17,7 @@
 			    <option>3</option>
 			  </select>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="delivery_way">
 			  <select class="form-control">
 			    <option>Выберите способ доставки</option>
 			    <option>1</option>
@@ -25,27 +25,27 @@
 			    <option>3</option>
 			  </select>
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="public">
 			    <label>ФИО:</label>
 			    <input value="<?php if(User::logged()) echo User::get("public") ?>" type="text" class="form-control" placeholder="Введите ФИО">
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="city">
 			    <label>Город:</label>
 			    <input type="text" class="form-control" placeholder="Введите город">
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="address">
 			    <label>Адрес:</label>
 			    <input type="text" class="form-control" placeholder="Введите адрес">
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="email">
 			    <label>Email:</label>
 			    <input value="<?php if(User::logged()) echo User::get("email") ?>" type="email" class="form-control" placeholder="Введите email">
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="phone">
 			    <label>Телефон:</label>
 			    <input value="<?php if(User::logged()) echo User::get("phone") ?>" type="tel" class="form-control" placeholder="Введите телефон">
 			</div>
-			<div class="form-group">
+			<div class="form-group" id="text">
 			  <textarea class="form-control" rows="5" placeholder="Комментарий к заказу"></textarea>
 			</div>
 			<div type="submit" class="wth_boot_but confirm_but ord_maker">Оформить заказ</div>
@@ -94,7 +94,7 @@
 		<div class="count">
 			<p class="main_title">количество (шт.)</p>
 			<div class="form-group">
-			    <input type="number" onchange="updateCartQuantity(<?= $index ?>, $(this).val())" class="form-control" value="<?= $cookie[$index]['quantity'] ?>"  min="1" >
+			    <input type="number" onchange="Cart.updateCartQuantity(<?= $index ?>, $(this).val())" class="form-control" value="<?= $cookie[$index]['quantity'] ?>"  min="1" >
 			</div>
 		</div>
 		<div class="c_price">
@@ -103,7 +103,7 @@
 				<button class="wth_boot_but confirm_but">Подробнее</button>
 			</a>
 		</div>
-		<img onclick="removeCart(<?= $index ?>, deleteProduct)" class="close_img" src="images/icons/close.svg">
+		<img onclick="Cart.removeCart(<?= $index ?>, deleteProduct)" class="close_img" src="images/icons/close.svg">
 	</div>
 	<?php } ?>
 </div>
@@ -113,22 +113,50 @@
   <div class="modal-dialog">
     <div class="modal-content siglog_window">
       <div class="modal-header">
-        <h4 class="modal-title main_title">Ваш заказ принят ! <br>Подробнее вы можете просмотреть в личном кабинете !</h4>
+        <h4 class="modal-title main_title">
+			Ваш заказ принят!
+			<?php if(User::logged()) echo '<br>Подробнее вы можете просмотреть в личном кабинете!' ?>
+		</h4>
       </div>
     </div>
   </div>
 </div>
 
 <script type="text/javascript">
+
+	$(document).ready(function() {
+		$('#phone input').mask("+38 (099) 999-99-99", {autoclear: false});
+
+		// ДЛЯ ОПОВЕЩЕНИЯ О ПРИНЯТИИ ЗАКАЗА
+		$('.ord_maker').click(function(){
+			ajaxController({
+				model: 'order',
+				method: 'add',
+				callback: function(data) {
+					if(data.status) {
+						$('#order_modal').modal('show');
+						setTimeout(function(){
+							$('#order_modal').modal('hide');
+						}, 2000);
+					} else {
+						console.log('ERROR');
+					}
+				},
+				pay_way: $('#pay_way select').val(),
+				delivery_way: $('#delivery_way select').val(),
+				public: $('#public input').val(),
+				city: $('#city input').val(),
+				address: $('#address input').val(),
+				email: $('#email input').val(),
+				phone: $('#phone input').val(),
+				text: $('#text textarea').val()
+			});
+		});
+	});
+
 	function deleteProduct(index) {
+		Cart.updateCartVisual();
 		$('.c_prod_part[data-id='+index+']').remove();
 	}
 
-	// ДЛЯ ОПОВЕЩЕНИЯ О ПРИНЯТИИ ЗАКАЗА
-	$('.ord_maker').click(function(){
-		$('#order_modal').modal('show');
-		setTimeout(function(){
-			$('#order_modal').modal('hide');
-		}, 2000);
-	});
 </script>
