@@ -94,7 +94,7 @@
 		<div class="count">
 			<p class="main_title">количество (шт.)</p>
 			<div class="form-group">
-			    <input type="number" onchange="Cart.updateCartQuantity(<?= $index ?>, $(this).val())" class="form-control" value="<?= $cookie[$index]['quantity'] ?>"  min="1" >
+			    <input type="number" onchange="Cart.updateQuantity(<?= $index ?>, $(this).val())" class="form-control" value="<?= $cookie[$index]['quantity'] ?>"  min="1" >
 			</div>
 		</div>
 		<div class="c_price">
@@ -103,7 +103,7 @@
 				<button class="wth_boot_but confirm_but">Подробнее</button>
 			</a>
 		</div>
-		<img onclick="Cart.removeCart(<?= $index ?>, deleteProduct)" class="close_img" src="images/icons/close.svg">
+		<img onclick="Cart.remove(<?= $index ?>, deleteProduct)" class="close_img" src="images/icons/close.svg">
 	</div>
 	<?php } ?>
 </div>
@@ -139,7 +139,8 @@
 							$('#order_modal').modal('hide');
 						}, 2000);
 					} else {
-						console.log('ERROR');
+						// data.error - текст ошибки
+						// Cart.empty();
 					}
 				},
 				pay_way: $('#pay_way select').val(),
@@ -155,7 +156,7 @@
 	});
 
 	function deleteProduct(index) {
-		Cart.updateCartVisual();
+		Cart.updateVisual();
 		$('.c_prod_part[data-id='+index+']').remove();
 	}
 

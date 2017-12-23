@@ -89,11 +89,11 @@
 
 
 	$('.pr_description ul li button').click(function() {
-		Cart.addCart(
+		Cart.add(
 			<?= $_GET['id'].',\''.$_GET['category'].'\'' ?>,
 			$('.pr_description ul li input').val(),
 			function() {
-				Cart.updateCartVisual();
+				Cart.updateVisual();
 				$('#cart_modal').modal('show');
 				setTimeout(function(){
 					$('#cart_modal').modal('hide');

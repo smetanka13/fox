@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-=======
-<link rel="stylesheet" type="text/css" href="css/search.css">
-<link rel="stylesheet" type="text/css" href="css/cart.css">
-
->>>>>>> 5216e18fb6934f95cd1da8c42d9e4e813c26ea4c
 <?php
 
     require 'model/searchModel.php';
@@ -33,48 +27,42 @@
 <link rel="stylesheet" type="text/css" href="css/product_block.css">
 
 <div class="reg_prod col-xs-12 col-sm-5 col-md-4 col-lg-4">
-<<<<<<< HEAD
-	<div class="reg_prod_cnt">
-
-=======
 	<div class="reg_prod_cnt" id="menu_f">
 		<?php
-        $categories = Category::getCategories();
-        foreach($categories as $index => $category) {
-            $subcategories = Category::getValues($category, 'Подкатегория');
-    ?>
-
-    <div class="catalog">
-        <div class="cnt">
-            <div class="name" data-id="<?= $index ?>">
-                <?= $category ?>
-                <button><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 533.333 533.333" style="enable-background:new 0 0 533.333 533.333;" xml:space="preserve"><g><path d="M516.667,200H333.333V16.667C333.333,7.462,325.871,0,316.667,0h-100C207.462,0,200,7.462,200,16.667V200H16.667   C7.462,200,0,207.462,0,216.667v100c0,9.204,7.462,16.666,16.667,16.666H200v183.334c0,9.204,7.462,16.666,16.667,16.666h100   c9.204,0,16.667-7.462,16.667-16.666V333.333h183.333c9.204,0,16.667-7.462,16.667-16.666v-100   C533.333,207.462,525.871,200,516.667,200z"/></g></svg></button>
-            </div>
-            <div class="list">
-                <!-- <?php
-                    foreach($subcategories as $subcategory) {
-                        $values = base64_encode(json_encode([
-                            'Подкатегория' => $subcategory
-                        ]));
-                        echo '<a href="search?category='.$category.'&values='.$values.'"><div class="item">'.$subcategory.'</div></a>';
-                    }
-                ?> -->
-                <div class="checkbox filt_cb">
-				  <label><input type="checkbox" value="">Option 1 <small>(+ 50)</small></label>
-				</div>
-				<div class="checkbox filt_cb">
-				  <label><input type="checkbox" value="">Option 2 <small>(+ 50)</small></label>
-				</div>
-				<div class="checkbox filt_cb">
-				  <label><input type="checkbox" value="">Option 3 <small>(+ 50)</small></label>
-				</div>
+            $categories = Category::getCategories();
+            foreach($categories as $index => $category) {
+                $subcategories = Category::getValues($category, 'Подкатегория');
+        ?>
+        <!-- ЗДЕСЬ ВСТАВЛЯЕШЬ БЛОКИ ФИЛЬТРОВ -->
+        <div class="catalog">
+            <div class="cnt">
+                <div class="name" data-id="<?= $index ?>">
+                    <?= $category ?>
+                    <button><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 533.333 533.333" style="enable-background:new 0 0 533.333 533.333;" xml:space="preserve"><g><path d="M516.667,200H333.333V16.667C333.333,7.462,325.871,0,316.667,0h-100C207.462,0,200,7.462,200,16.667V200H16.667   C7.462,200,0,207.462,0,216.667v100c0,9.204,7.462,16.666,16.667,16.666H200v183.334c0,9.204,7.462,16.666,16.667,16.666h100   c9.204,0,16.667-7.462,16.667-16.666V333.333h183.333c9.204,0,16.667-7.462,16.667-16.666v-100   C533.333,207.462,525.871,200,516.667,200z"/></g></svg></button>
+                </div>
+                <div class="list">
+                    <?php
+                        foreach($subcategories as $subcategory) {
+                            $values = base64_encode(json_encode([
+                                'Подкатегория' => $subcategory
+                            ]));
+                            echo '<a href="search?category='.$category.'&values='.$values.'"><div class="item">'.$subcategory.'</div></a>';
+                        }
+                    ?>
+                    <div class="checkbox filt_cb">
+    				  <label><input type="checkbox" value="">Option 1 <small>(+ 50)</small></label>
+    				</div>
+    				<div class="checkbox filt_cb">
+    				  <label><input type="checkbox" value="">Option 2 <small>(+ 50)</small></label>
+    				</div>
+    				<div class="checkbox filt_cb">
+    				  <label><input type="checkbox" value="">Option 3 <small>(+ 50)</small></label>
+    				</div>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- <?php } ?> -->
->>>>>>> 5216e18fb6934f95cd1da8c42d9e4e813c26ea4c
-	</div>
+    <?php } ?>
 </div>
 
 <!-- БЛОК С ТОВАРАМИ -->
@@ -119,4 +107,3 @@
         });
     });
 </script>
-

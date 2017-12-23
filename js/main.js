@@ -8,7 +8,12 @@ $.fn.extend ({
 });
 
 var Cart = {
-    updateCartVisual: function() {
+    empty: function() {
+        $('.header .cart .badge').html('0');
+        $('.header .cart ul li:eq(1)').html('UAH: 0');
+        $.cookie('cart', JSON.stringify(cart));
+    },
+    updateVisual: function() {
 
         var cookie = $.cookie('cart');
         var cart = [];
@@ -33,7 +38,7 @@ var Cart = {
             id: cookie
         })
     },
-    addCart: function(id, category, quantity, callback) {
+    add: function(id, category, quantity, callback) {
 
         var cookie = $.cookie('cart');
         var cart = [];
@@ -58,34 +63,34 @@ var Cart = {
             });
         }
 
-        this.updateCartVisual();
+        this.updateVisual();
 
         $.cookie('cart', JSON.stringify(cart));
         if(typeof(callback) != 'undefined') {
             callback();
         }
     },
-    removeCart: function(index, callback) {
+    remove: function(index, callback) {
         var cookie = $.cookie('cart');
         var cart = [];
         if(cookie != null) {
             var cart = JSON.parse(cookie);
         }
         cart.splice(index, 1);
-        this.updateCartVisual();
+        this.updateVisual();
         $.cookie('cart', JSON.stringify(cart));
         if(typeof(callback) != 'undefined') {
             callback(index);
         }
     },
-    updateCartQuantity: function(index, quantity, callback) {
+    updateQuantity: function(index, quantity, callback) {
         var cookie = $.cookie('cart');
         var cart = [];
         if(cookie != null) {
             var cart = JSON.parse(cookie);
         }
         cart[index].quantity = quantity;
-        this.updateCartVisual();
+        this.updateVisual();
         $.cookie('cart', JSON.stringify(cart));
         if(typeof(callback) != 'undefined') {
             callback(index);

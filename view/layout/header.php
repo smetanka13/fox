@@ -110,7 +110,7 @@
 <script type="text/javascript">
     $( document ).ready(function() {
 
-        Cart.updateCartVisual();
+        Cart.updateVisual();
 
     	$('#callback').mask("+38 (099) 999-99-99", {autoclear: false});
 
