@@ -1,0 +1,9 @@
+.list ul li{
+	color: #F7931E;
+	transition: color 0.3s ease;
+	cursor: pointer;
+	user-select: none;
+}
+.list ul li:hover{
+	color: #333;
+}

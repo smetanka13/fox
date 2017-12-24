@@ -198,6 +198,7 @@
     <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-plus-square fa-fw" aria-hidden="true"></i> Поступающие заказы</a></li>
     <li><a data-toggle="tab" href="#menu1"><i class="fa fa-phone-square fa-fw" aria-hidden="true"></i> Перезвонить</a></li>
     <li><a data-toggle="tab" href="#menu2"><i class="fa fa-download  fa-fw" aria-hidden="true"></i> Загрузка товаров</a></li>
+    <li><a data-toggle="tab" href="#menu3"><i class="fa fa-download  fa-fw" aria-hidden="true"></i> Загрузка cтатей</a></li>
   </ul>
 
     <div class="tab-content">
@@ -291,7 +292,7 @@
                                 <tr>
                                     <td>2</td>
                                     <td>0939463704</td>
-                                    <td class="order">
+                                    <td class="order order_phone">
                                         <div class="wth_boot_but btn-success ord_but">Подтвердить</div>
                                         <div class="cf_ord">Принято</div>
                                     </td>
@@ -419,13 +420,49 @@
                 <button class="wth_boot_but confirm_but" onclick="valuesParse()">Добавить</button>
             </div>
         </div>
+        <div id="menu3" class="tab-pane fade ns_cnt">
+          <h4 class="pr_titles_cat">Загрузка статей.</h4>
+          <p class="mbt">Тут вы можете загрузить новуя статью.</p>
+              <div id="excel" class="col-md-12 cnt_all">
+                <div class="form-group">
+                  <label>Загрузка заголовка</label>
+                  <input type="text" class="form-control" name="" placeholder="Введите заголовок">
+                </div>
+                <div class="form-group">
+                  <label>Загрузка основного текста</label>
+                  <textarea type="text" class="form-control" name="" placeholder="Введите текст новости"></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Загрузка фотографию</label>
+                  <input type="file" class="form-control" name="" placeholder="Введите фотографию">
+                </div>
+                <button class="wth_boot_but confirm_but" onclick="valuesParse()">Добавить</button>
+            </div>
+        </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    $('.order').click(function(){
-        $('.ord_but').fadeOut(0);
-        $('.cf_ord').fadeIn(0);
-        $('.order').addClass('success');
-    });
+    $('.order').click(
+        function(){
+            var order_but = $(this).find('.ord_but');
+            var confirm_but = $(this).find('.cf_ord');
+
+            if (order_but.css('display') == 'block') {
+                order_but.fadeOut(0);
+                confirm_but.addClass('text-success').fadeIn(0);
+            } 
+        }
+    );
+    $('.order_phone').click(
+        function(){
+            var order_but = $(this).find('.ord_but');
+            var confirm_but = $(this).find('.cf_ord');
+
+            if (order_but.css('display') == 'block') {
+                order_but.fadeOut(0);
+                confirm_but.addClass('text-success').fadeIn(0);
+            } 
+        }
+    );
 </script>

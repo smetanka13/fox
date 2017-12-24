@@ -123,7 +123,7 @@
     </div>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function() {
         $('.prods_header').addClass("hidden_css").viewportChecker({
             classToAdd:'visible_css animated fadeInUp'
@@ -132,4 +132,4 @@
             classToAdd:'visible_css animated fadeInUp'
         });
     });
-</script>
+</script> -->

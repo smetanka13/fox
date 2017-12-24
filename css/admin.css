@@ -55,8 +55,20 @@
 	height: 100%;
 	width: 100%;
 	border-radius: 0px;
+	display: block;
 }
 .cf_ord {
 	display: none;
-	padding-top: 20px;
+	padding-top: 10px;
+	display: none;
+}
+.ns_cnt label{
+	width: 100%;
+}
+.ns_cnt input{
+	width: 300px;
+}
+.ns_cnt textarea{
+	width: 80%;
+	height: 100px;
 }
