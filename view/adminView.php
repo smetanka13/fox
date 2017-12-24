@@ -192,7 +192,7 @@
         });
     });
 </script>
-<div class="container pr_main au btm">
+<div class="container- pr_main au btm">
     <h4 class="main_title tl_mg"></h4>
     <ul class="nav nav-tabs pr_tabs">
     <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-plus-square fa-fw" aria-hidden="true"></i> Поступающие заказы</a></li>
@@ -204,7 +204,7 @@
         <div id="home" class="tab-pane fade in active">
             <h4 class="pr_titles_cat">Поступающие заказы</h4>
             <p>Тут будут отображаться все заказы.</p>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="tb_cnt mbt">
                         <table class="table tb_buy table-bordered">

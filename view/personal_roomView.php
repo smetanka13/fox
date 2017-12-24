@@ -4,7 +4,6 @@
 	<h4 class="main_title tl_mg"></h4>
 	<ul class="nav nav-tabs pr_tabs">
     <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i> Покупки</a></li>
-    <li><a data-toggle="tab" href="#menu1"><i class="fa fa-star-half-o fa-fw" aria-hidden="true"></i> Скидки и предложения</a></li>
     <li><a data-toggle="tab" href="#menu2"><i class="fa fa-user  fa-fw" aria-hidden="true"></i> Личные данные</a></li>
   </ul>
 
@@ -88,66 +87,6 @@
 							<td>Самовывоз</td>
 							<td>20.10.2013</td>
 							<td class="success">Заказ принят</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<div id="menu1" class="tab-pane fade">
-	      <h4 class="pr_titles_cat">Скидки и предложения</h4>
-	      <p>Тут вы может увидеть список скидок и выгодных предложений специально для Вас.</p>
-		    <div class="tb_cnt">
-			    <table class="table tb_buy table-bordered">
-					<thead>
-						<tr>
-						<th>Название</th>
-						<th>Условия акции</th>
-						<th>Период акции</th>
-						<th>Статус акции</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>Скидка 50%</td>
-							<td>с 20.10.2013 по 20.10.2013</td>
-							<td class="success">Активный</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>2я единица в подарок</td>
-							<td>с 20.10.2013 по 20.10.2013</td>
-							<td class="success">Активный</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>50%</td>
-							<td>с 20.10.2013 по 20.10.2013</td>
-							<td class="danger">Завершено</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>50%</td>
-							<td>с 20.10.2013 по 20.10.2013</td>
-							<td class="success">Активный</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>Скидка 50% на второй товар</td>
-							<td>с 20.10.2013 по 20.10.2013</td>
-							<td class="danger">Завершено</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>50%</td>
-							<td>с 20.10.2013 по 20.10.2013</td>
-							<td class="danger">Завершено</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>50%</td>
-							<td>с 20.10.2013 по 20.10.2013</td>
-							<td class="success">Активный</td>
 						</tr>
 					</tbody>
 				</table>
