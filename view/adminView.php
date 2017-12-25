@@ -247,7 +247,7 @@
         </div>
         <div id="menu1" class="tab-pane fade">
           <h4 class="pr_titles_cat">Перезвоните по номеру</h4>
-           <div class="container">
+           <div class="container-fluid">
                 <div class="row">
                     <div class="tb_cnt mbt">
                         <table class="table tb_buy table-bordered">

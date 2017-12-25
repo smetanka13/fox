@@ -2,7 +2,7 @@
 
 <div id="menu" class="">
     <div id="close_butt" onclick="trigMenu()"></div>
-    <div class="heading">Каталог</div>
+    <div class="heading mbt">Каталог</div>
 
     <?php
         $categories = Category::getCategories();

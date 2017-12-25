@@ -90,7 +90,7 @@
     /*background-size: contain;background-repeat: no-repeat;background-position: center;*/
 }
 .img_cnt ul li:hover a div img{
-    transform: scale(0.8);
+    transform: translateY(-5px);
 }
 .img_cnt ul li a div img {
 

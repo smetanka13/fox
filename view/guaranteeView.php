@@ -18,11 +18,10 @@
 	</div>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready(function() {
-
 		$('.certificate_ul').addClass("hidden").viewportChecker({
             classToAdd:'visible animated fadeIn',
 		});
 	});
-</script>
+</script> -->
