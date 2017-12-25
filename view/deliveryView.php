@@ -66,7 +66,7 @@
 	</div>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(document).ready(function() {
 		$('.animate_cnt i').addClass("hidden_css").viewportChecker({
             classToAdd:'visible_css animated fadeInLeft'
@@ -81,4 +81,4 @@
             classToAdd:'visible_css animated fadeInUp'
 		});
 	});
-</script>
+</script> -->
