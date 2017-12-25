@@ -216,7 +216,8 @@
                                 <th>Контактный телефон</th>
                                 <th>Код товара</th>
                                 <th>Количество</th>
-                                <th>Сумма</th>
+                                <th>Сумма, грн</th>
+                                <th>Способ оплаты</th>
                                 <th>Способ доставки</th>
                                 <th>Комментарий к заказу</th>
                                 <th>Дата</th>
@@ -230,12 +231,13 @@
                                     <td>0939463704</td>
                                     <td><a href="#">67839992</td></a>
                                     <td>10 шт</td>
-                                    <td>200000 грн</td>
+                                    <td>2000</td>
+                                    <td>Оплата банковской картой</td>
                                     <td>Самовывоз</td>
                                     <td>Позвонить после принятия заказа</td>
                                     <td>20.10.2013</td>
                                     <td class="order">
-                                        <div class="wth_boot_but btn-success ord_but">Подтвердить заказ</div>
+                                        <div class="wth_boot_but ord_but">Подтвердить заказ</div>
                                         <div class="cf_ord">Заказ принят</div>
                                     </td>
                                 </tr>
@@ -263,14 +265,14 @@
                                     <td>2</td>
                                     <td>0939463704</td>
                                     <td class="order order_phone">
-                                        <div class="wth_boot_but btn-success ord_but">Подтвердить</div>
+                                        <div class="wth_boot_but ord_but">Подтвердить</div>
                                         <div class="cf_ord">Принято</div>
                                     </td>
                                 <tr>
                                     <td>2</td>
                                     <td>0939463704</td>
                                     <td class="order">
-                                        <div class="wth_boot_but btn-success ord_but">Подтвердить</div>
+                                        <div class="wth_boot_but ord_but">Подтвердить</div>
                                         <div class="cf_ord">Принято</div>
                                     </td>
                                 </tr>
@@ -278,7 +280,7 @@
                                     <td>2</td>
                                     <td>0939463704</td>
                                     <td class="order">
-                                        <div class="wth_boot_but btn-success ord_but">Подтвердить</div>
+                                        <div class="wth_boot_but ord_but">Подтвердить</div>
                                         <div class="cf_ord">Принято</div>
                                     </td>
                                 </tr>
@@ -403,8 +405,8 @@
                   <textarea type="text" class="form-control" name="" placeholder="Введите текст новости"></textarea>
                 </div>
                 <div class="form-group">
-                  <label>Загрузка фотографию</label>
-                  <input type="file" class="form-control" name="" placeholder="Введите фотографию">
+                  <label>Загрузка фотографий (загрузите 4 фотографии)</label>
+                  <input type="file" class="form-control" name="" placeholder="Загрузите фотографию">
                 </div>
                 <button class="wth_boot_but confirm_but" onclick="valuesParse()">Добавить</button>
             </div>

@@ -50,12 +50,16 @@
 }
 .order {
 	padding: 0 !important;
+	background: #5CB85C;
+	cursor: pointer;
 }
 .ord_but {
 	height: 100%;
 	width: 100%;
 	border-radius: 0px;
 	display: block;
+	color: white;
+	cursor: pointer;
 }
 .cf_ord {
 	display: none;

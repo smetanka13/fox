@@ -12,17 +12,14 @@
 			<div class="form-group" id="pay_way">
 			  <select class="form-control">
 			    <option>Выберите способ оплаты</option>
-			    <option>1</option>
-			    <option>2</option>
-			    <option>3</option>
+			    <option>Оплата банковской картой</option>
 			  </select>
 			</div>
 			<div class="form-group" id="delivery_way">
 			  <select class="form-control">
 			    <option>Выберите способ доставки</option>
-			    <option>1</option>
-			    <option>2</option>
-			    <option>3</option>
+			    <option>Самовывоз</option>
+			    <option>Новая почта</option>
 			  </select>
 			</div>
 			<div class="form-group" id="public">

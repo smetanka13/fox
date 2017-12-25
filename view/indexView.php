@@ -13,22 +13,15 @@
 		<div id="s_rg" style="background-image: url('images/icons/rar.png');"></div>
 		<div class="sl_vp">
 			<ul class="list-inline">
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/elf.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/motul.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/elf.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/idemitsu.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/castrol.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/motul.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/elf.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/idemitsu.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/castrol.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/elf.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/idemitsu.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/castrol.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/motul.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/elf.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/idemitsu.png"></div></a></li>
-				<li><a href="http://www.elf.ua"><div><img src="images/logos/castrol.png"></div></a></li>
+				<li title="Перейти"><a href="http://www.elf.ua"><div><img src="images/logos/elf.png"></div></a></li>
+				<li title="Перейти"><a href="https://www.motul.com/ua/uk"><div><img src="images/logos/motul.png"></div></a></li>
+				<li title="Перейти"><a href="http://www.idemitsu.com/"><div><img src="images/logos/idemitsu.png"></div></a></li>
+				<li title="Перейти"><a href="https://www.castrol.com/ru_ua/ukraine.html"><div><img src="images/logos/castrol.png"></div></a></li>
+				<li title="Перейти"><a href="http://www.ligaco.com/"><div><img src="images/logos/agip.jpg"></div></a></li>
+				<li title="Перейти"><a href="http://www.shell.ua"><div><img src="images/logos/shell.png"></div></a></li>
+				<li title="Перейти"><a href="http://www.total.ua/"><div><img src="images/logos/total.png"></div></a></li>
+				<li title="Перейти"><a href="https://xado.ua/"><div><img src="images/logos/xado.png"></div></a></li>
+				<li title="Перейти"><a href="https://xenum.ua"><div><img src="images/logos/xenum.jpg"></div></a></li>
 			</ul>
 		</div>
 	</div>

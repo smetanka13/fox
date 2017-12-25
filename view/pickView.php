@@ -27,7 +27,7 @@
 <link rel="stylesheet" type="text/css" href="css/product_block.css">
 <link rel="stylesheet" type="text/css" href="css/search2.css">
 
-<div class="reg_prod col-xs-12 col-sm-5 col-md-4 col-lg-4">
+<div class="reg_prod col-xs-12 col-sm-4 col-md-3 col-lg-3">
     <div class="reg_prod_cnt" id="menu_f">
         <?php
             $categories = Category::getCategories();
@@ -104,7 +104,7 @@
 </div>
 
 <!-- БЛОК С ТОВАРАМИ -->
-<div class="cart_prod back ptb col-xs-12 col-sm-7 col-md-8 col-lg-8">
+<div class="cart_prod back ptb col-xs-12 col-sm-8 col-md-9 col-lg-9">
     <!-- <div style="height: 120px;"><h4 class="main_title mbt">Результаты поиска :</h4></div> -->
     <?php
         foreach ($prods as $prod) {

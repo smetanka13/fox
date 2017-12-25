@@ -70,6 +70,11 @@
 </div>
 <?php } ?>
 
+<!-- ДЛЯ "ПОХОЖИЕ ТОВАРЫ" -->
+<div class="container">
+	ДЛЯ "ПОХОЖИЕ ТОВАРЫ"
+</div>
+
 <!-- FOR CART MODAL -->
 <div id="cart_modal" class="modal fade">
   <div class="modal-dialog">
@@ -82,8 +87,6 @@
 </div>
 
 <script type="text/javascript">
-
-
 	$('.pr_description ul li button').click(function() {
 		Cart.add(
 			<?= $_GET['id'].',\''.$_GET['category'].'\'' ?>,
