@@ -57,13 +57,22 @@ class Order {
             $query .= "('{$value['id_prod']}', '{$_COOKIE['quantity']}', '{$_COOKIE['category']}')";
         }
 
-        Product::selectFromDiffCategories($cookie);
+        try {
+            Main::query("
+                INSERT INTO `order_prod` (
+                    `id_prod`, `quantity`, `category`
+                ) VALUES $query
+            ");
+        } catch (RuntimeException $e) {
+            Main::query("
+                INSERT INTO `order_prod` (
+                    `id_prod`, `quantity`, `category`
+                ) VALUES $query
+            ");
+            throw new RuntimeException($e->getMessage());
+        }
 
-        Main::query("
-            INSERT INTO `order_prod` (
-                `id_prod`, `quantity`, `category`
-            ) VALUES $query
-        ");
+
     }
     public static function check() {
         Main::query("

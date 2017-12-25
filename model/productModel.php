@@ -133,21 +133,24 @@ class Product {
 
     public static function selectFromDiffCategories($prods) {
 
+        if(empty($prods)) return;
+
         $query = '';
-        foreach($prods as $index => $prod) {
-            if($index != 0) $query .= ' UNION ';
-            $query .= "(
-                SELECT * FROM `".$prod['category']."`
-                WHERE `id_prod` = '".$prod['id_prod']."'
-                LIMIT 1
-            )";
-        }
         if(count($prods) == 1) {
             $query = "
                 SELECT * FROM `".$prods[0]['category']."`
                 WHERE `id_prod` = '".$prods[0]['id_prod']."'
                 LIMIT 1
             ";
+        } else {
+            foreach($prods as $index => $prod) {
+                if($index != 0) $query .= ' UNION ';
+                $query .= "(
+                    SELECT * FROM `".$prod['category']."`
+                    WHERE `id_prod` = '".$prod['id_prod']."'
+                    LIMIT 1
+                )";
+            }
         }
 
         return self::processProdParams(Main::select($query, TRUE), TRUE);

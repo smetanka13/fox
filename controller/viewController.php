@@ -22,7 +22,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 <link rel="SHORTCUT ICON" href="images/icons/title_icon.png" type="image/x-icon">
-<link href="https://fonts.googleapis.com/css?family=Concert+One|Inconsolata|Roboto+Condensed|" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Concert+One|Inconsolata|Roboto+Condensed" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="library/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="library/bootstrap/css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="css/animate.css">
