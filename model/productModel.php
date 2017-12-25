@@ -3,6 +3,23 @@
 require_once 'model/categoryModel.php';
 
 class Product {
+
+    private static $default_values = [
+        'id_prod',
+        'category',
+        'price',
+        'title',
+        'quantity',
+        'date',
+        'text',
+        'image',
+        'video',
+        'bought',
+        'rating',
+        'articule',
+        'params'
+    ];
+
     public static function add($articule, $title, $price, $category, $spec = []) {
 
         $quantity = Main::select("
@@ -62,12 +79,12 @@ class Product {
         }
 
         Tops::addNewProds(Main::select("
-            SELECT `id` FROM `$category`
+            SELECT `id_prod` FROM `$category`
             WHERE `title` = '$title'
             LIMIT 1
-        ")['id'], $category);
+        ")['id_prod'], $category);
     }
-    public static function update($id, $articule, $title, $price, $category, $spec = []) {
+    public static function update($id_prod, $articule, $title, $price, $category, $spec = []) {
 
         if($articule != NULL) {
             $articule == "`articule` = '$articule',";
@@ -87,7 +104,7 @@ class Product {
             `title` = '$title',
             `price` = '$price',
             `category` = '$category'
-            WHERE `id` = '$id'
+            WHERE `id_prod` = '$id_prod'
             LIMIT 1
         ");
 
@@ -108,7 +125,7 @@ class Product {
             `price` = '$price',
             `category` = '$category',
             `text` = '$text'
-            WHERE `id` = '$id_prod'
+            WHERE `id_prod` = '$id_prod'
             LIMIT 1
         ");
 
@@ -121,27 +138,49 @@ class Product {
             if($index != 0) $query .= ' UNION ';
             $query .= "(
                 SELECT * FROM `".$prod['category']."`
-                WHERE `id` = '".$prod['id']."'
+                WHERE `id_prod` = '".$prod['id_prod']."'
                 LIMIT 1
             )";
         }
         if(count($prods) == 1) {
             $query = "
                 SELECT * FROM `".$prods[0]['category']."`
-                WHERE `id` = '".$prods[0]['id']."'
+                WHERE `id_prod` = '".$prods[0]['id_prod']."'
                 LIMIT 1
             ";
         }
 
-        if($prods != NULL) {
+        return self::processProdParams(Main::select($query, TRUE), TRUE);
 
-            $result = Main::select($query, TRUE);
+    }
 
-            return $result;
+    public static function processProdParams($input, $array = FALSE) {
+
+        if($array) {
+
+            foreach($input as $i => $prod) {
+                $input[$i]['params'] = [];
+                foreach($prod as $key => $value) {
+                    if(!Main::lookSame(self::$default_values, $key)) {
+                        $input[$i]['params'][$key] = $value;
+                        unset($input[$i][$key]);
+                    }
+                }
+            }
+
         } else {
-            return FALSE;
+
+            $input['params'] = [];
+            foreach($input as $key => $value) {
+                if(!Main::lookSame(self::$default_values, $key)) {
+                    $input['params'][$key] = $value;
+                    unset($input[$key]);
+                }
+            }
+
         }
 
+        return $input;
     }
 
     public static function upload($category, $id_prod, $text, $price, $quantity, $params, $img) {
@@ -161,7 +200,7 @@ class Product {
 
         $prev_image = Main::select("
             SELECT `image` FROM `$category`
-            WHERE `id` = '$id_prod'
+            WHERE `id_prod` = '$id_prod'
             LIMIT 1
         ")['image'];
 
@@ -186,7 +225,7 @@ class Product {
             Main::query("
                 UPDATE `$category`
                 SET `image` = '$image'
-                WHERE `id` = '$id_prod'
+                WHERE `id_prod` = '$id_prod'
                 LIMIT 1
             ");
         } catch (RuntimeException $e) {
@@ -202,19 +241,49 @@ class Product {
         if(empty($str)) return FALSE;
 
         if($str[0] == ':') {
-            return Main::select("
+            return self::processProdParams(Main::select("
                 SELECT * FROM `$category`
                 WHERE `articule` = '".substr($str, 1)."'
                 LIMIT 1
-            ");
+            "));
         } else {
             return Search::find($str, $category)[0];
         }
     }
-    public static function getByCookie($cookie) {
+    public static function getFullPriceCookie($cookie) {
 
         $cookie = json_decode($cookie, JSON_UNESCAPED_UNICODE);
 
-        return self::selectFromDiffCategories($cookie);
+        $prods = self::selectFromDiffCategories($cookie);
+
+        $price = 0;
+        foreach($prods as $index => $prod) {
+            $price += $prod['price'] * $cookie[$index]['quantity'];
+        }
+        return $price;
+    }
+    public static function getById($category, $id_prod) {
+
+        if(is_array($id_prod)) {
+
+            $query = '';
+            foreach($input as $i => $value) {
+                if($i > 0) $query .= " OR ";
+                $query .= " `id_prod` = '$value' ";
+            }
+
+            $result = Main::select("
+                SELECT * FROM `$category`
+                WHERE $query
+            ", TRUE);
+        } else {
+            $result = Main::select("
+                SELECT * FROM `$category`
+                WHERE `id_prod` = '$id_prod'
+                LIMIT 1
+            ");
+        }
+
+        return self::processProdParams($result, is_array($id_prod));
     }
 }

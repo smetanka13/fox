@@ -10,7 +10,7 @@ $permitted_actions = [
 	'User::registrate',
 	'Order::add',
 	'Callback::add',
-	'Product::getByCookie'
+	'Product::getFullPriceCookie'
 ];
 
 $logged_actions = [

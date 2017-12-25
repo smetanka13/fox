@@ -66,15 +66,15 @@ class Input {
                     $tmp_params[$param] = $row[$pos];
                 }
 
-                $id = Main::select("
-                    SELECT `id` FROM `".$category."`
-                    WHERE `title` = '".$row['C']."'
+                $id_prod = Main::select("
+                    SELECT `id` FROM `$category`
+                    WHERE `title` = '{$row['C']}'
                     LIMIT 1
-                ")['id']
+                ")['id_prod']
 
-                if($id) {
+                if($id_prod) {
                     Product::update(
-                        $id,
+                        $id_prod,
                         $row['B'],
                         $row['C'],
                         $row['E'],

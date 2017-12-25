@@ -2,14 +2,9 @@
 	# --- Это не трогай, это я беру из БД товар по категории и айди из адреса --- #
 	# --- < ?=  ? > Этот тег используется для вывода переменной PHP --- #
 
-	require_once 'model/categoryModel.php';
+	require_once 'model/productModel.php';
 
-	$product = Main::select("
-		SELECT * FROM `".$_GET['category']."`
-		WHERE `id` = '".$_GET['id']."'
-		OR `articule` = '".$_GET['id']."'
-		LIMIT 0, 1
-	");
+	$product = Product::getById($_GET['category'], $_GET['id']);
 ?>
 <link rel="stylesheet" href="css/card_prod_card.css">
 <div class="container-fluid pr_bck">
@@ -50,15 +45,14 @@
 				<p class="main_title">Характерстики товара</p>
 				<dl class="dl-horizontal">
 					<?php
-						# --- Вывод параметров, которые есть в этой категории --- #
-						$params = Category::getParams($_GET['category']);
+						# --- Вывод параметров --- #
 
-						foreach($params as $param) {
-							if(!empty($product[$param]))
-								echo '
-									<dt>'.$param.'</dt>
-									<dd>'.$product[$param].'</dd>
-								';
+						foreach($product['params'] as $param => $val) {
+							if(!empty($val))
+								echo "
+									<dt>$param</dt>
+									<dd>$val</dd>
+								";
 						}
 					?>
 				</dl>

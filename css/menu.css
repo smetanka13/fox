@@ -4,7 +4,7 @@
     background: #fafafa;
     position: fixed;
     z-index: 51;
-    border-right: 2px solid #F7931E;
+    box-shadow: 0 0 10px #000;
     transition: left 0.3s ease;
     left: -272px;
 }
@@ -62,7 +62,8 @@
     text-align: center;
     line-height: 30px;
     font-size: 20px;
-    color: #F7931E;
+    color: #aaa;
+    text-shadow: 0 0 2px #000;
     padding: 10px 0;
     background: #d3d3d3;
     background: #8e8e8e;

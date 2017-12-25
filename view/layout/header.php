@@ -37,9 +37,9 @@
                 <div><span class="badge">0</span></div>
                 <ul class="list-unstyled">
                     <li>Корзина</li>
-                    <li>UAH: 0</li>
+                    <li>UAH: 0.00</li>
                 </ul>
-                <p class="visible-xs">UAH:0</p>
+                <p class="visible-xs">UAH: 0.00</p>
             </div></a>
 
         </div><!-- /.navbar-collapse -->

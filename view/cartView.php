@@ -98,8 +98,8 @@
 			</div>
 		</div>
 		<div class="c_price">
-			<p class="main_title"><?= $product['price'] ?> &euro;</p>
-			<a href="product_card?category=<?= $product['category'] ?>&id=<?= $product['id'] ?>">
+			<p class="main_title"><?= $product['price'] * $cookie[$index]['quantity'] ?> &euro; (<?= $product['price'] ?> &euro;)</p>
+			<a href="product?category=<?= $product['category'] ?>&id=<?= $product['id_prod'] ?>">
 				<button class="wth_boot_but confirm_but">Подробнее</button>
 			</a>
 		</div>

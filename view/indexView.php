@@ -37,7 +37,7 @@
 <?php require_once 'view/layout/tops.php'; ?>
 
 <script type="text/javascript" src="js/slide.js" ></script>
-<script type="text/javascript" src="js/slick.min.js"></script>
+<script type="text/javascript" src="js/addons/slick.min.js"></script>
 
 <script type="text/javascript">
 		$(document).ready(function() {

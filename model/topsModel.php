@@ -21,13 +21,13 @@ class Tops {
         for($i = 0; isset($categories[$i]); $i++) {
             if($i > 0)
                 $query .= "
-                    UNION (SELECT `id`, `bought`, `category` FROM `".$categories[$i]."`
+                    UNION (SELECT `id_prod`, `bought`, `category` FROM `".$categories[$i]."`
                     ORDER BY `bought`
                     LIMIT 0, 10)
                 ";
             else
                 $query .= "
-                    (SELECT `id`, `bought`, `category` FROM `".$categories[$i]."`
+                    (SELECT `id_prod`, `bought`, `category` FROM `".$categories[$i]."`
                     ORDER BY `bought`
                     LIMIT 0, 10)
                 ";
@@ -35,7 +35,7 @@ class Tops {
 
         if(count($categories) == 1) {
             $query = "
-                SELECT `id`, `bought`, `category` FROM `".$categories[0]."`
+                SELECT `id_prod`, `bought`, `category` FROM `".$categories[0]."`
             ";
         }
 
@@ -52,7 +52,7 @@ class Tops {
         Main::query("
             UPDATE `variable`
             SET `data` = '".json_encode($prods, JSON_UNESCAPED_UNICODE)."'
-            WHERE `name` = 'top_prods'
+            WHERE `name` = 'hot_prods'
         ");
         Main::query("
             UPDATE `variable`
@@ -61,10 +61,10 @@ class Tops {
         ");
 
     }
-    static public function getTopProds() {
+    static public function getHotProds() {
         $prods = Main::select("
             SELECT `data` FROM `variable`
-            WHERE `name` = 'top_prods'
+            WHERE `name` = 'hot_prods'
             LIMIT 0, 1
         ")['data'];
         return Product::selectFromDiffCategories(json_decode($prods, TRUE));
@@ -77,7 +77,7 @@ class Tops {
         ")['data'];
         return Product::selectFromDiffCategories(json_decode($prods, TRUE));
     }
-    static public function addNewProds($id, $category) {
+    static public function addNewProds($id_prod, $category) {
         $new_prods = Main::select("
             SELECT `data` FROM `variable`
             WHERE `name` = 'new_prods'
@@ -90,7 +90,7 @@ class Tops {
             $new_prods = [];
 
         array_unshift($new_prods, [
-            'id' => $id,
+            'id_prod' => $id_prod,
             'category' => $category
         ]);
 

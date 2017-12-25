@@ -97,10 +97,10 @@ class Category {
         try {
             Main::query("
                 CREATE TABLE `$name` (
-                    id int(8) NOT NULL AUTO_INCREMENT,
+                    id mediumint NOT NULL AUTO_INCREMENT,
                     category varchar(64) NOT NULL,
                     price float UNSIGNED NOT NULL,
-                    title varchar(200) UNIQUE NOT NULL,
+                    title varchar(64) UNIQUE NOT NULL,
                     quantity int(11) UNSIGNED NOT NULL,
                     date int(20) UNSIGNED NOT NULL,
                     text mediumtext NOT NULL,

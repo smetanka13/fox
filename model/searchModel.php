@@ -1,6 +1,7 @@
 <?php
 
 require_once 'model/categoryModel.php';
+require_once 'model/productModel.php';
 
 class Search {
 
@@ -28,7 +29,7 @@ class Search {
         if(!Main::lookSame(['DESC', 'ASC'], $direction))
             throw new InvalidArgumentException("Invalid direction.");
 
-        if(!Main::lookSame(['bought', 'price', 'id'], $sort_by))
+        if(!Main::lookSame(['bought', 'price', 'id_prod'], $sort_by))
             throw new InvalidArgumentException("Invalid sort filter.");
 
         # ---- Формирование запроса по спецификациям ---- #
@@ -52,15 +53,14 @@ class Search {
         }
 
         # ---- Формирование запроса по поисковым словам ---- #
-        $srch_string = explode(" ", $srch);
-        for($i = 0; isset($srch_string[$i]) && $srch_string[$i] != NULL; $i++) {
+        $words = explode(" ", $srch);
+        foreach($words as $index => $word) {
             if($i > 0) {
-                $query_srch_title .= " AND `title` LIKE '%".$srch_string[$i]."%' ";
-                $query_srch_text .= " AND `text` LIKE '%".$srch_string[$i]."%' ";
-            } else {
-                $query_srch_title .= " `title` LIKE '%".$srch_string[$i]."%' ";
-                $query_srch_text .= " `text` LIKE '%".$srch_string[$i]."%' ";
+                $query_srch_title .= " AND ";
+                $query_srch_text .= " AND ";
             }
+            $query_srch_title .= " `title` LIKE '%$word%' ";
+            $query_srch_text .= " `text` LIKE '%$word%' ";
         }
 
         $list_params = Category::getParams($category);
@@ -72,19 +72,14 @@ class Search {
         if($query_srch_text == "")
             $query_srch_text = " `text` LIKE '%%' ";
 
-        for($i = 0; isset($list_params[$i]); $i++) {
+        foreach($list_params as $i => $param) {
             $tmp = "";
-            $srch_string[0];
-            for($j = 0; isset($srch_string[$j]) && $srch_string[$j] != NULL; $j++) {
-                if($j > 0) {
-                    $tmp .= " AND `".$list_params[$i]."` LIKE '%".$srch_string[$j]."%' ";
-                } else {
-                    $tmp .= " `".$list_params[$i]."` LIKE '%".$srch_string[$j]."%' ";
-                }
+            foreach($words as $j => $word) {
+                if($j > 0) $tmp .= ' AND ';
+                $tmp .= " `$param` LIKE '%$word%' ";
             }
 
-            if($tmp == "")
-                break;
+            if(empty($tmp)) break;
 
             $params_scan .= "
                 OR (
@@ -107,7 +102,7 @@ class Search {
             $query_sort
         ", TRUE);
 
-        $important_part = array_slice($result, 0, self::$max_finds);
+        $important_part = Product::processProdParams(array_slice($result, 0, self::$max_finds), TRUE);
 
         return [
             'found' => count($important_part),

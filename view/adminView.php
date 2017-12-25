@@ -225,36 +225,6 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Фионов Юрий Сергеевич</td>
-                                    <td>0939463704</td>
-                                    <td><a href="#">67839992</td></a>
-                                    <td>10 шт</td>
-                                    <td>200000 грн</td>
-                                    <td>Самовывоз</td>
-                                    <td>Позвонить после принятия заказа</td>
-                                    <td>20.10.2013</td>
-                                    <td class="order">
-                                        <div class="wth_boot_but btn-success ord_but">Подтвердить заказ</div>
-                                        <div class="cf_ord">Заказ принят</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Фионов Юрий Сергеевич</td>
-                                    <td>0939463704</td>
-                                    <td><a href="#">67839992</td></a>
-                                    <td>10 шт</td>
-                                    <td>200000 грн</td>
-                                    <td>Самовывоз</td>
-                                    <td>Позвонить после принятия заказа</td>
-                                    <td>20.10.2013</td>
-                                    <td class="order">
-                                        <div class="wth_boot_but btn-success ord_but">Подтвердить заказ</div>
-                                        <div class="cf_ord">Заказ принят</div>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td>3</td>
                                     <td>Фионов Юрий Сергеевич</td>
                                     <td>0939463704</td>
@@ -316,7 +286,7 @@
                         </table>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
 
          <div id="menu2" class="tab-pane fade">
@@ -451,7 +421,7 @@
             if (order_but.css('display') == 'block') {
                 order_but.fadeOut(0);
                 confirm_but.addClass('text-success').fadeIn(0);
-            } 
+            }
         }
     );
     $('.order_phone').click(
@@ -462,7 +432,7 @@
             if (order_but.css('display') == 'block') {
                 order_but.fadeOut(0);
                 confirm_but.addClass('text-success').fadeIn(0);
-            } 
+            }
         }
     );
 </script>
