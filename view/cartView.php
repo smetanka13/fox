@@ -54,7 +54,7 @@
 </div>
 
 <!-- БЛОК С ТОВАРАМИ -->
-<div class="cart_prod col-xs-12 col-sm-7 col-md-8 col-lg-8">
+<div class="cart_prod cp_wth_sh col-xs-12 col-sm-7 col-md-8 col-lg-8">
 	<h4 class="main_title au">На данный момент в корзине нет товаров!</h4>
 	<?php
 
