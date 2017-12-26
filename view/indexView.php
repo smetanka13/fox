@@ -44,7 +44,7 @@
 		</ul>
 	</div>
 </div>
-<div class="container-fluid in_bl ptb">
+<div class="container-fluid in_bl">
 	<div class="container-fluid"><h4 class="main_title">Новости</h4></div>
 	<div class="wins col-xs-12 col-sm-12 col-md-6 col-lg-6" style="background-image: url('images/main/3a.jpg');">
 		<a href="#"><div class="cover">Нажмите, чтобы перейти к новости</div></a>
