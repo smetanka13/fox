@@ -17,7 +17,7 @@ var Cart = {
         var cookie = $.cookie('cart');
         if(cookie != null) {
             var cart = JSON.parse(cookie);
-            $('.header .cart .badge').html(cart.length);
+            $('.header .cart .badge').html(Object.keys(cart).length);
         } else {
             return;
         }

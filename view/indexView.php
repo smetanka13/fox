@@ -2,9 +2,14 @@
 <link rel="stylesheet" type="text/css" href="css/slick.css">
 
 <div id="slider_cnt">
-	<div style="background-image: url(images/slider/qwe.jpeg)"></div>
-	<div style="background-image: url(images/slider/asd.jpg)"></div>
-	<div style="background-image: url(images/slider/zxc.jpg)"></div>
+	<?php
+
+        $items = array_diff(scandir('./images/slider'), array('..', '.'));
+
+        foreach($items as $item) {
+    ?>
+	<div style="background-image: url(images/slider/<?= $item ?>)"></div>
+	<?php } ?>
 </div>
 
 <div id="logo_cnt">
