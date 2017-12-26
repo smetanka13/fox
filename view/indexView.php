@@ -29,6 +29,31 @@
 
 <?php require_once 'view/layout/tops.php'; ?>
 
+<div class="container-fluid ind_ab ptb">
+	<h4 class="main_title pbm">Почему именно FoxMotors?</h4>
+	<div class="container ind_ab_cnt">
+		<ul class="container-fluid list-inline ">
+			<li class="main_text"><h4 class="main_title mbt au"><i class="fa fa-money fa-4x" aria-hidden="true"></i></h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></li>
+			<li class="main_text"><h4 class="main_title mbt au"><i class="fa fa-globe fa-4x" aria-hidden="true"></i></h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></li>
+			<li class="main_text"><h4 class="main_title mbt au"><i class="fa fa-shopping-cart  fa-4x" aria-hidden="true"></i></h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></li>
+			<li class="main_text"><h4 class="main_title mbt au"><i class="fa fa-shopping-cart  fa-4x" aria-hidden="true"></i></h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></li>
+		</ul>
+	</div>
+</div>
+<div class="container-fluid in_bl ptb">
+	<div class="container-fluid"><h4 class="main_title">Новости</h4></div>
+	<div class="wins col-xs-12 col-sm-12 col-md-6 col-lg-6" style="background-image: url('images/main/3a.jpg');">
+		<div class="cover"><a href="#">TEXT</a></div>
+	</div>
+    <div class="wins col-xs-12 col-sm-12 col-md-6 col-lg-6" style="background-image: url('images/main/vm.jpg');">
+    	<div class="cover"><a href="#">TEXT</a></div>
+    </div>
+</div>
+
 <script type="text/javascript" src="js/slide.js" ></script>
 <script type="text/javascript" src="js/addons/slick.min.js"></script>
 
