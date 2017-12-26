@@ -248,11 +248,21 @@ li > a:focus {
     padding: 20px;
     border-bottom: none;
 }
+.modal-dialog{
+    border-radius: 5px !important;
+}
 .modal-body{
     padding: 30px;
 }
 .modal-dialog .form-group{
     position: relative;
+}
+.err_modal{
+    background:#e74c3c !important;
+    background-image: none;
+}
+.err_modal h4{
+    color:#fff;
 }
 
 /*FOR ANIMATE CSS*/
@@ -285,6 +295,8 @@ li > a:focus {
     background: #f5f5f5;
     background-image: url(../images/main/f3.jpg);
     background-repeat: repeat-y;background-size: cover;
+    box-shadow: none;
+    border: none;
 }
 
 .social_reg {

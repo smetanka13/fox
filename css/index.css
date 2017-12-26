@@ -50,7 +50,7 @@
     padding:15px;
     color: #fff;
     border-bottom: 2px solid #F7931E;
-    /*border-top: 2px solid #F7931E;*/
+    border-top: 2px solid #F7931E;
 }
 
 /*2blocks*/
@@ -208,11 +208,20 @@
     .ind_ab_cnt ul{
         padding-left: 0!important;
     }
+    .wins{
+        height: 250px;
+    }
 }
 
 @media(min-width: 1420px){
 
-    .in_bl{
+    .wins{
         height: 500px;
+    }
+}
+@media(min-width: 1600px){
+
+    .wins{
+        height: 600px;
     }
 }

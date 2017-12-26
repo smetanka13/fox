@@ -118,6 +118,16 @@
     </div>
   </div>
 </div>
+<!-- FOR ERROR ORDER MODAL -->
+<div id="err_order_modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content siglog_window err_modal">
+      <div class="modal-header">
+        <h4 class="modal-title main_title">Пожалуйста, заполните все поля верно !</h4>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
 
@@ -138,6 +148,10 @@
 					} else {
 						// data.error - текст ошибки
 						// Cart.empty();
+						$('#err_order_modal').modal('show');
+						setTimeout(function(){
+							$('#err_order_modal').modal('hide');
+						}, 2000);
 					}
 				},
 				pay_way: $('#pay_way select').val(),

@@ -1,7 +1,7 @@
 footer {
 
   width: 100%;
-  height: 63px;
+  height: 70px;
   background: #333;
  /* border-top: 3px solid #F7931E;*/
   /*box-shadow: 0px 0px 7px 0px #333333;*/
@@ -17,10 +17,12 @@ footer {
 	text-align: center;
 }
 .foot_nav ul {
-	height: 60px;
-	line-height: 70px;
+	height: inherit;
 	text-align: center;
 	margin: 0;
+	display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .foot_nav ul a,.foot_nav ul li {
 
