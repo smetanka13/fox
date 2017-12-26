@@ -92,7 +92,6 @@
 			<?= $_GET['id'].',\''.$_GET['category'].'\'' ?>,
 			$('.pr_description ul li input').val(),
 			function() {
-				Cart.updateVisual();
 				$('#cart_modal').modal('show');
 				setTimeout(function(){
 					$('#cart_modal').modal('hide');
