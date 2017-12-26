@@ -73,7 +73,8 @@
     top: 0;left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(247,147,30,0);
+    background: #000;
+    opacity: 0;
 
     display: flex;
     align-items: center;
@@ -87,11 +88,11 @@
     display: none;
 }
 .wins:hover .cover{
-    background: rgba(247,147,30,0.7);
+    opacity: 0.8;
 }
-.wins:hover .cover a{
+/*.wins:hover .cover a{
     display: block;
-}
+}*/
 
 @media (max-width: 720px) {
     #slider_cnt {
