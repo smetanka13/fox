@@ -45,62 +45,46 @@
 			<div class="form-group" id="text">
 			  <textarea class="form-control" rows="5" placeholder="Комментарий к заказу"></textarea>
 			</div>
-			<div type="submit" class="wth_boot_but confirm_but ord_maker">Оформить заказ</div>
+			<div  type="submit" class="wth_boot_but confirm_but ord_maker">Оформить заказ</div>
 		</form>
 	</div>
 </div>
 
 <!-- БЛОК С ТОВАРАМИ -->
 <div class="cart_prod cp_wth_sh col-xs-12 col-sm-7 col-md-8 col-lg-8">
+	<?php if(empty($_COOKIE['cart'])) { ?>
 	<h4 class="main_title au">На данный момент в корзине нет товаров!</h4>
+	<?php } ?>
+
 	<?php
 
 		$cookie = json_decode($_COOKIE['cart'], TRUE);
+		$keys = array_keys($cookie);
+		$cookie = array_values($cookie);
 		$products = Product::selectFromDiffCategories($cookie);
 
 		foreach($products as $index => $product) {
-			$params = Category::getParams($product['category']);
+
+			$image = !empty($product['image']) ? 'catalog/'.$product['category'].'/'.$product['image'] : 'images/icons/no_photo.svg';
 	?>
-	<div class="c_prod_part" data-id="<?= $index ?>">
-		<div class="img-responsive c_prod_img hidden-xs cent_img"><img src="<?=
-			!empty($product['image']) ?
-			'catalog/'.$product['category'].'/'.$product['image'] :
-			'images/icons/no_photo.svg'
-		?>"></div>
+	<div class="c_prod_part" data-key="<?= $keys[$index] ?>">
+		<div class="img-responsive c_prod_img hidden-xs cent_img"><img src="<?= $image ?>"></div>
 		<div class="c_prod_txt">
-			<a href="#"><h4 class="main_title">Xenum GPR kkkk 3 33</h4></a>
-			<table class="table">
-				<tbody>
-
-					<?php
-						# --- Вывод параметров товара --- #
-						foreach($params as $param) {
-							if(!empty($product[$param])) {
-					?>
-
-					<tr>
-						<td><?= $param ?></td>
-						<td class="def"><?= $product[$param] ?></td>
-					</tr>
-
-					<?php }} ?>
-
-				</tbody>
-            </table>
+			<a href="#"><h4 class="main_title"><?= $product['title'] ?></h4></a>
 		</div>
 		<div class="count">
 			<p class="main_title">количество (шт.)</p>
 			<div class="form-group">
-			    <input type="number" onchange="Cart.updateQuantity(<?= $index ?>, $(this).val())" class="form-control" value="<?= $cookie[$index]['quantity'] ?>"  min="1" >
+			    <input type="number" class="form-control" value="<?= $cookie[$index]['quantity'] ?>"  min="1">
 			</div>
 		</div>
 		<div class="c_price">
-			<p class="main_title"><?= $product['price'] * $cookie[$index]['quantity'] ?> &euro; (<?= $product['price'] ?> &euro;)</p>
+			<p class="main_title"><?= $product['price'] ?> &euro;</p>
 			<a href="product?category=<?= $product['category'] ?>&id=<?= $product['id_prod'] ?>">
 				<button class="wth_boot_but confirm_but">Подробнее</button>
 			</a>
 		</div>
-		<img onclick="Cart.remove(<?= $index ?>, deleteProduct)" class="close_img" src="images/icons/close.svg">
+		<img class="close_img" src="images/icons/close.svg">
 	</div>
 	<?php } ?>
 </div>
@@ -112,7 +96,11 @@
       <div class="modal-header">
         <h4 class="modal-title main_title">
 			Ваш заказ принят!
-			<?php if(User::logged()) echo '<br>Подробнее вы можете просмотреть в личном кабинете!' ?>
+			<?php if(User::logged()) { ?>
+
+			<br>Подробнее вы можете просмотреть в личном кабинете!
+
+			<?php } ?>
 		</h4>
       </div>
     </div>
@@ -122,6 +110,20 @@
 <script type="text/javascript">
 
 	$(document).ready(function() {
+
+		$('.c_prod_part .close_img').click(function() {
+			var that = this;
+			var key = $(that).parent().attr('data-key');
+			Cart.remove(key, function() {
+				$(that).parent().remove();
+			});
+		});
+
+		$('.c_prod_part input[type=number]').change(function() {
+			var key = $(this).parent().parent().parent().attr('data-key');
+			Cart.updateQuantity(key, $(this).val());
+		});
+
 		$('#phone input').mask("+38 (099) 999-99-99", {autoclear: false});
 
 		// ДЛЯ ОПОВЕЩЕНИЯ О ПРИНЯТИИ ЗАКАЗА
@@ -151,10 +153,5 @@
 			});
 		});
 	});
-
-	function deleteProduct(index) {
-		Cart.updateVisual();
-		$('.c_prod_part[data-id='+index+']').remove();
-	}
 
 </script>

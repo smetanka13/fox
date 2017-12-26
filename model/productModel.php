@@ -143,6 +143,7 @@ class Product {
                 LIMIT 1
             ";
         } else {
+
             foreach($prods as $index => $prod) {
                 if($index != 0) $query .= ' UNION ';
                 $query .= "(
@@ -152,9 +153,7 @@ class Product {
                 )";
             }
         }
-
         return self::processProdParams(Main::select($query, TRUE), TRUE);
-
     }
 
     public static function processProdParams($input, $array = FALSE) {
@@ -255,7 +254,7 @@ class Product {
     }
     public static function getFullPriceCookie($cookie) {
 
-        $cookie = json_decode($cookie, JSON_UNESCAPED_UNICODE);
+        $cookie = array_values(json_decode($cookie, JSON_UNESCAPED_UNICODE));
 
         $prods = self::selectFromDiffCategories($cookie);
 

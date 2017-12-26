@@ -59,7 +59,6 @@
 <script type="text/javascript" src="js/addons/custom.js"></script>
 <script type="text/javascript" src="js/addons/jquery.mask.min.js"></script>
 <script src="js/addons/jquery.cookie.js"></script>
-<script src="js/addons/viewportchecker.js"></script>
 <script type="text/javascript" src="library/bootstrap/js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
 <script type="text/javascript" src="js/class/cartClass.js"></script>
