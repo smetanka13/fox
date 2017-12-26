@@ -3,7 +3,7 @@
 class Order {
     public static function getProds($id_order) {
         return Main::select("
-            SELECT * FROM `order_prods`
+            SELECT * FROM `order_prod`
             WHERE `id_order` = '$id_order'
         ", TRUE);
     }
@@ -36,31 +36,42 @@ class Order {
         if(!preg_match("/^(\+([0-9]{1,2}) (\([0-9]{3}\)) ([0-9]{3})\-([0-9]{2})\-([0-9]{2}))$/is", $phone))
             throw new InvalidArgumentException("Неверный формат номера.");
 
+        require_once 'model/productModel.php';
+
+        $cookie_json = array_values(json_decode($_COOKIE['cart'], TRUE));
+
         Main::query("
             INSERT INTO `order` (
                 `public`, `pay_way`, `delivery_way`,
                 `city`, `address`, `email`,
-                `phone`, `text`, `date`
+                `phone`, `text`, `date`, `price`
             ) VALUES (
                 '$public', '$pay_way', '$delivery_way',
                 '$city', '$address', '$email',
-                '$phone', '$text', '".TIME."'
+                '$phone', '$text', '".TIME."', '".Product::getFullPriceCookie($cookie_json)."'
             )
         ");
 
-        require_once 'model/productModel.php';
+        $order_id = Main::select("
+            SELECT `id_order` FROM `order`
+            WHERE `city` = '$city'
+            AND `address` = '$address'
+            AND `email` = '$email'
+            AND `phone` = '$phone'
+            AND `date` = '".TIME."'
+            LIMIT 1
+        ")['id_order'];
 
         $query = '';
-        $cookie_json = json_decode($_COOKIE['cart'], TRUE);
         foreach($cookie_json as $index => $value) {
             if($index > 0) $query .= ',';
-            $query .= "('{$value['id_prod']}', '{$_COOKIE['quantity']}', '{$_COOKIE['category']}')";
+            $query .= "('$order_id', '{$value['id_prod']}', '{$value['quantity']}', '{$value['category']}')";
         }
 
         try {
             Main::query("
                 INSERT INTO `order_prod` (
-                    `id_prod`, `quantity`, `category`
+                    `id_order`, `id_prod`, `quantity`, `category`
                 ) VALUES $query
             ");
         } catch (RuntimeException $e) {

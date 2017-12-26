@@ -25,5 +25,8 @@ class JSON {
 	public static function insert($key, $str) {
 		self::$json_array[$key] = $str;
 	}
+	public static function debug($str) {
+		self::$json_array['debug'] = $str;
+	}
 
 }

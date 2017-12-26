@@ -19,7 +19,7 @@
     }
 
 
-    $result = Search::find($srch, $category, $values, $sort, $from);
+    $result = Search::find($page, $srch, $category, $values, $sort, $from);
     $prods = $result['search_result'];
 ?>
 
@@ -106,33 +106,46 @@
 <!-- БЛОК С ТОВАРАМИ -->
 <div class="cart_prod back ptb col-xs-12 col-sm-8 col-md-9 col-lg-9">
     <!-- <div style="height: 120px;"><h4 class="main_title mbt">Результаты поиска :</h4></div> -->
-	<?php
-        foreach ($prods as $prod) {
-            $img = $prod['image'];
-    ?>
-        <div class="prods_cnt" style="margin-bottom: 50px;">
-            <div class="prods_wrapper">
-                <h3 class="title"><?= $prod['title'] ?></h3>
-                <div class="prods_img_cnt"><img src="<?= "catalog/$category/$img" ?>"></div>
-                <p>
-                <?php
-                    for($j = 0; isset($list_params[$j]); $j++) {
-                        if(empty($prod[$list_params[$j]])) continue;
-                        echo $list_params[$j].': '.$prod[$list_params[$j]].'</br>';
-                    }
-                ?>
-                </p>
-                <div class="prods_bottom">
-                    <a href="<?= 'product?category='.$prod['category'].'&id='.$prod['id'] ?>"><button>КУПИТЬ</button></a>
-                    <h4><?= $prod['price'] ?> грн.</h4>
-                </div>
-            </div>
-        </div>
-    <?php } ?>
+
 </div>
 
 <script type="text/javascript">
+
+    var query = <?= $srch ?>;
+    var page = <?= $page ?>;
+    var category = <?= $category ?>;
+    var sort = <?= $sort ?>;
+    var from = <?= $from ?>;
+    var params = <?= json_encode($values) ?>;
+
+    function addParam() {
+
+    }
+    function updateSrch(srch, category, values, sort, from) {
+        ajaxController({
+            model: 'search',
+            method: 'find',
+            callback: function qwe() {
+
+            },
+            query: ,
+            page: ,
+            category: ,
+            sort: ,
+            from: ,
+            values: ,
+        });
+    }
+    function drawProds(data) {
+        for(i in data) {
+            $('.cart_prod').append(prodBlock(data[i]));
+        }
+    }
+
 	$(document).ready(function() {
+
+        updateSrch(<?= json_encode($prods) ?>);
+
         $('#menu_f .catalog .cnt .name').click(function() {
             var block = $('#menu_f .catalog .cnt:eq('+$(this).attr('data-id')+') .list');
 
@@ -153,7 +166,7 @@
                     checked.removeClass('hidden_css');
                 }else{
                     checked.addClass('hidden_css');
-                } 
+                }
             }
         );
     });

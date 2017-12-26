@@ -1,36 +1,109 @@
 <?php
 
 class User {
- 
+
     private static $data = [
         'logged' => FALSE
     ];
 
+
+    private static function checkPass($pass) {
+
+        if(mb_strlen($pass) < 8)
+            throw new InvalidArgumentException("Длинна пароля должна быть более 8 символов.");
+        if(mb_strlen($pass) > 32)
+            throw new InvalidArgumentException("Длинна пароля должна быть менее 32 символов.");
+        if(preg_match("/'\{\}\[\]\(\)\`\"/", $pass))
+            throw new InvalidArgumentException("Некоторые символы недопустимы.");
+    }
+    private static function checkLogin($login) {
+        if(preg_match("/'\{\}\[\]\(\)\`\"/", $login))
+            throw new InvalidArgumentException("Некоторые символы недопустимы.");
+        if(mb_strlen($pass) < 8)
+            throw new InvalidArgumentException("Длинна логина должна быть более 8 символов.");
+        if(mb_strlen($pass) > 32)
+            throw new InvalidArgumentException("Длинна логина должна быть менее 32 символов.");
+    }
+
+    public static function recoverPass($email) {
+
+        $id_user = Main::select("
+        	SELECT `id` FROM `user`
+        	WHERE `email` = '$email'
+            LIMIT 1
+        ")['id'];
+
+        if(empty($id_user))
+            throw new InvalidArgumentException("No user found with that email.");
+
+        $key = Main::generateKey();
+        Main::query("
+            INSERT INTO `recover` (
+                `id_user`, `key`
+            )
+            VALUES (
+                '$id_user', '$key'
+            )
+        ");
+
+        $subject = "[".NAME."] Восстановление пароля.";
+        $headers = 'From: '.NAME. "\r\n";
+        $message = "Что бы восстановить пароль пройдите по ссылке: ".URL."?modal=changepass&key=$key";
+        if(!mail($email, $subject, $message, $headers)) {
+            Main::query("
+                DELETE FROM `recover`
+                WHERE `id_user` = '$id_user'
+                LIMIT 1
+            ");
+            throw new RuntimeException('Error sending mail.');
+        }
+    }
+
+    public static function changePass($key, $pass, $confirm) {
+
+        self::checkPass($pass);
+
+        if($confirm != $pass)
+            throw new InvalidArgumentException("Repeat password correctly.");
+        if(empty($confirm))
+            throw new InvalidArgumentException("Repeat password.");
+
+        $id_user = Main::select("
+            SELECT `id_user` FROM `recover`
+            WHERE `key` = '$key'
+            LIMIT 1
+        ")['id_user'];
+
+        if(empty($id_user))
+            throw new InvalidArgumentException("Wrong key.");
+
+        Main::query("
+            UPDATE `user`
+            SET `pass` = '".self::hashPass($login, $pass)."'
+            WHERE `id` = '$id_user'
+            LIMIT 1
+        ");
+        Main::query("
+            DELETE FROM `recover`
+            WHERE `id_user` = '$id_user'
+            LIMIT 1
+        ");
+    }
+
     public static function registrate($login, $email, $pass, $confirm) {
 
-        if(!preg_match("/^([a-z0-9_\.\-]{1,20})@([a-z0-9\.\-]{1,20})\.([a-z]{2,4})$/is", $email)) //
-            throw new Exception("Неверный формат email.");
+        if(!preg_match("/^([a-z0-9_\.\-]{1,20})@([a-z0-9\.\-]{1,20})\.([a-z]{2,4})$/is", $email))
+            throw new InvalidArgumentException("Неверный формат почты.");
 
         if(Main::select("
         	SELECT * FROM `user`
         	WHERE `email` = '$email'
             LIMIT 1
         "))
-            throw new InvalidArgumentException("Этот email уже занят.");
+            throw new InvalidArgumentException("Эта почта уже занята.");
 
-        if(strlen($pass) <= 4)
-            throw new InvalidArgumentException("Длинна пароля должна первышать 4 символа.");
-        if(strlen($pass) > 32)
-            throw new InvalidArgumentException("Длинна пароля не должна первышать 32 символа.");
-        if (preg_match("/'\{\}\[\]\(\)\`\"/", $pass))
-            throw new InvalidArgumentException("Некоторые символы в пароле не позволены."); //
-
-        if (preg_match("/'\{\}\[\]\(\)\`\"/", $login))
-            throw new InvalidArgumentException("Некоторые символы в логине не позволены."); //
-        if(strlen($login) <= 6)
-            throw new InvalidArgumentException("Длинна логина должна превышать 6 символов.");
-        if(strlen($login) > 32)
-            throw new InvalidArgumentException("Длинна логина не должна превышать 32 символов.");
+        self::checkPass($pass);
+        self::checkLogin($login);
 
         if($confirm != $pass)
             throw new InvalidArgumentException("Повторите пароль верно.");
@@ -65,7 +138,7 @@ class User {
 
         $subject = "[".NAME."] Регистрация.";
         $headers = 'From: '.NAME. "\r\n";
-        $message = "Что бы активировать ваш аккаунт пройдите по ссылке: ".URL."/remote?model=user&method=verifyEmail&key=".$key;
+        $message = "Что бы активировать ваш аккаунт пройдите по ссылке: ".URL."/remote?model=user&method=verify&key=".$key;
         if(!mail($email, $subject, $message, $headers)) {
             Main::query("
                 DELETE FROM `user`
@@ -75,11 +148,11 @@ class User {
                 DELETE FROM `verify`
                 WHERE `email` = '$email'
             ");
-            throw new RuntimeException('Ошибка отсылки письма.');
+            throw new RuntimeException('Error sending mail.');
         }
     }
 
-    public static function verifyEmail($key) {
+    public static function verify($key) {
 
         $email = Main::select("
         	SELECT `email` FROM `verify`
@@ -118,7 +191,7 @@ class User {
             setcookie('login', self::get('login'), 0, "/") &&
     		setcookie('pass', self::get('pass'), 0, "/")
         )) {
-    		throw new RuntimeException("Ошибка создания куков.");
+    		throw new RuntimeException("Cookie error.");
     	}
     }
 
@@ -149,7 +222,8 @@ class User {
         return FALSE;
     }
     public static function get($var) {
-        return self::$data[$var];
+        if(self::$data['logged']) return self::$data[$var];
+        else return FALSE;
     }
     public static function logged() {
         return self::$data['logged'];

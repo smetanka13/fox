@@ -10,14 +10,10 @@ $permitted_actions = [
 	'User::registrate',
 	'Order::add',
 	'Callback::add',
-	'Product::getFullPriceCookie'
-];
-
-$logged_actions = [
-
-];
-
-$admin_actions = [
+	'Product::getFullPriceCookie',
+	// --
+	'Order::getUnaccepted',
+	'Order::accept',
 	'Product::get',
 	'Product::update',
 	'Product::upload',
@@ -29,6 +25,14 @@ $admin_actions = [
 	'Category::addValues',
 	'Category::addParams',
 	'Category::newCategory'
+];
+
+$logged_actions = [
+
+];
+
+$admin_actions = [
+
 ];
 
 $logged_actions = array_merge($logged_actions, $admin_actions);

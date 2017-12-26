@@ -1,110 +1,3 @@
-<!-- <div class="dark_back" onclick="changeView('close')"></div>
-<div class="float_block">
-    <div class="float_view" id="enter">
-        <div>
-            <h3>E-mail</h3>
-            <input type="text" placeholder="Введите ваш e-mail" id="email">
-        </div>
-        <div>
-            <h3 id="ent_pass">Пароль</h3>
-            <input type="password" placeholder="Введите ваш пароль" id="pass">
-        </div>
-        <button class="buttons enter_but ent_but_top" onclick="ajaxController({
-            listener: 'login',
-            callback: login,
-            email: $('#enter_email').val(),
-            pass: $('#enter_pass').val()
-        })">ВХОД</button>
-        <button onclick="changeView('reg')">РЕГИСТРАЦИЯ</button>
-    </div>
-    <div class="reg_view float_view">
-        <div class="enter_inf">
-            <img class="back_arr" onclick="floatBlock('enter')" src="images/icons/back_arrow.svg">
-            <h3>Имя</h3>
-            <input class="reg_info" id="public" type="text" placeholder="Введите ваше имя">
-        </div>
-        <div class="enter_inf">
-            <h3>Телефон</h3>
-            <input class="reg_info" id="phone" type="tel" placeholder="Введите ваш телефон">
-        </div>
-        <div class="enter_inf">
-            <h3>E-mail *</h3>
-            <input class="reg_info" id="email" type="text" placeholder="Введите ваш e-mail">
-        </div>
-        <div class="enter_inf">
-            <h3>Пароль *</h3>
-            <input class="reg_info" id="pass" type="password" placeholder="Введите ваш пароль">
-        </div>
-        <div class="enter_inf">
-            <h3>Повторите пароль *</h3>
-            <input class="reg_info" id="confirm" type="password" placeholder="Введите ваш пароль">
-        </div>
-        <button class="buttons" onclick="ajaxController({
-            listener: 'reg',
-            callback: reg,
-            email: $('#reg_email').val(),
-            pass: $('#reg_pass').val(),
-            confirm: $('#reg_confirm').val(),
-            public: $('#reg_public').val(),
-            phone: $('#reg_phone').val()
-        })">РЕГИСТРАЦИЯ</button>
-    </div>
-</div>
-
-<script>
-    $('#reg_phone').mask("+38 (099) 999-99-99", {autoclear: false});
-    function changeView(view) {
-        if($('.dark_back').css('display') == 'none') {
-            $('.dark_back').fadeIn(300);
-            $('.float_block').fadeIn(300);
-        }
-        if(view == 'close') {
-            $('.dark_back').fadeOut(300);
-            $('.float_block').fadeOut(300);
-        }
-        $('.float_view').hide();
-        $('#'+view).show();
-    }
-    function loginCallback(json) {
-        data = JSON.parse(json);
-        if(data.status == false) {
-            if(typeof(data.user) != 'undefined') {
-                error('#enter_email', data.user);
-                error('#enter_pass', data.user);
-            }
-        } else {
-            $(document).attr('location', '<?= URL ?>/personal');
-        }
-    }
-    function regCallback(json) {
-        data = JSON.parse(json);
-        if(data.status == false) {
-            if(typeof(data.email) != 'undefined') {
-                error('#reg_email', data.email);
-            }
-            if(typeof(data.pass) != 'undefined') {
-                error('#reg_pass', data.pass);
-            }
-            if(typeof(data.confirm) != 'undefined') {
-                error('#reg_confirm', data.confirm);
-            }
-            if(typeof(data.system) != 'undefined') {
-                error('#reg_system', data.system);
-            }
-            if(typeof(data.phone) != 'undefined') {
-                error('#reg_phone', data.phone);
-            }
-        } else {
-            $(document).attr('location', URL);
-        }
-    }
-    function error(id, msg) {
-        $('.enter_inf input').removeAttr('title');
-        $(id).attr('title', msg).animateCss('shake');
-    }
-</script> -->
-
-
 <!-- FOR LOGIN -->
         <div id="signin_modal" class="modal fade">
             <div class="modal-dialog">
@@ -184,15 +77,7 @@
 
                         <input type="text" style="display: none" name="role" value="14">
 
-                      <button id="bt_reg" class="btn confirm_but" onclick="ajaxController({
-                          model: 'user',
-                          method: 'registrate',
-                          callback: foo,
-                          login: $('#inputLogin').val(),
-                          email: $('#inputEmail').val(),
-                          pass: $('#regist_modal #inputPassword').val(),
-                          confirm: $('#confirmPassword').val()
-                      })">Зарегистрироваться</button>
+                      <button id="bt_reg" class="btn confirm_but">Зарегистрироваться</button>
                 </div>
             </div>
         </div>
@@ -243,7 +128,7 @@
     </div>
 <script type="text/javascript">
     function foo() {
-        
+
     }
     // for modals
     $('#no_reg').click(function(){
@@ -320,5 +205,15 @@
             $('#regist_modal #confirmPassword').removeClass('alert-danger');
             $('#regist_modal #ps_rptr').removeClass('block_inl');
         }
+
+        ajaxController({
+            model: 'user',
+            method: 'registrate',
+            callback: foo,
+            login: $('#inputLogin').val(),
+            email: $('#inputEmail').val(),
+            pass: $('#regist_modal #inputPassword').val(),
+            confirm: $('#confirmPassword').val()
+        });
     });
 </script>

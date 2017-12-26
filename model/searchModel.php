@@ -8,7 +8,7 @@ class Search {
     private static $max_finds = 12;
     private static $max_pages = 2;
 
-    public static function find($srch, $category, $values = NULL, $sort = NULL, $from = NULL) {
+    public static function find($page, $srch, $category, $values = NULL, $sort = NULL, $from = NULL) {
 
         # ---- Строки для базы данных ---- #
 

@@ -13,7 +13,7 @@ class Main {
         return $tmp[$count - 1];
     }
 
-    public static function saveResized($size, $align, $target, $original) {
+    public static function saveResized($size, $align, $target, $original, $quad = FALSE) {
 
     	/* ALIGN
 
@@ -53,23 +53,53 @@ class Main {
     		case IMAGETYPE_PNG:
     			$image_create_func = 'imagecreatefrompng';
     			break;
+
+            default:
+                throw new InvalidArgumentException("Original's file extention is not supported.");
     	}
 
     	$img = $image_create_func($original);
     	list($width, $height) = getimagesize($original);
 
-    	if($align) {
-            $p = $height / $width;
-    		$new_width = $size;
-    		$new_height = $new_width * $p;
-    	} else {
-            $p = $width / $height;
-    		$new_height = $size;
-    		$new_width = $new_height * $p;
-    	}
+        $orig_offset_x = 0;
+        $orig_offset_y = 0;
+
+        if(!$quad) {
+            if($align) {
+                $p = $height / $width;
+        		$new_width = $size;
+        		$new_height = $new_width * $p;
+        	} else {
+                $p = $width / $height;
+        		$new_height = $size;
+        		$new_width = $new_height * $p;
+        	}
+        } else {
+            $new_height = $size;
+            $new_width = $size;
+
+            if($width > $height) {
+                $orig_offset_y = 0;
+                $orig_offset_x = ($width - $height) / 2;
+                $width = $height;
+            } else {
+                $orig_offset_y = ($height - $width) / 2;
+                $orig_offset_x = 0;
+                $height = $width;
+            }
+        }
 
     	$tmp = imagecreatetruecolor($new_width, $new_height);
-    	imagecopyresampled($tmp, $img, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+    	imagecopyresampled(
+            $tmp, $img,
+            0, 0,
+            $orig_offset_x,
+            $orig_offset_y,
+            $new_width,
+            $new_height,
+            $width,
+            $height
+        );
 
     	if(file_exists($target))
     		unlink($target);
@@ -77,17 +107,6 @@ class Main {
     	if(!$image_save_func($tmp, "$target"))
             throw new RuntimeException("Could't save resized image.");
 
-    }
-
-    public static function checkLang($lang) {
-        return self::lookSame([
-            'eng',
-            'rus'
-        ], $lang);
-    }
-
-    public static function printLang($text) {
-        return $text[LANG];
     }
 
     public static function lookSame ($arr, $subj) {

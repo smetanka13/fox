@@ -21,7 +21,7 @@ $pages = [
     'remote',
     'delivery',
     'callback',
-    'search2',
+    'search',
     'pick',
     'new',
     'privacy'
