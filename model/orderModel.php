@@ -2,10 +2,19 @@
 
 class Order {
     public static function getProds($id_order) {
-        return Main::select("
+        $order_prods = Main::select("
             SELECT * FROM `order_prod`
             WHERE `id_order` = '$id_order'
         ", TRUE);
+
+        foreach($order_prods as $index => $value) {
+            $order_prods[$index] = array_merge(Main::select("
+                SELECT `title`, `price`, `articule` FROM `{$value['category']}`
+                WHERE `id_prod` = '{$value['id_prod']}'
+                LIMIT 1
+            "), $order_prods[$index]);
+        }
+        return $order_prods;
     }
     public static function getUnaccepted() {
         $order = Main::select("
@@ -13,8 +22,8 @@ class Order {
             WHERE `ok` = '0'
         ", TRUE);
 
-        foreach($order as $value) {
-            $order['prods'] = self::getProds($order['id_order']);
+        foreach($order as $index => $value) {
+            $order[$index]['prods'] = self::getProds($value['id_order']);
         }
 
         return $order;
