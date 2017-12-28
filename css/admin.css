@@ -76,3 +76,13 @@
 	width: 80%;
 	height: 100px;
 }
+#order_table ul a:hover li{
+	color: #F7931E;
+}
+#order_table .description{
+	max-width: 150px;
+	word-wrap: break-word;
+}
+#order_table i{
+	color: #FFCA00;
+}

@@ -94,8 +94,7 @@
   <div class="modal-dialog">
     <div class="modal-content siglog_window">
       <div class="modal-header">
-        <h4 class="modal-title main_title">
-			Ваш заказ принят!
+        <h4 class="modal-title main_title">Ваш заказ принят!
 			<?php if(User::logged()) { ?>
 
 			<br>Подробнее вы можете просмотреть в личном кабинете!

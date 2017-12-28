@@ -205,10 +205,11 @@
         <div id="home" class="tab-pane fade in active">
             <h4 class="pr_titles_cat">Поступающие заказы</h4>
             <p>Тут будут отображаться все заказы.</p>
+            <p>Рядом в новыми заказами будет отображаться <i class="fa fa-lightbulb-o fa-fw fa-lg" aria-hidden="true"></i></p>
             <div class="container-fluid">
                 <div class="row">
                     <div class="tb_cnt mbt">
-                        <table class="table tb_buy table-bordered">
+                        <table id="order_table" class="table tb_buy table-bordered">
                             <thead>
                                 <tr>
                                 <th>№</th>
@@ -225,7 +226,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <!-- <tr>
                                     <td>3</td>
                                     <td>Фионов Юрий Сергеевич</td>
                                     <td>0939463704</td>
@@ -240,7 +241,7 @@
                                         <div class="wth_boot_but ord_but">Подтвердить заказ</div>
                                         <div class="cf_ord">Заказ принят</div>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -415,8 +416,50 @@
 </div>
 
 <script type="text/javascript">
-    $('.order').click(
+    
+$( document ).ready(function() {
+   setInterval(function(){
+        ajaxController({
+            model: 'order',
+            method: 'getUnaccepted',
+            callback: function(data){
+                $("#order_table tbody").empty();
+                for( var index = data.output.length - 1; index >= 0 ; --index){
+                    var str = '';
+                    for(var j in data.output[index].prods){
+                        var id_prod = data.output[index].prods[j].id_prod;
+                        var articule = data.output[index].prods[j].articule;
+                        var price = data.output[index].prods[j].price;
+                        var category = data.output[index].prods[j].category;
+
+                        str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + category + '&id=' + id_prod + '"><li>' + articule + '</li></a>';  
+                    }                
+                    $('#order_table ul').html(str);
+                    $('#order_table tbody').append(`
+                        <tr id="`+data.output[index].id_order+`">
+                            <td><i class="fa fa-lightbulb-o fa-fw fa-lg" aria-hidden="true"></i> `+data.output[index].id_order+`</td>
+                            <td>`+data.output[index].public+`</td>
+                            <td>`+data.output[index].phone+`</td>
+                            <td><ul class="list-unstyled"></ul></td>
+                            <td>кол-во</td>
+                            <td>`+price+`</td>
+                            <td>`+data.output[index].pay_way+`</td>
+                            <td>`+data.output[index].delivery_way+`</td>
+                            <td class="description">`+data.output[index].text+`</td>
+                            <td>`+timeConverter(data.output[index].date)+`</td>
+                            <td class="order">
+                                <div id="`+data.output[index].id_order+`" class="wth_boot_but ord_but">Подтвердить заказ</div>
+                                <div id="`+data.output[index].id_order+`" class="cf_ord">Заказ принят</div>
+                            </td>
+                        </tr>
+                    `);
+                } 
+            }
+        });
+    }, 10000);
+   $('.order').click(
         function(){
+            alert();
             var order_but = $(this).find('.ord_but');
             var confirm_but = $(this).find('.cf_ord');
 
@@ -437,4 +480,5 @@
             }
         }
     );
+});
 </script>
