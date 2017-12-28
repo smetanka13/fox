@@ -1,12 +1,11 @@
-<link rel='stylesheet' href='css/addons.css'>
+<link rel="stylesheet" href="css/addons.css">
 
-<div id="ajax_error"></div>
+<div id="ajax_error" class="fw-theme-grad-anim"></div>
 <div id="message_whole" onclick="showMessage()"></div>
 <div id="message_cnt"><div id="message_block"></div></div>
-<img src="image\ajax_load.svg" id="ajax_load">
+<i class="fa fa-spinner fa-pulse fa-3x fa-fw" id="ajax_load"></i>
 
-
-<script type="text/javascript">
+<script>
 
 	function showMessage(str) {
 		var main = $("#message_whole");
@@ -58,7 +57,7 @@
 
 		// Добавляет в data все ключи и их значения
 		for(var key in params) {
-			if(key == 'callback') continue;
+			if(key == 'callback' || key == 'local_params') continue;
 			data.append(key, params[key]);
 		}
 
@@ -86,16 +85,24 @@
 				console.log(json);
 				ajaxLoad(false);
 				var data = JSON.parse(json);
+
+				if(typeof(params.local_params) != 'undefined') {
+					var local_params = params.local_params;
+				} else {
+					var local_params = null;
+				}
+
 				if(typeof(data.permission) != 'undefined') {
 					ajaxError(data.permission);
 				} else {
-					params.callback(data);
+					params.callback(data, local_params);
 				}
 			}
 		});
 	}
 
 	$(document).ready(function() {
+
 		<?php
 			if(isset($_GET['msg'])) {
 				echo "showMessage('".$_GET['msg']."');";

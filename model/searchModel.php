@@ -8,9 +8,11 @@ class Search {
     private static $max_finds = 12;
     private static $max_pages = 2;
 
-    public static function find($page, $srch, $category, $values = NULL, $sort = NULL, $from = NULL) {
+    public static function find($page, $query, $category, $values = NULL, $sort = NULL, $direction = NULL) {
 
         # ---- Строки для базы данных ---- #
+
+        if(is_string($values)) $values = json_decode($values, TRUE);
 
         $query_sort = '';
         $query_srch_title = '';
@@ -23,7 +25,7 @@ class Search {
         if(empty($sort_by)) $sort_by = 'bought';
         if(empty($direction)) $direction = 'ASC';
 
-        $from = ($page * self::$max_finds);
+        $direction = ($page * self::$max_finds);
         $to = (($page + self::$max_pages) * self::$max_finds) + self::$max_finds;
 
         if(!Main::lookSame(['DESC', 'ASC'], $direction))
@@ -53,8 +55,8 @@ class Search {
         }
 
         # ---- Формирование запроса по поисковым словам ---- #
-        $words = explode(" ", $srch);
-        foreach($words as $index => $word) {
+        $words = explode(" ", $query);
+        foreach($words as $i => $word) {
             if($i > 0) {
                 $query_srch_title .= " AND ";
                 $query_srch_text .= " AND ";

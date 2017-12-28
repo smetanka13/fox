@@ -10,6 +10,7 @@ $permitted_actions = [
 	'User::registrate',
 	'Order::add',
 	'Callback::add',
+	'Search::find',
 	'Product::getFullPriceCookie',
 	// --
 	'Order::getUnaccepted',
