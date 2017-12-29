@@ -81,7 +81,7 @@
         Search.sort = '<?= $sort ?>';
         Search.direction = '<?= $direction ?>';
         Search.settings.val = <?= !empty($settings) ? json_encode($settings) : '{}' ?>;
-        
+
         Search.draw(<?= json_encode($prods) ?>);
 
         $('.list ul li').click(function() {

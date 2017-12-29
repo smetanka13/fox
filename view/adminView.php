@@ -396,27 +396,35 @@
         <div id="menu3" class="tab-pane fade ns_cnt">
           <h4 class="pr_titles_cat">Загрузка статей.</h4>
           <p class="mbt">Тут вы можете загрузить новуя статью.</p>
-              <div id="excel" class="col-md-12 cnt_all">
+              <div class="col-md-12 cnt_all">
                 <div class="form-group">
                   <label>Загрузка заголовка</label>
-                  <input type="text" class="form-control" name="" placeholder="Введите заголовок">
+                  <input id="title" type="text" class="form-control" placeholder="Введите заголовок">
                 </div>
                 <div class="form-group">
                   <label>Загрузка основного текста</label>
-                  <textarea type="text" class="form-control" name="" placeholder="Введите текст новости"></textarea>
+                  <textarea id="text" type="text" class="form-control" placeholder="Введите текст новости"></textarea>
                 </div>
                 <div class="form-group">
-                  <label>Загрузка фотографий (загрузите 4 фотографии)</label>
-                  <input type="file" class="form-control" name="" placeholder="Загрузите фотографию">
+                  <label>Загрузка изображений (загрузите не более 4 изображений)</label>
+                  <input id="images" type="file" class="form-control" multiple title="Загрузите фотографию">
                 </div>
-                <button class="wth_boot_but confirm_but" onclick="valuesParse()">Добавить</button>
+                <button onclick="ajaxController({
+                    model: 'article',
+                    method: 'upload',
+                    callback: function() {},
+                    title: $('#menu3 #title').val(),
+                    text: $('#menu3 #text').val()
+                }, {
+                    images: $('#menu3 #images')
+                })" class="wth_boot_but confirm_but">Добавить</button>
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
-    
+
 $( document ).ready(function() {
    setInterval(function(){
         ajaxController({
@@ -432,13 +440,13 @@ $( document ).ready(function() {
                         var price = data.output[index].prods[j].price;
                         var category = data.output[index].prods[j].category;
 
-                        str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + category + '&id=' + id_prod + '"><li>' + articule + '</li></a>';  
-                    }                
+                        str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + category + '&id=' + id_prod + '"><li>' + articule + '</li></a>';
+                    }
                     $('#order_table ul').html(str);
                     $('#order_table tbody').append(`
                         <tr id="`+data.output[index].id_order+`">
                             <td><i class="fa fa-lightbulb-o fa-fw fa-lg" aria-hidden="true"></i> `+data.output[index].id_order+`</td>
-                            <td>`+data.output[index].public+`</td>
+                            <td>${data.output[index].public}</td>
                             <td>`+data.output[index].phone+`</td>
                             <td><ul class="list-unstyled"></ul></td>
                             <td>кол-во</td>
@@ -453,7 +461,7 @@ $( document ).ready(function() {
                             </td>
                         </tr>
                     `);
-                } 
+                }
             }
         });
     }, 10000);

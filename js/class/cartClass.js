@@ -12,12 +12,11 @@ Cart.updateVisual = function() {
     } else {
         return;
     }
-
     ajaxController({
         model: 'product',
         method: 'getFullPriceCookie',
         callback: function(data) {
-            $('.header .cart ul li:eq(1)').html('UAH: '+data.output.toFixed(2));
+            $('.header .cart ul li:eq(1)').html('&euro;: '+data.output.toFixed(2));
         },
         cookie: cookie
     })
@@ -110,6 +109,6 @@ Cart.remove = function(key, callback = function(){}) {
  */
 Cart.empty = function() {
     $('.header .cart .badge').html('0');
-    $('.header .cart ul li:eq(1)').html('UAH: 0');
+    $('.header .cart ul li:eq(1)').html('&euro;: 0');
     $.removeCookie('cart');
 };

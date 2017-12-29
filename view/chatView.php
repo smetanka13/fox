@@ -109,7 +109,7 @@
 	function chatCallBack(json) {
 		var data = JSON.parse(json);
 
-		if(data.status == false) {
+		if( data.status == false ) {
 			if(typeof(data.system) != 'undefined') {
 				sysErr('Системная ошибка , попробуйте позже');
 			}
