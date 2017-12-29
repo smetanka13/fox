@@ -74,6 +74,8 @@ class Article {
             throw new InvalidArgumentException("Заполните текст.");
         if(count($imgs) > 4)
             throw new InvalidArgumentException("Не более 4-х изображений.");
+        if(count($imgs) < 1)
+            throw new InvalidArgumentException("Не менее 1-го изображения.");
     }
     private static function uploadImages($imgs) {
         foreach($imgs as $img) {
@@ -91,13 +93,16 @@ class Article {
         $articles = Main::select("
             SELECT *
             FROM article
-            JOIN article_image
-            ON article_image.id_article = article.id_article
-            LIMIT 1
         ", TRUE);
 
         foreach($articles as $i => $article) {
-            $articles[$i]['img'] = self::$image_path . '/' . $article['img'];
+            $img = Main::select("
+                SELECT `img`
+                FROM article_image
+                WHERE id_article = '{$article['id_article']}'
+                LIMIT 1
+            ")['img'];
+            $articles[$i]['img'] = self::$image_path . '/' . $img;
         }
 
         return $articles;
@@ -190,6 +195,11 @@ class Article {
             DELETE FROM article
             WHERE id_article = '$id_article'
             LIMIT 1
+        ");
+
+        Main::query("
+            DELETE FROM article_image
+            WHERE id_article = '$id_article'
         ");
 
     }

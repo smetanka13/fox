@@ -4,6 +4,10 @@
 
 	$articles = Article::getAll();
 
+	// foreach ($articles as $key => $value) {
+	// 	Article::delete($value['id_article']);
+	// }
+
 ?>
 
 <link rel="stylesheet" type="text/css" href="css/blog.css">
