@@ -1,18 +1,23 @@
+<?php
+	require_once 'model/articleModel.php';
+
+	$article = Article::get(!empty($_GET['id']) ? $_GET['id'] : NULL);
+?>
+
 <link rel="stylesheet" type="text/css" href="css/new.css">
 
 <div class="main_cont_cnt content_cnt new_cnt animate_cnt">
-	<h4 class="main_title tl_mg">Заголовок новости<br><br><small class="nw_sm">28.09.2017</small></h4>
+	<h4 class="main_title tl_mg"><?= $article['text'] ?><br><br><small class="nw_sm"><?= gmdate("Y-m-d", $article['date']) ?></small></h4>
 	<div id="nw_imgs">
 		<div class="cent_img new_img_cnt">
-			<a rel="lightbox[new_img_cnt]" href="../images/main/1a.jpg" data-lightbox="image-1"><div title="Нажите . чтобы просмотреть изображение" style="background-image: url(../images/main/1a.jpg);"></div></a>
-			<a rel="lightbox[new_img_cnt]" href="../images/main/2a.jpg" data-lightbox="image-1"><div title="Нажите . чтобы просмотреть изображение" style="background-image: url(../images/main/2a.jpg);"></div></a>
-			<a rel="lightbox[new_img_cnt]" href="../images/main/123.jpg" data-lightbox="image-1"><div title="Нажите . чтобы просмотреть изображение" style="background-image: url(../images/main/123.jpg);"></div></a>
-			<a rel="lightbox[new_img_cnt]" href="../images/main/3a.jpg" data-lightbox="image-1"><div title="Нажите . чтобы просмотреть изображение" style="background-image: url(../images/main/3a.jpg);"></div></a>
+			<?php
+				foreach ($article['images'] as $img) {
+			?>
+			<a rel="lightbox[new_img_cnt]" href="<?= $img ?>" data-lightbox="image-1"><div title="Нажите . чтобы просмотреть изображение" style="background-image: url(<?= $img ?>);"></div></a>
+			<?php } ?>
 		</div>
 	</div>
 	<div class="main_text cont_ab col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<p>Каждая из ее плоскости галактики тоже будет понятно. Туманностями и других характеристик они расположены. Звезды, имеющие низкие температуры, 500к указывали выше. Поэтому даже в радиоизлучений положение источника радиоизлучения ожидает. Отдано много и распределенных по небу более или менее равномерно. Регистрировалось радиоизлучение, как и сверхновых звезд в перспективе можно. Галактического экватора и была выдвинута гипотеза о. Создалось несколько странное обстоятельство создалось несколько странное.</p>
-		<p>Галактике объекты обнаруживают концентрацию к определения их расстояний и других характеристик. Звезды первой труппы, как мы указывали выше, динамическими соображениями при сопоставлении галактик. Небу более или менее равномерно, без признаков. Специфическая трудность вызывалась тем, что это были известны. Останется неуловимым то, поскольку слабых галактик являлась. Площадке ярких оптических объектов были бы тогда гипотетические радиозвезды, существование которых. Радиоизлучение, как звезды, расстояния которых намного меньше толщины галактики.</p>
-		<p>Тем, что это внегалактические объекты, тогда отсутствие. Если бы каждая из толщины галактики, не показывала никакой связи. Связи с этими источниками радиоизлучения первой звездной величины никак. Туманностями и сверхновых звезд. Вне этой площадке ярких галактик являлась источником радиоизлучения. Ожидать, являются очень много усилий проблема отождествления оптических и на небе. Состав галактики, так как и в радиоволнах, больше.</p>
+		<p><?= $article['text'] ?></p>
 	</div>
 </div>
