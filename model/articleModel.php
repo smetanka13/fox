@@ -68,8 +68,17 @@ class Article {
         }
     }
     private static function checkInput($title, $text, $imgs) {
+
+        if(mb_strlen($title) > 128)
+            throw new InvalidArgumentException("Заголовок может иметь не более 128 символов.");
+        if(Main::select("
+            SELECT title FROM article
+            WHERE title = '$title'
+            LIMIT 1
+        "))
+            throw new InvalidArgumentException("Такой заголовок уже занят.");
         if(empty($title))
-            throw new InvalidArgumentException("Заполните название.");
+            throw new InvalidArgumentException("Заполните заголовок.");
         if(empty($text))
             throw new InvalidArgumentException("Заполните текст.");
         if(count($imgs) > 4)

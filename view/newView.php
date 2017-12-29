@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="css/new.css">
 
 <div class="main_cont_cnt content_cnt new_cnt animate_cnt">
-	<h4 class="main_title tl_mg"><?= $article['text'] ?><br><br><small class="nw_sm"><?= gmdate("Y-m-d", $article['date']) ?></small></h4>
+	<h4 class="main_title tl_mg"><?= $article['title'] ?><br><br><small class="nw_sm"><?= gmdate("Y-m-d", $article['date']) ?></small></h4>
 	<div id="nw_imgs">
 		<div class="cent_img new_img_cnt">
 			<?php
