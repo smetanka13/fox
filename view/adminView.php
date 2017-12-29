@@ -463,21 +463,18 @@ $( document ).ready(function() {
                         </tr>
                     `);
 
-                    // if(data.output[index].checked == 0){
-                    //     $('#order_table i').addClass('hidden_css');
-                    // }
                     $('#order_table').mouseover(function(){
-                        ajaxController({
-                            model: 'order',
-                            method: 'check',
-                             // callback: function(data){
-                             //    if (data.output[index].checked == 1) {
-                             //        alert();
-                             //    }
-                             }
-                         });
-                    });
-                } 
+                        if (data.output[index].checked == 0) {
+                            ajaxController({
+                                model: 'order',
+                                method: 'check',
+                                callback:function(data){
+                                    $('#order_table i').addClass('hidden_css');
+                                }
+                             });
+                        } 
+                    }); 
+                    
                 }
             }
         });
