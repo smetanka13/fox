@@ -50,15 +50,40 @@
 }
 .order {
 	padding: 0 !important;
+}
+.order_ord .ord_but{
+	width: 100%;
+	background: #7AD37A;
+	cursor: pointer;
+	color: #fff;
+
+	transition: all 0.3s ease;
+}
+.order_ord .no_ord_but{
+	width: 100%;
+	background: #ff897d;
+	cursor: pointer;
+	color: #fff;
+
+	transition: all 0.3s ease;
+}
+.order_ord .ord_but:hover{
+	background:#5CB85C;
+}
+.order_ord .no_ord_but:hover{
+	background:#e74c3c;
+}
+.order_phone {
 	background: #5CB85C;
 	cursor: pointer;
 }
-.ord_but {
+.order_phone .ord_but {
 	height: 100%;
 	width: 100%;
 	border-radius: 0px;
+	color: #fff;
+
 	display: block;
-	color: white;
 	cursor: pointer;
 }
 .cf_ord {

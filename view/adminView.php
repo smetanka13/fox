@@ -272,7 +272,7 @@
                                 <tr>
                                     <td>2</td>
                                     <td>0939463704</td>
-                                    <td class="order">
+                                    <td class="order order_phone">
                                         <div class="wth_boot_but ord_but">Подтвердить</div>
                                         <div class="cf_ord">Принято</div>
                                     </td>
@@ -280,7 +280,7 @@
                                 <tr>
                                     <td>2</td>
                                     <td>0939463704</td>
-                                    <td class="order">
+                                    <td class="order order_phone">
                                         <div class="wth_boot_but ord_but">Подтвердить</div>
                                         <div class="cf_ord">Принято</div>
                                     </td>
@@ -447,28 +447,41 @@ $( document ).ready(function() {
                             <td>`+data.output[index].delivery_way+`</td>
                             <td class="description">`+data.output[index].text+`</td>
                             <td>`+timeConverter(data.output[index].date)+`</td>
-                            <td class="order">
-                                <div id="`+data.output[index].id_order+`" class="wth_boot_but ord_but">Подтвердить заказ</div>
+                            <td class="order order_ord form-group">
+                                <div id="`+data.output[index].id_order+`" class="wth_boot_but ord_but">Подтвердить</div>
+                                <div id="`+data.output[index].id_order+`" class="wth_boot_but no_ord_but">Отказать</div>
                                 <div id="`+data.output[index].id_order+`" class="cf_ord">Заказ принят</div>
                             </td>
                         </tr>
                     `);
+
+                    // if(data.output[index].checked == 0){
+                    //     $('#order_table i').addClass('hidden_css');
+                    // }
+                    $('#order_table').mouseover(function(){
+                        ajaxController({
+                            model: 'order',
+                            method: 'check',
+                             callback: function(data){
+                                if (data.output[index].checked == 1) {
+                                    alert();
+                                }
+                             }
+                         });
+                    });
                 } 
             }
         });
     }, 10000);
-   $('.order').click(
-        function(){
-            alert();
-            var order_but = $(this).find('.ord_but');
-            var confirm_but = $(this).find('.cf_ord');
+    // $(document).on('click','.order_ord', function(){
+    //     var order_but = $(this).find('.'+data.output[index].id_order+'');
+    //     var confirm_but = $(this).find('.'+data.output[index].id_order+'');
 
-            if (order_but.css('display') == 'block') {
-                order_but.fadeOut(0);
-                confirm_but.addClass('text-success').fadeIn(0);
-            }
-        }
-    );
+    //     if (order_but.css('display') == 'block') {
+    //         order_but.fadeOut(0);
+    //         confirm_but.addClass('text-success').fadeIn(0);
+    //     }
+    // });
     $('.order_phone').click(
         function(){
             var order_but = $(this).find('.ord_but');
