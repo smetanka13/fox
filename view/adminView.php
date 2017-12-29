@@ -462,10 +462,10 @@ $( document ).ready(function() {
                         ajaxController({
                             model: 'order',
                             method: 'check',
-                             callback: function(data){
-                                if (data.output[index].checked == 1) {
-                                    alert();
-                                }
+                             // callback: function(data){
+                             //    if (data.output[index].checked == 1) {
+                             //        alert();
+                             //    }
                              }
                          });
                     });
