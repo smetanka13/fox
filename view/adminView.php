@@ -465,6 +465,7 @@ $( document ).ready(function() {
 
                     $('#order_table').mouseover(function(){
                         if (data.output[index].checked == 0) {
+                            alert();
                             ajaxController({
                                 model: 'order',
                                 method: 'check',
