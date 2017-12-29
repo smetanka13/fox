@@ -2,17 +2,17 @@
 
 require_once 'model/jsonModel.php';
 
-define('DEBUG', TRUE);
-
 $permitted_actions = [
 	'User::saveLogged',
 	'User::verifyEmail',
 	'User::registrate',
 	'Order::add',
 	'Callback::add',
+	'Search::find',
 	'Product::getFullPriceCookie',
 	// --
 	'Order::getUnaccepted',
+	'Order::check',
 	'Order::accept',
 	'Product::get',
 	'Product::update',
@@ -24,7 +24,8 @@ $permitted_actions = [
 	'Category::getFullCategory',
 	'Category::addValues',
 	'Category::addParams',
-	'Category::newCategory'
+	'Category::newCategory',
+	'Article::upload'
 ];
 
 $logged_actions = [
@@ -53,8 +54,8 @@ $_DATA = array_diff_key($_DATA, [
 	'uri' => NULL
 ]);
 
-if(Main::lookSame($permitted_actions, ACTION)) {
-	if(Main::lookSame($logged_actions, ACTION)) {
+if(array_search(ACTION, $permitted_actions)) {
+	if(array_search(ACTION, $logged_actions)) {
 		if(User::login($_COOKIE['login'], $_COOKIE['pass'])) {
 
 			# ...

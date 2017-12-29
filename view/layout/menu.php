@@ -22,7 +22,7 @@
                         $values = base64_encode(json_encode([
                             'Подкатегория' => $subcategory
                         ]));
-                        echo '<a href="search?category='.$category.'&values='.$values.'"><div class="item"><i class="fa fa-arrow-circle-right fa-fw" aria-hidden="true"></i> '.$subcategory.'</div></a>';
+                        echo '<a href="search?category='.$category.'&settings='.$values.'"><div class="item"><i class="fa fa-arrow-circle-right fa-fw" aria-hidden="true"></i> '.$subcategory.'</div></a>';
                     }
                 ?>
             </div>
