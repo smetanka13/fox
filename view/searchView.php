@@ -64,7 +64,7 @@
 </div>
 
 <!-- БЛОК С ТОВАРАМИ -->
-<div class="cart_prod back ptb col-xs-12 col-sm-8 col-md-9 col-lg-9">
+<div class="search_pr_cnt cart_prod back ptb col-xs-12 col-sm-8 col-md-9 col-lg-9">
     <!-- <div style="height: 120px;"><h4 class="main_title mbt">Результаты поиска :</h4></div> -->
     <div id="prods_container" class=""></div>
 </div>

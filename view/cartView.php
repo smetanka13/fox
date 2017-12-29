@@ -5,7 +5,7 @@
 	require_once 'model/productModel.php';
 ?>
 
-<div class="reg_prod col-xs-12 col-sm-5 col-md-4 col-lg-4">
+<div class="reg_prod col-xs-12 col-sm-12 col-md-4 col-lg-4">
 	<div class="reg_prod_cnt">
 		<h4 class="main_title">Оформление заказа</h4>
 		<form>
@@ -51,11 +51,11 @@
 </div>
 
 <!-- БЛОК С ТОВАРАМИ -->
-<div class="cart_prod cp_wth_sh col-xs-12 col-sm-7 col-md-8 col-lg-8">
+<div class="cart_prod ptb cp_wth_sh col-xs-12 col-sm-12 col-md-8 col-lg-8">
 	<?php if(empty($_COOKIE['cart'])) { ?>
 	<h4 class="main_title au">На данный момент в корзине нет товаров!</h4>
 	<?php } ?>
-
+	<button title="Нажмите, чтобы очистить корзину" id="trash_but" class="wth_boot_but confirm_but"><i class="fa fa-trash fa-2x " aria-hidden="true"></i></button>
 	<?php
 
 		$cookie = json_decode($_COOKIE['cart'], TRUE);

@@ -7,3 +7,9 @@
 .list ul li:hover{
 	color: #333;
 }
+.search_pr_cnt{
+	min-height: calc(100vh + 300px);
+}
+.search_pr_cnt .prods_cnt{
+	margin: 35px 35px;
+}

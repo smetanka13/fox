@@ -167,6 +167,13 @@
 
 	transform: scale(1.1) rotate(180deg);
 }
+#trash_but{
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 20px;
+    right: 50px;
+}
 
 /*RESPONSIVE*/
 
@@ -193,7 +200,7 @@
 
 	.close_img {
 
-		top: 10px ; right: 50px;
+		top: 10px ; right: 20px;
 	}
 }
 
@@ -240,6 +247,10 @@
 
 		width: 60% ;
 		margin: 0 20%;
+	}
+	#trash_but{
+		left: 10px;
+    	top: 0px;
 	}
 }
 

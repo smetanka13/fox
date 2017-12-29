@@ -474,8 +474,7 @@ $( document ).ready(function() {
                                 }
                              });
                         } 
-                    }); 
-                    
+                    });  
                 }
             }
         });
