@@ -7,8 +7,8 @@
     $page = isset($_GET['page']) ? $_GET['page'] : 0;
     $query = isset($_GET['query']) ? $_GET['query'] : '';
     $category = isset($_GET['category']) ? $_GET['category'] : 'Масла';
-    $sort = isset($_GET['sort']) ? $_GET['sort'] : NULL;
-    $direction = isset($_GET['direction']) ? $_GET['direction'] : NULL;
+    $sort = isset($_GET['sort']) ? $_GET['sort'] : 'bought';
+    $direction = isset($_GET['direction']) ? $_GET['direction'] : 'ASC';
 
     if(isset($_GET['settings'])) {
         $settings = json_decode(base64_decode($_GET['settings']), TRUE);
@@ -95,7 +95,26 @@
                 Search.settings.delete($(this).attr('data-param'), $(this).attr('data-value'));
             }
 
-            Search.update();
+            Search.update(updateSrchHistory);
         });
     });
+
+    function updateSrchHistory() {
+        history.pushState({
+                query: Search.query,
+                settings: Search.settings.val,
+                sort: Search.sort,
+                direction: Search.direction,
+                page: Search.page
+            },
+            null,
+            'search?query='+Search.query+'&page='+Search.page+'&sort='+Search.sort+'&direction='+Search.direction+'&category='+Search.category+'&settings='+FW.b64EncodeUnicode(JSON.stringify(Search.settings.val))
+        );
+    }
+
+    // window.onpopstate = function(event) {
+    //     if(event && event.state) {
+    //         loadItems(event.state.page, sort, direction, section, false);
+    //     }
+    // }
 </script>

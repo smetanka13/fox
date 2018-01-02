@@ -14,7 +14,6 @@ class Search {
 
         if(is_string($values)) $values = json_decode($values, TRUE);
 
-        $query_sort = '';
         $query_srch_title = '';
         $query_srch_text = '';
         $query_params = '';
@@ -22,16 +21,15 @@ class Search {
         # ---- Начальные параметры ---- #
 
         if(empty($page)) $page = 0;
-        if(empty($sort_by)) $sort_by = 'bought';
+        if(empty($sort)) $sort = 'bought';
         if(empty($direction)) $direction = 'ASC';
 
-        $direction = ($page * self::$max_finds);
         $to = (($page + self::$max_pages) * self::$max_finds) + self::$max_finds;
 
         if(!Main::lookSame(['DESC', 'ASC'], $direction))
             throw new InvalidArgumentException("Invalid direction.");
 
-        if(!Main::lookSame(['bought', 'price', 'id_prod'], $sort_by))
+        if(!Main::lookSame(['bought', 'price', 'id_prod'], $sort))
             throw new InvalidArgumentException("Invalid sort filter.");
 
         # ---- Формирование запроса по спецификациям ---- #
@@ -101,7 +99,7 @@ class Search {
                 $query_params
             )
             $params_scan
-            $query_sort
+            ORDER BY $sort $direction
         ", TRUE);
 
         $important_part = Product::processProdParams(array_slice($result, 0, self::$max_finds), TRUE);

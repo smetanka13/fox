@@ -77,7 +77,7 @@
                 <a href="<?= URL ?>"><div class="logo"></div></a>
             </div>
             <ul class="nav navbar-nav nav_bar_pages2">
-                <li><a href="search2?category=Масла">Масла</a></li>
+                <li><a href="search?category=Масла">Масла</a></li>
                 <li><a href="#">Фильтры</a></li>
                 <li><a href="#">Ремни</a></li>
                 <li><a href="#">Присадки</a></li>

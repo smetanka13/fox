@@ -24,7 +24,7 @@
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pr_description">
 			<ul class="list-unstyled">
 				<li class="pr_name"><?= $product['title'] ?></li>
-				<li class="code_name">Код товара : 67839992</li>
+				<li class="code_name">Код товара : <?= $product['articule'] ?></li>
 				<li>Цена : <b><?= $product['price'] ?></b> &euro;</li>
 				<li><a href="delivery"><i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i> Условия доставки</a></li>
 				<li><a href="#"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i> Видео на YouTube</a></li>
