@@ -1,4 +1,4 @@
-Cart = Object;
+Cart = new Object();
 
 /**
  * Обновляет сверху визуально корзину (сверху слева)
@@ -12,7 +12,7 @@ Cart.updateVisual = function() {
     } else {
         return;
     }
-    ajaxController({
+    FW.ajax.send({
         model: 'product',
         method: 'getFullPriceCookie',
         callback: function(data) {

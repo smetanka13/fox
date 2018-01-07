@@ -112,9 +112,15 @@
         );
     }
 
-    // window.onpopstate = function(event) {
-    //     if(event && event.state) {
-    //         loadItems(event.state.page, sort, direction, section, false);
-    //     }
-    // }
+    window.onpopstate = function(event) {
+        if(event && event.state) {
+            Search.query = event.state.query;
+            Search.page = event.state.page;
+            Search.category = event.state.category;
+            Search.sort = event.state.sort;
+            Search.direction = event.state.direction;
+            Search.settings.val = event.state.settings;
+        }
+        Search.update();
+    }
 </script>

@@ -22,91 +22,57 @@ class Product {
 
     public static function add($articule, $title, $price, $category, $spec = []) {
 
-        $quantity = Main::select("
-            SELECT `quantity` FROM `category_params`
-            WHERE `category` = '$category'
-            LIMIT 1
-        ")['quantity'];
+        FW::$DB->get('category_params', 'quantity', [
+            'category' => $category
+        ]);
 
         if(empty($quantity))
             throw new InvalidArgumentException("No category $category found.");
 
         $quantity++;
-        Main::query("
-            UPDATE `category_params`
-            SET `quantity` = '$quantity'
-            WHERE `category` = '$category'
-            LIMIT 1
-        ");
 
-        $params_str = '';
-        foreach($spec as $param => $value) {
-            $params_str .= "`$param`,";
-        }
+        FW::$DB->action(function() {
+            FW::$DB->update('category_params', [
+                'quantity' => $quantity
+            ], [
+                'category' => $category
+            ]);
 
-        $values_str = '';
-        foreach($spec as $param => $value) {
-            $values_str .= "'$value',";
-        }
+            $query_array = [
+                'articule' => $articule,
+                'title' => $title,
+                'price' => $price,
+                'category' => $category
+            ];
+            foreach($spec as $param => $value) {
+                $query_array[$param] = $value;
+            }
 
-        try {
+            FW::$DB->insert($category, $query_array);
 
-            Main::query("
-                INSERT INTO `$category` (
-                    $params_str
-                    `articule`,
-                    `title`,
-                    `price`,
-                    `category`
-                )
-                VALUES (
-                    $values_str
-                    '$articule',
-                    '$title',
-                    '$price',
-                    '$category'
-                )
-            ");
-
-        } catch (RuntimeException $e) {
-            $quantity--;
-            Main::query("
-                UPDATE `category_params`
-                SET `quantity` = '$quantity'
-                WHERE `category` = '$category'
-            ");
-            throw new RuntimeException($e->getMessage());
-        }
-
-        Tops::addNewProds(Main::select("
-            SELECT `id_prod` FROM `$category`
-            WHERE `title` = '$title'
-            LIMIT 1
-        ")['id_prod'], $category);
+            Tops::addNewProds(
+                FW::$DB->get($category, 'id_prod', [
+                    'title' => $title
+                ]),
+            $category);
+        });
     }
     public static function update($id_prod, $articule, $title, $price, $category, $spec = []) {
 
-        if($articule != NULL) {
-            $articule == "`articule` = '$articule',";
-        } else {
-            $articule == "";
-        }
-
-        $query_str = '';
+        $query = [
+            'title' => $title,
+            'price' => $price,
+            'category' => $category
+        ];
         foreach($spec as $param => $value) {
-            $query_str .= "`$param` = '$value', ";
+            $query[$param] = $value;
         }
 
-        Main::query("
-            UPDATE `$category`
-            SET $query_str
-            $articule
-            `title` = '$title',
-            `price` = '$price',
-            `category` = '$category'
-            WHERE `id_prod` = '$id_prod'
-            LIMIT 1
-        ");
+        if(empty($articule)) $query['articule'] = $articule;
+
+        FW::$DB->update($category, $query, [
+            'id_prod' => $id_prod
+        ]);
 
     }
 
@@ -114,20 +80,18 @@ class Product {
 
         $text = str_replace("\n", '<br>', $text);
 
-        $query_str = '';
+        $query = [
+            'price' => $price,
+            'category' => $category,
+            'text' => $text
+        ];
         foreach($spec as $param => $value) {
-            $query_str .= "`$param` = '$value', ";
+            $query[$param] = $value;
         }
 
-        Main::query("
-            UPDATE `$category`
-            SET $query_str
-            `price` = '$price',
-            `category` = '$category',
-            `text` = '$text'
-            WHERE `id_prod` = '$id_prod'
-            LIMIT 1
-        ");
+        FW::$DB->update($category, $query, [
+            'id_prod' => $id_prod
+        ]);
 
     }
 
@@ -135,25 +99,30 @@ class Product {
 
         if(empty($prods)) return;
 
-        $query = '';
         if(count($prods) == 1) {
-            $query = "
-                SELECT * FROM `".$prods[0]['category']."`
-                WHERE `id_prod` = '".$prods[0]['id_prod']."'
-                LIMIT 1
-            ";
+
+            $result = self::getById($prods[0]['category'], [$prods[0]['id_prod']]);
+
         } else {
 
-            foreach($prods as $index => $prod) {
-                if($index != 0) $query .= ' UNION ';
+            $query = '';
+            $category = Category::getCategories();
+
+            foreach($prods as $i => $prod) {
+                if(array_search($prod['category'], $category) === FALSE || !is_numeric($prod['id_prod']))
+                    continue;
+                if($i != 0) $query .= ' UNION ';
                 $query .= "(
-                    SELECT * FROM `".$prod['category']."`
-                    WHERE `id_prod` = '".$prod['id_prod']."'
+                    SELECT * FROM {$prod['category']}
+                    WHERE id_prod = {$prod['id_prod']}
                     LIMIT 1
                 )";
             }
+
+            $result = self::processProdParams(FW::$DB->query($query)->fetchAll(), TRUE);
         }
-        return self::processProdParams(Main::select($query, TRUE), TRUE);
+
+        return $result;
     }
 
     public static function processProdParams($input, $array = FALSE) {
@@ -163,7 +132,7 @@ class Product {
             foreach($input as $i => $prod) {
                 $input[$i]['params'] = [];
                 foreach($prod as $key => $value) {
-                    if(!Main::lookSame(self::$default_values, $key)) {
+                    if(array_search($key, self::$default_values) === FALSE) {
                         $input[$i]['params'][$key] = $value;
                         unset($input[$i][$key]);
                     }
@@ -174,7 +143,7 @@ class Product {
 
             $input['params'] = [];
             foreach($input as $key => $value) {
-                if(!Main::lookSame(self::$default_values, $key)) {
+                if(array_search($key, self::$default_values) === FALSE) {
                     $input['params'][$key] = $value;
                     unset($input[$key]);
                 }
@@ -186,9 +155,10 @@ class Product {
     }
 
     public static function upload($category, $id_prod, $text, $price, $quantity, $params, $img) {
-        $params = json_decode($params, TRUE);
 
-        if(!Main::lookSame(Category::getCategories(), $category))
+        if(is_string($params)) $params = json_decode($params, TRUE);
+
+        if(array_search(Category::getCategories(), $category) === FALSE)
             throw new InvalidArgumentException("Категория '$category' не найдена.");
 
         Product::humanUpdate($id_prod, $price, $category, $text, $params);
@@ -198,7 +168,7 @@ class Product {
         # --- IF IMAGE EXISTS, UPLOAD IT --- #
         if(empty($img)) return;
 
-        $img_dir = __DIR__ . '/../catalog/'.$category;
+        $img_dir = __DIR__ . '/material/catalog/'.$category;
 
         $prev_image = Main::select("
             SELECT `image` FROM `$category`
@@ -208,9 +178,9 @@ class Product {
 
         $valid_ext = ['jpeg', 'png', 'jpg', 'bmp'];
 
-        $extention = Main::getFileExt($img['name']);
+        $extention = FW::getFileExt($img['name']);
 
-        if(!Main::lookSame($valid_ext, $extention))
+        if(array_search($valid_ext, $extention) !== FALSE)
             throw new InvalidArgumentException("Недопустимое расширение для файла '$extention'.");
 
         $image = substr(sha1(TIME . $img['name']), 0, (31 - strlen($extention))) . ".$extention";
@@ -238,16 +208,18 @@ class Product {
     }
     public static function getApprox($category, $str) {
 
-        require_once 'model/searchModel.php';
+        Category::checkCategory($category);
 
         if(empty($str)) return FALSE;
 
+        require_once 'model/searchModel.php';
+
         if($str[0] == ':') {
-            return self::processProdParams(Main::select("
-                SELECT * FROM `$category`
-                WHERE `articule` = '".substr($str, 1)."'
-                LIMIT 1
-            "));
+            return self::processProdParams(
+                FW::$DB->get($category, '*', [
+                    'articule' => substr($str, 1)
+                ])
+            );
         } else {
             return Search::find($str, $category)[0];
         }
@@ -266,24 +238,20 @@ class Product {
     }
     public static function getById($category, $id_prod) {
 
+        Category::checkCategory($category, TRUE);
+
         if(is_array($id_prod)) {
 
-            $query = '';
-            foreach($input as $i => $value) {
-                if($i > 0) $query .= " OR ";
-                $query .= " `id_prod` = '$value' ";
-            }
+            $result = FW::$DB->select($category, '*', [
+                'id_prod' => $id_prod
+            ]);
 
-            $result = Main::select("
-                SELECT * FROM `$category`
-                WHERE $query
-            ", TRUE);
         } else {
-            $result = Main::select("
-                SELECT * FROM `$category`
-                WHERE `id_prod` = '$id_prod'
-                LIMIT 1
-            ");
+
+            $result = FW::$DB->get($category, '*', [
+                'id_prod' => $id_prod
+            ]);
+
         }
 
         return self::processProdParams($result, is_array($id_prod));

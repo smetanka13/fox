@@ -1,12 +1,16 @@
 <?php
 
 	require_once 'model/articleModel.php';
+	require_once 'model/searchModel.php';
 
 	$articles = Article::getAll();
 
-	// foreach ($articles as $key => $value) {
-	// 	Article::delete($value['id_article']);
-	// }
+	// echo '<pre style="color: #000">';
+	// print_r(Search::find(0, 'XPG', 'Масла', [
+	// 	'Подкатегория' => 'Моторное масла',
+	// 	'Литраж' => '1L'
+	// ], 'id_prod', 'ASC'));
+	// echo '</pre>';
 
 ?>
 
@@ -15,24 +19,21 @@
 <div class="wrapper container-fluid blog_back">
 	<div class="blog_main_block container-fluid">
 
-		<?php
-
-			foreach ($articles as $article) {
-
-		?>
+		<?php foreach ($articles as $article) { ?>
 
 		<div class="some_info_block_back col-xs-12 col-sm-12 col-md-6 col-lg-6">
-			<div class="some_info_block"><a title="Нажмите , чтобы читать далее" href="new?id=<?= $article['id_article'] ?>">
-				<h4><?= $article['title'] ?></h4>
-				<div class="some_info_img cent_img"><img src="<?= $article['img'] ?>"></div>
-				<div class="some_info_txt main_text">
-
-					<small><?= gmdate("Y-m-d", $article['date']) ?></small>
-					<div>
-						<p><?= $article['text'] ?></p>
+			<div class="some_info_block">
+				<a title="Нажмите , чтобы читать далее" href="new?id=<?= $article['id_article'] ?>">
+					<h4><?= $article['title'] ?></h4>
+					<div class="some_info_img cent_img"><img src="<?= $article['img'] ?>"></div>
+					<div class="some_info_txt main_text">
+						<small><?= gmdate("Y-m-d", $article['date']) ?></small>
+						<div>
+							<p><?= $article['text'] ?></p>
+						</div>
 					</div>
-				</div>
-			</a></div>
+				</a>
+			</div>
 		</div>
 
 		<?php } ?>

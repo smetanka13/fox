@@ -93,7 +93,7 @@ Search.prevPage = function() {
  * @param callback -
  */
 Search.update = function(callback = function() {}) {
-    ajaxController({
+    FW.ajax.send({
         model: 'search',
         method: 'find',
         callback: function(data, callback) {

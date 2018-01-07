@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="css/index.css">
-<link rel="stylesheet" type="text/css" href="css/slick.css">
+<link rel="stylesheet" type="text/css" href="bower_components/slick-carousel/slick/slick.css">
 
 <div id="slider_cnt">
 	<?php
@@ -60,7 +60,7 @@
 </div>
 
 <script type="text/javascript" src="js/slide.js" ></script>
-<script type="text/javascript" src="js/addons/slick.min.js"></script>
+<script type="text/javascript" src="bower_components/slick-carousel/slick/slick.min.js"></script>
 
 <script type="text/javascript">
 		$(document).ready(function() {

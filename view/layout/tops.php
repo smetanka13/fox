@@ -4,7 +4,7 @@
 
     require_once 'model/topsModel.php';
 
-    Tops::updateTopProds();
+    Tops::updateHotProds();
 
 ?>
 
@@ -58,10 +58,10 @@
         var newTopData = <?= json_encode(Tops::getNewProds(), JSON_UNESCAPED_UNICODE) ?>;
         var hotTopData = <?= json_encode(Tops::getHotProds(), JSON_UNESCAPED_UNICODE) ?>;
 
-        for(i in newTopData) {
+        for(let i in newTopData) {
             $('.product_cnt#new .prods_slider').append(prodBlock(newTopData[i]));
         }
-        for(i in hotTopData) {
+        for(let i in hotTopData) {
             $('.product_cnt#hot .prods_slider').append(prodBlock(hotTopData[i]));
         }
     });

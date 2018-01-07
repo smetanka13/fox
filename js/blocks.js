@@ -1,5 +1,5 @@
 function prodBlock(data) {
-    data.image = (data.image != '') ? `catalog/${data.category}/${data.image}` : 'images/icons/no_photo.svg';
+    data.image = (data.image != '') ? `material/catalog/${data.category}/${data.image}` : 'images/icons/no_photo.svg';
     var params = '';
 
     for(param in data.params) {
