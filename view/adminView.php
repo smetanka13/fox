@@ -455,7 +455,7 @@ function getUnaccepted(data){
         method: 'getUnaccepted',
         callback: function(data){
             $("#order_table tbody").empty();
-            for( var index = data.output.length - 1; index >= 0 ; --index){
+            for(var index = data.output.length - 1; index >= 0 ; --index){
                 $('#order_table tbody').append(tableOrd(data.output[index]));
 
                 $('#order_table').mouseover(function(){
@@ -468,8 +468,8 @@ function getUnaccepted(data){
                                 $('#order_table i').addClass('hidden_css');
                             }
                          });
-                    } 
-                });  
+                    }
+                });
             }
         }
     });
