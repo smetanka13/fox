@@ -1,20 +1,14 @@
 <link rel="stylesheet" href="css/fw.css">
+<div class="fw-addons">
+	<div id="ajax_error"></div>
 
-<div id="ajax_error" class="fw-theme-grad-anim"></div>
-<div id="message_whole" onclick="FW.showMessage()"></div>
-<div id="message_cnt"><div id="message_block"></div></div>
-<i class="fa fa-spinner fa-pulse fa-3x fa-fw" id="ajax_load"></i>
+	<div class="message">
+		<div class="bckgnd" onclick="FW.showMessage()"></div>
+		<div class="cnt"><div class="content"></div></div>
+	</div>
 
-<script>
-
-	$(document).ready(function() {
-
-		<?php
-			if(isset($_GET['msg'])) {
-				echo "showMessage('".$_GET['msg']."');";
-			}
-		?>
-
-	});
-
-</script>
+	<i id="ajax_load" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+	<script>
+		window.onload = function() {<?= (isset($_GET['msg']) ? "FW.showMessage('{$_GET['msg']}')" : '') ?>};
+	</script>
+</div>

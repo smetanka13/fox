@@ -1,12 +1,11 @@
-<?php require_once 'model/categoryModel.php'; ?>
 <link rel="stylesheet" type="text/css" href="css/admin.css">
 <link rel="stylesheet" type="text/css" href="css/personal_room.css">
 <script>
     function callback(data) {
         if(data.status == true) {
-            showMessage('Успешная операция.');
+            FW.showMessage('Успешная операция.');
         } else {
-            showMessage('Ошибка.');
+            FW.showMessage('Ошибка.');
         }
     }
     function getProd(data) {
@@ -92,7 +91,7 @@
             return;
         }
 
-        ajaxController({
+        FW.ajax.send({
             listener: 'newcategory',
             callback: callback,
             name: $('#newcategory #name').val(),
@@ -116,7 +115,7 @@
             return;
         }
 
-        ajaxController({
+        FW.ajax.send({
             model: 'category',
             method: 'addValues',
             callback: callback,
@@ -135,7 +134,7 @@
 
         json = JSON.stringify(json);
 
-        ajaxController({
+        FW.ajax.send({
             model: 'product',
             method: 'upload',
             callback: callback,
@@ -153,7 +152,7 @@
     $(document).ready(function() {
         $('#newparamvalues #category').change(function() {
             $('#newparamvalues #values_cnt').html('');
-            ajaxController({
+            FW.ajax.send({
                 model: 'category',
                 method: 'getParams',
                 callback: getParams,
@@ -162,7 +161,7 @@
         });
         $('#newparamvalues #param').change(function() {
             $('#newparamvalues #values_cnt').html('');
-            ajaxController({
+            FW.ajax.send({
                 model: 'category',
                 method: 'getValues',
                 callback: getValues,
@@ -172,7 +171,7 @@
         });
         $('#upload #category').change(function() {
             $('#upload #values').html('');
-            ajaxController({
+            FW.ajax.send({
                 model: 'category',
                 method: 'getFullCategory',
                 callback: getAll,
@@ -181,7 +180,7 @@
         });
         $('#upload #id').keyup(function() {
             if($('#upload #category').val() != 'Не выбрано' && $('#upload #id').val() != '') {
-                ajaxController({
+                FW.ajax.send({
                     model: 'product',
                     method: 'getApprox',
                     callback: getProd,
@@ -298,7 +297,7 @@
               <div id="excel" class="col-md-12 cnt_all">
                 <h1 class="main_title">Excel загрузка</h1>
                 <input type="file" id="file" multiple="multiple">
-                <button class="wth_boot_but confirm_but" onclick="ajaxController({
+                <button class="wth_boot_but confirm_but" onclick="FW.ajax.send({
                     listener: 'excel',
                     callback: callback
                 }, {
@@ -409,7 +408,7 @@
                   <label>Загрузка изображений (загрузите не более 4 изображений)</label>
                   <input id="images" type="file" class="form-control" multiple title="Загрузите фотографию">
                 </div>
-                <button onclick="ajaxController({
+                <button onclick="FW.ajax.send({
                     model: 'article',
                     method: 'upload',
                     callback: function() {},
@@ -427,7 +426,7 @@
 
 $( document ).ready(function() {
    setInterval(function(){
-        ajaxController({
+        FW.ajax.send({
             model: 'order',
             method: 'getUnaccepted',
             callback: function(data){
@@ -466,15 +465,15 @@ $( document ).ready(function() {
                     $('#order_table').mouseover(function(){
                         if (data.output[index].checked == 0) {
                             alert();
-                            ajaxController({
+                            FW.ajax.send({
                                 model: 'order',
                                 method: 'check',
                                 callback:function(data){
                                     $('#order_table i').addClass('hidden_css');
                                 }
                              });
-                        } 
-                    });  
+                        }
+                    });
                 }
             }
         });

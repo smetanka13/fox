@@ -7,9 +7,13 @@ require_once 'model/topsModel.php';
 
 
 class Input {
-    public static function excelUpload($file) {
 
-        require_once 'plugins/PHPExcel-1.8/Classes/PHPExcel.php';
+    /**
+     * Uploads product from a specified .xlsx (excel) file
+     *
+     * @param file - path to excel file
+     */
+    public static function excelUpload($file) {
 
         /* --- EXCEL STRUCTURE ---
 
@@ -49,14 +53,13 @@ class Input {
                 ];
             }
 
-            # --- If no category exists - stop --- #
-            if(!Main::lookSame($categories, $category))
-                throw new InvalidArgumentException("Категория '$category' не найдена.");
+            # if no category exists - stop
+            Category::checkCategory($category, TRUE);
 
             foreach($excel_array as $index => $row) {
                 if($index == 1) continue;
 
-                # --- Add new values to category params --- #
+                # add new values to category params
                 foreach($spec_params as $param => $pos) {
                     Category::addValues($category, $param, $row[$pos], FALSE);
                 }
@@ -66,13 +69,15 @@ class Input {
                     $tmp_params[$param] = $row[$pos];
                 }
 
-                $id_prod = Main::select("
-                    SELECT `id` FROM `$category`
-                    WHERE `title` = '{$row['C']}'
-                    LIMIT 1
-                ")['id_prod']
+                $id_prod = FW::$DB->get($category, [
+                    'id_prod'
+                ], [
+                    'title' => $row['C']
+                ]);
 
                 if($id_prod) {
+
+                    # if product with that ID exists - rewrite it
                     Product::update(
                         $id_prod,
                         $row['B'],
@@ -81,6 +86,7 @@ class Input {
                         $category,
                         $tmp_params
                     );
+
                 } else {
                     Product::add(
                         $row['B'],
