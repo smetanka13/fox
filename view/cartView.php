@@ -65,7 +65,7 @@
 
 		foreach($products as $index => $product) {
 
-			$image = !empty($product['image']) ? 'catalog/'.$product['category'].'/'.$product['image'] : 'images/icons/no_photo.svg';
+			$image = !empty($product['image']) ? 'material/catalog/'.$product['category'].'/'.$product['image'] : 'images/icons/no_photo.svg';
 	?>
 	<div class="c_prod_part" data-key="<?= $keys[$index] ?>">
 		<div class="img-responsive c_prod_img hidden-xs cent_img"><img src="<?= $image ?>"></div>
@@ -137,7 +137,7 @@
 
 		// ДЛЯ ОПОВЕЩЕНИЯ О ПРИНЯТИИ ЗАКАЗА
 		$('.ord_maker').click(function(){
-			ajaxController({
+			FW.ajax.send({
 				model: 'order',
 				method: 'add',
 				callback: function(data) {

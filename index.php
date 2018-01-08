@@ -2,10 +2,11 @@
 
 mb_internal_encoding('UTF-8');
 
+require_once 'vendor/autoload.php';
+require_once 'model/fwModel.php';
+require_once 'model/userModel.php';
 require_once 'config/globals.php';
 require_once 'config/db.php';
-require_once 'model/mainModel.php';
-require_once 'model/userModel.php';
 
 if(empty($_GET['uri'])) $_GET['uri'] = 'index';
 
@@ -29,7 +30,7 @@ $pages = [
 
 define('URI', $_GET['uri']);
 
-if(Main::lookSame($pages, URI)) {
+if(array_search(URI, $pages) !== FALSE) {
     if(URI == 'remote') require_once 'controller/remoteController.php';
     else require_once 'controller/viewController.php';
 }

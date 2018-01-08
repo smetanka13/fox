@@ -2,72 +2,81 @@
 
 class Category {
 
+    private static $category_cache;
+    private static $param_cache;
+    private static $value_cache;
+
+    public static function checkCategory($category, $exception = FALSE) {
+        if(array_search($category, self::getCategories()) === FALSE) {
+            if($exception)
+                throw new InvalidArgumentException("Не найдено категории '$category'.");
+            else
+                return FALSE;
+        }
+        return TRUE;
+    }
+    public static function checkParam($category, $param, $exception = FALSE) {
+        if(array_search($param, self::getParams($category)) === FALSE) {
+            if($exception)
+                throw new InvalidArgumentException("Параметра '$param' не найдено в категории '$category'.");
+            else
+                return FALSE;
+        }
+        return TRUE;
+    }
+
     static public function getCategories($str = FALSE) {
-        $categories = Main::select("
-            SELECT `data` FROM `variable`
-            WHERE `name` = 'categories'
-            LIMIT 1
-        ")['data'];
+
+        if(empty(self::$category_cache))
+            self::$category_cache = FW::$DB->get('variable', 'data', [
+                'name' => 'categories'
+            ]);
+
         if(!$str) {
-            if(!empty($categories))
-                return explode(';', $categories);
+            if(!empty(self::$category_cache))
+                return explode(';', self::$category_cache);
             else
                 return [];
         } else
-            return $categories;
+            return self::$category_cache;
     }
     static public function getParams($category, $str = FALSE) {
 
-        if(!Main::lookSame(self::getCategories(), $category))
-            throw new InvalidArgumentException("Категория '$category' не найдена.");
-
-        $params = Main::select("
-            SELECT `params` FROM `category_param`
-            WHERE `category` = '".$category."'
-            LIMIT 1
-        ")['params'];
+        if(empty(self::$param_cache[$category]))
+            self::$param_cache[$category] = FW::$DB->get('category_param', 'params', [
+                'category' => $category
+            ]);
 
         if(!$str) {
-            if(!empty($params))
-                return explode(';', $params);
+            if(!empty(self::$param_cache[$category]))
+                return explode(';', self::$param_cache[$category]);
             else
                 return [];
         } else
-            return $params;
+            return self::$param_cache[$category];
     }
     static public function getValues($category, $param, $str = FALSE) {
 
-        if(!Main::lookSame(self::getCategories(), $category))
-            throw new InvalidArgumentException("Категория '$category' не найдена.");
-
-        if(!Main::lookSame(self::getCategories(), $category))
-            throw new InvalidArgumentException("Параметра '$param' в категории '$category' не найдено.");
-
-        $values = Main::select("
-            SELECT `values` FROM `param_value`
-            WHERE `category_param` = '$category/$param'
-            LIMIT 1
-        ")['values'];
+        if(empty(self::$value_cache[$category][$param]))
+            self::$value_cache[$category][$param] = FW::$DB->get('param_value', 'values', [
+                'category_param' => "$category/$param"
+            ]);
 
         if(!$str) {
-            if(!empty($values))
-                return explode(';', $values);
+            if(!empty(self::$value_cache[$category][$param]))
+                return explode(';', self::$value_cache[$category][$param]);
             else
                 return [];
         } else
-            return $values;
+            return self::$value_cache[$category][$param];
     }
     public static function newCategory($name, $params) {
         if($params == NULL) $params = [];
-        $query_str = "";
 
         array_unshift($params, 'Бренд');
         array_unshift($params, 'Подкатегория');
 
-        for($i = 0; isset($params[$i]) && $params[$i] != NULL; $i++) {
-            $query_str .= "`".$params[$i]."` varchar(64) NOT NULL,";
-        }
-        if(Main::lookSame(self::getCategories(), $name)) {
+        if(array_search($name, self::getCategories())) {
             throw new InvalidArgumentException("Категория $name уже существует.");
         }
 
@@ -75,130 +84,94 @@ class Category {
         if($categories == NULL)
             $updated_categories = $name;
         else
-            $updated_categories = $categories.";".$name;
+            $updated_categories = $categories.';'.$name;
 
-        Main::query("
-            UPDATE `variables`
-            SET `data` = '$updated_categories'
-            WHERE `name` = 'categories'
-            LIMIT 1
-        ");
+        FW::$DB->action(function() {
+            FW::$DB->update('variables', [
+                'data' => $updated_categories
+            ], [
+                'name' => 'categories'
+            ]);
 
-        Main::query("
-            INSERT INTO `category_param` (
-                `category`
-            ) VALUES (
-                '$name'
-            )
-        ");
+            FW::$DB->insert('category_param', [
+                'category' => $name
+            ]);
 
-        self::addParams($name, $params);
+            self::addParams($name, $params);
 
-        try {
-            Main::query("
-                CREATE TABLE `$name` (
-                    id mediumint NOT NULL AUTO_INCREMENT,
+            $query = '';
+            foreach($params as $i => $param) {
+                $query .= "$param varchar(32) NOT NULL,";
+            }
+
+            FW::$DB->query("
+                CREATE TABLE $name (
+                    id int NOT NULL AUTO_INCREMENT,
                     category varchar(64) NOT NULL,
                     price float UNSIGNED NOT NULL,
                     title varchar(64) UNIQUE NOT NULL,
-                    quantity int(11) UNSIGNED NOT NULL,
-                    date int(20) UNSIGNED NOT NULL,
+                    quantity smallint UNSIGNED NOT NULL,
+                    date int(12) UNSIGNED NOT NULL,
                     text mediumtext NOT NULL,
                     image varchar(32) NOT NULL,
                     video varchar(256) NOT NULL,
                     bought smallint UNSIGNED NOT NULL,
                     rating tinyint UNSIGNED NOT NULL,
                     articule varchar(70) NOT NULL,
-                    ".$query_str."
+                    $query
                     PRIMARY KEY (id)
                 )
             ");
-        } catch (RuntimeException $e) {
-            Main::query("
-                DELETE FROM `category_param`
-                WHERE `category` = '$name'
-                LIMIT 1
-            ");
-            Main::query("
-                UPDATE `variables`
-                SET `data` = '".$categories."'
-                WHERE `name` = 'categories'
-                LIMIT 1
-            ");
-            throw new RuntimeException($e->getMessage());
-        }
+        });
 
-        if(!is_dir("./../catalog/".$name))
-            mkdir("./../catalog/".$name);
+        if(!is_dir('material/catalog/' . $name))
+            mkdir('material/catalog/' . $name);
     }
     static public function addParams($category, $params, $update = TRUE) {
 
         $params = is_array($params) ? $params : [$params];
 
-        if(!Main::lookSame(self::getCategories(), $category)) {
-            throw new Exception("No category '$category' found.");
-        }
+        self::checkCategory($category, TRUE);
         foreach ($params as $param) {
-            if(!$update && Main::lookSame(self::getParams($category), $param)) {
+            if(!$update && array_search($param, self::getParams($category))) {
                 return;
             }
         }
-        if($update) {
-            Main::query("
-                UPDATE `category_param`
-                SET `params` = '".implode(';', $params)."'
-                WHERE `category` = '$category'
-                LIMIT 1
-            ");
-        } else {
-            Main::query("
-                UPDATE `category_param`
-                SET `params` = '".implode(';', array_merge(self::getParams($category), $params))."'
-                WHERE `category` = '$category'
-                LIMIT 1
-            ");
-        }
+
+        $mode = $update ? implode(';', $params) : implode(';', array_merge(self::getParams($category), $params));
+
+        FW::$DB->update('category_param', [
+            'params' => $mode
+        ], [
+            'category' => $category
+        ]);
+
         foreach($params as $param) {
-            Main::query("
-                INSERT INTO `param_value` (
-                    `category_param`
-                ) VALUES (
-                    '$category/$param'
-                )
-            ");
+            FW::$DB->insert('param_value', [
+                'category_param' => "$category/$param"
+            ]);
         }
     }
     static public function addValues($category, $param, $values, $update = TRUE) {
 
         $values = is_array($values) ? $values : [$values];
 
-        if(!Main::lookSame(self::getCategories(), $category)) {
-            throw new InvalidArgumentException("Не найдено категории '$category'.");
-        }
-        if(!Main::lookSame(self::getParams($category), $param)) {
-            throw new InvalidArgumentException("Параметра '$param' не найдено в категории '$category'.");
-        }
+        self::checkCategory($category, TRUE);
+        self::checkParam($category, $param, TRUE);
+
         foreach ($values as $value) {
-            if(!$update && Main::lookSame(self::getValues($category, $param), $value)) {
+            if(!$update && array_search($value, self::getValues($category, $param))) {
                 return;
             }
         }
 
-        if($update) {
-            Main::query("
-                UPDATE `param_value`
-                SET `values` = '".implode(';', $values)."'
-                WHERE `category_param` = '$category/$param'
-                LIMIT 1
-            ");
-        } else {
-            Main::query("
-                UPDATE `param_value`
-                SET `values` = '".implode(';', array_merge(self::getValues($category, $param), $values))."'
-                WHERE `category_param` = '$category/$param'
-                LIMIT 1
-            ");
-        }
+        $mode = $update ? implode(';', $values) : implode(';', array_merge(self::getValues($category, $param), $values));
+
+        FW::$DB->update('param_value', [
+            'values' => $mode
+        ], [
+            'category_param' => "$category/$param"
+        ]);
     }
 
     static public function getFullCategory($category) {

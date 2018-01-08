@@ -15,7 +15,7 @@
 			?>" data-lightbox="image-1">
 				<div class="pr_img cent_img"><img src="<?=
 				!empty($product['image']) ?
-				'catalog/'.$product['category'].'/'.$product['image'] :
+				'material/catalog/'.$product['category'].'/'.$product['image'] :
 				'images/icons/no_photo.svg'
 			?>"></div>
 			</a>

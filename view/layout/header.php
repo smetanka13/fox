@@ -107,6 +107,7 @@
 </div>
 
 <!-- FOR EMBLEM ANIMATE -->
+<script src="bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
 <script type="text/javascript">
     $( document ).ready(function() {
 

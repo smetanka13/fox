@@ -2,28 +2,36 @@
 
 class Order {
     public static function getProds($id_order) {
-        $order_prods = Main::select("
-            SELECT * FROM `order_prod`
-            WHERE `id_order` = '$id_order'
-        ", TRUE);
+        return FW::$DB->select('order_prod', '*', [
+            'id_order' => $id_order
+        ]);
+    }
+    public static function getFullProds($id_order) {
+        $order_prods = FW::$DB->select('order_prod', '*', [
+            'id_order' => $id_order
+        ]);
 
         foreach($order_prods as $index => $value) {
-            $order_prods[$index] = array_merge(Main::select("
-                SELECT `title`, `price`, `articule` FROM `{$value['category']}`
-                WHERE `id_prod` = '{$value['id_prod']}'
-                LIMIT 1
-            "), $order_prods[$index]);
+
+            $order_prods[$index] = array_merge(
+                FW::$DB->get($value['category'], [
+                    'title',
+                    'price',
+                    'articule'
+                ], [
+                    'id_order' => $value['id_prod']
+                ]
+            ), $order_prods[$index]);
         }
         return $order_prods;
     }
     public static function getUnaccepted() {
-        $order = Main::select("
-            SELECT * FROM `order`
-            WHERE `ok` = '0'
-        ", TRUE);
+        $order = FW::$DB->select('order', '*', [
+            'ok' => 0
+        ]);
 
         foreach($order as $index => $value) {
-            $order[$index]['prods'] = self::getProds($value['id_order']);
+            $order[$index]['prods'] = self::getFullProds($value['id_order']);
         }
 
         return $order;
@@ -47,66 +55,60 @@ class Order {
 
         require_once 'model/productModel.php';
 
-        $cookie_json = array_values(json_decode($_COOKIE['cart'], TRUE));
+        FW::$DB->action(function() {
 
-        Main::query("
-            INSERT INTO `order` (
-                `public`, `pay_way`, `delivery_way`,
-                `city`, `address`, `email`,
-                `phone`, `text`, `date`, `price`
-            ) VALUES (
-                '$public', '$pay_way', '$delivery_way',
-                '$city', '$address', '$email',
-                '$phone', '$text', '".TIME."', '".Product::getFullPriceCookie($cookie_json)."'
-            )
-        ");
+            FW::$DB->insert('order', [
+                'public' => $public,
+                'pay_way' => $pay_way,
+                'delivery_way' => $delivery_way,
+                'city' => $city,
+                'address' => $address,
+                'email' => $email,
+                'phone' => $phone,
+                'text' => $text,
+                'date' => TIME,
+                'price' => Product::getFullPriceCookie($_COOKIE['cart'])
+            ]);
 
-        $order_id = Main::select("
-            SELECT `id_order` FROM `order`
-            WHERE `city` = '$city'
-            AND `address` = '$address'
-            AND `email` = '$email'
-            AND `phone` = '$phone'
-            AND `date` = '".TIME."'
-            LIMIT 1
-        ")['id_order'];
+            $id_order = FW::$DB->id();
 
-        $query = '';
-        foreach($cookie_json as $index => $value) {
-            if($index > 0) $query .= ',';
-            $query .= "('$order_id', '{$value['id_prod']}', '{$value['quantity']}', '{$value['category']}')";
-        }
+            $query = [];
+            foreach(array_values(json_decode($_COOKIE['cart'], TRUE)) as $index => $value) {
+                $query[] = [
+                    'id_order' => $id_order,
+                    'id_prod' => $value['id_prod'],
+                    'quantity' => $value['quantity'],
+                    'category' => $value['category']
+                ];
+            }
 
-        try {
-            Main::query("
-                INSERT INTO `order_prod` (
-                    `id_order`, `id_prod`, `quantity`, `category`
-                ) VALUES $query
-            ");
-        } catch (RuntimeException $e) {
-            Main::query("
-                INSERT INTO `order_prod` (
-                    `id_prod`, `quantity`, `category`
-                ) VALUES $query
-            ");
-            throw new RuntimeException($e->getMessage());
-        }
+            FW::$DB->insert('order_prod', $query);
 
+        });
 
     }
     public static function check() {
-        Main::query("
-            UPDATE `order`
-            SET `checked` = '1'
-            WHERE `checked` = '0'
-        ");
+        FW::$DB->update('order', [
+            'checked' => 1
+        ], [
+            'checked' => 0
+        ]);
     }
     public static function accept($id_order) {
-        Main::query("
-            UPDATE `order`
-            SET `ok` = '1'
-            WHERE `id` = '$id'
-            LIMTI 1
-        ");
+        FW::$DB->update('order', [
+            'ok' => 1
+        ], [
+            'id_order' => $id_order
+        ]);
+        $prods = self::getProds($id_order);
+
+        foreach ($prods as $i => $prod) {
+            FW::$DB->query("
+                UPDATE $prod['category']
+                SET bought = bought + 1
+                WHERE id_prod = {$prod['id_prod'] + 1}
+                LIMIT 1
+            ");
+        }
     }
 }
