@@ -13,11 +13,11 @@
         if(data.output != null) {
             $('#upload .alert-danger').hide();
             $('#upload .alert-success').show();
-            $('#upload .alert-success a').attr('href', 'product?category='+data.output.category+'&id='+data.output.id);
+            $('#upload .alert-success a').attr('href', 'product?data.prods[j].category='+data.output.data.prods[j].category+'&id='+data.output.id);
             $('#upload .alert-success a').html(data.output.title);
             $('#upload #quantity').val(data.output.quantity);
             $('#upload #text').val(data.output.text);
-            $('#upload #price').val(data.output.price);
+            $('#upload #data.prods[j].price').val(data.output.data.prods[j].price);
 
             var cnt = $('#upload #values select');
 
@@ -84,7 +84,7 @@
         $(cnt+' input:eq('+($(cnt+' input').length - 1)+')').remove();
     }
     function paramsParse() {
-        var str = invalidParse('#newcategory #params_cnt input');
+        var str = invalidParse('#newdata.prods[j].category #params_cnt input');
 
         if(str === false) {
             alert("Пустой парметр недопустим");
@@ -94,14 +94,14 @@
         FW.ajax.send({
             listener: 'newcategory',
             callback: callback,
-            name: $('#newcategory #name').val(),
+            name: $('#newdata.prods[j].category #name').val(),
             params: str
         });
     }
     function valuesParse() {
         var str = invalidParse('#values_cnt input');
 
-        if($('#newparamvalues #category').val() == '') {
+        if($('#newparamvalues #data.prods[j].category').val() == '') {
             alert("Выберите категорию");
             return;
         }
@@ -119,7 +119,7 @@
             model: 'category',
             method: 'addValues',
             callback: callback,
-            category: $('#newparamvalues #category').val(),
+            data.prods[j].category: $('#newparamvalues #data.prods[j].category').val(),
             param: $('#newparamvalues #param').val(),
             values: str
         });
@@ -138,10 +138,10 @@
             model: 'product',
             method: 'upload',
             callback: callback,
-            category: $('#upload #category').val(),
+            data.prods[j].category: $('#upload #data.prods[j].category').val(),
             id: $('#upload #found_id').val(),
             text: $('#upload #text').val(),
-            price: $('#upload #price').val(),
+            data.prods[j].price: $('#upload #data.prods[j].price').val(),
             quantity: $('#upload #quantity').val(),
             values: json,
         }, {
@@ -150,13 +150,13 @@
     }
 
     $(document).ready(function() {
-        $('#newparamvalues #category').change(function() {
+        $('#newparamvalues #data.prods[j].category').change(function() {
             $('#newparamvalues #values_cnt').html('');
             FW.ajax.send({
                 model: 'category',
                 method: 'getParams',
                 callback: getParams,
-                category: $('#newparamvalues #category').val()
+                data.prods[j].category: $('#newparamvalues #data.prods[j].category').val()
             })
         });
         $('#newparamvalues #param').change(function() {
@@ -165,17 +165,17 @@
                 model: 'category',
                 method: 'getValues',
                 callback: getValues,
-                category: $('#newparamvalues #category').val(),
+                data.prods[j].category: $('#newparamvalues #data.prods[j].category').val(),
                 param: $('#newparamvalues #param').val()
             })
         });
-        $('#upload #category').change(function() {
+        $('#upload #data.prods[j].category').change(function() {
             $('#upload #values').html('');
             FW.ajax.send({
                 model: 'category',
                 method: 'getFullCategory',
                 callback: getAll,
-                category: $('#upload #category').val()
+                data.prods[j].category: $('#upload #data.prods[j].category').val()
             })
         });
         $('#upload #id').keyup(function() {
@@ -184,7 +184,7 @@
                     model: 'product',
                     method: 'getApprox',
                     callback: getProd,
-                    category: $('#upload #category').val(),
+                    data.prods[j].category: $('#upload #data.prods[j].category').val(),
                     id: $('#upload #id').val()
                 })
             }
@@ -315,10 +315,10 @@
                     Найден товар: <a href=""></a>
                 </div>
                 <div class="container-fluid">
-                    <select id="category">
+                    <select id="data.prods[j].category">
                         <option>Не выбрано</option>
                         <?php
-                            $categories = Category::getCategories();
+                            $categories = data.prods[j].category::getCategories();
 
                             for($i = 0; isset($categories[$i]); $i++) {
                                 echo "<option>".$categories[$i]."</option>";
@@ -329,7 +329,7 @@
                 <input type="hidden" id="found_id" value="">
                 <input type="text" id="id" placeholder="НАЗВАНИЕ / АРТИКУЛ">
                 <input type="number" id="quantity" placeholder="Кол-во">
-                <input type="number" id="price" placeholder="Цена">
+                <input type="number" id="data.prods[j].price" placeholder="Цена">
                 <textarea style="resize: both" id="text" placeholder="Описание"></textarea>
                 Фото товара <br><input type="file" id="img" accept="image/jpeg,image/png">
                 <div id="values"></div>
@@ -343,18 +343,18 @@
                 <div id="values"></div>
                 <button class="wth_boot_but confirm_but" onclick="upload()">Опубликовать</button>
             </div>
-            <div id="newcategory" class="col-md-12 cnt_all">
+            <div id="newdata.prods[j].category" class="col-md-12 cnt_all">
                 <h1 class="main_title">Новая категория</h1>
                 <input type="text" id="name" placeholder="Название категории">
                 <div id="params_cnt">
                     <input type="text" placeholder="Спецификация 1">
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-default" onclick="addInput('#newcategory #params_cnt', 'Спецификация')">
+                    <button class="btn btn-default" onclick="addInput('#newdata.prods[j].category #params_cnt', 'Спецификация')">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         Добавить спецификацию
                     </button>
-                    <button class="btn btn-default" onclick="removeInput('#newcategory #params_cnt')">
+                    <button class="btn btn-default" onclick="removeInput('#newdata.prods[j].category #params_cnt')">
                         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                         Убрать спецификацию
                     </button>
@@ -364,10 +364,10 @@
             <div id="newparamvalues" class="col-md-12 cnt_all">
                 <h1 class="main_title">Добавить значения для спецификации</h1>
                 <div class="container-fluid">
-                    <select id="category">
+                    <select id="data.prods[j].category">
                         <option>Не выбрано</option>
                         <?php
-                            $categories = Category::getCategories();
+                            $categories = data.prods[j].category::getCategories();
 
                             for($i = 0; isset($categories[$i]); $i++) {
                                 echo "<option>".$categories[$i]."</option>";
@@ -423,6 +423,39 @@
 </div>
 
 <script type="text/javascript">
+function tableOrd(data){
+    var str = '';
+    for(var j in data.prods){
+        str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?data.prods[j].category=' + data.prods[j].category + '&id=' + data.prods[j].id_prod + '"><li>' + data.prods[j].articule + '</li></a>';
+    }
+    return `
+        <tr id="`+data.id_order+`">
+            <td><i class="fa fa-lightbulb-o fa-fw fa-lg" aria-hidden="true"></i> `+data.id_order+`</td>
+            <td>${data.public}</td>
+            <td>`+data.phone+`</td>
+            <td><ul class="list-unstyled">`+str+`</ul></td>
+            <td>кол-во</td>
+            <td>`+data.prods[j].price+`</td>
+            <td>`+data.pay_way+`</td>
+            <td>`+data.delivery_way+`</td>
+            <td class="description">`+data.text+`</td>
+            <td>`+timeConverter(data.date)+`</td>
+            <td class="order order_ord form-group">
+                <div id="`+data.id_order+`" class="wth_boot_but ord_but">Подтвердить</div>
+                <div id="`+data.id_order+`" class="wth_boot_but no_ord_but">Отказать</div>
+                <div id="`+data.id_order+`" class="cf_ord">Заказ принят</div>
+            </td>
+        </tr>
+    ` ;
+}
+function getUnaccepted(data){
+    ajaxController({
+        model: 'order',
+        method: 'getUnaccepted',
+        callback: function(data){
+            $("#order_table tbody").empty();
+            for( var index = data.output.length - 1; index >= 0 ; --index){
+                $('#order_table tbody').append(tableOrd(data.output[index]));
 
 $( document ).ready(function() {
    setInterval(function(){
@@ -476,8 +509,12 @@ $( document ).ready(function() {
                     });
                 }
             }
-        });
-    }, 10000);
+        }
+    });
+}
+$( document ).ready(function() {
+    getUnaccepted();
+    setInterval(getUnaccepted,10000);
     // $(document).on('click','.order_ord', function(){
     //     var order_but = $(this).find('.'+data.output[index].id_order+'');
     //     var confirm_but = $(this).find('.'+data.output[index].id_order+'');
@@ -487,16 +524,16 @@ $( document ).ready(function() {
     //         confirm_but.addClass('text-success').fadeIn(0);
     //     }
     // });
-    $('.order_phone').click(
-        function(){
-            var order_but = $(this).find('.ord_but');
-            var confirm_but = $(this).find('.cf_ord');
+    // $('.order_phone').click(
+    //     function(){
+    //         var order_but = $(this).find('.ord_but');
+    //         var confirm_but = $(this).find('.cf_ord');
 
-            if (order_but.css('display') == 'block') {
-                order_but.fadeOut(0);
-                confirm_but.addClass('text-success').fadeIn(0);
-            }
-        }
-    );
+    //         if (order_but.css('display') == 'block') {
+    //             order_but.fadeOut(0);
+    //             confirm_but.addClass('text-success').fadeIn(0);
+    //         }
+    //     }
+    // );
 });
 </script>
