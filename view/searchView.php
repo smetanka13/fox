@@ -48,7 +48,7 @@
                                 }
                         ?>
                         <li data-param="<?= $param ?>" data-value="<?= $value ?>">
-                            <span class="fa-stack">
+                            <span class="fa-stack check_c">
                                 <i class="fa fa-square-o fa-stack-2x"></i>
                                 <i class="fa fa-check fa-stack-1x checked <?= $is_checked ? '' : 'hidden_css' ?>"></i>
                             </span>
@@ -64,15 +64,16 @@
 </div>
 
 <!-- БЛОК С ТОВАРАМИ -->
-<div class="search_pr_cnt cart_prod back ptb col-xs-12 col-sm-8 col-md-9 col-lg-9">
+<div class="search_pr_cnt cart_prod  ptb col-xs-12 col-sm-8 col-md-9 col-lg-9">
     <!-- <div style="height: 120px;"><h4 class="main_title mbt">Результаты поиска :</h4></div> -->
+    <div class="tr_cnt">
+      <button data-toggle="tooltip" data-placement="auto left" title="Нажмите, чтобы очистить поиск" id="trash_but" class="wth_boot_but confirm_but"><i class="fa fa-trash fa-2x " aria-hidden="true"></i></button>
+    </div>
     <div id="prods_container" class=""></div>
 </div>
 <script src="js/class/searchClass.js"></script>
 <script>
-
 	$(document).ready(function() {
-
         Search.items_container = $('#prods_container');
         Search.drawFunc = prodBlock;
         Search.query = '<?= $query ?>';
@@ -86,13 +87,16 @@
 
         $('.list ul li').click(function() {
             var checked = $(this).find('.checked');
+            var checked_c = $(this).find('.check_c');
 
             if(checked.hasClass('hidden_css')) {
                 checked.removeClass('hidden_css');
+                checked_c.css('color','#F7931E');
                 Search.settings.add($(this).attr('data-param'), $(this).attr('data-value'));
             } else {
                 checked.addClass('hidden_css');
                 Search.settings.delete($(this).attr('data-param'), $(this).attr('data-value'));
+                checked_c.css('color','#333');
             }
 
             Search.update(updateSrchHistory);

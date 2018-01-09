@@ -121,14 +121,14 @@
                 if ($(this).scrollTop() > 250) {
 
                     $('.sec_head').hide(),
-                    $('.header').addClass('navbar-fixed-top'),
-                    $('#content').css('padding-top','300px');
+                    $('.header').addClass('navbar-fixed-top')
+                    // $('#content').css('padding-top','300px');
                     //допустим показать элемент если прокрутили больше чем на 250 пикселей скролл
 
                 } else {
                     $('.header').removeClass('navbar-fixed-top'),
-                    $('.sec_head').show(),
-                    $('#content').css('padding-top','0');
+                    $('.sec_head').slideDown(0)
+                    // $('#content').css('padding-top','0');
                 }
             }
             if ($('body').width() <= 767) {

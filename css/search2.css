@@ -4,12 +4,27 @@
 	cursor: pointer;
 	user-select: none;
 }
-.list ul li:hover{
-	color: #333;
+.list ul li:hover i{
+	color: #F7931E;
+}
+.reg_prod{
+	align-self:stretch;
+	border-top: 3px solid #F7931E;
+	background:#444;
+	height: auto;
 }
 .search_pr_cnt{
-	min-height: calc(100vh + 300px);
+	align-self:stretch;
+	height: auto;
 }
 .search_pr_cnt .prods_cnt{
 	margin: 35px 35px;
+}
+@media(max-width:767px){
+	.list h4{
+		font-size: 20px;
+	}
+	.list ul li{
+		font-size: 18px;
+	}
 }
