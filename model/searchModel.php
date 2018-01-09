@@ -86,6 +86,8 @@ class Search {
 
     public static function find($page, $query, $category, $values = NULL, $sort = NULL, $direction = NULL) {
 
+        $query = trim(preg_replace("/ +/", ' ',$query));
+
         if(is_string($values)) $values = json_decode($values, TRUE);
 
         if(empty($page)) $page = 0;

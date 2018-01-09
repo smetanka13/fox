@@ -28,13 +28,29 @@
 				<li>Цена : <b><?= $product['price'] ?></b> &euro;</li>
 				<li><a href="delivery"><i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i> Условия доставки</a></li>
 				<li><a href="#"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i> Видео на YouTube</a></li>
-				<li><select>
-					<option>Выберите литраж</option>
-					<option>1л</option>
-					<option>3л</option>
-					<option>5л</option>
-					<option>10л</option>
-				</select></li>
+				<?php if($_GET['category'] == 'Масла') { ?>
+				<li>
+					<select>
+						<?php
+
+							require_once 'model/searchModel.php';
+
+							$amount = Category::getValues('Масла', 'Литраж');
+
+							$other = Search::find(
+								0,
+								str_replace($amount, '', $product['title']),
+								'Масла'
+							);
+
+							foreach ($amount as $i => $item) {
+
+						?>
+						<option value="<?= $item ?>"><?= $item ?></option>
+						<?php } ?>
+					</select>
+				</li>
+				<?php } ?>
 				<li><input type="number" class="form-control" value="1"  min="1" ></li>
 				<li><button class="pr_card_btn wth_boot_but confirm_but">В корзину</button></li>
 			</ul>

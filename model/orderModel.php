@@ -104,7 +104,7 @@ class Order {
 
         foreach ($prods as $i => $prod) {
             FW::$DB->query("
-                UPDATE $prod['category']
+                UPDATE {$prod['category']}
                 SET bought = bought + 1
                 WHERE id_prod = {$prod['id_prod'] + 1}
                 LIMIT 1
