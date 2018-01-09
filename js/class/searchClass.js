@@ -1,4 +1,4 @@
-Search = Object;
+Search = new Object();
 
 Search.items_container = $(document);
 Search.drawFunc = function() {};
@@ -26,6 +26,13 @@ Search.settings.add = function (param, value) {
 };
 
 /**
+ * Empty settings
+ */
+Search.settings.empty = function (param, value) {
+    this.val = {};
+};
+
+/**
  * Deletes a value from a parameter in settings
  *
  * @param param - setting parameter
@@ -40,6 +47,7 @@ Search.settings.delete = function (param, value) {
         this.val[param] = tmp.join('/');
     }
 };
+
 
 /**
  * Go to direct page

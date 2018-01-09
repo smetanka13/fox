@@ -138,10 +138,10 @@
             model: 'product',
             method: 'upload',
             callback: callback,
-            data.prods[j].category: $('#upload #data.prods[j].category').val(),
+            category: $('#upload #data.prods[j].category').val(),
             id: $('#upload #found_id').val(),
             text: $('#upload #text').val(),
-            data.prods[j].price: $('#upload #data.prods[j].price').val(),
+            price: $('#upload #data.prods[j].price').val(),
             quantity: $('#upload #quantity').val(),
             values: json,
         }, {
@@ -457,6 +457,7 @@ function getUnaccepted(data){
             for( var index = data.output.length - 1; index >= 0 ; --index){
                 $('#order_table tbody').append(tableOrd(data.output[index]));
 
+<<<<<<< HEAD
 $( document ).ready(function() {
    setInterval(function(){
         FW.ajax.send({
@@ -508,6 +509,20 @@ $( document ).ready(function() {
                         }
                     });
                 }
+=======
+                $('#order_table').mouseover(function(){
+                    if (data.output[index].checked == 0) {
+                        alert();
+                        ajaxController({
+                            model: 'order',
+                            method: 'check',
+                            callback:function(data){
+                                $('#order_table i').addClass('hidden_css');
+                            }
+                         });
+                    }
+                });
+>>>>>>> 9c2fcf0b5b0f4d61b7d14b3619f0246e0b1d95fc
             }
         }
     });
