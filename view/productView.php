@@ -11,7 +11,7 @@
 	<div class="pr_main_crd container">
 
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-			<a href="<?=!empty($product['image']) ?'catalog/'.$product['category'].'/'.$product['image'] :'images/icons/no_photo.svg'
+			<a href="<?=!empty($product['image']) ?'material/catalog/'.$product['category'].'/'.$product['image'] :'images/icons/no_photo.svg'
 			?>" data-lightbox="image-1">
 				<div class="pr_img cent_img"><img src="<?=
 				!empty($product['image']) ?

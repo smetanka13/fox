@@ -1,12 +1,11 @@
-<?php require_once 'model/categoryModel.php'; ?>
 <link rel="stylesheet" type="text/css" href="css/admin.css">
 <link rel="stylesheet" type="text/css" href="css/personal_room.css">
 <script>
     function callback(data) {
         if(data.status == true) {
-            showMessage('Успешная операция.');
+            FW.showMessage('Успешная операция.');
         } else {
-            showMessage('Ошибка.');
+            FW.showMessage('Ошибка.');
         }
     }
     function getProd(data) {
@@ -92,8 +91,8 @@
             return;
         }
 
-        ajaxController({
-            listener: 'newdata.prods[j].category',
+        FW.ajax.send({
+            listener: 'newcategory',
             callback: callback,
             name: $('#newdata.prods[j].category #name').val(),
             params: str
@@ -116,8 +115,8 @@
             return;
         }
 
-        ajaxController({
-            model: 'data.prods[j].category',
+        FW.ajax.send({
+            model: 'category',
             method: 'addValues',
             callback: callback,
             data.prods[j].category: $('#newparamvalues #data.prods[j].category').val(),
@@ -135,7 +134,7 @@
 
         json = JSON.stringify(json);
 
-        ajaxController({
+        FW.ajax.send({
             model: 'product',
             method: 'upload',
             callback: callback,
@@ -153,8 +152,8 @@
     $(document).ready(function() {
         $('#newparamvalues #data.prods[j].category').change(function() {
             $('#newparamvalues #values_cnt').html('');
-            ajaxController({
-                model: 'data.prods[j].category',
+            FW.ajax.send({
+                model: 'category',
                 method: 'getParams',
                 callback: getParams,
                 data.prods[j].category: $('#newparamvalues #data.prods[j].category').val()
@@ -162,8 +161,8 @@
         });
         $('#newparamvalues #param').change(function() {
             $('#newparamvalues #values_cnt').html('');
-            ajaxController({
-                model: 'data.prods[j].category',
+            FW.ajax.send({
+                model: 'category',
                 method: 'getValues',
                 callback: getValues,
                 data.prods[j].category: $('#newparamvalues #data.prods[j].category').val(),
@@ -172,16 +171,16 @@
         });
         $('#upload #data.prods[j].category').change(function() {
             $('#upload #values').html('');
-            ajaxController({
-                model: 'data.prods[j].category',
-                method: 'getFulldata.prods[j].category',
+            FW.ajax.send({
+                model: 'category',
+                method: 'getFullCategory',
                 callback: getAll,
                 data.prods[j].category: $('#upload #data.prods[j].category').val()
             })
         });
         $('#upload #id').keyup(function() {
-            if($('#upload #data.prods[j].category').val() != 'Не выбрано' && $('#upload #id').val() != '') {
-                ajaxController({
+            if($('#upload #category').val() != 'Не выбрано' && $('#upload #id').val() != '') {
+                FW.ajax.send({
                     model: 'product',
                     method: 'getApprox',
                     callback: getProd,
@@ -298,7 +297,7 @@
               <div id="excel" class="col-md-12 cnt_all">
                 <h1 class="main_title">Excel загрузка</h1>
                 <input type="file" id="file" multiple="multiple">
-                <button class="wth_boot_but confirm_but" onclick="ajaxController({
+                <button class="wth_boot_but confirm_but" onclick="FW.ajax.send({
                     listener: 'excel',
                     callback: callback
                 }, {
@@ -409,7 +408,7 @@
                   <label>Загрузка изображений (загрузите не более 4 изображений)</label>
                   <input id="images" type="file" class="form-control" multiple title="Загрузите фотографию">
                 </div>
-                <button onclick="ajaxController({
+                <button onclick="FW.ajax.send({
                     model: 'article',
                     method: 'upload',
                     callback: function() {},
@@ -458,18 +457,57 @@ function getUnaccepted(data){
             for(var index = data.output.length - 1; index >= 0 ; --index){
                 $('#order_table tbody').append(tableOrd(data.output[index]));
 
-                $('#order_table').mouseover(function(){
-                    if (data.output[index].checked == 0) {
-                        alert();
-                        ajaxController({
-                            model: 'order',
-                            method: 'check',
-                            callback:function(data){
-                                $('#order_table i').addClass('hidden_css');
-                            }
-                         });
+$( document ).ready(function() {
+   setInterval(function(){
+        FW.ajax.send({
+            model: 'order',
+            method: 'getUnaccepted',
+            callback: function(data){
+                $("#order_table tbody").empty();
+                for( var index = data.output.length - 1; index >= 0 ; --index){
+                    var str = '';
+                    for(var j in data.output[index].prods){
+                        var id_prod = data.output[index].prods[j].id_prod;
+                        var articule = data.output[index].prods[j].articule;
+                        var price = data.output[index].prods[j].price;
+                        var category = data.output[index].prods[j].category;
+
+                        str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + category + '&id=' + id_prod + '"><li>' + articule + '</li></a>';
                     }
-                });
+                    $('#order_table ul').html(str);
+                    $('#order_table tbody').append(`
+                        <tr id="`+data.output[index].id_order+`">
+                            <td><i class="fa fa-lightbulb-o fa-fw fa-lg" aria-hidden="true"></i> `+data.output[index].id_order+`</td>
+                            <td>${data.output[index].public}</td>
+                            <td>`+data.output[index].phone+`</td>
+                            <td><ul class="list-unstyled"></ul></td>
+                            <td>кол-во</td>
+                            <td>`+price+`</td>
+                            <td>`+data.output[index].pay_way+`</td>
+                            <td>`+data.output[index].delivery_way+`</td>
+                            <td class="description">`+data.output[index].text+`</td>
+                            <td>`+timeConverter(data.output[index].date)+`</td>
+                            <td class="order order_ord form-group">
+                                <div id="`+data.output[index].id_order+`" class="wth_boot_but ord_but">Подтвердить</div>
+                                <div id="`+data.output[index].id_order+`" class="wth_boot_but no_ord_but">Отказать</div>
+                                <div id="`+data.output[index].id_order+`" class="cf_ord">Заказ принят</div>
+                            </td>
+                        </tr>
+                    `);
+
+                    $('#order_table').mouseover(function(){
+                        if (data.output[index].checked == 0) {
+                            alert();
+                            FW.ajax.send({
+                                model: 'order',
+                                method: 'check',
+                                callback:function(data){
+                                    $('#order_table i').addClass('hidden_css');
+                                }
+                             });
+                        }
+                    });
+                }
             }
         }
     });

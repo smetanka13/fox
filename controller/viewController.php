@@ -32,7 +32,7 @@
 
 	<?php require_once 'view/layout/footer.php' ?>
 	<?php require_once 'view/layout/float.php' ?>
-	
+
 </div>
 
 <?php require_once 'view/layout/noncrit.php' ?>
@@ -40,5 +40,18 @@
 <script>
 	$(document).ready(function(){
 	    $('[data-toggle="tooltip"]').tooltip();
+	});
+	$.fn.extend ({
+	    animateCss: function (animationName) {
+	        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+	        this.addClass('animated ' + animationName).one(animationEnd, function() {
+	            $(this).removeClass('animated ' + animationName);
+	        });
+	    }
+	});
+	FW.ajax.betasend({
+		model: 'category',
+		method: 'getCategories',
+		callback: function() {}
 	});
 </script>

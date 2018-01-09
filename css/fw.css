@@ -1,4 +1,4 @@
-#message_whole {
+.fw-addons .bckgnd {
 	display: none;
 	position: fixed;
 	width: 100%;
@@ -7,34 +7,38 @@
 	z-index: 18;
 	cursor: pointer;
 }
-#message_block {
+.fw-addons .cnt {
+	border-radius: 50px;
+	margin-left: -150px;
+	left: 50%;
+	float: left;
+	top: -300px;
+	width: 300px;
+	height: auto;
+	position: fixed;
+	overflow: hidden;
+	z-index: 101;
+	transition: top 0.3s ease;
+}
+.fw-addons .message.opened .bckgnd {
+	display: block;
+}
+.fw-addons .message.opened .cnt {
+	top: 100px;
+}
+.fw-addons .content {
 	font-size: 1.4em;
 	line-height: 135%;
 	width: 100%;
 	height: auto;
 	padding: 20px;
 	z-index: inherit;
-	background-color: #f7f7f7;
-	float: left;
+	background-color: #fafafa;
 	text-align: center;
 	position: relative;
 
 }
-#message_cnt {
-	display: none;
-	border-radius: 50px;
-	margin-left: -150px;
-	left: 50%;
-	top: -300px;
-	float: left;
-	width: 300px;
-	height: auto;
-	position: fixed;
-	overflow: hidden;
-	z-index: 101;
-	transition: top 0.3s cubic-bezier(.31,.85,.46,1.12);
-}
-#ajax_load {
+.fw-addons #ajax_load {
 	color: #3498db;
 	position: fixed;
 	width: 40px;
@@ -46,7 +50,7 @@
 	transition: all 0.2s ease;
 }
 
-#ajax_error {
+.fw-addons #ajax_error {
 	top: 5px;
 	left: 10px;
 	display: none;
@@ -62,7 +66,7 @@
 }
 
 @media (max-width: 400px) {
-	#ajax_error {
+	.fw-addons #ajax_error {
 		top: 0;
 		min-height: 40px;
 		padding: 10px 0;

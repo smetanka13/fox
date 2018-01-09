@@ -1,17 +1,7 @@
 <?php
-
 	require_once 'model/articleModel.php';
-	require_once 'model/searchModel.php';
 
 	$articles = Article::getAll();
-
-	// echo '<pre style="color: #000">';
-	// print_r(Search::find(0, 'XPG', 'Масла', [
-	// 	'Подкатегория' => 'Моторное масла',
-	// 	'Литраж' => '1L'
-	// ], 'id_prod', 'ASC'));
-	// echo '</pre>';
-
 ?>
 
 <link rel="stylesheet" type="text/css" href="css/blog.css">

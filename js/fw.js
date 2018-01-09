@@ -1,12 +1,3 @@
-$.fn.extend ({
-    animateCss: function (animationName) {
-        var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-        this.addClass('animated ' + animationName).one(animationEnd, function() {
-            $(this).removeClass('animated ' + animationName);
-        });
-    }
-});
-
 var FW = new Object();
 
 FW.ajax = new Object();
@@ -32,33 +23,26 @@ FW.getTags = function(text) {
     return text.match(/#\w+/gm);
 };
 FW.processTags = function(block, drawFunc) {
-    var description = block.html();
+    var elem = document.querySelector(block);
+    var description = elem.innerHTML;
     var tags = getTags(description);
-    for(index in tags) {
+    for(let index in tags) {
         description = description.replace(
             tags[index],
             drawFunc(tags[index])
         );
-        block.html(description);
+        elem.innerHTML = description;
     }
 };
 
 FW.showMessage = function(str) {
-    var main = $("#message_whole");
-    var content = $("#message_block");
-    var container = $("#message_cnt");
-
-    if(main.css("display") == "none") {
-        content.html(str);
-        container.show();
-        main.fadeIn(100, function() {
-            container.css("top", "100px");
-        });
+    var parent = document.querySelector('.fw-addons .message');
+    var classes = parent.classList;
+    if(classes.contains('opened')) {
+        classes.remove('opened');
     } else {
-        container.css("top", "-"+container.height()+"px");
-        main.fadeOut(200, function() {
-            container.hide();
-        });
+        document.querySelector('.fw-addons .message .content').innerHTML = str;
+        classes.add('opened');
     }
 };
 
@@ -108,8 +92,8 @@ FW.ajax.send = function(params, files = null) {
 
     // Отправка data в PHP контроллер аjax запросов
     $.ajax({
-        url: "remote",
-        type: "POST",
+        url: 'remote',
+        type: 'POST',
         data: data,
         contentType: false,
         processData: false,
@@ -135,6 +119,44 @@ FW.ajax.send = function(params, files = null) {
             }
         }
     });
+};
+FW.ajax.betasend = function(params, files = null) {
+    this.animate(true);
+    var data = new FormData();
+
+    // Добавляет в data все ключи и их значения
+    for(let key in params) {
+        if(key == 'callback' || key == 'local_params') continue;
+        data.append(key, params[key]);
+    }
+
+    // Если присутствуют файлы, добавить их в data
+    if(files != null) {
+        for(let key in files) {
+            for(let i in files[key][0].files) {
+                data.append(key+i, files[key][0].files[i]);
+            }
+        }
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'remote', true);
+
+    xhr.upload.onprogress = function(e) {
+        if (e.lengthComputable) {
+            let percentComplete = (e.loaded / e.total) * 100;
+            console.log(percentComplete + '% uploaded');
+        }
+    };
+    xhr.onload = function() {
+        if (this.status == 200) {
+            console.log(this.responseText);
+            FW.ajax.animate(false);
+            let data = JSON.parse(this.responseText);
+            params.callback(data);
+        }
+    };
+    xhr.send(data);
 };
 FW.randomKey = function(len = 8) {
     var text = '';
