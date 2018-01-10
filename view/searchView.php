@@ -25,11 +25,24 @@
 <link rel="stylesheet" type="text/css" href="css/search2.css">
 
 <div class="reg_prod col-xs-12 col-sm-4 col-md-3 col-lg-3">
-	<div class="reg_prod_cnt" id="menu_f">
+	<div class="reg_prod_cnt sc_pr_cnt" id="menu_f">
+    <div class="cat_cover">
+      <ul class="list-unstyled">
+        <h4 class="main_title tl_mg"><i class="fa fa-align-justify" aria-hidden="true"></i> Категории</h4>
+        <li id="first">Масла</li>
+        <li>Фильтры</li>
+        <li>Ремни</li>
+        <li>Присадки</li>
+        <li>Тормозная система</li>
+        <li>Стеклочистители</li>
+        <li>Аккумуляторы</li>
+      </ul>
+    </div>
         <!-- ЗДЕСЬ ВСТАВЛЯЕШЬ БЛОКИ ФИЛЬТРОВ -->
         <div class="catalog">
             <div class="cnt">
                 <div class="list pbm">
+                  <p class="main_title"><i class="fa fa-arrow-left fa-fw" aria-hidden="true"></i> вернуться к выбору</p>
                     <?php
                         $params = Category::getParams($category);
                         foreach($params as $i => $param) {
@@ -48,7 +61,7 @@
                                 }
                         ?>
                         <li data-param="<?= $param ?>" data-value="<?= $value ?>">
-                            <span class="fa-stack">
+                            <span class="fa-stack check_c">
                                 <i class="fa fa-square-o fa-stack-2x"></i>
                                 <i class="fa fa-check fa-stack-1x checked <?= $is_checked ? '' : 'hidden_css' ?>"></i>
                             </span>
@@ -64,15 +77,27 @@
 </div>
 
 <!-- БЛОК С ТОВАРАМИ -->
-<div class="search_pr_cnt cart_prod back ptb col-xs-12 col-sm-8 col-md-9 col-lg-9">
+<div class="search_pr_cnt cart_prod  ptb col-xs-12 col-sm-8 col-md-9 col-lg-9">
     <!-- <div style="height: 120px;"><h4 class="main_title mbt">Результаты поиска :</h4></div> -->
-    <div id="prods_container" class=""></div>
+    <div class="tr_cnt">
+      <button data-toggle="tooltip" data-placement="auto left" title="Нажмите, чтобы очистить поиск" id="trash_but" class="wth_boot_but confirm_but"><i class="fa fa-trash fa-2x " aria-hidden="true"></i></button>
+    </div>
+    <div id="prods_container" class="product_cnt"></div>
+    <div class="pag_cnt">
+      <ul class="pagination">
+        <li class="disabled"><a href="#">«</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">»</a></li>
+      </ul>
+    </div>
 </div>
 <script src="js/class/searchClass.js"></script>
 <script>
-
 	$(document).ready(function() {
-
         Search.items_container = $('#prods_container');
         Search.drawFunc = prodBlock;
         Search.query = '<?= $query ?>';
@@ -86,13 +111,16 @@
 
         $('.list ul li').click(function() {
             var checked = $(this).find('.checked');
+            var checked_c = $(this).find('.check_c');
 
             if(checked.hasClass('hidden_css')) {
                 checked.removeClass('hidden_css');
+                checked_c.css('color','#F7931E');
                 Search.settings.add($(this).attr('data-param'), $(this).attr('data-value'));
             } else {
                 checked.addClass('hidden_css');
                 Search.settings.delete($(this).attr('data-param'), $(this).attr('data-value'));
+                checked_c.css('color','#333');
             }
 
             Search.update(updateSrchHistory);
@@ -123,4 +151,11 @@
         }
         Search.update();
     }
+
+    $('.cat_cover ul li').click(function(){
+      $('.cat_cover').addClass('none_css');
+    });
+    $('.list p').click(function(){
+      $('.cat_cover').removeClass('none_css');
+    });
 </script>

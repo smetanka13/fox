@@ -1,17 +1,14 @@
 .reg_prod {
-
-	min-height: calc(100% + 300px);
-	background: #f5f5f5;
+	align-self:stretch;
+	border-top: 3px solid #F7931E;
+	background:#444;
 	height: auto;
 }
 
 .cart_prod {
-
-	/*background: #fafafa;*/
-	/*box-shadow: -3px 4px 8px -3px #333333;*/
+	align-self:stretch;
 	box-shadow: 0px 0px 7px 0px #333333;
 	height:auto;
-	min-height: calc(100% + 300px);
 	position: relative;
 }
 .cp_wth_sh{
@@ -20,11 +17,9 @@
 
 /*FOR REG PROD PART*/
 .reg_prod_cnt {
-
-	width: 90%;
+	width: 100%;
 	height: auto;
-	margin: 0 5%;
-	margin-top: 50px;
+	padding: 30px 5%;
 }
 
 .reg_prod_cnt h4 {
@@ -167,13 +162,6 @@
 
 	transform: scale(1.1) rotate(180deg);
 }
-#trash_but{
-    height: 50px;
-    width: 50px;
-    position: absolute;
-    top: 20px;
-    right: 50px;
-}
 
 /*RESPONSIVE*/
 
@@ -247,10 +235,6 @@
 
 		width: 60% ;
 		margin: 0 20%;
-	}
-	#trash_but{
-		left: 10px;
-    	top: 0px;
 	}
 }
 

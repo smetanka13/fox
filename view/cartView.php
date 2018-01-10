@@ -55,7 +55,7 @@
 	<?php if(empty($_COOKIE['cart'])) { ?>
 	<h4 class="main_title au">На данный момент в корзине нет товаров!</h4>
 	<?php } ?>
-	<button title="Нажмите, чтобы очистить корзину" id="trash_but" class="wth_boot_but confirm_but"><i class="fa fa-trash fa-2x " aria-hidden="true"></i></button>
+	<button data-toggle="tooltip" data-placement="auto left" title="Нажмите, чтобы очистить коризину" id="trash_but" class="wth_boot_but confirm_but"><i class="fa fa-trash fa-2x " aria-hidden="true"></i></button>
 	<?php
 
 		$cookie = json_decode($_COOKIE['cart'], TRUE);

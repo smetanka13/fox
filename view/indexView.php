@@ -50,12 +50,14 @@
 	</div>
 </div>
 <div class="container-fluid in_bl">
-	<div class="container-fluid"><h4 class="main_title">Новости</h4></div>
+	<div class="hidden-xs hidden-sm inl_ttl"><h4 class="main_title">Новости <i class="fa fa-arrow-down" aria-hidden="true"></i></h4><h4 class="main_title">Подбор масла <i class="fa fa-arrow-down" aria-hidden="true"></i></h4></div>
+	<div class="col-xs-12 col-sm-12 hidden-md hidden-lg"><h4 class="main_title">Новости <i class="fa fa-arrow-down" aria-hidden="true"></i></h4></div>
 	<div class="wins col-xs-12 col-sm-12 col-md-6 col-lg-6" style="background-image: url('images/main/3a.jpg');">
-		<a href="#"><div class="cover">Нажмите, чтобы перейти к новости</div></a>
+		<a href="blog"><div class="cover">Нажмите, чтобы перейти к новостям</div></a>
 	</div>
+	<div class="col-xs-12 col-sm-12 hidden-md hidden-lg"><h4 class="main_title">Подбор масла <i class="fa fa-arrow-down" aria-hidden="true"></i></h4></div>
     <div class="wins col-xs-12 col-sm-12 col-md-6 col-lg-6" style="background-image: url('images/main/vm.jpg');">
-    	<a href="#"><div class="cover">Нажмите, чтобы перейти к новости</div></a>
+    	<a href="pick"><div class="cover">Нажмите, чтобы перейти к подбору</div></a>
     </div>
 </div>
 

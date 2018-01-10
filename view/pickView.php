@@ -153,7 +153,7 @@
                     checked.removeClass('hidden_css');
                 }else{
                     checked.addClass('hidden_css');
-                } 
+                }
             }
         );
     });

@@ -27,6 +27,7 @@
 /*about*/
 .ind_ab{
     height: auto;
+    width: 100%;
     /*border-top: 1px solid #e1e1e1;*/
     background: #333;
 }
@@ -63,7 +64,7 @@
     height: 80px;
     background:#333;
 }
-.in_bl .container-fluid h4{ 
+.in_bl .container-fluid h4{
     line-height: 50px;
 }
 .wins{
@@ -88,12 +89,22 @@
     transition: all 0.3s ease;
     cursor: pointer;
 
+    text-transform: uppercase;
 }
 .cover a{
     display: none;
 }
 .wins:hover .cover{
     opacity: 0.8;
+}
+.in_bl h4{
+  height: 50px;
+  background: #333;
+  padding-top: 15px;
+}
+.inl_ttl h4{
+  width: 50%;
+  float: left;
 }
 /*.wins:hover .cover a{
     display: block;
