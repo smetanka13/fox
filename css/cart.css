@@ -17,11 +17,9 @@
 
 /*FOR REG PROD PART*/
 .reg_prod_cnt {
-
-	width: 90%;
+	width: 100%;
 	height: auto;
-	margin: 0 5%;
-	margin-top: 50px;
+	padding: 30px 5%;
 }
 
 .reg_prod_cnt h4 {
