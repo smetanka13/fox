@@ -1,21 +1,16 @@
-<?php
-	# --- Это не трогай, это я беру из БД товар по категории и айди из адреса --- #
-	# --- < ?=  ? > Этот тег используется для вывода переменной PHP --- #
-
-	require_once 'model/productModel.php';
-
-	$product = Product::getById($_GET['category'], $_GET['id']);
-?>
 <link rel="stylesheet" href="css/card_prod_card.css">
+<link rel="stylesheet" type="text/css" href="css/product_block.css">
+<link rel="stylesheet" type="text/css" href="css/tops.css">
+
 <div class="container-fluid pr_bck">
 	<div class="pr_main_crd container">
 
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-			<a href="<?=!empty($product['image']) ?'material/catalog/'.$product['category'].'/'.$product['image'] :'images/icons/no_photo.svg'
+			<a href="<?=!empty($_DATA['prod']['image']) ?'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] :'images/icons/no_photo.svg'
 			?>" data-lightbox="image-1">
 				<div class="pr_img cent_img"><img src="<?=
-				!empty($product['image']) ?
-				'material/catalog/'.$product['category'].'/'.$product['image'] :
+				!empty($_DATA['prod']['image']) ?
+				'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] :
 				'images/icons/no_photo.svg'
 			?>"></div>
 			</a>
@@ -23,34 +18,34 @@
 
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pr_description">
 			<ul class="list-unstyled">
-				<li class="pr_name"><?= $product['title'] ?></li>
-				<li class="code_name">Код товара : <?= $product['articule'] ?></li>
-				<li>Цена : <b><?= $product['price'] ?></b> &euro;</li>
+				<li class="pr_name"><?= $_DATA['prod']['title'] ?></li>
+				<li class="code_name">Код товара : <?= $_DATA['prod']['articule'] ?></li>
+				<li>Цена : <b><?= $_DATA['prod']['price'] ?></b> &euro;</li>
 				<li><a href="delivery"><i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i> Условия доставки</a></li>
 				<li><a href="#"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i> Видео на YouTube</a></li>
-				<?php if($_GET['category'] == 'Масла') { ?>
+				<?php
+					if($_GET['category'] == 'Масла') {
+
+						$amount = Category::getValues('Масла', 'Литраж');
+
+						$other = Search::find(
+							0,
+							str_replace($amount, '', $_DATA['prod']['title']),
+							'Масла'
+						);
+
+						if($other['found'] > 1) {
+				?>
 				<li>
-					<select>
-						<?php
-
-							require_once 'model/searchModel.php';
-
-							$amount = Category::getValues('Масла', 'Литраж');
-
-							$other = Search::find(
-								0,
-								str_replace($amount, '', $product['title']),
-								'Масла'
-							);
-
-							foreach ($amount as $i => $item) {
-
-						?>
-						<option value="<?= $item ?>"><?= $item ?></option>
-						<?php } ?>
-					</select>
+					<?php
+						foreach ($other['search_result'] as $found) {
+							$url = 'product?category=Масла&id=' . $found['id_prod'];
+							if($found['id_prod'] == $_DATA['prod']['id_prod']) continue;
+					?>
+						<a href="<?= $url ?>"><?= $found['params']['Литраж'] ?></a>
+					<?php } ?>
 				</li>
-				<?php } ?>
+				<?php }} ?>
 				<li><input type="number" class="form-control" value="1"  min="1" ></li>
 				<li><button class="pr_card_btn wth_boot_but confirm_but">В корзину</button></li>
 			</ul>
@@ -63,7 +58,7 @@
 					<?php
 						# --- Вывод параметров --- #
 
-						foreach($product['params'] as $param => $val) {
+						foreach($_DATA['prod']['params'] as $param => $val) {
 							if(!empty($val))
 								echo "
 									<dt>$param</dt>
@@ -77,18 +72,20 @@
 	</div>
 </div>
 
-<?php if(!empty($product['text'])) { // Если пустой текст , то оно не выводит ?>
+<?php if(!empty($_DATA['prod']['text'])) { // Если пустой текст , то оно не выводит ?>
 <div class="pr_about">
 	<h4 class="main_title">Описание :</h4>
 	<div class=".main_text pr_about_txt">
-		<?= $product['text'] ?>
+		<?= $_DATA['prod']['text'] ?>
 	</div>
 </div>
 <?php } ?>
 
-<!-- ДЛЯ "ПОХОЖИЕ ТОВАРЫ" -->
-<div class="container">
-	ДЛЯ "ПОХОЖИЕ ТОВАРЫ"
+<div class="top_cnt">
+	<div class="top_header">ПОХОЖИЕ ТОВАРЫ</div>
+	<div class="top_viewport">
+		<div class="top_slider"></div>
+	</div>
 </div>
 
 <!-- FOR CART MODAL -->
@@ -102,17 +99,30 @@
   </div>
 </div>
 
-<script type="text/javascript">
-	$('.pr_description ul li button').click(function() {
-		Cart.add(
-			<?= $_GET['id'].',\''.$_GET['category'].'\'' ?>,
-			$('.pr_description ul li input').val(),
-			function() {
-				$('#cart_modal').modal('show');
-				setTimeout(function(){
-					$('#cart_modal').modal('hide');
-				}, 1000);
-			}
-		)
+<script>
+
+	$(document).ready(function() {
+
+		$('.pr_description ul li button').click(function() {
+			Cart.add(
+				<?= $_GET['id'].',\''.$_GET['category'].'\'' ?>,
+				$('.pr_description ul li input').val(),
+				function() {
+					$('#cart_modal').modal('show');
+					setTimeout(function(){
+						$('#cart_modal').modal('hide');
+					}, 1000);
+				}
+			)
+		});
+
+		var related_data = <?= $_DATA['related'] ?>;
+
+		for(let i in related_data) {
+			$('.top_cnt .top_slider').append(prodBlock(related_data[i]));
+		}
+
 	});
+
 </script>
+<script src="js/tops.js"></script>

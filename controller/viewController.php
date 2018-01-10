@@ -11,7 +11,7 @@
 	}
 	# if(Engine::lookSame($private_view, VIEW) && !$User->logged()) header('Location: '.URL);
 
-	if(method_exists('View', URI)) call_user_func('View::' . URI);
+	if(method_exists('View', URI)) $_DATA = call_user_func('View::' . URI);
 ?>
 
 <!DOCTYPE html>
@@ -49,9 +49,9 @@
 	        });
 	    }
 	});
-	FW.ajax.betasend({
-		model: 'category',
-		method: 'getCategories',
-		callback: function() {}
-	});
+	// FW.ajax.betasend({
+	// 	model: 'category',
+	// 	method: 'getCategories',
+	// 	callback: function() {}
+	// });
 </script>

@@ -9,71 +9,39 @@
 ?>
 
 <link rel="stylesheet" type="text/css" href="css/product_block.css">
+<link rel="stylesheet" type="text/css" href="css/tops.css">
 
 <!-- Топ самых часто продаваемых товаров -->
-<div id="product_block">
-    <div class="product_cnt" id="hot">
-        <div class="prods_header">ТОП ПРОДАЖ</div>
-        <button class="left_arrow" data-index="0"></button>
-        <button class="right_arrow" data-index="0"></button>
-        <div class="prod_viewport">
-            <div class="prods_slider"></div>
+<div class="top_wrapper">
+    <div class="top_cnt" id="hot">
+        <div class="top_header">ТОП ПРОДАЖ</div>
+        <div class="top_viewport">
+            <div class="top_slider"></div>
         </div>
     </div>
 
     <!-- Топ самых новых товаров -->
-    <div class="product_cnt" id="new">
-        <div class="prods_header">НОВИНКИ</div>
-        <button class="left_arrow" data-index="1"></button>
-        <button class="right_arrow" data-index="1"></button>
-        <div class="prod_viewport">
-            <div class="prods_slider"></div>
+    <div class="top_cnt" id="new">
+        <div class="top_header">НОВИНКИ</div>
+        <div class="top_viewport">
+            <div class="top_slider"></div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
     $(document).ready(function() {
-        var offset = [0, 0];
 
-        $('.right_arrow').click(function() {
-            var index = $(this).attr('data-index');
-            if(offset[index] <= -1500) return;
-            offset[index] -= $('.prod_viewport:eq('+index+')').width();
-            if(offset[index] <= -1500) offset[index] = -1500;
-            $('.prods_slider:eq('+index+')').css('left', offset[index]+'px');
-        });
-        $('.left_arrow').click(function() {
-            var index = $(this).attr('data-index');
-            if(offset[index] >= 0) return;
-            offset[index] += $('.prod_viewport:eq('+index+')').width();
-            if(offset[index] >= 0) offset[index] = 0;
-            $('.prods_slider:eq('+index+')').css('left', offset[index]+'px');
-        });
-        // $('.prods_slider').addClass("hidden").viewportChecker({
-        //     classToAdd:'visible animated fadeIn',
-        //     offset:100
-        // });
+        var new_top_data = <?= json_encode(Tops::getNewProds(), JSON_UNESCAPED_UNICODE) ?>;
+        var hot_top_data = <?= json_encode(Tops::getHotProds(), JSON_UNESCAPED_UNICODE) ?>;
 
-        var newTopData = <?= json_encode(Tops::getNewProds(), JSON_UNESCAPED_UNICODE) ?>;
-        var hotTopData = <?= json_encode(Tops::getHotProds(), JSON_UNESCAPED_UNICODE) ?>;
-
-        for(let i in newTopData) {
-            $('.product_cnt#new .prods_slider').append(prodBlock(newTopData[i]));
+        for(let i in new_top_data) {
+            $('.top_cnt#new .top_slider').append(prodBlock(new_top_data[i]));
         }
-        for(let i in hotTopData) {
-            $('.product_cnt#hot .prods_slider').append(prodBlock(hotTopData[i]));
+        for(let i in hot_top_data) {
+            $('.top_cnt#hot .top_slider').append(prodBlock(hot_top_data[i]));
         }
+
     });
 </script>
-
-<!-- <script type="text/javascript">
-    $(document).ready(function() {
-        $('.prods_header').addClass("hidden_css").viewportChecker({
-            classToAdd:'visible_css animated fadeInUp'
-        });
-        $('.prod_viewport').addClass("hidden_css").viewportChecker({
-            classToAdd:'visible_css animated fadeInUp'
-        });
-    });
-</script> -->
+<script src="js/tops.js"></script>

@@ -11,8 +11,6 @@ class Search {
     public static function formatWordQuery($query, $category, $query_params) {
         # ---- Формирование запроса по поисковым словам ---- #
 
-        Category::checkCategory($category, TRUE);
-
         $query_title = '';
         $query_text = '';
         $quated_words = [];
@@ -84,23 +82,29 @@ class Search {
         return $query;
     }
 
-    public static function find($page, $query, $category, $values = NULL, $sort = NULL, $direction = NULL) {
+    public static function find($page, $query, $category, $values = NULL, $sort = NULL, $direction = NULL, $finds = 12) {
 
-        $query = trim(preg_replace("/ +/", ' ',$query));
+        Category::checkCategory($category, TRUE);
+
+        if($finds > self::$max_finds) $finds = self::$max_finds;
 
         if(is_string($values)) $values = json_decode($values, TRUE);
+
+        if(!is_numeric($page)) $page = 0;
 
         if(empty($page)) $page = 0;
         if(empty($sort)) $sort = 'bought';
         if(empty($direction)) $direction = 'ASC';
 
-        $to = (($page + self::$max_pages) * self::$max_finds) + self::$max_finds;
+        $to = (($page + $finds) * $finds) + $finds;
 
         if(array_search($direction, ['DESC', 'ASC']) === FALSE)
             throw new InvalidArgumentException("Invalid direction.");
 
         if(array_search($sort, ['bought', 'price', 'id_prod']) === FALSE)
             throw new InvalidArgumentException("Invalid sort filter.");
+
+        $query = trim(preg_replace("/ +/", ' ',$query));
 
         $query_params = self::formatValuesQuery($values);
         list($query_title, $query_text, $params_scan) = self::formatWordQuery($query, $category, $query_params);
@@ -118,12 +122,12 @@ class Search {
             ORDER BY $sort $direction
         ")->fetchAll();
 
-        $important_part = Product::processProdParams(array_slice($result, 0, self::$max_finds), TRUE);
+        $important_part = Product::processProdParams(array_slice($result, 0, $finds), TRUE);
 
         return [
             'found' => count($important_part),
             'search_result' => $important_part,
-            'pages_left' => ceil(count(array_slice($result, self::$max_finds)) / self::$max_finds)
+            'pages_left' => ceil(count(array_slice($result, $finds)) / $finds)
         ];
     }
 

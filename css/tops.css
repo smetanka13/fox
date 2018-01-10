@@ -1,0 +1,82 @@
+/* --- Контейнер товаров --- */
+.top_wrapper {
+	width: 100%;
+	height: auto;
+	background-image: url(../images/main/f2.jpg);
+	background-repeat: no-repeat;background-position: center;background-size: cover;
+}
+.top_cnt {
+	position: relative;
+	width: 100%;
+	height: auto;
+	padding: 20px 0;
+}
+.top_cnt .top_header {
+	position: relative;
+	margin: 50px auto;
+	height: 30px;
+	width: 100%;
+	text-align: center;
+	line-height: 200%;
+	text-transform: uppercase;
+	font-weight: bold;
+	color: #333;
+}
+.top_cnt .top_header::after {
+	content: '';
+	position: absolute;
+	border-bottom: #d37730 solid 2px;
+	width: 100px;
+	left: 50%;
+	bottom: 0;
+	margin-left: -50px;
+}
+.top_cnt .top_viewport {
+	width: 100%;
+	height: 360px;
+	margin: 0 auto;
+	padding: 30px 0;
+	overflow: hidden;
+	position: relative;
+}
+.top_cnt .top_slider {
+	height: 300px;
+}
+.top_cnt .slick-list {
+	overflow: visible;
+}
+.top_cnt .slick-arrow {
+    z-index: 1;
+    top: 50%;
+    margin-top: -25px;
+	position: absolute;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    border: none;
+    border-radius: 25px;
+    color: #fafafa;
+    padding: 0;
+}
+.top_cnt .slick-prev {
+    left: 10px;
+}
+.top_cnt .slick-next {
+    right: 10px;
+}
+
+/*@media (max-width: 1250px) {
+	.top_cnt .top_viewport {
+		width: 750px;
+	}
+}
+@media (max-width: 900px) {
+	.top_cnt .top_viewport {
+		width: 500px;
+	}
+}
+@media (max-width: 600px) {
+	.top_cnt .top_viewport {
+		width: 250px;
+	}
+}*/

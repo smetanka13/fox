@@ -59,10 +59,8 @@
     </div>
 </div>
 
-<script type="text/javascript" src="js/slide.js" ></script>
-<script type="text/javascript" src="bower_components/slick-carousel/slick/slick.min.js"></script>
-
-<script type="text/javascript">
+<script src="js/slide.js" ></script>
+<script>
 		$(document).ready(function() {
 
 			var rightArr = $('#s_rg');
@@ -95,14 +93,3 @@
 			});
 		});
 </script>
-
-<!-- <script type="text/javascript">
-	$(document).ready(function(){
-		$('#product_block').addClass("hidden_css").viewportChecker({
-		  classToAdd: 'visible_css animated fadeInDown',
-	      classToRemove: 'hidden_css',
-	      offset: [10%],
-	      repeat: true
-		});
-	});
-</script> -->

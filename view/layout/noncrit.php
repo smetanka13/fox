@@ -2,6 +2,7 @@
 <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
 <script src="bower_components/bootstrap/js/bootstrap.min.js"></script>
 
+<script src="bower_components/slick-carousel/slick/slick.min.js"></script>
 <script src="js/fw.js"></script>
 <script src="js/class/cartClass.js"></script>
 <script src="js/blocks.js"></script>
