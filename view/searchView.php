@@ -29,7 +29,7 @@
     <div class="cat_cover">
       <ul class="list-unstyled">
         <h4 class="main_title tl_mg"><i class="fa fa-align-justify" aria-hidden="true"></i> Категории</h4>
-        <li id="first">Масла</li>
+        <li>Масла</li>
         <li>Фильтры</li>
         <li>Ремни</li>
         <li>Присадки</li>
@@ -78,8 +78,33 @@
 
 <!-- БЛОК С ТОВАРАМИ -->
 <div class="search_pr_cnt cart_prod  ptb col-xs-12 col-sm-8 col-md-9 col-lg-9">
-    <!-- <div style="height: 120px;"><h4 class="main_title mbt">Результаты поиска :</h4></div> -->
     <div class="tr_cnt">
+      <div class="form-inline">
+        <div class="form-group">
+          <select class="" name="">
+            <option value="">По цене</option>
+            <option value="">Самые дешевые</option>
+            <option value="">Самые дорогие</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="" name="">
+            <option value="">По популярности</option>
+            <option value="">Самые популярные</option>
+            <option value="">Менее популярные</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select class="" name="">
+            <option value="">По дате</option>
+            <option value="">Самые новые</option>
+            <option value="">Самые старые</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="checkbox-inline"><input type="checkbox" name="">АКЦИЯ</label>
+        </div>
+      </div>
       <button data-toggle="tooltip" data-placement="auto left" title="Нажмите, чтобы очистить поиск" id="trash_but" class="wth_boot_but confirm_but"><i class="fa fa-trash fa-2x " aria-hidden="true"></i></button>
     </div>
     <div id="prods_container" class="product_cnt"></div>

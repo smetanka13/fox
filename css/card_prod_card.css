@@ -172,7 +172,8 @@
 	height: auto;
 	padding: 50px;
 	background: #f5f5f5;
-	/* box-shadow: 0px 1px 7px 0px #333333 inset; */
+	border-bottom: 3px solid #F7931E;
+	background: #444;
 }
 
 .pr_about h4 {
@@ -183,14 +184,13 @@
 }
 
 .pr_about_txt {
-
-	width: 80%;
-	margin: 0 auto;
 	padding: 20px 0;
 	margin-bottom: 50px;
-	border-bottom: 1px dashed #F7931E;
+	color: #fff;
 }
-
+.top_cnt{
+	padding-bottom: 60px !important;
+}
 
 /*RESPONSIVE*/
 

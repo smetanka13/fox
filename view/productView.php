@@ -75,7 +75,7 @@
 <?php if(!empty($_DATA['prod']['text'])) { // Если пустой текст , то оно не выводит ?>
 <div class="pr_about">
 	<h4 class="main_title">Описание :</h4>
-	<div class=".main_text pr_about_txt">
+	<div class="main_text pr_about_txt">
 		<?= $_DATA['prod']['text'] ?>
 	</div>
 </div>

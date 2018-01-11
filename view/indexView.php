@@ -39,13 +39,13 @@
 	<div class="container ind_ab_cnt">
 		<ul class="container-fluid list-inline ">
 			<li class="main_text"><h4 class="main_title mbt au"><i class="fa fa-money fa-4x" aria-hidden="true"></i></h4>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></li>
+			<p>Цены на автотовары в нашем интернет-магазине всегда актуальны. Относительно невысокая стоимость товаров в нашем интернет-магазине связана с тем, что мы ориентированы на большие объемы розничных продаж и сотрудничество с оптовыми покупателями.</p></li>
+			<li class="main_text"><h4 class="main_title mbt au"><i class="fa  fa-check-square-o fa-4x" aria-hidden="true"></i></h4>
+			<p>Вся линейка товаров нашего интернет-магазина имеет сертификаты соответствия качества. Кроме того, Fox Motors – авторизованная точка продаж. Покупая автотовары в Fox Motors – вы можете быть уверены в качестве продукции.</p></li>
 			<li class="main_text"><h4 class="main_title mbt au"><i class="fa fa-globe fa-4x" aria-hidden="true"></i></h4>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></li>
-			<li class="main_text"><h4 class="main_title mbt au"><i class="fa fa-shopping-cart  fa-4x" aria-hidden="true"></i></h4>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></li>
-			<li class="main_text"><h4 class="main_title mbt au"><i class="fa fa-shopping-cart  fa-4x" aria-hidden="true"></i></h4>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></li>
+			<p>Доставка возможна по всей Украине любым удобным способом. Мы рекомендуем пользоваться услугами крупнейшего оператора Украины по экспресс-доставке товаров – ООО «Нова пошта». Если стоимость заказа превышает 2000 грн. – доставка бесплатная.</p></li>
+			<li class="main_text"><h4 class="main_title mbt au"><i class="fa fa-child fa-4x" aria-hidden="true"></i></h4>
+			<p>Купить товары для авто у нас, значит , что вы можете быть уверены в грамотном и вежливом обслуживании, быстроте и точности исполнения заказов. Интернет-магазин Fox Motors ценит своих клиентов и будет рад видеть вас и ваш автомобиль или мотоцикл в качестве постоянных клиентов на долгие годы!</p></li>
 		</ul>
 	</div>
 </div>
