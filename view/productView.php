@@ -22,6 +22,7 @@
 				<li>Цена : <b><?= $_DATA['prod']['price'] ?></b> &euro;<span id="sec_price"><div></div><?= $_DATA['prod']['price'] ?></b> &euro;</span></li>
 				<li><a href="delivery"><i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i> Условия доставки</a></li>
 				<li><a href="#"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i> Видео на YouTube</a></li>
+				<li><span id="like"><i class="fa fa-heart fa-lg fa-fw" aria-hidden="true"></i> В избранное</span></li>
 				<?php
 					if($_GET['category'] == 'Масла') {
 
@@ -98,6 +99,17 @@
   </div>
 </div>
 
+<!-- FOR LIKE MODAL -->
+<div id="like_modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content siglog_window">
+      <div class="modal-header">
+        <h4 class="modal-title main_title">Товар добавлен в избранное !</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 
 	$(document).ready(function() {
@@ -123,6 +135,13 @@
 
 	});
 
+	// для избранного
+	$('.pr_description #like').click(function() {
+		$('#like_modal').modal('show');
+		setTimeout(function(){
+			$('#like_modal').modal('hide');
+		}, 1000);
+	});
 	// для скидки
 	// if () {
 	//   $('#sec_price').addClass(block_css);

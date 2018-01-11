@@ -4,7 +4,8 @@
 	<h4 class="main_title tl_mg"></h4>
 	<ul class="nav nav-tabs pr_tabs">
     <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i> Покупки</a></li>
-    <li><a data-toggle="tab" href="#menu2"><i class="fa fa-user  fa-fw" aria-hidden="true"></i> Личные данные</a></li>
+		<li><a data-toggle="tab" href="#menu3"><i class="fa fa-heart fa-fw" aria-hidden="true"></i> Избранное</a></li>
+    <li><a data-toggle="tab" href="#menu2"><i class="fa fa-user fa-fw" aria-hidden="true"></i> Личные данные</a></li>
   </ul>
 
     <div class="tab-content">
@@ -92,6 +93,38 @@
 				</table>
 			</div>
 		</div>
+		<div id="menu3" class="tab-pane fade">
+			 <h4 class="pr_titles_cat">Избранные товары.</h4>
+			 <p>Тут вы можете перейти на страницу товара щелкнув на название.</p>
+			 <div class="tb_cnt">
+				 <table class="table tb_buy table-bordered">
+				 <thead>
+					 <tr>
+					 <th>Удалить</th>
+					 <th>Название</th>
+					 <th>Цена</th>
+					 </tr>
+				 </thead>
+				 <tbody>
+					 <tr>
+						 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
+						 <td><a href="#">Xenum12345</td></a>
+						 <td>200000 грн</td>
+					 </tr>
+					 <tr>
+						 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
+						 <td><a href="#">Xenum12345</td></a>
+						 <td>200000 грн</td>
+					 </tr>
+					 <tr>
+						 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
+						 <td><a href="#">Xenum12345</td></a>
+						 <td>200000 грн</td>
+					 </tr>
+				 </tbody>
+			 </table>
+		 </div>
+		 </div>
 		 <div id="menu2" class="tab-pane fade">
 	      <h4 class="pr_titles_cat">Ваши личные параметры.</h4>
 	      <p>Тут вы можете редактировать параметры аккаунта.</p>
@@ -150,7 +183,7 @@
     </div>
   </div>
 </div>
-	
+
 <script type="text/javascript">
 	function pInfEd(num){
 
@@ -169,7 +202,7 @@
 		$('#pr_ed_inf' + num).css('display','none');
 	};
 
-	// ДЛЯ ОПОВЕЩЕНИЯ ОБ ИЗМЕНЕНИИ ДАННЫХ 
+	// ДЛЯ ОПОВЕЩЕНИЯ ОБ ИЗМЕНЕНИИ ДАННЫХ
 	$('.pr_edit_memor').click(function(){
 		$('#data_modal').modal('show');
 		setTimeout(function(){

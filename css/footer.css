@@ -1,5 +1,4 @@
 footer {
-
   width: 100%;
   height: 70px;
   background: #333;
@@ -10,7 +9,6 @@ footer {
 }
 
 .foot_nav {
-
 	width: 100%;
 	height: 100%;
 	text-align: center;
@@ -24,7 +22,6 @@ footer {
     justify-content: center;
 }
 .foot_nav ul a,.foot_nav ul li {
-
 	color: #F7931E;
 	transition: color 0.3s ease;
 	cursor: pointer;
