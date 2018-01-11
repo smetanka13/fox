@@ -58,10 +58,14 @@
 .cat_cover ul li{
 	width: 80%;
 	margin: 0 10%;
-	border-bottom: 3px solid #F7931E;
+	margin-bottom: 10px;
+
+	border: 3px solid #F7931E;
+	border-radius: 5px;
+
 	height: 40px;
 	text-align: center;
-	line-height: 40px;
+	line-height: 35px;
 	color: #fff;
 
 	transition: all 0.3s ease;
@@ -69,11 +73,8 @@
 }
 .cat_cover ul li:hover{
 	height: 30px;
-	line-height: 30px;
+	line-height: 25px;
 	background: #F7931E;
-}
-#menu_f #first{
-	border-top: 3px solid #F7931E;
 }
 .list p{
 	font-size: 16px;
@@ -86,6 +87,20 @@
 .list p:hover{
 	color: #fff;
 }
+.tr_cnt .form-inline{
+	padding-left: 20px;
+	width: 80%;
+	position: absolute;
+	top: 25px;
+}
+.tr_cnt .form-inline select{
+	height: 25px;
+	width: 170px;
+	margin-top: 2px;
+}
+.tr_cnt .form-inline label{
+	font-weight: bold;
+}
 
 @media(max-width:767px){
 	.list h4{
@@ -96,6 +111,13 @@
 	}
 	.cat_cover ul h4{
 		margin-top: 50px;
+	}
+	.tr_cnt{
+		height: 200px;
+		padding-top: 25px;
+	}
+	.tr_cnt .form-inline{
+		position: relative;
 	}
 }
 @media(max-width:749px){

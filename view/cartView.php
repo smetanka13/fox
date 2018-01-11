@@ -70,7 +70,7 @@
 	<div class="c_prod_part" data-key="<?= $keys[$index] ?>">
 		<div class="img-responsive c_prod_img hidden-xs cent_img"><img src="<?= $image ?>"></div>
 		<div class="c_prod_txt">
-			<a href="#"><h4 class="main_title"><?= $product['title'] ?></h4></a>
+			<a href="product?category=<?= $product['category'] ?>&id=<?= $product['id_prod'] ?>"><h4 class="main_title"><?= $product['title'] ?></h4></a>
 		</div>
 		<div class="count">
 			<p class="main_title">количество (шт.)</p>

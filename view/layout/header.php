@@ -88,7 +88,7 @@
             <form>
               <div class="form-group">
                 <input type="search" class="form-control"  placeholder="Нажмите для поиска">
-                <a href="search2"><img id="sch_icn" src="images/icons/search.svg"></a>
+                <a href="search"><img id="sch_icn" src="images/icons/search.svg"></a>
               </div>
             </form>
         </div>

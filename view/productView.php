@@ -4,15 +4,14 @@
 
 <div class="container-fluid pr_bck">
 	<div class="pr_main_crd container">
-
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 			<a href="<?=!empty($_DATA['prod']['image']) ?'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] :'images/icons/no_photo.svg'
 			?>" data-lightbox="image-1">
-				<div class="pr_img cent_img"><img src="<?=
-				!empty($_DATA['prod']['image']) ?
-				'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] :
-				'images/icons/no_photo.svg'
-			?>"></div>
+				<div class="pr_img cent_img">
+						<img src="<?=!empty($_DATA['prod']['image']) ?'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] :
+						'images/icons/no_photo.svg'?>">
+						<span class="discount_deg badge badge-pill badge-danger">-25%</span>
+				</div>
 			</a>
 		</div>
 
@@ -20,9 +19,10 @@
 			<ul class="list-unstyled">
 				<li class="pr_name"><?= $_DATA['prod']['title'] ?></li>
 				<li class="code_name">Код товара : <?= $_DATA['prod']['articule'] ?></li>
-				<li>Цена : <b><?= $_DATA['prod']['price'] ?></b> &euro;</li>
+				<li>Цена : <b><?= $_DATA['prod']['price'] ?></b> &euro;<span id="sec_price"><div></div><?= $_DATA['prod']['price'] ?></b> &euro;</span></li>
 				<li><a href="delivery"><i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i> Условия доставки</a></li>
 				<li><a href="#"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i> Видео на YouTube</a></li>
+				<li><span id="like"><i class="fa fa-heart fa-lg fa-fw" aria-hidden="true"></i> В избранное</span></li>
 				<?php
 					if($_GET['category'] == 'Масла') {
 
@@ -75,7 +75,7 @@
 <?php if(!empty($_DATA['prod']['text'])) { // Если пустой текст , то оно не выводит ?>
 <div class="pr_about">
 	<h4 class="main_title">Описание :</h4>
-	<div class=".main_text pr_about_txt">
+	<div class="main_text pr_about_txt">
 		<?= $_DATA['prod']['text'] ?>
 	</div>
 </div>
@@ -96,6 +96,17 @@
     <div class="modal-content siglog_window">
       <div class="modal-header">
         <h4 class="modal-title main_title">Товар добавлен в корзину !</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOR LIKE MODAL -->
+<div id="like_modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content siglog_window">
+      <div class="modal-header">
+        <h4 class="modal-title main_title">Товар добавлен в избранное !</h4>
       </div>
     </div>
   </div>
@@ -126,5 +137,20 @@
 
 	});
 
+	// для избранного
+	$('.pr_description #like').click(function() {
+		$('#like_modal').modal('show');
+		setTimeout(function(){
+			$('#like_modal').modal('hide');
+		}, 1000);
+	});
+	// для скидки
+	// if () {
+	//   $('#sec_price').addClass(block_css);
+	// 	$('.discount_deg').addClass(block_css);
+	// }else{
+	// 	$('#sec_price').removeClass(block_css);
+	// 	$('.discount_deg').removeClass(block_css);
+	// }
 </script>
 <script src="js/tops.js"></script>

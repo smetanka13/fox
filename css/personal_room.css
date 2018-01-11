@@ -178,7 +178,17 @@
 	overflow: auto;
 	margin-top: 30px;
 }
-
+.tb_cnt .delete{
+	width: 40px;
+	cursor: pointer;
+}
+.tb_cnt .delete i{
+	color: #e74c3c;
+	transition: color 0.3s ease;
+}
+.tb_cnt .delete:hover i{
+	color: #333;
+}
 .tb_buy thead tr th {
 
 	color: #F7931E;
@@ -295,9 +305,9 @@
 	}
 
 	.pr_notice button {
-	
+
 		width: 100%;
-		margin-top: 10px;	
+		margin-top: 10px;
 	}
 
 	/*FOR SEARCHBAR*/

@@ -45,6 +45,7 @@
 	position: relative;
 	width: 180px;
 	height: 180px;
+	z-index: 10;
 }
 /* --- Картинка (отцентрирована по вертикали и горизонтали) --- */
 .prods_cnt .prods_img_cnt img {
@@ -109,4 +110,20 @@
 }
 .prods_cnt:hover .prods_bottom {
 	bottom: 0;
+}
+/* для скидки */
+.prods_wrapper .discount{
+	width: 60px;
+	height: 60px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	transform: rotate(45deg);
+
+	background-image: url('../images/icons/sale.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	z-index: 100;
+	display: none;
 }

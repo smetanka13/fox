@@ -10,7 +10,6 @@
 }
 
 .color_head {
-
 	background: #f7a64f; /* Old browsers */
 	background: #f4b673; /* Old browsers */
 	background: -moz-linear-gradient(top, #f4b673 25%, #f4a449 56%, #f7931e 81%, #ea8c27 100%); /* FF3.6-15 */
@@ -92,7 +91,7 @@
 	position: absolute;
 	top: 15px;
 	right: -17px;
-	transition: all 0.3s ease; 
+	transition: all 0.3s ease;
 }
 .oil_parce:hover img {
 	transform: scale(1.1) translateY(5px);
@@ -330,7 +329,7 @@
 	display: block;
 }
 
-/*FOR XS DISP*/ 
+/*FOR XS DISP*/
 /*SEARCH*/
 .xs_form {
 
@@ -432,7 +431,7 @@
 }
 
 @media(min-width: 1200px) {
-	
+
 	/*FOR LINK PAGES*/
 	.nav_bar_pages {
 
@@ -627,4 +626,3 @@
 		right: 18px;
 	}
 }
-
