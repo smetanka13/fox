@@ -4,15 +4,14 @@
 
 <div class="container-fluid pr_bck">
 	<div class="pr_main_crd container">
-
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 			<a href="<?=!empty($_DATA['prod']['image']) ?'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] :'images/icons/no_photo.svg'
 			?>" data-lightbox="image-1">
-				<div class="pr_img cent_img"><img src="<?=
-				!empty($_DATA['prod']['image']) ?
-				'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] :
-				'images/icons/no_photo.svg'
-			?>"></div>
+				<div class="pr_img cent_img">
+						<img src="<?=!empty($_DATA['prod']['image']) ?'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] :
+						'images/icons/no_photo.svg'?>">
+						<span class="discount_deg badge badge-pill badge-danger">-25%</span>
+				</div>
 			</a>
 		</div>
 
@@ -20,7 +19,7 @@
 			<ul class="list-unstyled">
 				<li class="pr_name"><?= $_DATA['prod']['title'] ?></li>
 				<li class="code_name">Код товара : <?= $_DATA['prod']['articule'] ?></li>
-				<li>Цена : <b><?= $_DATA['prod']['price'] ?></b> &euro;</li>
+				<li>Цена : <b><?= $_DATA['prod']['price'] ?></b> &euro;<span id="sec_price"><div></div><?= $_DATA['prod']['price'] ?></b> &euro;</span></li>
 				<li><a href="delivery"><i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i> Условия доставки</a></li>
 				<li><a href="#"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i> Видео на YouTube</a></li>
 				<?php
@@ -124,5 +123,13 @@
 
 	});
 
+	// для скидки
+	// if () {
+	//   $('#sec_price').addClass(block_css);
+	// 	$('.discount_deg').addClass(block_css);
+	// }else{
+	// 	$('#sec_price').removeClass(block_css);
+	// 	$('.discount_deg').removeClass(block_css);
+	// }
 </script>
 <script src="js/tops.js"></script>

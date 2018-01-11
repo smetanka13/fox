@@ -191,6 +191,39 @@
 .top_cnt{
 	padding-bottom: 60px !important;
 }
+/* для старой цены */
+#sec_price{
+	padding-left: 10px;
+	position: relative;
+	color: #7f7f7f;
+
+	display: none;
+}
+#sec_price div{
+	width: 80%;
+	height: 2px;
+
+	position: absolute;
+	top: 8px;
+	right: 0px;
+
+	background: #e74c3c;
+	transform: rotate(-5deg);
+}
+.discount_deg{
+	width: 70px;
+	height: 70px;
+	position: absolute;
+	top: 0px;
+	right: 20px;
+
+	line-height: 65px;
+	border-radius: 50%;
+	background: #e74c3c;
+	font-size: 18px;
+
+	display: none;
+}
 
 /*RESPONSIVE*/
 
