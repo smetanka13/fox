@@ -81,10 +81,12 @@
 </div>
 <?php } ?>
 
-<div class="top_cnt">
-	<div class="top_header">ПОХОЖИЕ ТОВАРЫ</div>
-	<div class="top_viewport">
-		<div class="top_slider"></div>
+<div class="top_wrapper">
+	<div class="top_cnt">
+		<div class="top_header">ПОХОЖИЕ ТОВАРЫ</div>
+		<div class="top_viewport">
+			<div class="top_slider"></div>
+		</div>
 	</div>
 </div>
 
