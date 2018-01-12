@@ -448,16 +448,7 @@ function tableOrd(data){
         </tr>
     ` ;
 }
-function getUnaccepted(data){
-    ajaxController({
-        model: 'order',
-        method: 'getUnaccepted',
-        callback: function(data){
-            $("#order_table tbody").empty();
-            for(var index = data.output.length - 1; index >= 0 ; --index){
-                $('#order_table tbody').append(tableOrd(data.output[index]));
 
-<<<<<<< HEAD
 $( document ).ready(function() {
    setInterval(function(){
         FW.ajax.send({
@@ -509,20 +500,6 @@ $( document ).ready(function() {
                         }
                     });
                 }
-=======
-                $('#order_table').mouseover(function(){
-                    if (data.output[index].checked == 0) {
-                        alert();
-                        ajaxController({
-                            model: 'order',
-                            method: 'check',
-                            callback:function(data){
-                                $('#order_table i').addClass('hidden_css');
-                            }
-                         });
-                    }
-                });
->>>>>>> 9c2fcf0b5b0f4d61b7d14b3619f0246e0b1d95fc
             }
         }
     });

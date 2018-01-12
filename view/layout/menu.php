@@ -13,7 +13,10 @@
     <div class="catalog">
         <div class="cnt">
             <div class="item">
-                <div class="name"><?= $category ?></div>
+                <div class="name">
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    <?= $category ?>
+                </div>
                 <div class="list">
                     <?php
                         foreach($subcategories as $subcategory) {
