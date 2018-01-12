@@ -509,20 +509,6 @@ $( document ).ready(function() {
                         }
                     });
                 }
-=======
-                $('#order_table').mouseover(function(){
-                    if (data.output[index].checked == 0) {
-                        alert();
-                        ajaxController({
-                            model: 'order',
-                            method: 'check',
-                            callback:function(data){
-                                $('#order_table i').addClass('hidden_css');
-                            }
-                         });
-                    }
-                });
->>>>>>> 9c2fcf0b5b0f4d61b7d14b3619f0246e0b1d95fc
             }
         }
     });

@@ -81,24 +81,12 @@
     <div class="tr_cnt">
       <div class="form-inline">
         <div class="form-group">
-          <select class="" name="">
-            <option value="">По цене</option>
-            <option value="">Самые дешевые</option>
-            <option value="">Самые дорогие</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <select class="" name="">
-            <option value="">По популярности</option>
-            <option value="">Самые популярные</option>
-            <option value="">Менее популярные</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <select class="" name="">
-            <option value="">По дате</option>
-            <option value="">Самые новые</option>
-            <option value="">Самые старые</option>
+          <label for="sort"><i class="fa fa-sort fa-lg fa-fw" aria-hidden="true"></i></label>
+          <select class="" name="sort">
+            <option value="">популярные</option>
+            <option value="">от дешевых к дорогим</option>
+            <option value="">от дорогих к дешевым</option>
+            <option value="">новинки</option>
           </select>
         </div>
         <div class="form-group">
