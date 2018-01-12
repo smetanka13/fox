@@ -448,16 +448,7 @@ function tableOrd(data){
         </tr>
     ` ;
 }
-function getUnaccepted(data){
-    ajaxController({
-        model: 'order',
-        method: 'getUnaccepted',
-        callback: function(data){
-            $("#order_table tbody").empty();
-            for(var index = data.output.length - 1; index >= 0 ; --index){
-                $('#order_table tbody').append(tableOrd(data.output[index]));
 
-<<<<<<< HEAD
 $( document ).ready(function() {
    setInterval(function(){
         FW.ajax.send({

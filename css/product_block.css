@@ -78,7 +78,7 @@
 	bottom: -30px;
 	transition: bottom 0.3s ease;
 }
-.prods_cnt .prods_bottom button {
+/*.prods_cnt .prods_bottom button {
 	font-weight: bold;
 	float: right;
 	position: relative;
@@ -98,6 +98,22 @@
 	border-left: 21px solid transparent;
 	top: 0;
 	left: -20px;
+}*/
+.prods_cnt .prods_bottom button {
+	font-weight: bold;
+	float: right;
+	position: relative;
+	width: 70px;
+	height: 20px;
+	background: #d37730;
+	font-size: 12px;
+	color: #333;
+	border: none;
+	margin: 5px 5px;
+	border-radius: 5px;
+}
+.prods_cnt .prods_bottom button:hover {
+	color: #fafafa;
 }
 /* --- Цена --- */
 .prods_cnt .prods_bottom h4 {

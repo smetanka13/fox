@@ -101,23 +101,25 @@ class Category {
 
             $query = '';
             foreach($params as $i => $param) {
-                $query .= "$param varchar(32) NOT NULL,";
+                $query .= "`$param` VARCHAR(32) NOT NULL,";
             }
 
             FW::$DB->query("
-                CREATE TABLE $name (
-                    id int NOT NULL AUTO_INCREMENT,
-                    category varchar(64) NOT NULL,
-                    price float UNSIGNED NOT NULL,
-                    title varchar(64) UNIQUE NOT NULL,
-                    quantity smallint UNSIGNED NOT NULL,
-                    date int(12) UNSIGNED NOT NULL,
-                    text mediumtext NOT NULL,
-                    image varchar(32) NOT NULL,
-                    video varchar(256) NOT NULL,
-                    bought smallint UNSIGNED NOT NULL,
-                    rating tinyint UNSIGNED NOT NULL,
-                    articule varchar(70) NOT NULL,
+                CREATE TABLE `$name` (
+                    id_prod INT NOT NULL AUTO_INCREMENT,
+                    category VARCHAR(64) NOT NULL,
+                    price FLOAT UNSIGNED NOT NULL,
+                    title VARCHAR(64) UNIQUE NOT NULL,
+                    quantity SMALLINT UNSIGNED NOT NULL,
+                    date INT(12) UNSIGNED NOT NULL,
+                    text MEDIUMTEXT NOT NULL,
+                    image VARCHAR(32) NOT NULL,
+                    video VARCHAR(256) NOT NULL,
+                    bought SMALLINT UNSIGNED NOT NULL,
+                    rating TINYINT UNSIGNED NOT NULL,
+                    articule VARCHAR(70) NOT NULL,
+                    discount BOOLEAN NOT NULL,
+                    discount_val FLOAT NOT NULL,
                     $query
                     PRIMARY KEY (id)
                 )
@@ -140,17 +142,30 @@ class Category {
 
         $mode = $update ? implode(';', $params) : implode(';', array_merge(self::getParams($category), $params));
 
-        FW::$DB->update('category_param', [
-            'params' => $mode
-        ], [
-            'category' => $category
-        ]);
+        FW::$DB->action(function() {
 
-        foreach($params as $param) {
-            FW::$DB->insert('param_value', [
-                'category_param' => "$category/$param"
+            $query = '';
+            foreach($params as $i => $param) {
+                $query .= "ADD `$param` VARCHAR(32) NOT NULL,";
+            }
+
+            FW::$DB->query("
+                ALTER TABLE `Масла`
+                $query
+            ");
+
+            FW::$DB->update('category_param', [
+                'params' => $mode
+            ], [
+                'category' => $category
             ]);
-        }
+
+            foreach($params as $param) {
+                FW::$DB->insert('param_value', [
+                    'category_param' => "$category/$param"
+                ]);
+            }
+        });
     }
     static public function addValues($category, $param, $values, $update = TRUE) {
 
