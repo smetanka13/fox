@@ -130,6 +130,7 @@
     function foo() {
 
     }
+    
     // for modals
     $('#no_reg').click(function(){
         $('#signin_modal').modal('hide');

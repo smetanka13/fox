@@ -59,7 +59,7 @@ class Search {
         ];
     }
 
-    private static function formatValuesQuery($values) {
+    private static function formatValuesQuery($category, $values) {
         # ---- Формирование запроса по спецификациям ---- #
 
         $query = '';
@@ -68,7 +68,7 @@ class Search {
             $params = array_keys($values);
 
             foreach($params as $param) {
-                Category::checkParam($param, TRUE);
+                Category::checkParam($category, $param);
                 $query .= ' AND (';
                 $exploaded_values = explode('/', $values[$param]);
                 foreach($exploaded_values as $i => $value) {
@@ -84,11 +84,9 @@ class Search {
 
     public static function find($page, $query, $category, $values = NULL, $sort = NULL, $direction = NULL, $finds = 12) {
 
-        Category::checkCategory($category, TRUE);
+        Category::checkCategory($category);
 
         if($finds > self::$max_finds) $finds = self::$max_finds;
-
-        if(is_string($values)) $values = json_decode($values, TRUE);
 
         if(!is_numeric($page)) $page = 0;
 
@@ -106,7 +104,7 @@ class Search {
 
         $query = trim(preg_replace("/ +/", ' ',$query));
 
-        $query_params = self::formatValuesQuery($values);
+        $query_params = self::formatValuesQuery($category, $values);
         list($query_title, $query_text, $params_scan) = self::formatWordQuery($query, $category, $query_params);
 
         $result = FW::$DB->query("

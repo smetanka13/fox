@@ -12,7 +12,7 @@ class Article {
 
         self::checkInput($title, $text, $imgs);
 
-        FW::$DB->action(function() {
+        FW::$DB->action(function() use($title, $text, $imgs) {
 
             FW::$DB->insert('article', [
                 'title' => $title,
@@ -102,8 +102,8 @@ class Article {
     public static function update($id_article, $title, $text, $imgs) {
         self::checkInput($title, $text, $imgs);
 
-        FW::$DB->action(function() {
-            
+        FW::$DB->action(function() use($id_article, $title, $text, $imgs) {
+
             FW::$DB->update('update', [
                 'title' => $title,
                 'text' => $text

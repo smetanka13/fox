@@ -115,12 +115,17 @@ Search.update = function(callback = function() {}) {
             });
         },
         local_params: callback,
-        page: this.page,
-        query: this.query,
-        category: this.category,
-        settings: JSON.stringify(this.settings.val),
-        sort: this.sort,
-        direction: this.direction
+        data: {
+            page: this.page,
+            query: this.query,
+            category: this.category,
+            settings: JSON.stringify(this.settings.val),
+            sort: this.sort,
+            direction: this.direction
+        },
+        decoder: {
+            settings: 'JSON'
+        }
     });
 };
 

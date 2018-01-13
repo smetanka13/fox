@@ -18,7 +18,9 @@ Cart.updateVisual = function() {
         callback: function(data) {
             $('.header .cart ul li:eq(1)').html('&euro;: '+data.output.toFixed(2));
         },
-        cookie: cookie
+        data: {
+            cookie: cookie
+        }
     })
 };
 
@@ -29,9 +31,9 @@ Cart.updateVisual = function() {
  *     с уникальным ключом(рандомные числа, буквы):
  *
  *         key: {id_prod, category, quantity}
- *         "ABCD24": {24, Масла, 5}
+ *         "ABCD24": {24, 'Масла', 5}
  *
- *  @param id_prod - айди продукта
+ *  @param {Int} id_prod - айди продукта
  *  @param category - категория продукта
  *  @param quantity - кол-во
  *  @param callback - послед. функция

@@ -71,7 +71,7 @@ html, body {
 }
 a,p,li,h1,h2,h3,h4,h5,h6,span{
     color: #333;
-    transition: color 0.3s ease;
+    transition: color 0.1s ease;
 }
 label{
     color: #F7931E;
