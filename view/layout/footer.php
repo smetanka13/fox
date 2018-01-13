@@ -5,8 +5,8 @@
 		  	<!-- <li data-toggle='modal' data-target='#privacy_modal'>конфеденциальность</li> -->
 		  	<i data-toggle='modal' data-target='#about_modal' class="ic fa fa-phone-square fa-2x fa-fw" aria-hidden="true"></i>
 		  	<a href="#"><i class="ic fa fa-facebook-square fa-2x fa-fw" aria-hidden="true"></i></a>
-		  	<a href="#"><i class="ic fa fa-vk fa-2x fa-fw" aria-hidden="true"></i></a>
-		  	<a href="#"><i class="ic fa fa-youtube-play fa-2x fa-fw" aria-hidden="true"></i></a>
+				<a href="https://www.youtube.com/channel/UCf7iYlJ7au_R0yLBrkbqnfA"><i class="ic fa fa-youtube-play fa-2x fa-fw" aria-hidden="true"></i></a>
+		  	<a href="https://www.instagram.com/fox_motors_shop "><i class="ic fa fa-instagram fa-2x fa-fw" aria-hidden="true"></i></a>
 		  	<i data-toggle='modal' data-target='#privacy_modal' class="ic fa fa-dot-circle-o fa-2x fa-fw" aria-hidden="true"></i>
 		</ul>
 	</div>

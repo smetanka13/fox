@@ -59,7 +59,9 @@
 	color: #7f7f7f;
 	font-size: 12px;
 }
-
+.code_name small{
+	margin-left: 10px;
+}
 .pr_description ul li {
 
 	margin-bottom: 20px;

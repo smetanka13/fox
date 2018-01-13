@@ -295,7 +295,12 @@ li > a:focus {
 {
     display: inline-block !important;
 }
-
+.red{
+  color: #e74c3c;
+}
+.green{
+  color: green;
+}
 /*FOR REGIST AND SIGN*/
 
 .siglog_window {
