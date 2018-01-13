@@ -207,7 +207,7 @@
             $('#regist_modal #ps_rptr').removeClass('block_inl');
         }
 
-        ajaxController({
+        FW.ajax.send({
             model: 'user',
             method: 'registrate',
             callback: foo,

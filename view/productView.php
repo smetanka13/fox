@@ -18,7 +18,7 @@
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 pr_description">
 			<ul class="list-unstyled">
 				<li class="pr_name"><?= $_DATA['prod']['title'] ?></li>
-				<li class="code_name">Код товара : <?= $_DATA['prod']['articule'] ?></li>
+				<li class="code_name">Код товара : <?= $_DATA['prod']['articule'] ?><small></small></li>
 				<li>Цена : <b><?= $_DATA['prod']['price'] ?></b> &euro;<span id="sec_price"><div></div><?= $_DATA['prod']['price'] ?></b> &euro;</span></li>
 				<li><a href="delivery"><i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i> Условия доставки</a></li>
 				<li><a href="#"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i> Видео на YouTube</a></li>
