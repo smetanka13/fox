@@ -19,7 +19,7 @@ class Order {
                     'price',
                     'articule'
                 ], [
-                    'id_order' => $value['id_prod']
+                    'id_prod' => $value['id_prod']
                 ]
             ), $order_prods[$index]);
         }
@@ -110,5 +110,24 @@ class Order {
                 LIMIT 1
             ");
         }
+    }
+    public static function delete($id_order) {
+        FW::$DB->delete('order', [
+            'id_order' => $id_order
+        ]);
+        FW::$DB->delete('order_prod', [
+            'id_order' => $id_order
+        ]);
+    }
+    public static function getAccepted() {
+        $order = FW::$DB->select('order', '*', [
+            'ok' => 1
+        ]);
+
+        foreach($order as $index => $value) {
+            $order[$index]['prods'] = self::getFullProds($value['id_order']);
+        }
+
+        return $order;
     }
 }
