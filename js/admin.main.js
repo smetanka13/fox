@@ -1,9 +1,11 @@
 function invalidParse(id) {
     var params = [];
+    var error = false;
     $.each($(id), function(i, val) {
         params.push(val.value);
+        if(val.value == '') error = true;
     });
-    if(params.length == 0) return false;
+    if(error) return false;
     return JSON.stringify(params);
 }
 function addInput(cnt, placeholder) {
