@@ -266,6 +266,8 @@ class Product {
 
         }
 
+        if(empty($result)) return FALSE;
+
         return self::processProdParams($result, is_array($id_prod));
     }
     public static function setDiscount($category, $id_prod, $percent) {
