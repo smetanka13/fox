@@ -487,18 +487,18 @@ $( document ).ready(function() {
                         </tr>
                     `);
 
-                    $('#order_table').mouseover(function(){
-                        if (data.output[index].checked == 0) {
-                            alert();
-                            FW.ajax.send({
-                                model: 'order',
-                                method: 'check',
-                                callback:function(data){
-                                    $('#order_table i').addClass('hidden_css');
-                                }
-                             });
-                        }
-                    });
+                    // $('#order_table').mouseover(function(){
+                    //     if (data.output[index].checked == 0) {
+                    //         alert();
+                    //         FW.ajax.send({
+                    //             model: 'order',
+                    //             method: 'check',
+                    //             callback:function(data){
+                    //                 $('#order_table i').addClass('hidden_css');
+                    //             }
+                    //          });
+                    //     }
+                    // });
                 }
             }
         }
@@ -507,25 +507,25 @@ $( document ).ready(function() {
 $( document ).ready(function() {
     getUnaccepted();
     setInterval(getUnaccepted,10000);
-    // $(document).on('click','.order_ord', function(){
-    //     var order_but = $(this).find('.'+data.output[index].id_order+'');
-    //     var confirm_but = $(this).find('.'+data.output[index].id_order+'');
-
-    //     if (order_but.css('display') == 'block') {
-    //         order_but.fadeOut(0);
-    //         confirm_but.addClass('text-success').fadeIn(0);
-    //     }
-    // });
-    // $('.order_phone').click(
-    //     function(){
-    //         var order_but = $(this).find('.ord_but');
-    //         var confirm_but = $(this).find('.cf_ord');
-
-    //         if (order_but.css('display') == 'block') {
-    //             order_but.fadeOut(0);
-    //             confirm_but.addClass('text-success').fadeIn(0);
-    //         }
-    //     }
-    // );
 });
+// $(document).on('click','.order_ord', function(){
+//     var order_but = $(this).find('.'+data.output[index].id_order+'');
+//     var confirm_but = $(this).find('.'+data.output[index].id_order+'');
+
+//     if (order_but.css('display') == 'block') {
+//         order_but.fadeOut(0);
+//         confirm_but.addClass('text-success').fadeIn(0);
+//     }
+// });
+// $('.order_phone').click(
+//     function(){
+//         var order_but = $(this).find('.ord_but');
+//         var confirm_but = $(this).find('.cf_ord');
+
+//         if (order_but.css('display') == 'block') {
+//             order_but.fadeOut(0);
+//             confirm_but.addClass('text-success').fadeIn(0);
+//         }
+//     }
+// );
 </script>
