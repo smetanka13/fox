@@ -55,7 +55,7 @@ class Order {
 
         require_once 'model/productModel.php';
 
-        FW::$DB->action(function() {
+        FW::$DB->action(function() use($pay_way, $delivery_way, $public, $city, $address, $email, $phone, $text) {
 
             FW::$DB->insert('order', [
                 'public' => $public,
@@ -106,7 +106,7 @@ class Order {
             FW::$DB->query("
                 UPDATE {$prod['category']}
                 SET bought = bought + 1
-                WHERE id_prod = {$prod['id_prod'] + 1}
+                WHERE id_prod = {$prod['id_prod']}
                 LIMIT 1
             ");
         }

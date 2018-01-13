@@ -1,9 +1,6 @@
 <link rel="stylesheet" type="text/css" href="css/cart.css">
 
-<?php
-	require_once 'model/categoryModel.php';
-	require_once 'model/productModel.php';
-?>
+<?php require_once 'model/productModel.php' ?>
 
 <div class="reg_prod col-xs-12 col-sm-12 col-md-4 col-lg-4">
 	<div class="reg_prod_cnt">
@@ -155,14 +152,16 @@
 						}, 2000);
 					}
 				},
-				pay_way: $('#pay_way select').val(),
-				delivery_way: $('#delivery_way select').val(),
-				public: $('#public input').val(),
-				city: $('#city input').val(),
-				address: $('#address input').val(),
-				email: $('#email input').val(),
-				phone: $('#phone input').val(),
-				text: $('#text textarea').val()
+				data: {
+					pay_way: $('#pay_way select').val(),
+					delivery_way: $('#delivery_way select').val(),
+					public: $('#public input').val(),
+					city: $('#city input').val(),
+					address: $('#address input').val(),
+					email: $('#email input').val(),
+					phone: $('#phone input').val(),
+					text: $('#text textarea').val()
+				}
 			});
 		});
 	});
