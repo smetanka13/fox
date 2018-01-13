@@ -17,6 +17,8 @@ class Product {
         'bought',
         'rating',
         'articule',
+        'discount',
+        'discount_percent',
         'params'
     ];
 
@@ -59,12 +61,18 @@ class Product {
     }
     public static function update($id_prod, $articule, $title, $price, $category, $spec = []) {
 
+        if(!is_numeric($price))
+            throw new InvalidArgumentException("Цена должна быть цифровым значением.");
+
+        Category::checkCategory($category);
+
         $query = [
             'title' => $title,
             'price' => $price,
             'category' => $category
         ];
         foreach($spec as $param => $value) {
+            Category::checkParam($category, $param);
             $query[$param] = $value;
         }
 
@@ -78,6 +86,11 @@ class Product {
 
     public static function humanUpdate($id_prod, $price, $category, $text, $spec = []) {
 
+        if(!is_numeric($price))
+            throw new InvalidArgumentException("Цена должна быть цифровым значением.");
+
+        Category::checkCategory($category);
+
         $text = str_replace("\n", '<br>', $text);
 
         $query = [
@@ -86,6 +99,7 @@ class Product {
             'text' => $text
         ];
         foreach($spec as $param => $value) {
+            Category::checkParam($category, $param);
             $query[$param] = $value;
         }
 
@@ -156,10 +170,7 @@ class Product {
 
     public static function upload($category, $id_prod, $text, $price, $quantity, $params, $img) {
 
-        if(is_string($params)) $params = json_decode($params, TRUE);
-
-        if(array_search(Category::getCategories(), $category) === FALSE)
-            throw new InvalidArgumentException("Категория '$category' не найдена.");
+        Category::checkCategory($category);
 
         Product::humanUpdate($id_prod, $price, $category, $text, $params);
 
@@ -168,19 +179,17 @@ class Product {
         # --- IF IMAGE EXISTS, UPLOAD IT --- #
         if(empty($img)) return;
 
-        $img_dir = __DIR__ . '/material/catalog/'.$category;
+        $img_dir = './material/catalog/'.$category;
 
-        $prev_image = Main::select("
-            SELECT `image` FROM `$category`
-            WHERE `id_prod` = '$id_prod'
-            LIMIT 1
-        ")['image'];
+        $prev_image = FW::$DB->get($category, 'image', [
+            'id_prod' => $id_prod
+        ]);
 
         $valid_ext = ['jpeg', 'png', 'jpg', 'bmp'];
 
         $extention = FW::getFileExt($img['name']);
 
-        if(array_search($valid_ext, $extention) !== FALSE)
+        if(array_search($valid_ext, $extention) === FALSE)
             throw new InvalidArgumentException("Недопустимое расширение для файла '$extention'.");
 
         $image = substr(sha1(TIME . $img['name']), 0, (31 - strlen($extention))) . ".$extention";
@@ -194,15 +203,14 @@ class Product {
             throw new RuntimeException("Не вышло загрузить фото.");
 
         try {
-            Main::query("
-                UPDATE `$category`
-                SET `image` = '$image'
-                WHERE `id_prod` = '$id_prod'
-                LIMIT 1
-            ");
-        } catch (RuntimeException $e) {
+            FW::$DB->update($category, [
+                'image' => $image
+            ], [
+                'id_prod' => $id_prod
+            ]);
+        } catch (Exception $e) {
             unlink($full_path);
-            throw new RuntimeException($e->getMessage());
+            throw $e;
         }
 
     }
@@ -210,18 +218,22 @@ class Product {
 
         Category::checkCategory($category);
 
-        if(empty($str)) return FALSE;
+        if(empty($str)) return;
 
         require_once 'model/searchModel.php';
 
         if($str[0] == ':') {
-            return self::processProdParams(
-                FW::$DB->get($category, '*', [
-                    'articule' => substr($str, 1)
-                ])
-            );
+
+            $prods = FW::$DB->get($category, '*', [
+                'articule' => substr($str, 1)
+            ]);
+
+            if(empty($prods))
+                return;
+            else
+                return self::processProdParams($prods);
         } else {
-            return Search::find($str, $category)[0];
+            return Search::find(0, $str, $category)['search_result'][0];
         }
     }
     public static function getFullPriceCookie($cookie) {
@@ -232,13 +244,13 @@ class Product {
 
         $price = 0;
         foreach($prods as $index => $prod) {
-            $price += $prod['price'] * $cookie[$index]['quantity'];
+            $price += ($prod['price'] * (1 - ($prod['discount_percent'] / 100))) * $cookie[$index]['quantity'];
         }
         return $price;
     }
     public static function getById($category, $id_prod) {
 
-        Category::checkCategory($category, TRUE);
+        Category::checkCategory($category);
 
         if(is_array($id_prod)) {
 
@@ -255,5 +267,26 @@ class Product {
         }
 
         return self::processProdParams($result, is_array($id_prod));
+    }
+    public static function setDiscount($category, $id_prod, $percent) {
+
+        Category::checkCategory($category);
+
+        FW::$DB->update($category, [
+            'discount' => 1,
+            'discount_percent' => $percent
+        ], [
+            'id_prod' => $id_prod
+        ]);
+    }
+    public static function offDiscount($category, $id_prod) {
+        Category::checkCategory($category);
+
+        FW::$DB->update($category, [
+            'discount' => 0,
+            'discount_percent' => 0
+        ], [
+            'id_prod' => $id_prod
+        ]);
     }
 }

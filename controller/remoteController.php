@@ -1,40 +1,7 @@
 <?php
 
 require_once 'model/jsonModel.php';
-
-$permitted_actions = [
-	'User::saveLogged',
-	'User::verifyEmail',
-	'User::registrate',
-	'Order::add',
-	'Callback::add',
-	'Search::find',
-	'Product::getFullPriceCookie',
-	// --
-	'Order::getUnaccepted',
-	'Order::check',
-	'Order::accept',
-	'Product::get',
-	'Product::update',
-	'Product::upload',
-	'Input::excelUpload',
-	'Category::getCategories',
-	'Category::getParams',
-	'Category::getValues',
-	'Category::getFullCategory',
-	'Category::addValues',
-	'Category::addParams',
-	'Category::newCategory',
-	'Article::upload'
-];
-
-$logged_actions = [
-
-];
-
-$admin_actions = [
-
-];
+require_once 'config/permitted.php';
 
 $logged_actions = array_merge($logged_actions, $admin_actions);
 $permitted_actions = array_merge($permitted_actions, $logged_actions);
@@ -48,11 +15,34 @@ define('MODEL', $_DATA['model']);
 define('METHOD', $_DATA['method']);
 define('ACTION', ucfirst(MODEL)."::".METHOD);
 
+if(isset($_DATA['decoder'])) {
+	$_DATA['decoder'] = json_decode($_DATA['decoder'], TRUE);
+
+	foreach ($_DATA['decoder'] as $key => $value) {
+		if(!isset($_DATA[$key])) continue;
+
+		switch ($value) {
+			case 'JSON':
+				$_DATA[$key] = json_decode($_DATA[$key], TRUE);
+				break;
+			case 'XML':
+				# code...
+				break;
+		}
+	}
+}
+
+if(isset($_DATA['args_array'])) define('ARGS_ARRAY', TRUE);
+else define('ARGS_ARRAY', FALSE);
+
 $_DATA = array_diff_key($_DATA, [
 	'model' => NULL,
 	'method' => NULL,
-	'uri' => NULL
+	'uri' => NULL,
+	'decoder' => NULL
 ]);
+
+if(ARGS_ARRAY) $_DATA = [$_DATA];
 
 if(array_search(ACTION, $permitted_actions)) {
 	if(array_search(ACTION, $logged_actions)) {

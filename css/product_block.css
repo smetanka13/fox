@@ -100,20 +100,21 @@
 	left: -20px;
 }*/
 .prods_cnt .prods_bottom button {
-	font-weight: bold;
+	/*font-weight: bold;*/
 	float: right;
 	position: relative;
 	width: 70px;
 	height: 20px;
-	background: #d37730;
 	font-size: 12px;
-	color: #333;
 	border: none;
 	margin: 5px 5px;
 	border-radius: 5px;
+	background: #F7931E;
+	color: #fafafa;
+	transition: background 0.1s ease;
 }
 .prods_cnt .prods_bottom button:hover {
-	color: #fafafa;
+	background: #F78400;
 }
 /* --- Цена --- */
 .prods_cnt .prods_bottom h4 {
@@ -128,7 +129,7 @@
 	bottom: 0;
 }
 /* для скидки */
-.prods_wrapper .discount{
+.prods_cnt .discount{
 	width: 60px;
 	height: 60px;
 	position: absolute;

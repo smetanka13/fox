@@ -7,21 +7,20 @@ function prodBlock(data) {
             params += param + ': ' + data.params[param] + '<br>';
     }
 
-    // if (data.discount) {
-    //   $('.prods_wrapper .discount').addClass(block_css);
-    // }else{
-    //   $('.prods_wrapper .discount').removeClass(block_css);
-    // }
+    if(data.discount)
+        var discount = '<div class="discount"></div>';
+    else
+        var discount = '';
 
     return `
         <div class="prods_cnt">
             <div class="prods_wrapper">
-              <div class="discount"></div>
+                ${discount}
                 <h3 class="title">${data.title}</h3>
                 <div class="prods_img_cnt"><img src="${data.image}"></div>
                 <p>${params}</p>
                 <div class="prods_bottom">
-                    <a href="product?category=${data.category}&id=${data.id_prod}"><button>КУПИТЬ</button></a>
+                    <a href="product?category=${data.category}&id=${data.id_prod}"><button>Купить</button></a>
                     <h4>${data.price} &euro;</h4>
                 </div>
             </div>

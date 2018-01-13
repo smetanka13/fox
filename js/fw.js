@@ -72,18 +72,29 @@ FW.ajax.animate = function(mode) {
 
 FW.ajax.send = function(params, files = null) {
 
+    if(typeof params.model == 'undefined' || typeof params.method == 'undefined')
+        return;
+
+    if(typeof params.callback == 'undefined')
+        params.callback = function() {};
+
     this.animate(true);
     var data = new FormData();
 
     // Добавляет в data все ключи и их значения
-    for(var key in params) {
-        if(key == 'callback' || key == 'local_params') continue;
-        data.append(key, params[key]);
+    data.append('model', params.model);
+    data.append('method', params.method);
+
+    if(typeof params.decoder != 'undefined')
+        data.append('decoder', JSON.stringify(params.decoder));
+
+    for(let key in params.data) {
+        data.append(key, params.data[key]);
     }
 
     // Если присутствуют файлы, добавить их в data
     if(files != null) {
-        for(var key in files) {
+        for(let key in files) {
             $.each(files[key][0].files, function(i, file) {
                 data.append(key+i, file);
             });
@@ -104,7 +115,7 @@ FW.ajax.send = function(params, files = null) {
         success: function(json) {
             console.log(json);
             FW.ajax.animate(false);
-            var data = JSON.parse(json);
+            let data = JSON.parse(json);
 
             if(typeof(params.local_params) != 'undefined') {
                 var local_params = params.local_params;

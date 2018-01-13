@@ -6,24 +6,35 @@ class Category {
     private static $param_cache;
     private static $value_cache;
 
-    public static function checkCategory($category, $exception = FALSE) {
+    public static function checkCategory($category, $return = FALSE) {
         if(array_search($category, self::getCategories()) === FALSE) {
-            if($exception)
+            if(!$return)
                 throw new InvalidArgumentException("Не найдено категории '$category'.");
             else
                 return FALSE;
         }
         return TRUE;
     }
-    public static function checkParam($category, $param, $exception = FALSE) {
+    public static function checkParam($category, $param, $return = FALSE) {
         if(array_search($param, self::getParams($category)) === FALSE) {
-            if($exception)
+            if(!$return)
                 throw new InvalidArgumentException("Параметра '$param' не найдено в категории '$category'.");
             else
                 return FALSE;
         }
         return TRUE;
     }
+
+    static public function clearCategoriesCache() {
+        self::$category_cache = NULL;
+    }
+    static public function clearParamsCache($category) {
+        self::$param_cache[$category] = NULL;
+    }
+    static public function clearValuesCache($category, $param) {
+        self::$value_cache[$category][$param] = NULL;
+    }
+
 
     static public function getCategories($str = FALSE) {
 
@@ -71,13 +82,16 @@ class Category {
             return self::$value_cache[$category][$param];
     }
     public static function newCategory($name, $params) {
-        if($params == NULL) $params = [];
+
+        if(is_string($params)) $params = [$params];
+
+        if(empty($params)) $params = [];
 
         array_unshift($params, 'Бренд');
         array_unshift($params, 'Подкатегория');
 
-        if(array_search($name, self::getCategories())) {
-            throw new InvalidArgumentException("Категория $name уже существует.");
+        if(self::checkCategory($name, TRUE)) {
+            throw new InvalidArgumentException("Категория '$name' уже существует.");
         }
 
         $categories = self::getCategories(TRUE);
@@ -86,8 +100,11 @@ class Category {
         else
             $updated_categories = $categories.';'.$name;
 
-        FW::$DB->action(function() {
-            FW::$DB->update('variables', [
+        self::clearCategoriesCache();
+
+        FW::$DB->action(function() use($name, $updated_categories) {
+
+            FW::$DB->update('variable', [
                 'data' => $updated_categories
             ], [
                 'name' => 'categories'
@@ -96,13 +113,6 @@ class Category {
             FW::$DB->insert('category_param', [
                 'category' => $name
             ]);
-
-            self::addParams($name, $params);
-
-            $query = '';
-            foreach($params as $i => $param) {
-                $query .= "`$param` VARCHAR(32) NOT NULL,";
-            }
 
             FW::$DB->query("
                 CREATE TABLE `$name` (
@@ -117,45 +127,69 @@ class Category {
                     video VARCHAR(256) NOT NULL,
                     bought SMALLINT UNSIGNED NOT NULL,
                     rating TINYINT UNSIGNED NOT NULL,
-                    articule VARCHAR(70) NOT NULL,
+                    articule VARCHAR(70) UNIQUE NOT NULL,
                     discount BOOLEAN NOT NULL,
-                    discount_val FLOAT NOT NULL,
-                    $query
-                    PRIMARY KEY (id)
+                    discount_percent TINYINT NOT NULL,
+                    PRIMARY KEY (id_prod)
                 )
             ");
+
         });
+
+        try {
+
+            self::addParams($name, $params);
+
+        } catch (Exception $e) {
+
+            FW::$DB->update('variable', [
+                'data' => $categories
+            ], [
+                'name' => 'categories'
+            ]);
+
+            FW::$DB->delete('category_param', [
+                'category' => $name
+            ]);
+
+            FW::$DB->query("
+                DROP TABLE `$name`
+            ");
+
+            throw $e;
+
+        }
+
 
         if(!is_dir('material/catalog/' . $name))
             mkdir('material/catalog/' . $name);
     }
-    static public function addParams($category, $params, $update = TRUE) {
+    static public function addParams($category, $params) {
 
         $params = is_array($params) ? $params : [$params];
 
-        self::checkCategory($category, TRUE);
+        self::checkCategory($category);
         foreach ($params as $param) {
-            if(!$update && array_search($param, self::getParams($category))) {
+            if(self::checkParam($category, $param, TRUE)) {
                 return;
             }
         }
 
-        $mode = $update ? implode(';', $params) : implode(';', array_merge(self::getParams($category), $params));
-
-        FW::$DB->action(function() {
+        FW::$DB->action(function() use($category, $params) {
 
             $query = '';
             foreach($params as $i => $param) {
-                $query .= "ADD `$param` VARCHAR(32) NOT NULL,";
+                if($i > 0) $query .= ',';
+                $query .= "ADD `$param` VARCHAR(64) NOT NULL";
             }
 
             FW::$DB->query("
-                ALTER TABLE `Масла`
+                ALTER TABLE `$category`
                 $query
             ");
 
             FW::$DB->update('category_param', [
-                'params' => $mode
+                'params' => implode(';', array_merge(self::getParams($category), $params))
             ], [
                 'category' => $category
             ]);
@@ -171,12 +205,14 @@ class Category {
 
         $values = is_array($values) ? $values : [$values];
 
-        self::checkCategory($category, TRUE);
-        self::checkParam($category, $param, TRUE);
+        self::checkCategory($category);
+        self::checkParam($category, $param);
 
-        foreach ($values as $value) {
-            if(!$update && array_search($value, self::getValues($category, $param))) {
-                return;
+        if(!$update) {
+            foreach ($values as $value) {
+                if(array_search($value, self::getValues($category, $param))) {
+                    return;
+                }
             }
         }
 
@@ -191,14 +227,75 @@ class Category {
 
     static public function getFullCategory($category) {
         $arr = [];
-        $params = Category::getParams($category);
+        $params = self::getParams($category);
         if(!empty($params[0])) {
             for($i = 0; isset($params[$i]); $i++) {
-                $arr[$params[$i]] = Category::getValues($category, $params[$i]);
+                $arr[$params[$i]] = self::getValues($category, $params[$i]);
             }
             return $arr;
         } else {
             throw new InvalidArgumentException("Не найдено категории '$category'.");
         }
+    }
+    static public function deleteParams($category, $params) {
+        $params = is_array($params) ? $params : [$params];
+
+        self::checkCategory($category);
+        foreach ($params as $param) {
+            if(!self::checkParam($category, $param, TRUE)) {
+                return;
+            }
+        }
+
+        FW::$DB->action(function() use($category, $params) {
+
+            $query = '';
+            foreach($params as $i => $param) {
+                if($i > 0) $query .= ',';
+                $query .= "DROP `$param` VARCHAR(64) NOT NULL";
+            }
+
+            FW::$DB->query("
+                ALTER TABLE `$category`
+                $query
+            ");
+
+            FW::$DB->update('category_param', [
+                'params' => implode(';', array_diff(self::getParams($category), $params))
+            ], [
+                'category' => $category
+            ]);
+
+            foreach($params as $param) {
+                FW::$DB->delete('param_value', [
+                    'category_param' => "$category/$param"
+                ]);
+            }
+        });
+    }
+    static public function deleteCategory($category) {
+
+        self::checkCategory($category);
+
+        $categories = self::getCategories();
+        unset($categories[array_search($category, $categories)]);
+
+        FW::$DB->update('variable', [
+            'data' => implode(';', $categories)
+        ], [
+            'name' => 'categories'
+        ]);
+
+        FW::$DB->delete('category_param', [
+            'category' => $category
+        ]);
+
+        FW::$DB->delete('param_value', [
+            'category_param[~]' => "$category/"
+        ]);
+
+        FW::$DB->query("
+            DROP TABLE `$category`
+        ");
     }
 }
