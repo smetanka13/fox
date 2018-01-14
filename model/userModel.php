@@ -33,12 +33,11 @@ class User {
                 'category' => $category,
                 'id_prod' => $id_prod,
                 'id_user' => self::get('id')
-            ])
+            ]);
 
             return 'added';
 
         }
-
 
     }
     public static function getFavorite() {
@@ -98,7 +97,7 @@ class User {
         }
     }
 
-    public static function changePass($key, $pass, $confirm) {
+    public static function changePassKey($key, $pass, $confirm) {
 
         self::checkPass($pass);
 
@@ -113,6 +112,28 @@ class User {
 
         if(empty($id_user))
             throw new InvalidArgumentException("Wrong key.");
+
+        FW::$DB->update('user', [
+            'pass' => self::hashPass($login, $pass)
+        ], [
+            'id_user' => $id_user
+        ]);
+
+
+        $id_user = FW::$DB->delete('recover', [
+            'id_user' => $id_user
+        ]);
+    }
+
+    public static function changePass($pass, $confirm) {
+
+        self::checkPass($pass);
+
+        if($confirm != $pass)
+            throw new InvalidArgumentException("Repeat password correctly.");
+        if(empty($confirm))
+            throw new InvalidArgumentException("Repeat password.");
+
 
         FW::$DB->update('user', [
             'pass' => self::hashPass($login, $pass)

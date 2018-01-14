@@ -1,20 +1,17 @@
 <?php
 
 class Callback {
-    public static function getUnchecked() {
-        return Main::select("
-            SELECT * FROM `callback`
-            WHERE `checked` = '0'
-        ", TRUE);
+    public static function get() {
+        return FW::$DB->select('callback', '*', [
+            'phone' => $phone
+        ]);
     }
     public static function add($phone) {
 
-        $is_busy = Main::select("
-            SELECT `id` FROM `callback`
-            WHERE `phone` = '$phone'
-            AND `checked` = '0'
-            LIMIT 1
-        ");
+        $is_busy = FW::$DB->get('callback', 'id', [
+            'phone' => $phone,
+            'checked' => 0
+        ]);
 
         if(!empty($is_busy))
             throw new InvalidArgumentException("Вы уже отправили свой номер, сейчас оператор наберет вас.");
@@ -23,19 +20,15 @@ class Callback {
         if(!preg_match("/^(\+([0-9]{1,2}) (\([0-9]{3}\)) ([0-9]{3})\-([0-9]{2})\-([0-9]{2}))$/is", $phone))
             throw new InvalidArgumentException("Неверный формат номера.");
 
-        Main::query("
-            INSERT INTO `callback` (
-                `phone`, `date`
-            ) VALUES (
-                '$phone', '".TIME."'
-            )
-        ");
+        FW::$DB->insert('callback', [
+            'phone' => $phone,
+            'date' => TIME
+        ]);
+
     }
-    public static function check() {
-        Main::query("
-            UPDATE `callback`
-            SET `checked` = '1'
-            WHERE `checked` = '0'
-        ");
+    public static function delete($phone) {
+        FW::$DB->delete('callback', [
+            'phone' => $phone
+        ]);
     }
 }
