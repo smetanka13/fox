@@ -17,13 +17,28 @@ class User {
             'category' => $category,
             'id_prod' => $id_prod,
             'id_user' => self::get('id')
-        ])) return;
+        ])) {
 
-        FW::$DB->insert('user_favorite', [
-            'category' => $category,
-            'id_prod' => $id_prod,
-            'id_user' => self::get('id')
-        ])
+            FW::$DB->delete('user_favorite', [
+                'category' => $category,
+                'id_prod' => $id_prod,
+                'id_user' => self::get('id')
+            ]);
+
+            return 'deleted';
+
+        } else {
+
+            FW::$DB->insert('user_favorite', [
+                'category' => $category,
+                'id_prod' => $id_prod,
+                'id_user' => self::get('id')
+            ])
+
+            return 'added';
+
+        }
+
 
     }
     public static function getFavorite() {
