@@ -87,11 +87,7 @@ class Order {
             FW::$DB->insert('order_prod', $query);
 
             if(User::logged()) {
-<<<<<<< HEAD
-
-=======
                 User::addOrder($id_order);
->>>>>>> 3a60896a3200ac8ec5cfa54f1ddba7bd1490d399
             }
 
         });
