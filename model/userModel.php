@@ -6,6 +6,51 @@ class User {
         'logged' => FALSE
     ];
 
+    public static function updateFavorite($category, $id_prod) {
+
+        require_once 'model/productModel.php';
+
+        if(!Product::getById($category, $id_prod))
+            throw new InvalidArgumentException("В категории '$category' нету продукта с айди $id_prod.");
+
+        if(FW::$DB->has('user_favorite', [
+            'category' => $category,
+            'id_prod' => $id_prod,
+            'id_user' => self::get('id')
+        ])) {
+
+            FW::$DB->delete('user_favorite', [
+                'category' => $category,
+                'id_prod' => $id_prod,
+                'id_user' => self::get('id')
+            ]);
+
+            return 'deleted';
+
+        } else {
+
+            FW::$DB->insert('user_favorite', [
+                'category' => $category,
+                'id_prod' => $id_prod,
+                'id_user' => self::get('id')
+            ]);
+
+            return 'added';
+
+        }
+
+    }
+    public static function getFavorite() {
+
+        require_once 'model/productModel.php';
+
+        $fav = FW::$DB->select('user_favorite', '*', [
+            'id_user' => self::get('id')
+        ]);
+
+        return Product::selectFromDiffCategories($fav);
+
+    }
 
     private static function checkPass($pass) {
 
@@ -27,39 +72,32 @@ class User {
 
     public static function recoverPass($email) {
 
-        $id_user = Main::select("
-        	SELECT `id` FROM `user`
-        	WHERE `email` = '$email'
-            LIMIT 1
-        ")['id'];
+        $id_user = FW::$DB->get('user', 'id', [
+            'email' => $email
+        ]);
 
         if(empty($id_user))
             throw new InvalidArgumentException("No user found with that email.");
 
-        $key = Main::generateKey();
-        Main::query("
-            INSERT INTO `recover` (
-                `id_user`, `key`
-            )
-            VALUES (
-                '$id_user', '$key'
-            )
-        ");
+        $key = FW::generateKey();
+
+        FW::$DB->insert('recover', [
+            'id_user' => $id_user,
+            'key' => $key
+        ]);
 
         $subject = "[".NAME."] Восстановление пароля.";
         $headers = 'From: '.NAME. "\r\n";
         $message = "Что бы восстановить пароль пройдите по ссылке: ".URL."?modal=changepass&key=$key";
         if(!mail($email, $subject, $message, $headers)) {
-            Main::query("
-                DELETE FROM `recover`
-                WHERE `id_user` = '$id_user'
-                LIMIT 1
-            ");
+            FW::$DB->delete('recover', [
+                'id_user' => $id_user
+            ]);
             throw new RuntimeException('Error sending mail.');
         }
     }
 
-    public static function changePass($key, $pass, $confirm) {
+    public static function changePassKey($key, $pass, $confirm) {
 
         self::checkPass($pass);
 
@@ -68,26 +106,45 @@ class User {
         if(empty($confirm))
             throw new InvalidArgumentException("Repeat password.");
 
-        $id_user = Main::select("
-            SELECT `id_user` FROM `recover`
-            WHERE `key` = '$key'
-            LIMIT 1
-        ")['id_user'];
+        $id_user = FW::$DB->get('recover', 'id_user', [
+            'key' => $key
+        ]);
 
         if(empty($id_user))
             throw new InvalidArgumentException("Wrong key.");
 
-        Main::query("
-            UPDATE `user`
-            SET `pass` = '".self::hashPass($login, $pass)."'
-            WHERE `id` = '$id_user'
-            LIMIT 1
-        ");
-        Main::query("
-            DELETE FROM `recover`
-            WHERE `id_user` = '$id_user'
-            LIMIT 1
-        ");
+        FW::$DB->update('user', [
+            'pass' => self::hashPass($login, $pass)
+        ], [
+            'id_user' => $id_user
+        ]);
+
+
+        $id_user = FW::$DB->delete('recover', [
+            'id_user' => $id_user
+        ]);
+    }
+
+    public static function changePass($pass, $confirm) {
+
+        self::checkPass($pass);
+
+        if($confirm != $pass)
+            throw new InvalidArgumentException("Repeat password correctly.");
+        if(empty($confirm))
+            throw new InvalidArgumentException("Repeat password.");
+
+
+        FW::$DB->update('user', [
+            'pass' => self::hashPass($login, $pass)
+        ], [
+            'id_user' => $id_user
+        ]);
+
+
+        $id_user = FW::$DB->delete('recover', [
+            'id_user' => $id_user
+        ]);
     }
 
     public static function registrate($login, $email, $pass, $confirm) {
@@ -95,11 +152,9 @@ class User {
         if(!preg_match("/^([a-z0-9_\.\-]{1,20})@([a-z0-9\.\-]{1,20})\.([a-z]{2,4})$/is", $email))
             throw new InvalidArgumentException("Неверный формат почты.");
 
-        if(Main::select("
-        	SELECT * FROM `user`
-        	WHERE `email` = '$email'
-            LIMIT 1
-        "))
+        if(FW::$DB->get('recover', '*', [
+            'email' => $email
+        ]))
             throw new InvalidArgumentException("Эта почта уже занята.");
 
         self::checkPass($pass);
@@ -110,72 +165,48 @@ class User {
         if(empty($confirm))
             throw new InvalidArgumentException("Повторите пароль.");
 
-        Main::query("
-            INSERT INTO `user` (
-                `login`, `email`, `pass`
-            ) VALUES (
-                '$login', '$email', '".self::hashPass($login, $pass)."'
-            )
-        ");
+        FW::$DB->action(function() use($login, $pass, $email) {
 
-        $key = Main::generateKey();
-        try {
-            Main::query("
-                INSERT INTO `verify` (
-                    `email`, `key`
-                )
-                VALUES (
-                    '$email', '$key'
-                )
-            ");
-        } catch (RuntimeException $e) {
-            Main::query("
-                DELETE FROM `user`
-                WHERE `email` = '$email';
-            ");
-            throw new RuntimeException($e->getMessage());
-        }
+            FW::$DB->insert('user', [
+                'login' => $login,
+                'email' => $email,
+                'pass' => self::hashPass($login, $pass)
+            ]);
 
-        $subject = "[".NAME."] Регистрация.";
-        $headers = 'From: '.NAME. "\r\n";
-        $message = "Что бы активировать ваш аккаунт пройдите по ссылке: ".URL."/remote?model=user&method=verify&key=".$key;
-        if(!mail($email, $subject, $message, $headers)) {
-            Main::query("
-                DELETE FROM `user`
-                WHERE `email` = '$email'
-            ");
-            Main::query("
-                DELETE FROM `verify`
-                WHERE `email` = '$email'
-            ");
-            throw new RuntimeException('Error sending mail.');
-        }
+            $key = FW::generateKey();
+            FW::$DB->insert('user_verify', [
+                'key' => $key,
+                'email' => $email
+            ]);
+
+            $subject = "[".NAME."] Регистрация.";
+            $headers = 'From: '.NAME. "\r\n";
+            $message = "Что бы активировать ваш аккаунт пройдите по ссылке: ".URL."/remote?model=user&method=verify&key=".$key;
+            if(!mail($email, $subject, $message, $headers)) {
+                throw new RuntimeException('Error sending mail.');
+            }
+
+        });
     }
 
     public static function verify($key) {
 
-        $email = Main::select("
-        	SELECT `email` FROM `verify`
-        	WHERE `key` = '$key'
-        	LIMIT 1
-        ");
+        $email = FW::$DB->get('user_verify', 'email', [
+            'key' => $key
+        ]);
 
-        if(Main::query("
-        	SELECT `email` FROM `user`
-        	WHERE `email` = '".$email['email']."'
-        	LIMIT 1
-        ")) {
-        	Main::query("
-        		UPDATE `user`
-        		SET `confirmed` = '1'
-        		WHERE `email` = '".$email['email']."'
-        		LIMIT 1
-        	");
-        	Main::query("
-        		DELETE FROM `verify`
-        		WHERE `key` = '$key'
-        		LIMIT 1
-        	");
+        if(FW::$DB->has('user', [
+            'email' => $email
+        ])) {
+            FW::$DB->update('user', [
+                'confirmed' => 1
+            ], [
+                'email' => $email
+            ]);
+
+            FW::$DB->delete('user_verify', [
+                'key' => $key
+            ]);
 
         	header("Location: ".URL."?msg=Вы успешно зарегистрировались.");
         } else {
@@ -202,13 +233,11 @@ class User {
     public static function login($login, $pass, $hash = FALSE) {
         if($hash) $pass = self::hashPass($login, $pass);
 
-        $user = Main::select("
-            SELECT * FROM `user`
-            WHERE `login` = '$login'
-            AND `pass` = '$pass'
-            AND `confirmed` = '1'
-            LIMIT 1
-        ");
+        $user = FW::$DB->get('user', '*', [
+            'login' => $login,
+            'pass' => $pass,
+            'confirmed' => 1
+        ]);
 
         if(!empty($user)) {
             foreach($user as $key => $value) {

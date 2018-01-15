@@ -25,7 +25,7 @@ class Article {
             $query = [];
             foreach($imgs as $img) {
 
-                $imgs[$index]['name'] = substr(sha1($img['name'].TIME), 0, 15).'.'.Main::getFileExt($img['name']);
+                $imgs[$index]['name'] = substr(sha1($img['name'].TIME), 0, 15).'.'.FW::getFileExt($img['name']);
 
                 $query[] = [
                     'id_article' => $id_article,
@@ -66,7 +66,7 @@ class Article {
                     if(file_exists($file_path)) unlink($file_path);
                 }
 
-                throw new RuntimeException("Ошибка загрузки файлов.");
+                throw new RuntimeException("Error loading files.");
             }
         }
     }
@@ -116,7 +116,7 @@ class Article {
             $query = [];
             foreach($imgs as $img) {
 
-                $imgs[$index]['name'] = substr(sha1($img['name'].TIME), 0, 15).'.'.Main::getFileExt($img['name']);
+                $imgs[$index]['name'] = substr(sha1($img['name'].TIME), 0, 15).'.'.FW::getFileExt($img['name']);
 
                 $query[] = [
                     'id_article' => $id_article,

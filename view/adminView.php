@@ -248,8 +248,10 @@
                     model: 'article',
                     method: 'upload',
                     callback: function() {},
-                    title: $('#menu3 #title').val(),
-                    text: $('#menu3 #text').val()
+                    data: {
+                        title: $('#menu3 #title').val(),
+                        text: $('#menu3 #text').val()
+                    }
                 }, {
                     images: $('#menu3 #images')
                 })" class="wth_boot_but confirm_but">Добавить</button>

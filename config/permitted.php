@@ -9,6 +9,9 @@ $permitted_actions = [
 	'Search::find',
 	'Product::getFullPriceCookie',
 	// --
+	'User::updateFavorite',
+	'User::getFavorite',
+	// --
 	'Order::getUnaccepted',
 	'Order::check',
 	'Order::accept',
@@ -16,6 +19,8 @@ $permitted_actions = [
 	'Product::update',
 	'Product::upload',
 	'Product::getApprox',
+	'Product::setDiscount',
+	'Product::offDiscount',
 	'Input::excelUpload',
 	'Category::getCategories',
 	'Category::getParams',

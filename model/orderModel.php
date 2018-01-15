@@ -111,4 +111,23 @@ class Order {
             ");
         }
     }
+    public static function delete($id_order) {
+        FW::$DB->delete('order', [
+            'id_order' => $id_order
+        ]);
+        FW::$DB->delete('order_prod', [
+            'id_order' => $id_order
+        ]);
+    }
+    public static function getAccepted() {
+        $order = FW::$DB->select('order', '*', [
+            'ok' => 1
+        ]);
+
+        foreach($order as $index => $value) {
+            $order[$index]['prods'] = self::getFullProds($value['id_order']);
+        }
+
+        return $order;
+    }
 }

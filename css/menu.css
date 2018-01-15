@@ -77,6 +77,7 @@
     line-height: 40px;
 }
 #menu .catalog .item .list {
+    border-radius: 5px;
     height: auto;
     background: #ddd;
     width: 250px;
@@ -88,4 +89,10 @@
     width: 100%;
     padding: 5px 5px;
     line-height: 15px;
+}
+#menu .catalog .item .list a {
+    transition: color 0.1s ease;
+}
+#menu .catalog .item .list a:hover {
+    color: #388cff;
 }
