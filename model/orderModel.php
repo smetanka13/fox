@@ -26,15 +26,15 @@ class Order {
         return $order_prods;
     }
     public static function getUnaccepted() {
-        $order = FW::$DB->select('order', '*', [
+        $orders = FW::$DB->select('order', '*', [
             'ok' => 0
         ]);
 
-        foreach($order as $index => $value) {
-            $order[$index]['prods'] = self::getFullProds($value['id_order']);
+        foreach($orders as $index => $value) {
+            $orders[$index]['prods'] = self::getFullProds($value['id_order']);
         }
 
-        return $order;
+        return $orders;
     }
     public static function add($pay_way, $delivery_way, $public, $city, $address, $email, $phone, $text) {
 
@@ -52,6 +52,8 @@ class Order {
             throw new InvalidArgumentException("Введите ваш номер телефона.");
         if(!preg_match("/^(\+([0-9]{1,2}) (\([0-9]{3}\)) ([0-9]{3})\-([0-9]{2})\-([0-9]{2}))$/is", $phone))
             throw new InvalidArgumentException("Неверный формат номера.");
+        if(empty(json_decode($_COOKIE['cart'], TRUE)))
+            throw new InvalidArgumentException("Карзина пустая.");
 
         require_once 'model/productModel.php';
 
@@ -85,7 +87,11 @@ class Order {
             FW::$DB->insert('order_prod', $query);
 
             if(User::logged()) {
+<<<<<<< HEAD
 
+=======
+                User::addOrder($id_order);
+>>>>>>> 3a60896a3200ac8ec5cfa54f1ddba7bd1490d399
             }
 
         });
@@ -122,16 +128,17 @@ class Order {
         FW::$DB->delete('order_prod', [
             'id_order' => $id_order
         ]);
+        User::deleteOrder($id_order);
     }
     public static function getAccepted() {
-        $order = FW::$DB->select('order', '*', [
+        $orders = FW::$DB->select('order', '*', [
             'ok' => 1
         ]);
 
-        foreach($order as $index => $value) {
-            $order[$index]['prods'] = self::getFullProds($value['id_order']);
+        foreach($orders as $index => $value) {
+            $orders[$index]['prods'] = self::getFullProds($value['id_order']);
         }
 
-        return $order;
+        return $orders;
     }
 }

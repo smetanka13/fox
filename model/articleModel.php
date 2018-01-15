@@ -23,7 +23,7 @@ class Article {
             $id_article = FW::$DB->id();
 
             $query = [];
-            foreach($imgs as $img) {
+            foreach($imgs as $index => $img) {
 
                 $imgs[$index]['name'] = substr(sha1($img['name'].TIME), 0, 15).'.'.FW::getFileExt($img['name']);
 
