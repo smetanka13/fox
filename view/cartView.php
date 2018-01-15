@@ -52,7 +52,7 @@
 	<?php if(empty($_COOKIE['cart'])) { ?>
 	<h4 class="main_title au">На данный момент в корзине нет товаров!</h4>
 	<?php } ?>
-	<button data-toggle="tooltip" data-placement="auto left" title="Нажмите, чтобы очистить коризину" id="trash_but" class="wth_boot_but confirm_but"><i class="fa fa-trash fa-2x " aria-hidden="true"></i></button>
+	<button id="trash_but" data-toggle="tooltip" data-placement="auto left" title="Нажмите, чтобы очистить коризину" class="wth_boot_but confirm_but"><i class="fa fa-trash fa-2x " aria-hidden="true"></i></button>
 	<?php
 
 		$cookie = json_decode($_COOKIE['cart'], TRUE);
@@ -114,9 +114,7 @@
 </div>
 
 <script type="text/javascript">
-
 	$(document).ready(function() {
-
 		$('.c_prod_part .close_img').click(function() {
 			var that = this;
 			var key = $(that).parent().attr('data-key');
@@ -143,6 +141,8 @@
 						setTimeout(function(){
 							$('#order_modal').modal('hide');
 						}, 2000);
+						Cart.empty();
+						location.href = "/?msg=Заказ принят!";
 					} else {
 						// data.error - текст ошибки
 						// Cart.empty();
@@ -164,6 +164,10 @@
 				}
 			});
 		});
+		$('.cart_prod #trash_but').click(function(){
+			Cart.empty();
+			$('.cart_prod').empty();
+			$('.cart_prod').append('<h4 class="main_title au">На данный момент в корзине нет товаров!</h4>');
+		});
 	});
-
 </script>

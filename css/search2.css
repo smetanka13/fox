@@ -70,6 +70,11 @@
 
 	transition: all 0.3s ease;
 	cursor: pointer;
+	
+	background: #333; /* Old browsers */
+	background: -moz-linear-gradient(to bottom, #424141 1%,#4a4949 35%,#4c4a4a 64%,#333333 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(to bottom, #424141 1%,#4a4949 35%,#4c4a4a 64%,#333333 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #424141 1%,#4a4949 35%,#4c4a4a 64%,#333333 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 .cat_cover ul li:hover{
 	height: 30px;

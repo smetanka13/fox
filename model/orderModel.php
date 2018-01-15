@@ -19,7 +19,7 @@ class Order {
                 'articule'
             ], [
                 'id_prod' => $value['id_prod']
-            ];
+            ]);
 
             $order_prods[$index]['quantity'] = $value['quantity'];
         }
@@ -85,7 +85,7 @@ class Order {
             FW::$DB->insert('order_prod', $query);
 
             if(User::logged()) {
-                
+
             }
 
         });

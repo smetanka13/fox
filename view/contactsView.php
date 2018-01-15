@@ -29,9 +29,8 @@
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 				<h4 class="main_title tl_mg">Мы в социальных сетях:</h4>
 				<ul class="list-unstyled ct_cnt">
-				  <li><a href="#"><i class="fa fa-facebook-official fa-lg fa-fw" aria-hidden="true"></i>  Facebook</a></li>
-				  <li><a href="#"><i class="fa fa-vk fa-lg fa-fw" aria-hidden="true"></i>  Вконтактe</a></li>
-				  <li><a href="#"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i>  YouTube</a></li>
+				  <li><a href="https://www.youtube.com/channel/UCf7iYlJ7au_R0yLBrkbqnfA"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i> YouTube</a></li>
+				  <li><a href="https://www.instagram.com/fox_motors_shop"><i class="fa fa-instagram fa-lg fa-fw" aria-hidden="true"></i> Instagram</a></li>
 				</ul>
 			</div>
 		</div>

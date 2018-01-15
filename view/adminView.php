@@ -6,7 +6,7 @@
     <h4 class="main_title tl_mg"></h4>
     <ul class="nav nav-tabs pr_tabs">
     <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-plus-square fa-fw" aria-hidden="true"></i> Поступающие заказы</a></li>
-    <li><a data-toggle="tab" href="#menu4"><i class="fa fa-phone-square fa-fw" aria-hidden="true"></i> Принятые заказы</a></li>
+    <li><a data-toggle="tab" href="#menu4"><i class="fa fa-check-square  fa-fw" aria-hidden="true"></i> Принятые заказы</a></li>
     <li><a data-toggle="tab" href="#menu1"><i class="fa fa-phone-square fa-fw" aria-hidden="true"></i> Перезвонить</a></li>
     <li><a data-toggle="tab" href="#menu2"><i class="fa fa-download  fa-fw" aria-hidden="true"></i> Загрузка товаров</a></li>
     <li><a data-toggle="tab" href="#menu3"><i class="fa fa-download  fa-fw" aria-hidden="true"></i> Загрузка cтатей</a></li>
