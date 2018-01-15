@@ -21,17 +21,11 @@
                             <input type="password" class="form-control" id="inputPassword" name="pass" placeholder="Введите пароль">
                           </div>
                           <div class="checkbox hidden-xs">
-                            <label>
-                              <input type="checkbox">Запомнить
-                            </label>
                             <a id="fg_pass" data-toggle='modal' data-target='#pass_modal' class="pass_get">Забыли пароль?</a>
                           </div>
 
                           <div class="form-group visible-xs">
                               <div class="checkbox">
-                                <label>
-                                  <input type="checkbox">Запомнить
-                                </label>
                                 <div><a data-toggle='modal' data-target='#pass_modal' class="pass_get">Забыли пароль?</a></div>
                               </div>
                           </div>
