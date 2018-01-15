@@ -154,3 +154,4 @@
 	// }
 </script>
 <script src="js/tops.js"></script>
+<script src="js/personal.js" charset="utf-8"></script>

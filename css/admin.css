@@ -87,9 +87,18 @@
 	cursor: pointer;
 }
 .cf_ord {
-	display: none;
 	padding-top: 10px;
 	display: none;
+}
+#order_table, #accept_order_table{
+  border-radius: 5px;
+}
+#accept_order_table .order_ord{
+  width: 120px;
+  padding-top: 20px!important;
+}
+#accept_order_table #time{
+  width: 120px;
 }
 .ns_cnt label{
 	width: 100%;
@@ -104,10 +113,19 @@
 #order_table ul a:hover li{
 	color: #F7931E;
 }
+#accept_order_table ul a:hover li{
+	color: #F7931E;
+}
 #order_table .description{
 	max-width: 150px;
 	word-wrap: break-word;
 }
 #order_table i{
 	color: #FFCA00;
+}
+
+@media (max-width:768px) {
+  #accept_order_table .order_ord{
+    padding-top: 15px!important;
+  }
 }

@@ -5,6 +5,7 @@ $permitted_actions = [
 	'User::verifyEmail',
 	'User::registrate',
 	'Order::add',
+	'Order::delete',
 	'Callback::add',
 	'Search::find',
 	'Product::getFullPriceCookie',
@@ -13,6 +14,7 @@ $permitted_actions = [
 	'User::getFavorite',
 	// --
 	'Order::getUnaccepted',
+	'Order::getAccepted',
 	'Order::check',
 	'Order::accept',
 	'Product::get',
