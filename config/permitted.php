@@ -9,10 +9,14 @@ $permitted_actions = [
 	'Callback::add',
 	'Search::find',
 	'Product::getFullPriceCookie',
-	// --
+	#
+
 	'User::updateFavorite',
 	'User::getFavorite',
-	// --
+	'User::getOrders',
+	#	
+	'Callback::get',
+	'Callback::delete',
 	'Order::getUnaccepted',
 	'Order::getAccepted',
 	'Order::check',

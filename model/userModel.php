@@ -8,14 +8,31 @@ class User {
 
     public static function getOrders() {
 
+        require_once 'model/orderModel.php';
+
+        $orders = FW::$DB->select('user_order', [
+            '[<>]order' => ['id_order' => 'id_order']
+        ], '*', [
+            'id_user' => User::get('id_user')
+        ]);
+
+        foreach ($orders as $key => $value) {
+            $orders[$index]['prods'] = Order::getFullProds($value['id_order']);
+        }
     }
 
-    public static function addOrders($id_order) {
-
+    public static function addOrder($id_order) {
+        FW::$DB->insert('user_order', [
+            'id_user' => User::get('id_user'),
+            'id_order' => $id_order
+        ]);
     }
 
-    public static function deleteOrders($id_order) {
-        
+    public static function deleteOrder($id_order) {
+        FW::$DB->delete('user_order', [
+            'id_user' => User::get('id_user'),
+            'id_order' => $id_order
+        ]);
     }
 
     public static function updateFavorite($category, $id_prod) {
@@ -28,13 +45,13 @@ class User {
         if(FW::$DB->has('user_favorite', [
             'category' => $category,
             'id_prod' => $id_prod,
-            'id_user' => self::get('id')
+            'id_user' => self::get('id_user')
         ])) {
 
             FW::$DB->delete('user_favorite', [
                 'category' => $category,
                 'id_prod' => $id_prod,
-                'id_user' => self::get('id')
+                'id_user' => self::get('id_user')
             ]);
 
             return 'deleted';
@@ -44,7 +61,7 @@ class User {
             FW::$DB->insert('user_favorite', [
                 'category' => $category,
                 'id_prod' => $id_prod,
-                'id_user' => self::get('id')
+                'id_user' => self::get('id_user')
             ]);
 
             return 'added';
