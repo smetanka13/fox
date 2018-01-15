@@ -64,3 +64,21 @@ function save(json)
 		undo();
 	}
 }
+
+// ДЛЯ ИЗБРАННОГО
+// function updateFavorite(category, id_prod) {
+//   FW.ajax.send({
+//     model: 'user',
+//     method: 'updateFavorite'
+//     callback: getUnaccepted,
+//     data: {
+//       id_order: id_order
+//     }
+//   });
+// }
+// $( document ).ready(function() {
+//     getUnaccepted();
+//     getAccepted();
+//     setInterval(getUnaccepted,10000);
+//     setInterval(getAccepted,20000);
+// });

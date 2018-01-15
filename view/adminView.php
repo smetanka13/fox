@@ -6,6 +6,7 @@
     <h4 class="main_title tl_mg"></h4>
     <ul class="nav nav-tabs pr_tabs">
     <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-plus-square fa-fw" aria-hidden="true"></i> Поступающие заказы</a></li>
+    <li><a data-toggle="tab" href="#menu4"><i class="fa fa-phone-square fa-fw" aria-hidden="true"></i> Принятые заказы</a></li>
     <li><a data-toggle="tab" href="#menu1"><i class="fa fa-phone-square fa-fw" aria-hidden="true"></i> Перезвонить</a></li>
     <li><a data-toggle="tab" href="#menu2"><i class="fa fa-download  fa-fw" aria-hidden="true"></i> Загрузка товаров</a></li>
     <li><a data-toggle="tab" href="#menu3"><i class="fa fa-download  fa-fw" aria-hidden="true"></i> Загрузка cтатей</a></li>
@@ -15,7 +16,6 @@
         <div id="home" class="tab-pane fade in active">
             <h4 class="pr_titles_cat">Поступающие заказы</h4>
             <p>Тут будут отображаться все заказы.</p>
-            <p>Рядом в новыми заказами будет отображаться <i class="fa fa-lightbulb-o fa-fw fa-lg" aria-hidden="true"></i></p>
             <div class="container-fluid">
                 <div class="row">
                     <div class="tb_cnt mbt">
@@ -35,28 +35,39 @@
                                 <th>Подтверждение заказа</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!-- <tr>
-                                    <td>3</td>
-                                    <td>Фионов Юрий Сергеевич</td>
-                                    <td>0939463704</td>
-                                    <td><a href="#">67839992</td></a>
-                                    <td>10 шт</td>
-                                    <td>2000</td>
-                                    <td>Оплата банковской картой</td>
-                                    <td>Самовывоз</td>
-                                    <td>Позвонить после принятия заказа</td>
-                                    <td>20.10.2013</td>
-                                    <td class="order">
-                                        <div class="wth_boot_but ord_but">Подтвердить заказ</div>
-                                        <div class="cf_ord">Заказ принят</div>
-                                    </td>
-                                </tr> -->
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>
             </div>
+        </div>
+        <div id="menu4" class="tab-pane fade">
+          <h4 class="pr_titles_cat">Принятые заказы</h4>
+          <p>Тут будут отображаться все принятые заказы.</p>
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="tb_cnt mbt">
+                      <table id="accept_order_table" class="table tb_buy table-bordered">
+                          <thead>
+                              <tr>
+                              <th>№</th>
+                              <th>ФИО клиента</th>
+                              <th>Контактный телефон</th>
+                              <th>Код товара</th>
+                              <th>Количество</th>
+                              <th>Сумма, грн</th>
+                              <th>Способ оплаты</th>
+                              <th>Способ доставки</th>
+                              <th>Комментарий к заказу</th>
+                              <th>Дата</th>
+                              <!-- <th>Статус заказа</th> -->
+                              </tr>
+                          </thead>
+                          <tbody></tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
         </div>
         <div id="menu1" class="tab-pane fade">
           <h4 class="pr_titles_cat">Перезвоните по номеру</h4>
@@ -259,4 +270,4 @@
         }
     }
 </script>
-<script src="admin.sec.js" charset="utf-8"></script>
+<script src="js/admin.sec.js" charset="utf-8"></script>
