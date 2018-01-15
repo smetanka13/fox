@@ -130,7 +130,7 @@
     function foo() {
 
     }
-    
+
     // for modals
     $('#no_reg').click(function(){
         $('#signin_modal').modal('hide');
@@ -206,15 +206,15 @@
             $('#regist_modal #confirmPassword').removeClass('alert-danger');
             $('#regist_modal #ps_rptr').removeClass('block_inl');
         }
-
         FW.ajax.send({
             model: 'user',
             method: 'registrate',
-            callback: foo,
-            login: $('#inputLogin').val(),
-            email: $('#inputEmail').val(),
-            pass: $('#regist_modal #inputPassword').val(),
-            confirm: $('#confirmPassword').val()
+            data: {
+              login: $('#inputLogin').val(),
+              email: $('#inputEmail').val(),
+              pass: $('#regist_modal #inputPassword').val(),
+              confirm: $('#confirmPassword').val()
+            }
         });
     });
 </script>

@@ -93,9 +93,9 @@ class User {
     private static function checkLogin($login) {
         if(preg_match("/'\{\}\[\]\(\)\`\"/", $login))
             throw new InvalidArgumentException("Некоторые символы недопустимы.");
-        if(mb_strlen($pass) < 8)
+        if(mb_strlen($login) < 8)
             throw new InvalidArgumentException("Длинна логина должна быть более 8 символов.");
-        if(mb_strlen($pass) > 32)
+        if(mb_strlen($login) > 32)
             throw new InvalidArgumentException("Длинна логина должна быть менее 32 символов.");
     }
 
