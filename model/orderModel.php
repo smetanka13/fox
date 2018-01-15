@@ -19,7 +19,7 @@ class Order {
                     'price',
                     'articule'
                 ], [
-                    'id_order' => $value['id_prod']
+                    'id_prod' => $value['id_prod']
                 ]
             ), $order_prods[$index]);
         }
