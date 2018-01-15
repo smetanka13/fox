@@ -21,17 +21,11 @@
                             <input type="password" class="form-control" id="inputPassword" name="pass" placeholder="Введите пароль">
                           </div>
                           <div class="checkbox hidden-xs">
-                            <label>
-                              <input type="checkbox">Запомнить
-                            </label>
                             <a id="fg_pass" data-toggle='modal' data-target='#pass_modal' class="pass_get">Забыли пароль?</a>
                           </div>
 
                           <div class="form-group visible-xs">
                               <div class="checkbox">
-                                <label>
-                                  <input type="checkbox">Запомнить
-                                </label>
                                 <div><a data-toggle='modal' data-target='#pass_modal' class="pass_get">Забыли пароль?</a></div>
                               </div>
                           </div>
@@ -206,15 +200,21 @@
             $('#regist_modal #confirmPassword').removeClass('alert-danger');
             $('#regist_modal #ps_rptr').removeClass('block_inl');
         }
-
         FW.ajax.send({
             model: 'user',
             method: 'registrate',
             data: {
+<<<<<<< HEAD
                 login: $('#inputLogin').val(),
                 email: $('#inputEmail').val(),
                 pass: $('#regist_modal #inputPassword').val(),
                 confirm: $('#confirmPassword').val()
+=======
+              login: $('#inputLogin').val(),
+              email: $('#inputEmail').val(),
+              pass: $('#regist_modal #inputPassword').val(),
+              confirm: $('#confirmPassword').val()
+>>>>>>> 250130d4525ff93f184b84f33499b6bfe32103c2
             }
         });
     });
