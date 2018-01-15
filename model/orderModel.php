@@ -13,15 +13,15 @@ class Order {
 
         foreach($order_prods as $index => $value) {
 
-            $order_prods[$index] = array_merge(
-                FW::$DB->get($value['category'], [
-                    'title',
-                    'price',
-                    'articule'
-                ], [
-                    'id_prod' => $value['id_prod']
-                ]
-            ), $order_prods[$index]);
+            $order_prods[$index] = FW::$DB->get($value['category'], [
+                'title',
+                'price',
+                'articule'
+            ], [
+                'id_prod' => $value['id_prod']
+            ];
+
+            $order_prods[$index]['quantity'] = $value['quantity'];
         }
         return $order_prods;
     }
@@ -83,6 +83,10 @@ class Order {
             }
 
             FW::$DB->insert('order_prod', $query);
+
+            if(User::logged()) {
+                
+            }
 
         });
 

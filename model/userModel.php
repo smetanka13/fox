@@ -6,6 +6,18 @@ class User {
         'logged' => FALSE
     ];
 
+    public static function getOrders() {
+
+    }
+
+    public static function addOrders($id_order) {
+
+    }
+
+    public static function deleteOrders($id_order) {
+        
+    }
+
     public static function updateFavorite($category, $id_prod) {
 
         require_once 'model/productModel.php';
