@@ -7,7 +7,7 @@
                         <h4 class="modal-title main_title">Вход</h4>
                     </div>
                         <div class="modal-body">
-                        <form class="enter_reg_place" action="../cgi/log_in.php" method="post">
+                        <form class="enter_reg_place">
                           <div class="form-group">
                             <label for="inputLogin_2" class="enter_reg_lable"><i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i> Login:</label>
                             <input type="text" class="form-control" id="inputLogin_2" name="login" placeholder="Введите login">
@@ -130,7 +130,7 @@
     function foo() {
 
     }
-    
+
     // for modals
     $('#no_reg').click(function(){
         $('#signin_modal').modal('hide');
@@ -210,11 +210,12 @@
         FW.ajax.send({
             model: 'user',
             method: 'registrate',
-            callback: foo,
-            login: $('#inputLogin').val(),
-            email: $('#inputEmail').val(),
-            pass: $('#regist_modal #inputPassword').val(),
-            confirm: $('#confirmPassword').val()
+            data: {
+                login: $('#inputLogin').val(),
+                email: $('#inputEmail').val(),
+                pass: $('#regist_modal #inputPassword').val(),
+                confirm: $('#confirmPassword').val()
+            }
         });
     });
 </script>

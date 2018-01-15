@@ -2,7 +2,7 @@
 
 $permitted_actions = [
 	'User::saveLogged',
-	'User::verifyEmail',
+	'User::verify',
 	'User::registrate',
 	'Order::add',
 	'Order::delete',
@@ -14,7 +14,7 @@ $permitted_actions = [
 	'User::updateFavorite',
 	'User::getFavorite',
 	'User::getOrders',
-	#	
+	#
 	'Callback::get',
 	'Callback::delete',
 	'Order::getUnaccepted',
