@@ -103,13 +103,45 @@ function getAccepted(){
               var str = '';
               for(let j in data.output[index].prods){
                   var id_prod = data.output[index].prods[j].id_prod;
-                  var articule = data.output[index].prods[j].articule;
+                  var title = data.output[index].prods[j].title;
                   var price = data.output[index].price;
                   var category = data.output[index].prods[j].category;
 
-                  str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + category + '&id=' + id_prod + '"><li>' + articule + '</li></a>';
+                  str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + category + '&id=' + id_prod + '"><li>' + title + '</li></a>';
               }
-              $('#accept_order_table tbody').append(`
+              $('#tb_buy tbody').append(`
+                  <tr id="${data.output[index].id_order}">
+                      <td>`+data.output[index].id_order+`</td>
+                      <td><ul class="list-unstyled">`+str+`</ul></td>
+                      <td>кол-во</td>
+                      <td>`+price+`</td>
+                      <td>`+data.output[index].pay_way+`</td>
+                      <td>`+data.output[index].delivery_way+`</td>
+                      <td id="time">`+FW.timeConverter(data.output[index].date)+`</td>
+                  </tr>
+              `);
+          }
+      }
+  });
+}
+// ДЛЯ ТЕХ , ЧТО ОЖИДАЮТ ПОДТВЕРЖДЕНИЕ
+function getUnaccepted(){
+  FW.ajax.send({
+      model: 'order',
+      method: 'getUnaccepted',
+      callback: function(data){
+          $("#tb_bf_buy tbody").empty();
+          for( let index = data.output.length - 1; index >= 0 ; --index){
+              var str = '';
+              for(let j in data.output[index].prods){
+                  var id_prod = data.output[index].prods[j].id_prod;
+                  var title = data.output[index].prods[j].title;
+                  var price = data.output[index].price;
+                  var category = data.output[index].prods[j].category;
+
+                  str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + category + '&id=' + id_prod + '"><li>' + title + '</li></a>';
+              }
+              $('#tb_bf_buy tbody').append(`
                   <tr id="${data.output[index].id_order}">
                       <td>`+data.output[index].id_order+`</td>
                       <td><ul class="list-unstyled">`+str+`</ul></td>
@@ -125,6 +157,8 @@ function getAccepted(){
   });
 }
 $( document ).ready(function() {
+    getUnaccepted();
     getAccepted();
+    setInterval(getUnaccepted,10000);
     setInterval(getAccepted,20000);
 });

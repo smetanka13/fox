@@ -204,17 +204,10 @@
             model: 'user',
             method: 'registrate',
             data: {
-<<<<<<< HEAD
-                login: $('#inputLogin').val(),
-                email: $('#inputEmail').val(),
-                pass: $('#regist_modal #inputPassword').val(),
-                confirm: $('#confirmPassword').val()
-=======
               login: $('#inputLogin').val(),
               email: $('#inputEmail').val(),
               pass: $('#regist_modal #inputPassword').val(),
               confirm: $('#confirmPassword').val()
->>>>>>> 250130d4525ff93f184b84f33499b6bfe32103c2
             }
         });
     });
