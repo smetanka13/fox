@@ -7,89 +7,25 @@
 		<li><a data-toggle="tab" href="#menu3"><i class="fa fa-heart fa-fw" aria-hidden="true"></i> Избранное</a></li>
     <li><a data-toggle="tab" href="#menu2"><i class="fa fa-user fa-fw" aria-hidden="true"></i> Личные данные</a></li>
   </ul>
-
     <div class="tab-content">
 		<div id="home" class="tab-pane fade in active">
 	      <h4 class="pr_titles_cat">Ваши покупки</h4>
-	      <p>Тут вы может увидеть список купленных на сайте товаров.</p>
+	      <p>Тут вы может увидеть список подтвержденных заказов.</p>
+				<p>После принятия заказа Вам перезвонит администратор.</p>
 		    <div class="tb_cnt">
-			    <table class="table tb_buy table-bordered">
+			    <table id="tb_buy" class="table tb_buy table-bordered">
 					<thead>
 						<tr>
-						<th>Название</th>
-						<th>Количество</th>
-						<th>Цена</th>
-						<th>Способ доставки</th>
-						<th>Дата</th>
-						<th>Статус покупки</th>
+							<th>Номер заказа</th>
+							<th>Название</th>
+							<th>Количество</th>
+							<th>Сумма</th>
+							<th>Способ оплаты</th>
+							<th>Способ доставки</th>
+							<th>Дата</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="danger">Заказ завершен</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="danger">Заказ завершен</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="warning">Ожидается подтверждение</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="danger">Заказ завершен</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="warning">Ожидается подтверждение</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="success">Заказ принят</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="danger">Заказ завершен</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="success">Заказ принят</td>
-						</tr>
-					</tbody>
+					<tbody></tbody>
 				</table>
 			</div>
 		</div>
@@ -183,7 +119,7 @@
     </div>
   </div>
 </div>
-
+<script src="js/personal.js" charset="utf-8"></script>
 <script type="text/javascript">
 	function pInfEd(num){
 
@@ -209,5 +145,4 @@
 			$('#data_modal').modal('hide');
 		}, 1000);
 	});
-
 </script>

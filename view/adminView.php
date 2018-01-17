@@ -16,7 +16,7 @@
         <div id="home" class="tab-pane fade in active">
             <h4 class="pr_titles_cat">Поступающие заказы</h4>
             <p>Тут будут отображаться все заказы.</p>
-            <div class="container-fluid">
+            <div class="container-fluid"> 
                 <div class="row">
                     <div class="tb_cnt mbt">
                         <table id="order_table" class="table tb_buy table-bordered">

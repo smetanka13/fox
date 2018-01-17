@@ -92,9 +92,39 @@ function updateFavorite(category, id_prod) {
     }
   });
 }
-// $( document ).ready(function() {
-//     getUnaccepted();
-//     getAccepted();
-//     setInterval(getUnaccepted,10000);
-//     setInterval(getAccepted,20000);
-// });
+// ДЛЯ ТАБЛИЦЫ ПРИНЯТЫХ ЗАКАЗОВ
+function getAccepted(){
+  FW.ajax.send({
+      model: 'order',
+      method: 'getAccepted',
+      callback: function(data){
+          $("#tb_buy tbody").empty();
+          for( let index = data.output.length - 1; index >= 0 ; --index){
+              var str = '';
+              for(let j in data.output[index].prods){
+                  var id_prod = data.output[index].prods[j].id_prod;
+                  var articule = data.output[index].prods[j].articule;
+                  var price = data.output[index].price;
+                  var category = data.output[index].prods[j].category;
+
+                  str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + category + '&id=' + id_prod + '"><li>' + articule + '</li></a>';
+              }
+              $('#accept_order_table tbody').append(`
+                  <tr id="${data.output[index].id_order}">
+                      <td>`+data.output[index].id_order+`</td>
+                      <td><ul class="list-unstyled">`+str+`</ul></td>
+                      <td>кол-во</td>
+                      <td>`+price+`</td>
+                      <td>`+data.output[index].pay_way+`</td>
+                      <td>`+data.output[index].delivery_way+`</td>
+                      <td id="time">`+FW.timeConverter(data.output[index].date)+`</td>
+                  </tr>
+              `);
+          }
+      }
+  });
+}
+$( document ).ready(function() {
+    getAccepted();
+    setInterval(getAccepted,20000);
+});
