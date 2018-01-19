@@ -4,126 +4,82 @@
 	<h4 class="main_title tl_mg"></h4>
 	<ul class="nav nav-tabs pr_tabs">
     <li class="active"><a data-toggle="tab" href="#home"><i class="fa fa-shopping-cart fa-fw" aria-hidden="true"></i> Покупки</a></li>
+		<li><a data-toggle="tab" href="#menu4"><i class="fa fa-check-square fa-fw" aria-hidden="true"></i> Ожидается подтверждение</a></li>
 		<li><a data-toggle="tab" href="#menu3"><i class="fa fa-heart fa-fw" aria-hidden="true"></i> Избранное</a></li>
     <li><a data-toggle="tab" href="#menu2"><i class="fa fa-user fa-fw" aria-hidden="true"></i> Личные данные</a></li>
   </ul>
-
     <div class="tab-content">
 		<div id="home" class="tab-pane fade in active">
 	      <h4 class="pr_titles_cat">Ваши покупки</h4>
-	      <p>Тут вы может увидеть список купленных на сайте товаров.</p>
+	      <p>Тут вы может увидеть список подтвержденных заказов.</p>
 		    <div class="tb_cnt">
-			    <table class="table tb_buy table-bordered">
+			    <table id="tb_buy" class="table tb_buy table-bordered">
 					<thead>
 						<tr>
-						<th>Название</th>
-						<th>Количество</th>
-						<th>Цена</th>
-						<th>Способ доставки</th>
-						<th>Дата</th>
-						<th>Статус покупки</th>
+							<th>Номер заказа</th>
+							<th>Название</th>
+							<th>Количество</th>
+							<th>Сумма</th>
+							<th>Способ оплаты</th>
+							<th>Способ доставки</th>
+							<th>Дата</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="danger">Заказ завершен</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="danger">Заказ завершен</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="warning">Ожидается подтверждение</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="danger">Заказ завершен</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="warning">Ожидается подтверждение</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="success">Заказ принят</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="danger">Заказ завершен</td>
-						</tr>
-						<tr>
-							<td><a href="#">Xenum12345</td></a>
-							<td>10 шт</td>
-							<td>200000 грн</td>
-							<td>Самовывоз</td>
-							<td>20.10.2013</td>
-							<td class="success">Заказ принят</td>
-						</tr>
-					</tbody>
+					<tbody></tbody>
 				</table>
 			</div>
 		</div>
+		<div id="menu4" class="tab-pane fade">
+			 <h4 class="pr_titles_cat">Ожидается подтверждение.</h4>
+			 <p>После подтверждения заказа Вам перезвонит администратор.</p>
+				 <div class="tb_cnt">
+					 <table id="tb_bf_buy" class="table tb_buy table-bordered">
+					 <thead>
+						 <tr>
+							 <th>Номер заказа</th>
+							 <th>Названия товаров</th>
+							 <th>Количество</th>
+							 <th>Сумма</th>
+							 <th>Способ оплаты</th>
+							 <th>Способ доставки</th>
+							 <th>Дата</th>
+						 </tr>
+					 </thead>
+					 <tbody></tbody>
+				 </table>
+			 </div>
+		 </div>
 		<div id="menu3" class="tab-pane fade">
 			 <h4 class="pr_titles_cat">Избранные товары.</h4>
 			 <p>Тут вы можете перейти на страницу товара щелкнув на название.</p>
-			 <div class="tb_cnt">
-				 <table class="table tb_buy table-bordered">
-				 <thead>
-					 <tr>
-					 <th>Удалить</th>
-					 <th>Название</th>
-					 <th>Цена</th>
-					 </tr>
-				 </thead>
-				 <tbody>
-					 <tr>
-						 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
-						 <td><a href="#">Xenum12345</td></a>
-						 <td>200000 грн</td>
-					 </tr>
-					 <tr>
-						 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
-						 <td><a href="#">Xenum12345</td></a>
-						 <td>200000 грн</td>
-					 </tr>
-					 <tr>
-						 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
-						 <td><a href="#">Xenum12345</td></a>
-						 <td>200000 грн</td>
-					 </tr>
-				 </tbody>
-			 </table>
-		 </div>
+				 <div class="tb_cnt">
+					 <table class="table tb_buy table-bordered">
+					 <thead>
+						 <tr>
+						 <th>Удалить</th>
+						 <th>Название</th>
+						 <th>Цена</th>
+						 </tr>
+					 </thead>
+					 <tbody>
+						 <tr>
+							 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
+							 <td><a href="#">Xenum12345</td></a>
+							 <td>200000 грн</td>
+						 </tr>
+						 <tr>
+							 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
+							 <td><a href="#">Xenum12345</td></a>
+							 <td>200000 грн</td>
+						 </tr>
+						 <tr>
+							 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
+							 <td><a href="#">Xenum12345</td></a>
+							 <td>200000 грн</td>
+						 </tr>
+					 </tbody>
+				 </table>
+			 </div>
 		 </div>
 		 <div id="menu2" class="tab-pane fade">
 	      <h4 class="pr_titles_cat">Ваши личные параметры.</h4>
@@ -184,6 +140,7 @@
   </div>
 </div>
 
+<script src="js/personal.js" charset="utf-8"></script>
 <script type="text/javascript">
 	function pInfEd(num){
 
@@ -209,5 +166,4 @@
 			$('#data_modal').modal('hide');
 		}, 1000);
 	});
-
 </script>

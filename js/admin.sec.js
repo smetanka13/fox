@@ -1,4 +1,4 @@
-function tableOrd(data){
+function tableOrd(data) {
     var str = '';
     for(var j in data.prods){
         str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + data.prods[j].category + '&id=' + data.prods[j].id_prod + '"><li>' + data.prods[j].articule + '</li></a>';
