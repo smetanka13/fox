@@ -11,12 +11,17 @@ class Order {
             'id_order' => $id_order
         ]);
 
+        require_once 'model/categoryModel.php';
+
         foreach($order_prods as $index => $value) {
 
+            Category::checkCategory($value['category']);
+
             $order_prods[$index] = FW::$DB->get($value['category'], [
-                'title',
-                'price',
-                'articule'
+                'articule',
+                'id_prod',
+                'category',
+                'price'
             ], [
                 'id_prod' => $value['id_prod']
             ]);
