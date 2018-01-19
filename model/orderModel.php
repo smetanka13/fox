@@ -19,6 +19,7 @@ class Order {
 
             $order_prods[$index] = FW::$DB->get($value['category'], [
                 'articule',
+                'title',
                 'id_prod',
                 'category',
                 'price'
