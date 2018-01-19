@@ -74,7 +74,7 @@ class User {
         require_once 'model/productModel.php';
 
         $fav = FW::$DB->select('user_favorite', '*', [
-            'id_user' => self::get('id')
+            'id_user' => self::get('id_user')
         ]);
 
         return Product::selectFromDiffCategories($fav);
