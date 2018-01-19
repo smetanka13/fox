@@ -68,7 +68,7 @@ class User {
 
         }
 
-    }
+    } 
     public static function getFavorite() {
 
         require_once 'model/productModel.php';

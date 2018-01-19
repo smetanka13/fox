@@ -16,7 +16,7 @@
         <div id="home" class="tab-pane fade in active">
             <h4 class="pr_titles_cat">Поступающие заказы</h4>
             <p>Тут будут отображаться все заказы.</p>
-            <div class="container-fluid"> 
+            <div class="container-fluid">
                 <div class="row">
                     <div class="tb_cnt mbt">
                         <table id="order_table" class="table tb_buy table-bordered">
@@ -26,7 +26,7 @@
                                 <th>ФИО клиента</th>
                                 <th>Контактный телефон</th>
                                 <th>Код товара</th>
-                                <th>Количество</th>
+                                <th>Количество, шт</th>
                                 <th>Сумма, грн</th>
                                 <th>Способ оплаты</th>
                                 <th>Способ доставки</th>
@@ -54,7 +54,7 @@
                               <th>ФИО клиента</th>
                               <th>Контактный телефон</th>
                               <th>Код товара</th>
-                              <th>Количество</th>
+                              <th>Количество, шт</th>
                               <th>Сумма, грн</th>
                               <th>Способ оплаты</th>
                               <th>Способ доставки</th>
@@ -71,42 +71,19 @@
         </div>
         <div id="menu1" class="tab-pane fade">
           <h4 class="pr_titles_cat">Перезвоните по номеру</h4>
+          <p>После нажатия на кнопку подтвердить , номер удалится из таблицы.</p>
            <div class="container-fluid">
                 <div class="row">
                     <div class="tb_cnt mbt">
-                        <table class="table tb_buy table-bordered">
+                        <table id="accept_phone" class="table tb_buy table-bordered">
                             <thead>
                                 <tr>
-                                <th>Номер</th>
-                                <th>Контактный телефон</th>
-                                <th>Подтверждение</th>
+                                  <th>Контактный телефон</th>
+                                  <th>Подтверждение</th>
+                                  <th>Дата</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>2</td>
-                                    <td>0939463704</td>
-                                    <td class="order order_phone">
-                                        <div class="wth_boot_but ord_but">Подтвердить</div>
-                                        <div class="cf_ord">Принято</div>
-                                    </td>
-                                <tr>
-                                    <td>2</td>
-                                    <td>0939463704</td>
-                                    <td class="order order_phone">
-                                        <div class="wth_boot_but ord_but">Подтвердить</div>
-                                        <div class="cf_ord">Принято</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>0939463704</td>
-                                    <td class="order order_phone">
-                                        <div class="wth_boot_but ord_but">Подтвердить</div>
-                                        <div class="cf_ord">Принято</div>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>

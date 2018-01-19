@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="css/tops.css">
 
 <div class="container-fluid pr_bck">
-	<div class="pr_main_crd container">
+	<div class="pr_main_crd container"> 
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 			<a href="<?=!empty($_DATA['prod']['image']) ?'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] :'images/icons/no_photo.svg'
 			?>" data-lightbox="image-1">
