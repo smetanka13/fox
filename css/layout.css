@@ -90,6 +90,17 @@ textarea{
 input , select{
     border-radius: 5px;
 }
+
+select {
+    background: #F7931E;
+    color: #fafafa;
+    border: none;
+}
+option {
+    background: #f0f0f0;
+    color: #7f7f7f;
+}
+
 /*FOR BUTTONS WITHOUT BOOT*/
 .wth_boot_but{
     display: inline-block;
