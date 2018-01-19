@@ -1,3 +1,6 @@
+table td {
+  color: #333;
+}
 .container h1 {
     text-align: center;
 }
@@ -74,8 +77,17 @@
 	background:#e74c3c;
 }
 .order_phone {
-	background: #5CB85C;
+  width: 150px;
+	background: #7AD37A;
 	cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+.order_phone:hover {
+  background: #5CB85C;
+}
+#accept_phone {
+  width: 600px;
 }
 .order_phone .ord_but {
 	height: 100%;
@@ -127,5 +139,10 @@
 @media (max-width:768px) {
   #accept_order_table .order_ord{
     padding-top: 15px!important;
+  }
+}
+@media (max-width:500px) {
+  #accept_phone {
+    width: 100%;
   }
 }

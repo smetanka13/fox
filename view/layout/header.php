@@ -19,9 +19,9 @@
                     <input type="search" value="<?= isset($_GET['srch']) ? $_GET['srch'] : '' ?>" class="form-control"  placeholder="Нажмите для поиска">
                     <img src="images/icons/search.svg">
                   </div>
-                  <div class="form-group tel">
+                  <div id="callback_mob" class="form-group tel">
                     <input type="tel" class="form-control"  placeholder="Перезвонить">
-                    <img  src="images/icons/call_back.svg">
+                    <img src="images/icons/call_back.svg">
                   </div>
                 </form>
 
@@ -100,7 +100,7 @@
   <div class="modal-dialog">
     <div class="modal-content siglog_window">
       <div class="modal-header">
-        <h4 class="modal-title main_title">Мы перезвоним Вам в течении 000 минут !</h4>
+        <h4 class="modal-title main_title">Мы Вам перезвоним !</h4>
       </div>
     </div>
   </div>
@@ -113,7 +113,8 @@
 
         Cart.updateVisual();
 
-    	$('#callback').mask("+38 (099) 999-99-99", {autoclear: false});
+    	$('.table #callback').mask("+38 (099) 999-99-99", {autoclear: false});
+      $('#callback_mob input').mask("+38 (099) 999-99-99", {autoclear: false});
 
         $(window).scroll(function(){
 
@@ -122,13 +123,10 @@
 
                     $('.sec_head').hide(),
                     $('.header').addClass('navbar-fixed-top')
-                    // $('#content').css('padding-top','300px');
-                    //допустим показать элемент если прокрутили больше чем на 250 пикселей скролл
 
                 } else {
                     $('.header').removeClass('navbar-fixed-top'),
                     $('.sec_head').slideDown(0)
-                    // $('#content').css('padding-top','0');
                 }
             }
             if ($('body').width() <= 767) {
@@ -142,22 +140,43 @@
         });
 
         // ДЛЯ ОПОВЕЩЕНИЯ ОБ ОБРАТНОЙ СВЯЗИ
-        $('#call_back').click(function(){
-            ajaxController({
+      $('.table #call_back').click(function callback() {
+        FW.ajax.send ({
     			model: 'callback',
     			method: 'add',
     			callback: function(data) {
     				if(data.status) {
-                        $('#callback_modal').modal('show');
-                        setTimeout(function(){
-                            $('#callback_modal').modal('hide');
-                        }, 1000);
+              $('#callback_modal').modal('show');
+              setTimeout(function(){
+                  $('#callback_modal').modal('hide');
+              }, 1000);
     				} else {
-    					console.log('ERROR');
+              FW.showMessage(data.error);
     				}
     			},
-    			phone: $('#callback').val()
+          data: {
+            phone: $('.table #callback').val()
+          }
     		});
-        });
+      });
+      $('#callback_mob img').click(function callback() {
+        FW.ajax.send ({
+    			model: 'callback',
+    			method: 'add',
+    			callback: function(data) {
+    				if(data.status) {
+              $('#callback_modal').modal('show');
+              setTimeout(function(){
+                  $('#callback_modal').modal('hide');
+              }, 1000);
+    				} else {
+              FW.showMessage(data.error);
+    				}
+    			},
+          data: {
+            phone: $('#callback_mob input').val()
+          }
+    		});
+      });
     });
 </script>

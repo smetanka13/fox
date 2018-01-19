@@ -18,8 +18,8 @@
 						<tr>
 							<th>Номер заказа</th>
 							<th>Название</th>
-							<th>Количество</th>
-							<th>Сумма</th>
+							<th>Количество, шт</th>
+							<th>Сумма, грн</th>
 							<th>Способ оплаты</th>
 							<th>Способ доставки</th>
 							<th>Дата</th>
@@ -38,8 +38,8 @@
 						 <tr>
 							 <th>Номер заказа</th>
 							 <th>Названия товаров</th>
-							 <th>Количество</th>
-							 <th>Сумма</th>
+							 <th>Количество, шт</th>
+							 <th>Сумма, грн</th>
 							 <th>Способ оплаты</th>
 							 <th>Способ доставки</th>
 							 <th>Дата</th>
@@ -53,7 +53,7 @@
 			 <h4 class="pr_titles_cat">Избранные товары.</h4>
 			 <p>Тут вы можете перейти на страницу товара щелкнув на название.</p>
 				 <div class="tb_cnt">
-					 <table class="table tb_buy table-bordered">
+					 <table id="favourite_tb" class="table tb_buy table-bordered">
 					 <thead>
 						 <tr>
 						 <th>Удалить</th>
@@ -61,23 +61,7 @@
 						 <th>Цена</th>
 						 </tr>
 					 </thead>
-					 <tbody>
-						 <tr>
-							 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
-							 <td><a href="#">Xenum12345</td></a>
-							 <td>200000 грн</td>
-						 </tr>
-						 <tr>
-							 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
-							 <td><a href="#">Xenum12345</td></a>
-							 <td>200000 грн</td>
-						 </tr>
-						 <tr>
-							 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
-							 <td><a href="#">Xenum12345</td></a>
-							 <td>200000 грн</td>
-						 </tr>
-					 </tbody>
+					 <tbody></tbody>
 				 </table>
 			 </div>
 		 </div>

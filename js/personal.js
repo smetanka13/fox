@@ -92,28 +92,58 @@ function updateFavorite(category, id_prod) {
     }
   });
 }
+function getFavorite() {
+  FW.ajax.send( {
+      model: 'user',
+      method: 'getFavorite',
+      callback: function(data) {
+				// if ( data.output == 0 ) {
+        //   $('#favourite_tb').empty();
+        //   $('#favourite_tb').html('<h4>У Вас пока нет избранного</h4>');
+        // } else {
+          $("#favourite_tb tbody").empty();
+          for( let index = data.output.length - 1; index >= 0 ; --index) {
+              $('#favourite_tb tbody').append(`
+								<tr>
+								 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
+								 <td><a href="#">${data.output[index].id_prod}</td></a>
+								 <td>200000 грн</td>
+							 </tr>
+              `);
+          }
+				// }
+      }
+  });
+}
 // ДЛЯ ТАБЛИЦЫ ПРИНЯТЫХ ЗАКАЗОВ
 function getAccepted(){
   FW.ajax.send({
       model: 'order',
       method: 'getAccepted',
       callback: function(data){
+				// if ( data.output == 0 ) {
+        //   $('#tb_buy').empty();
+        //   $('#tb_buy').html('<h4>У Вас пока нет принятых заказов</h4>');
+        // } else {
           $("#tb_buy tbody").empty();
-          for( let index = data.output.length - 1; index >= 0 ; --index){
+          for( let index = data.output.length - 1; index >= 0 ; --index) {
               var str = '';
+							var count = '';
               for(let j in data.output[index].prods){
                   var id_prod = data.output[index].prods[j].id_prod;
                   var title = data.output[index].prods[j].title;
                   var price = data.output[index].price;
                   var category = data.output[index].prods[j].category;
+									var quantity = data.output[index].prods[j].quantity;
 
                   str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + category + '&id=' + id_prod + '"><li>' + title + '</li></a>';
+									count += '<li>' + quantity + '</li>';
               }
               $('#tb_buy tbody').append(`
                   <tr id="${data.output[index].id_order}">
                       <td>`+data.output[index].id_order+`</td>
                       <td><ul class="list-unstyled">`+str+`</ul></td>
-                      <td>кол-во</td>
+                      <td><ul class="list-unstyled">`+count+`</ul></td>
                       <td>`+price+`</td>
                       <td>`+data.output[index].pay_way+`</td>
                       <td>`+data.output[index].delivery_way+`</td>
@@ -121,6 +151,7 @@ function getAccepted(){
                   </tr>
               `);
           }
+				// }
       }
   });
 }
@@ -129,23 +160,30 @@ function getUnaccepted(){
   FW.ajax.send({
       model: 'order',
       method: 'getUnaccepted',
-      callback: function(data){
+      callback: function(data) {
+				// if ( data.output == 0 ) {
+        //   $('#tb_bf_buy').empty();
+        //   $('#tb_bf_buy').html('<h4>У Вас пока нет заказов</h4>');
+        // } else {
           $("#tb_bf_buy tbody").empty();
-          for( let index = data.output.length - 1; index >= 0 ; --index){
+          for( let index = data.output.length - 1; index >= 0 ; --index) {
               var str = '';
+							var count = '';
               for(let j in data.output[index].prods){
                   var id_prod = data.output[index].prods[j].id_prod;
                   var title = data.output[index].prods[j].title;
                   var price = data.output[index].price;
                   var category = data.output[index].prods[j].category;
+									var quantity = data.output[index].prods[j].quantity;
 
                   str += '<a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + category + '&id=' + id_prod + '"><li>' + title + '</li></a>';
+									count += '<li>' + quantity + '</li>';
               }
               $('#tb_bf_buy tbody').append(`
                   <tr id="${data.output[index].id_order}">
                       <td>`+data.output[index].id_order+`</td>
                       <td><ul class="list-unstyled">`+str+`</ul></td>
-                      <td>кол-во</td>
+                      <td><ul class="list-unstyled">`+count+`</ul></td>
                       <td>`+price+`</td>
                       <td>`+data.output[index].pay_way+`</td>
                       <td>`+data.output[index].delivery_way+`</td>
@@ -153,12 +191,15 @@ function getUnaccepted(){
                   </tr>
               `);
           }
+				// }
       }
   });
 }
 $( document ).ready(function() {
     getUnaccepted();
     getAccepted();
+		getFavorite();
     setInterval(getUnaccepted,10000);
     setInterval(getAccepted,20000);
+		setInterval(getFavorite,10000);
 });

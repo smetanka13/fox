@@ -1,5 +1,4 @@
 .pr_main {
-
 	width: 100%;
 	height: auto;
 	padding: 50px 10% 100px 10%;
@@ -9,13 +8,18 @@
 #tb_buy, #tb_bf_buy {
 	transition: all 0.3s ease;
 }
-#tb_buy ul a:hover li, #tb_bf_buy ul a:hover li{
+#tb_buy td, #tb_bf_buy td {
+	color: #333;
+}
+#tb_buy ul a:hover li, #tb_bf_buy ul a:hover li {
 	color: #F7931E;
 }
-#tb_buy ul a li, #tb_bf_buy ul a li{
-	border-bottom:1px solid #e1e1e1;
+#tb_buy ul a li, #tb_bf_buy ul a li {
 	width: 100%;
 	text-align: left;
+}
+#tb_buy ul a li::before, #tb_bf_buy ul a li::before {
+	content: "- ";
 }
 .pr_username {
 
