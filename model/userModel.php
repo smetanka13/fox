@@ -101,7 +101,7 @@ class User {
 
     public static function recoverPass($email) {
 
-        $id_user = FW::$DB->get('user', 'id', [
+        $id_user = FW::$DB->get('user', 'id_user', [
             'email' => $email
         ]);
 
