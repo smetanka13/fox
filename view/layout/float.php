@@ -12,16 +12,12 @@
                     <label for="inputLogin_2" class="enter_reg_lable"><i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i> Login:</label>
                     <input type="text" class="form-control" id="inputLogin_2" name="login" placeholder="Введите login">
                   </div>
-                  <!--  <div class="form-group">
-                    <label for="inputEmail" class="enter_reg_lable">Email:</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Введите email">
-                  </div> -->
                   <div class="form-group">
                     <label for="inputPassword" class="enter_reg_lable"><i class="fa fa-unlock-alt fa-lg fa-fw" aria-hidden="true"></i> Пароль:</label>
                     <input type="password" class="form-control" id="inputPassword" name="pass" placeholder="Введите пароль">
                   </div>
                   <div class="checkbox hidden-xs">
-                    <a id="fg_pass" data-toggle='modal' data-target='#pass_change_modal' class="pass_get">Забыли пароль?</a>
+                    <a id="fg_pass" data-toggle='modal' data-target='#pass_modal' class="pass_get">Забыли пароль?</a>
                   </div>
                   <div class="form-group visible-xs">
                       <div class="checkbox">

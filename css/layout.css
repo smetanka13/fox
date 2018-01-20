@@ -38,6 +38,10 @@ html, body {
     height: 100%;
     width: 100%;
 }
+body {
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
 .page {
     display: -webkit-box;
     display: -ms-flexbox;
