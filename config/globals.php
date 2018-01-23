@@ -1,5 +1,5 @@
 <?php
 
-define('URL', 'http://195.138.81.126/other/autoshop');
+define('URL', '/other/foxmotors');
 define('NAME', 'FoxMotors');
 define('TIME', time());

@@ -45,4 +45,7 @@ class View {
             'prod' => $prod
         ];
     }
+    public static function search() {
+        
+    }
 }
