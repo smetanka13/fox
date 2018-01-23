@@ -44,8 +44,8 @@ $_DATA = array_diff_key($_DATA, [
 
 if(ARGS_ARRAY) $_DATA = [$_DATA];
 
-if(array_search(ACTION, $permitted_actions)) {
-	if(array_search(ACTION, $logged_actions)) {
+if(array_search(ACTION, $permitted_actions) !== FALSE) {
+	if(array_search(ACTION, $logged_actions) !== FALSE) {
 		if(User::login($_COOKIE['login'], $_COOKIE['pass'])) {
 
 			# ...

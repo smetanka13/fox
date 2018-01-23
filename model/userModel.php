@@ -40,7 +40,7 @@ class User {
         require_once 'model/productModel.php';
 
         if(!Product::getById($category, $id_prod))
-            throw new InvalidArgumentException("В категории '$category' нету продукта с айди $id_prod.");
+            throw new InvalidArgumentException("В категории '$category' нет продукта с айди $id_prod.");
 
         if(FW::$DB->has('user_favorite', [
             'category' => $category,

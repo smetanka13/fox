@@ -4,6 +4,8 @@ $permitted_actions = [
 	'User::saveLogged',
 	'User::verify',
 	'User::registrate',
+	'User::recoverPass',
+	'User::changePass',
 	'Order::add',
 	'Order::delete',
 	'Callback::add',

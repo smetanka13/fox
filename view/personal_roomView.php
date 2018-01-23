@@ -58,7 +58,7 @@
 						 <tr>
 						 <th>Удалить</th>
 						 <th>Название</th>
-						 <th>Цена</th>
+						 <th>Цена, грн</th>
 						 </tr>
 					 </thead>
 					 <tbody></tbody>

@@ -85,6 +85,7 @@ function updateFavorite(category, id_prod) {
 					alert(data.error);
 				}
 			});
+			getFavorite();
     },
     data: {
       category: category,
@@ -101,15 +102,15 @@ function getFavorite() {
         //   $('#favourite_tb').empty();
         //   $('#favourite_tb').html('<h4>У Вас пока нет избранного</h4>');
         // } else {
-          $("#favourite_tb tbody").empty();
-          for( let index = data.output.length - 1; index >= 0 ; --index) {
-              $('#favourite_tb tbody').append(`
-								<tr>
-								 <td class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
-								 <td><a href="#">${data.output[index].id_prod}</td></a>
-								 <td>200000 грн</td>
-							 </tr>
-              `);
+        $("#favourite_tb tbody").empty();
+        for( let index = data.output.length - 1; index >= 0 ; --index) {
+            $('#favourite_tb tbody').append(`
+							<tr>
+							 <td onclick="updateFavorite('${data.output[index].category}', ${data.output[index].id_prod})" class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></td>
+							 <td><a target="_blank" title="Нажмите, чтобы перейти на страницу товара" href="product?category=' + category + '&id=' + id_prod + '">${data.output[index].title}</td></a>
+							 <td>${data.output[index].price}</td>
+						 </tr>
+            `);
           }
 				// }
       }
@@ -195,6 +196,7 @@ function getUnaccepted(){
       }
   });
 }
+
 $( document ).ready(function() {
     getUnaccepted();
     getAccepted();

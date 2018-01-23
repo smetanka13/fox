@@ -4,7 +4,7 @@
 	width: 100%;
 	height: 100%;
 	background-color: rgba(51, 51, 51, 0.5);
-	z-index: 100;
+	z-index: 1100;
 	cursor: pointer;
 }
 .fw-addons .cnt {
@@ -17,7 +17,7 @@
 	height: auto;
 	position: fixed;
 	overflow: hidden;
-	z-index: 101;
+	z-index: 1101;
 	transition: top 0.3s ease;
 }
 .fw-addons .message.opened .bckgnd {
