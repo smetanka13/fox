@@ -399,10 +399,19 @@
 /* Для категорий поиска */
 .s_filt {
 	position: absolute;
-	top: 8px;
+	top: 5px;
+	left: -35px;
+	cursor: pointer;
+	transition: transform 0.3s ease;
 }
 .s_filt i {
 	color: #fff;
+}
+.s_filt .fa-stack-2x {
+	color: #F7931E;
+}
+.s_filt:hover {
+	transform: rotate(-15deg);
 }
 
 /*RESPONSIVE*/

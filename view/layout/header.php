@@ -84,12 +84,9 @@
             <?php if(URI != 'search') { ?>
             <form>
               <div class="form-group">
-                <span class="fa-stack fa-lg s_filt">
-                  <i class="fa fa-square-o fa-stack-2x"></i>
-                  <i class="fa fa-filter fa-stack-1x"></i>
-                </span>
-                <!-- <span class="s_filt">
-                  <i class="fa fa-filter fa-lg" aria-hidden="true"></i>
+                <!-- <span title="Категория" class="fa-stack s_filt">
+                  <i class="fa fa-superpowers fa-stack-2x"></i>
+                  <i class="fa fa-bars fa-stack-1x"></i>
                 </span> -->
                 <input type="search" class="form-control"  placeholder="Нажмите для поиска">
                 <a href="search"><img id="sch_icn" src="images/icons/search.svg"></a>
