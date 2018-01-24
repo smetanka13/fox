@@ -205,7 +205,7 @@
 	position: relative;
 	color: #7f7f7f;
 
-	display: none;
+	display: inline-block;
 }
 #sec_price div{
 	width: 80%;
@@ -218,19 +218,19 @@
 	background: #e74c3c;
 	transform: rotate(-5deg);
 }
-.discount_deg{
+.discount_deg {
 	width: 70px;
 	height: 70px;
 	position: absolute;
-	top: 0px;
-	right: 20px;
+	top: 10px;
+	right: 10px;
 
 	line-height: 65px;
 	border-radius: 50%;
 	background: #e74c3c;
 	font-size: 18px;
 
-	display: none;
+	display: block;
 }
 
 

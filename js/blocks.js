@@ -7,7 +7,7 @@ function prodBlock(data) {
             params += param + ': ' + data.params[param] + '<br>';
     }
 
-    if(data.discount)
+    if(data.discount == 1)
         var discount = '<div class="discount"></div>';
     else
         var discount = '';

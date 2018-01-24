@@ -135,6 +135,16 @@ table td {
 #order_table i{
 	color: #FFCA00;
 }
+#adm_dsc input {
+  width: 80px;
+  padding-left: 20px;
+}
+#adm_dsc span {
+  margin-left: 10px;
+  font-size: 20px;
+  position: relative;
+  top: 3px;
+}
 
 @media (max-width:768px) {
   #accept_order_table .order_ord{
