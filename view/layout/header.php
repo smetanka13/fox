@@ -77,20 +77,18 @@
                 <a href="<?= URL ?>"><div class="logo"></div></a>
             </div>
             <ul class="nav navbar-nav nav_bar_pages2">
-                <li><a href="search?category=Масла">Масла</a></li>
-                <li><a href="#">Фильтры</a></li>
-                <li><a href="#">Ремни</a></li>
-                <li><a href="#">Присадки</a></li>
-                <li><a href="#">Тормозная система</a></li>
-                <li><a href="#">Стеклоочистители</a></li>
-                <li><a href="#">Аккумуляторы</a></li>
+                <?php foreach ( Category::getCategories() as $val ) { ?>
+                <li><a href="search?category=<?= $val ?>"><?= $val ?></a></li>
+                <?php } ?>
             </ul>
+            <?php if(URI != 'search') { ?>
             <form>
               <div class="form-group">
                 <input type="search" class="form-control"  placeholder="Нажмите для поиска">
                 <a href="search"><img id="sch_icn" src="images/icons/search.svg"></a>
               </div>
             </form>
+            <?php } ?>
         </div>
     </div><!-- /.container-fluid -->
 </nav>

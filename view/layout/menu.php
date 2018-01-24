@@ -22,7 +22,7 @@
                         foreach($subcategories as $subcategory) {
                             $values = base64_encode(json_encode([
                                 'Подкатегория' => $subcategory
-                            ]));
+                            ], JSON_UNESCAPED_UNICODE));
                             echo '<a href="search?category='.$category.'&settings='.$values.'"><div>'.$subcategory.'</div></a>';
                         }
                     ?>
