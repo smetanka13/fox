@@ -222,11 +222,11 @@
 
 .sec_head form div img {
 
-	width: 35px;
-	height: 35px;
-	position: absolute;
-	right: -8px;
-	top: -1px;
+	width: 34px;
+  height: 36px;
+  position: absolute;
+  right: -5px;
+  top: -1px;
 	cursor: pointer;
 }
 
