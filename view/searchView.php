@@ -11,14 +11,9 @@
     $direction = isset($_GET['direction']) ? $_GET['direction'] : 'ASC';
 
     if(isset($_GET['settings'])) {
+        $_GET['settings'] = str_replace(' ', '+', $_GET['settings']);
         $settings = json_decode(
-            utf8_encode(
-                urlencode(
-                    base64_decode(
-                        $_GET['settings']
-                    )
-                )
-            ),
+            base64_decode($_GET['settings']),
             TRUE
         );
     } else {
@@ -61,7 +56,6 @@
 
 <!-- БЛОК С ТОВАРАМИ -->
 <div class="left-container">
-    <?php print_r($settings); echo "<br>"; ?>
     <!-- <div class="tr_cnt">
         <div class="form-inline">
             <div class="form-group">
@@ -175,9 +169,9 @@
                 page: Search.page,
             },
             null,
-            'search?query='+Search.query+'&page='+Search.page+'&sort='+Search.sort+'&direction='+Search.direction+'&category='+Search.category+'&settings='+FW.b64EncodeUnicode(JSON.stringify(Search.settings.val))
+            'search?query='+Search.query+'&page='+Search.page+'&sort='+Search.sort+'&direction='+Search.direction+'&category='+Search.category+'&settings='+encodeURI(FW.b64EncodeUnicode(JSON.stringify(Search.settings.val)))
         );
-
+            console.log(FW.b64EncodeUnicode(JSON.stringify(Search.settings.val)));
     }
 
     window.onpopstate = function(event) {

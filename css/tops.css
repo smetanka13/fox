@@ -36,7 +36,8 @@
 	height: 360px;
 	margin: 0 auto;
 	padding: 30px 0;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: visible;
 	position: relative;
 }
 .top_cnt .top_slider {
