@@ -6,6 +6,7 @@
 	min-height: 100%;
 	box-shadow: 0 0 10px rgba(0,0,0,0.5) inset;
 	position: relative;
+	align-self: stretch;
 }
 .sider input {
 	padding-left: 10px;
@@ -94,6 +95,7 @@
 	left: 8px;
 }
 .left-container {
+	align-self: stretch;
 	width: calc(100% - 300px);
 	background-image: url(../images/main/f2.jpg);
 	background-repeat: no-repeat;
