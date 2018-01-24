@@ -154,6 +154,10 @@
             Убрать спецификацию
         </button>
     </div>
+    <div id="adm_dsc" class="form-group">
+      <h1 class="main_title">Добавить скидку</h1>
+      <input type="number" placeholder=""><span>%</span>
+    </div>
     <button class="wth_boot_but confirm_but" onclick="addCategory()">Создать</button>
 </div>
 <div id="newparams" class="col-md-12 cnt_all">
@@ -199,6 +203,18 @@
         </button>
     </div>
     <div id="values_cnt"></div>
+    <button class="wth_boot_but confirm_but" onclick="updateValues()">Добавить</button>
+
+    <h1 class="main_title">Добавить скидку к существующему товару</h1>
+    <div class="alert alert-danger" role="alert" style="display: none">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        Товара с таким идентификатором не найдено.
+    </div>
+    <input type="text" id="id" placeholder="НАЗВАНИЕ / АРТИКУЛ">
+    <div id="adm_dsc" class="form-group">
+      <h1 class="main_title">Добавить процент скидки</h1>
+      <input type="number" placeholder=""><span>%</span>
+    </div>
     <button class="wth_boot_but confirm_but" onclick="updateValues()">Добавить</button>
 </div>
 </div>

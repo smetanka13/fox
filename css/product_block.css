@@ -142,5 +142,5 @@
 	background-size: cover;
 
 	z-index: 100;
-	display: none;
+	display: block;
 }
