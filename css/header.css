@@ -381,7 +381,6 @@
 	background-position: center;
 }
 
-
 #logo_mob {
 
 	display: none;
@@ -395,6 +394,15 @@
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
+}
+
+/* Для категорий поиска */
+.s_filt {
+	position: absolute;
+	top: 8px;
+}
+.s_filt i {
+	color: #fff;
 }
 
 /*RESPONSIVE*/
