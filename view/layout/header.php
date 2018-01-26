@@ -5,7 +5,7 @@
     <!-- mobile version of header -->
         <div class="navbar-header color_head">
                 <div id="mb_reg" data-toggle='modal' data-target='#signin_modal'></div>
-                <a href="<?= URL ?>"><div id="logo_mob"></div></a>
+                <a href="/"><div id="logo_mob"></div></a>
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header_menu">
                 <span><image class="menu_icon" src="images/icons/menu.svg"></span>
             </button>
@@ -26,7 +26,7 @@
                 </form>
 
                 <ul class="nav navbar-nav nav_bar_pages">
-                    <li><a href="<?= URL ?>">Главная</a></li>
+                    <li><a href="/">Главная</a></li>
                     <li><a href="blog">Статьи</a></li>
                     <li><a href="delivery">Доставка и оплата</a></li>
                     <li><a href="callback">Отзывы</a></li>
@@ -67,14 +67,15 @@
                     <div class="sec_inf_part">
                         <div class="reglog" >
                             <img src="images/icons/user.svg">
-                           <!--  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+                            <?php if(!User::logged()) { ?>
                             <span data-toggle='modal' data-target='#signin_modal'>Вход/Регистрация</span>
-                            <!-- после авторизации -->
-                            <!-- <a href="personal_room"><span>Личный кабинет</span></a> -->
+                            <?php } else { ?>
+                            <a href="personal_room"><span>Личный кабинет</span></a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
-                <a href="<?= URL ?>"><div class="logo"></div></a>
+                <a href="/"><div class="logo"></div></a>
             </div>
             <ul class="nav navbar-nav nav_bar_pages2">
                 <?php foreach ( Category::getCategories() as $val ) { ?>
@@ -82,16 +83,14 @@
                 <?php } ?>
             </ul>
             <?php if(URI != 'search') { ?>
-            <form>
-              <div class="form-group">
-                <!-- <span title="Категория" class="fa-stack s_filt">
-                  <i class="fa fa-superpowers fa-stack-2x"></i>
-                  <i class="fa fa-bars fa-stack-1x"></i>
-                </span> -->
-                <input type="search" class="form-control"  placeholder="Нажмите для поиска">
-                <a href="search"><img id="sch_icn" src="images/icons/search.svg"></a>
-              </div>
-            </form>
+            <div class="form-group srch">
+              <!-- <span title="Категория" class="fa-stack s_filt">
+                <i class="fa fa-superpowers fa-stack-2x"></i>
+                <i class="fa fa-bars fa-stack-1x"></i>
+              </span> -->
+              <input type="search" class="form-control"  placeholder="Нажмите для поиска">
+              <a href="search"><img id="sch_icn" src="images/icons/search.svg"></a>
+            </div>
             <?php } ?>
         </div>
     </div><!-- /.container-fluid -->
@@ -180,5 +179,18 @@
           }
     		});
       });
+    });
+
+    $('.sec_head .srch input').keyup(function(e) {
+
+        if(e.which != 13) {
+            let str = $(this).val();
+
+            $('.sec_head .srch a').attr('href', 'search?query=' + $(this).val());
+
+        } else {
+            window.location.href = $('.sec_head .srch a').attr('href');
+        }
+
     });
 </script>

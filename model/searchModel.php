@@ -7,23 +7,48 @@ class Search {
 
     private static $max_finds = 12;
     private static $max_pages = 2;
+    const NO_EXPLODE = 1;
+    const STRICT_SEARCH = 2;
 
-    public static function formatWordQuery($query, $category, $query_params) {
+    public static function findCategory($str) {
+
+        if(empty($str)) return FALSE;
+
+        $words = explode(' ', $str);
+
+        $query = [];
+        foreach ($words as $i => $word) {
+            $query['OR #'.$i] = [
+                'category_param[~]' => $word,
+                'values[~]' => $word
+            ];
+        }
+
+        $result = FW::$DB->get('param_value', 'category_param', [
+            'OR' => $query
+        ]);
+
+        return explode('/', $result)[0];
+    }
+
+    private static function formatWordQuery($query, $category, $query_params, $flag = NULL) {
         # ---- Формирование запроса по поисковым словам ---- #
 
         $query_title = '';
         $query_text = '';
         $quated_words = [];
 
-        $words = explode(" ", $query);
+        if($flag != self::NO_EXPLODE && $flag != self::STRICT_SEARCH)
+            $words = explode(" ", $query);
+
         foreach($words as $i => $word) {
             if($i > 0) {
                 $query_title .= ' AND ';
                 $query_text .= ' AND ';
             }
             $quated_words[$i] = FW::$DB->quote("%$word%");
-            $query_title .= "title LIKE $quated_words[$i]";
-            $query_text .= "text LIKE $quated_words[$i]";
+            $query_title .= "title LIKE {$quated_words[$i]}";
+            $query_text .= "text LIKE {$quated_words[$i]}";
         }
 
         $list_params = Category::getParams($category);
@@ -35,17 +60,19 @@ class Search {
         if($query_text == '')
             $query_text = "text LIKE '%%'";
 
-        foreach($list_params as $param) {
+        foreach($list_params as $index => $param) {
             $tmp = "";
             foreach($words as $i => $word) {
                 if($i > 0) $tmp .= ' AND ';
-                $tmp .= "`$param` LIKE $quated_words[$i]";
+                $tmp .= "`$param` LIKE {$quated_words[$i]}";
             }
 
             if(empty($tmp)) break;
 
+            if($index > 0) $params_scan .= 'OR';
+
             $params_scan .= "
-                OR (
+                (
                     ($tmp)
                     $query_params
                 )
@@ -82,7 +109,7 @@ class Search {
         return $query;
     }
 
-    public static function find($page, $query, $category, $values = NULL, $sort = NULL, $direction = NULL, $finds = 12) {
+    public static function find($page, $query, $category, $values = NULL, $sort = NULL, $direction = NULL, $discount = FALSE, $finds = 12, $flag = NULL) {
 
         Category::checkCategory($category);
 
@@ -94,7 +121,8 @@ class Search {
         if(empty($sort)) $sort = 'bought';
         if(empty($direction)) $direction = 'ASC';
 
-        $to = (($page + $finds) * $finds) + $finds;
+        $from = $page * $finds;
+        $to = ($page + self::$max_pages) * $finds;
 
         if(array_search($direction, ['DESC', 'ASC']) === FALSE)
             throw new InvalidArgumentException("Invalid direction.");
@@ -105,7 +133,7 @@ class Search {
         $query = trim(preg_replace("/ +/", ' ',$query));
 
         $query_params = self::formatValuesQuery($category, $values);
-        list($query_title, $query_text, $params_scan) = self::formatWordQuery($query, $category, $query_params);
+        list($query_title, $query_text, $params_scan) = self::formatWordQuery($query, $category, $query_params, $flag);
 
         $result = FW::$DB->query("
             SELECT * FROM  $category
@@ -115,10 +143,29 @@ class Search {
             ) OR (
                 ($query_text)
                 $query_params
+            ) OR (
+                $params_scan
             )
-            $params_scan
+            AND `discount` = '".intval($discount)."'
             ORDER BY $sort $direction
+            LIMIT $from, $to
         ")->fetchAll();
+
+        // echo("
+        //     SELECT * FROM  $category
+        //     WHERE (
+        //         ($query_title)
+        //         $query_params
+        //     ) OR (
+        //         ($query_text)
+        //         $query_params
+        //     ) OR (
+        //         $params_scan
+        //     )
+        //     AND `discount` = '".intval($discount)."'
+        //     ORDER BY $sort $direction
+        //     LIMIT $from, $to
+        // ");
 
         $important_part = Product::processProdParams(array_slice($result, 0, $finds), TRUE);
 

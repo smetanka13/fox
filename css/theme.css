@@ -1,6 +1,7 @@
 .fw-theme-metal-button {
     transition: background-position 0.1s ease;
     color: #eee;
+    border: 0;
     background-size: 100% 200%;
     background-image: -moz-linear-gradient(top, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
     background-image: -webkit-linear-gradient(top, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);

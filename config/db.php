@@ -4,10 +4,10 @@ use Medoo\Medoo;
 
 FW::$DB = new Medoo([
     'database_type' => 'mysql',
-    'database_name' => 'autoshop',
-    'server' => 'localhost',
-    'username' => 'root',
-    'password' => '',
+    'database_name' => 'foxmotor_db',
+    'server' => 'foxmotor.mysql.tools',
+    'username' => 'foxmotor_db',
+    'password' => 'Ttgu9yKn',
     'charset' => 'utf8',
     'option' => [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

@@ -203,24 +203,19 @@
 	float: left;
 }
 
-.sec_head form {
-
+.sec_head .srch {
 	width: 15%;
 	margin-right: 5%;
 	float: left;
-}
-
-.sec_head form div {
-
 	position: relative;
 }
 
-.sec_head form div input {
+.sec_head .srch input {
 
 	border-radius: 20px;
 }
 
-.sec_head form div img {
+.sec_head .srch img {
 
 	width: 34px;
   height: 36px;
@@ -298,9 +293,9 @@
 	height: 80px;
 	padding-left: 30px;
 	padding-top: 15px;
-	background: #f5f5f5;
+	background: rgba(255, 255, 255, 0.3);
 	border-radius: 0 0 0 200px;
-	box-shadow: 0px 0px 7px 0px #333333 inset;
+	box-shadow: 7px -7px 7px -7px #333333 inset;
 	float: right;
 	cursor: pointer;
 	transition: box-shadow 0.3s ease;

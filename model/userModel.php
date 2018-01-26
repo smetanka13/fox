@@ -181,10 +181,17 @@ class User {
         if(!preg_match("/^([a-z0-9_\.\-]{1,20})@([a-z0-9\.\-]{1,20})\.([a-z]{2,4})$/is", $email))
             throw new InvalidArgumentException("Неверный формат почты.");
 
-        if(FW::$DB->get('recover', '*', [
+        if(FW::$DB->has('user_verify', [
+            'email' => $email
+        ]) || FW::$DB->has('user', [
             'email' => $email
         ]))
             throw new InvalidArgumentException("Эта почта уже занята.");
+
+        if(FW::$DB->has('user', [
+            'login' => $login
+        ]))
+            throw new InvalidArgumentException("Этот логин уже занят.");
 
         self::checkPass($pass);
         self::checkLogin($login);
@@ -210,7 +217,7 @@ class User {
 
             $subject = "[".NAME."] Регистрация.";
             $headers = 'From: '.NAME. "\r\n";
-            $message = "Что бы активировать ваш аккаунт пройдите по ссылке: ".URL."/remote?model=user&method=verify&key=".$key;
+            $message = "Что бы активировать ваш аккаунт пройдите по ссылке: ".URL."/remote?model=user&method=verify&key=$key";
             if(!mail($email, $subject, $message, $headers)) {
                 throw new RuntimeException('Error sending mail.');
             }
@@ -243,7 +250,7 @@ class User {
         }
     }
 
-    public static function saveLogged($login, $pass) {
+    public static function stayLogged($login, $pass) {
         if(!self::login($login, $pass, TRUE))
             throw new InvalidArgumentException("Неверный логин или пароль.");
 

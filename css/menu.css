@@ -1,12 +1,12 @@
 #menu {
-    width: 270px;
+    width: 320px;
     height: 100%;
     background: #f0f0f0;
     position: fixed;
     z-index: 51;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     transition: left 0.3s ease;
-    left: -280px;
+    left: -330px;
 }
 #menu.opened {
     left: 0;
@@ -60,39 +60,69 @@
     height: 50px;
     text-align: center;
     line-height: 30px;
-    font-size: 30px;
+    font-size: 34px;
     padding: 10px 0;
 }
 
 #menu .catalog {
     font-size: 18px;
-    width: 270px;
+    width: 100%;
     height: auto;
     padding: 10px 0;
+    padding: 10px;
 }
 #menu .catalog .item .name {
     padding: 0 10px;
     height: 35px;
-    font-size: 24px;
+    font-size: 26px;
     line-height: 40px;
+    margin-bottom: 5px;
 }
 #menu .catalog .item .list {
     border-radius: 5px;
     height: auto;
     background: #ddd;
-    width: 250px;
-    margin: 0 10px;
+    width: 100%;
+    overflow: hidden;
 }
 #menu .catalog .item .list div {
-    height: 25px;
-    font-size: 13px;
+    height: 30px;
+    font-size: 14px;
     width: 100%;
     padding: 5px 5px;
-    line-height: 15px;
+    line-height: 20px;
+    color: #333;
 }
-#menu .catalog .item .list a {
-    transition: color 0.1s ease;
+#menu .catalog .item .list div {
+    transition: background 0.1s ease;
 }
-#menu .catalog .item .list a:hover {
-    color: #388cff;
+#menu .catalog .item .list div:hover {
+    background: #ccc;
+    color: #333;
+}
+
+@media (max-width: 420px) {
+    #menu {
+        left: -280px;
+        width: 270px;
+    }
+    #menu .heading {
+        font-size: 30px;
+    }
+    #menu .catalog .item .name {
+        font-size: 22px;
+        margin-bottom: 0;
+    }
+    #menu .catalog .item .list div {
+        font-size: 13px;
+    }
+}
+@media (max-width: 768px) {
+    #menu .heading {
+        margin-bottom: 5px;
+    }
+    #menu #close_butt {
+        top: unset;
+        bottom: 10px;
+    }
 }

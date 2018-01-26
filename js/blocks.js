@@ -16,7 +16,7 @@ function prodBlock(data) {
         <div class="prods_cnt">
             <div class="prods_wrapper">
                 ${discount}
-                <h3 class="title">${data.title}</h3>
+                <h3 class="title" title="${data.title}">${data.title}</h3>
                 <div class="prods_img_cnt"><img src="${data.image}"></div>
                 <p>${params}</p>
                 <div class="prods_bottom">

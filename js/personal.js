@@ -196,12 +196,3 @@ function getUnaccepted(){
       }
   });
 }
-
-$( document ).ready(function() {
-    getUnaccepted();
-    getAccepted();
-		getFavorite();
-    setInterval(getUnaccepted,10000);
-    setInterval(getAccepted,20000);
-		setInterval(getFavorite,10000);
-});

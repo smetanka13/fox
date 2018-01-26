@@ -3,7 +3,10 @@
 	width: 100%;
 	height: auto;
 	background-image: url(../images/main/f2.jpg);
-	background-repeat: no-repeat;background-position: center;background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	padding-bottom: 50px;
 }
 .top_cnt {
 	position: relative;

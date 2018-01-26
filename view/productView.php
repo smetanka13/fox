@@ -3,14 +3,14 @@
 <link rel="stylesheet" type="text/css" href="css/tops.css">
 
 <div class="container-fluid pr_bck">
-	<div class="pr_main_crd container"> 
+	<div class="pr_main_crd container">
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-			<a href="<?=!empty($_DATA['prod']['image']) ?'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] :'images/icons/no_photo.svg'
-			?>" data-lightbox="image-1">
+			<a href="<?=!empty($_DATA['prod']['image']) ? 'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] : 'images/icons/no_photo.svg'?>" data-lightbox="image-1">
 				<div class="pr_img cent_img">
-						<img src="<?=!empty($_DATA['prod']['image']) ?'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] :
-						'images/icons/no_photo.svg'?>">
-						<span class="discount_deg badge badge-pill badge-danger">-25%</span>
+						<img src="<?=!empty($_DATA['prod']['image']) ? 'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] : 'images/icons/no_photo.svg'?>">
+						<?php if($_DATA['prod']['discount']) { ?>
+						<span class="discount_deg badge badge-pill badge-danger">-<?= $_DATA['prod']['discount_percent'] ?>%</span>
+						<?php } ?>
 				</div>
 			</a>
 		</div>
@@ -19,7 +19,15 @@
 			<ul class="list-unstyled">
 				<li class="pr_name"><?= $_DATA['prod']['title'] ?></li>
 				<li class="code_name">Код товара : <?= $_DATA['prod']['articule'] ?><small></small></li>
-				<li>Цена : <b><?= $_DATA['prod']['price'] ?></b> &euro;<span id="sec_price"><div></div><?= $_DATA['prod']['price'] ?></b> &euro;</span></li>
+				<li>
+					Цена : <b><?= $_DATA['prod']['price'] ?></b> &euro;
+					<?php if($_DATA['prod']['discount']) { ?>
+					<span id="sec_price">
+						<div></div>
+						<?= round($_DATA['prod']['price'] * ($_DATA['prod']['discount_percent'] / 100), 2) ?></b> &euro;
+					</span>
+					<?php } ?>
+				</li>
 				<li><a href="delivery"><i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i> Условия доставки</a></li>
 				<li><a href="#"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i> Видео на YouTube</a></li>
 				<li><span id="like" onclick="updateFavorite('<?= $_DATA['prod']['category'] ?>', <?= $_DATA['prod']['id_prod'] ?>)"><i class="fa fa-heart fa-lg fa-fw" aria-hidden="true"></i> В избранное</span></li>

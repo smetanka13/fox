@@ -6,10 +6,10 @@
 		'personal'
 	];
 
-	if(isset($_COOKIE['id']) && isset($_COOKIE['email']) && isset($_COOKIE['pass'])) {
-		User::login($_COOKIE['id'], $_COOKIE['email'], $_COOKIE['pass']);
+	if(isset($_COOKIE['login']) && isset($_COOKIE['pass'])) {
+		User::login($_COOKIE['login'], $_COOKIE['pass']);
 	}
-	# if(Engine::lookSame($private_view, VIEW) && !$User->logged()) header('Location: '.URL);
+	if(array_search(URI, $private_view) && !User::logged()) header('Location: '.URL);
 
 	if(method_exists('View', URI)) $_DATA = call_user_func('View::' . URI);
 ?>

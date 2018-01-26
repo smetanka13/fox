@@ -7,6 +7,7 @@ Search.page = 0;
 Search.category = '';
 Search.sort = '';
 Search.direction = '';
+Search.discount = 0;
 Search.settings = {
     val: {}
 };
@@ -18,10 +19,10 @@ Search.settings = {
  * @param value - value of parameter
  */
 Search.settings.add = function (param, value) {
-    if(typeof(this.val[param]) != 'undefined') {
-        this.val[param] += '/' + value;
+    if(typeof(Search.settings.val[param]) != 'undefined') {
+        Search.settings.val[param] += '/' + value;
     } else {
-        this.val[param] = value;
+        Search.settings.val[param] = value;
     }
 };
 
@@ -29,7 +30,7 @@ Search.settings.add = function (param, value) {
  * Empty settings
  */
 Search.settings.empty = function (param, value) {
-    this.val = {};
+    Search.settings.val = {};
 };
 
 /**
@@ -39,15 +40,14 @@ Search.settings.empty = function (param, value) {
  * @param value - value of parameter
  */
 Search.settings.delete = function (param, value) {
-    var tmp = this.val[param].split("/");
+    var tmp = Search.settings.val[param].split("/");
     if(Object.keys(tmp).length == 1) {
-        delete this.val[param];
+        delete Search.settings.val[param];
     } else {
         tmp.splice(tmp.indexOf(value), 1);
-        this.val[param] = tmp.join('/');
+        Search.settings.val[param] = tmp.join('/');
     }
 };
-
 
 /**
  * Go to direct page
@@ -55,25 +55,25 @@ Search.settings.delete = function (param, value) {
  * @param page - page num
  */
 Search.goPage = function(page) {
-    this.page = page;
-    this.update();
+    Search.page = page;
+    Search.update();
 };
 
 /**
  * Go to next page
  */
 Search.nextPage = function() {
-    this.page += 1;
-    this.update();
+    Search.page += 1;
+    Search.update();
 };
 
 /**
  * Toggle sort direction filter between DESC and ASC
  */
 Search.chDirection = function() {
-    if(this.direction == 'ASC') this.direction = 'DESC';
-    else this.direction = 'ASC';
-    this.update();
+    if(Search.direction == 'ASC') Search.direction = 'DESC';
+    else Search.direction = 'ASC';
+    Search.update();
 };
 
 /**
@@ -82,17 +82,17 @@ Search.chDirection = function() {
  * @param sort - value of sort
  */
 Search.chSort = function(sort) {
-    this.sort = sort;
-    this.direction = 'ASC'
-    this.update();
+    Search.sort = sort;
+    Search.direction = 'ASC'
+    Search.update();
 };
 
 /**
  * Go to next page
  */
 Search.prevPage = function() {
-    this.page -= 1;
-    this.update();
+    Search.page -= 1;
+    Search.update();
 };
 
 /**
@@ -100,28 +100,31 @@ Search.prevPage = function() {
  *
  * @param callback -
  */
-Search.update = function(callback = function() {}) {
+Search.update = function(update, callback = function() {}) {
     FW.ajax.send({
         model: 'search',
         method: 'find',
-        callback: function(data, callback) {
+        callback: function(data, params) {
             if(!data.status) return;
 
-            Search.draw(data.output.search_result);
+            Search.draw(data.output.search_result, params.update);
 
-            callback({
+            params.callback({
                 found: data.output.found,
                 pages_left: data.output.pages_left
             });
         },
-        local_params: callback,
+        local_params: {
+            callback: callback,
+            update: update
+        },
         data: {
-            page: this.page,
-            query: this.query,
-            category: this.category,
-            settings: JSON.stringify(this.settings.val),
-            sort: this.sort,
-            direction: this.direction
+            page: Search.page,
+            query: Search.query,
+            category: Search.category,
+            settings: JSON.stringify(Search.settings.val),
+            sort: Search.sort,
+            direction: Search.direction
         },
         decoder: {
             settings: 'JSON'
@@ -134,9 +137,10 @@ Search.update = function(callback = function() {}) {
  *
  * @param data - данные для отрисовки
  */
-Search.draw = function(data) {
-    this.items_container.html('');
+Search.draw = function(data, update = true) {
+    if(update)
+        Search.items_container.html('');
     for(i in data) {
-        this.items_container.append(this.drawFunc(data[i]));
+        Search.items_container.append(Search.drawFunc(data[i]));
     }
 };

@@ -35,7 +35,7 @@ FW.processTags = function(block, drawFunc) {
     }
 };
 
-FW.showMessage = function(str) {
+FW.showMessage = function(str, timer = 0) {
     var parent = document.querySelector('.fw-addons .message');
     var classes = parent.classList;
     if(classes.contains('opened')) {
@@ -43,6 +43,11 @@ FW.showMessage = function(str) {
     } else {
         document.querySelector('.fw-addons .message .content').innerHTML = str;
         classes.add('opened');
+        if(timer > 0) {
+            setTimeout(function(block) {
+                block.remove('opened');
+            }, timer, classes);
+        }
     }
 };
 

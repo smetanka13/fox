@@ -166,13 +166,12 @@
     $('#signin_modal #sign_in_btn').click(function saveLogged() {
       FW.ajax.send ({
         model: 'user',
-        method: 'saveLogged',
+        method: 'stayLogged',
         callback: function(data) {
-          if(data.status) {
-            $('#signin_modal').modal('hide');
-          } else {
-            FW.showMessage(data.error);
-          }
+            if(data.status)
+                window.location.href = '/?msg=Вы успешно вошли.';
+            else
+                FW.showMessage(data.error, 1000);
         },
         data: {
           login: $('#signin_modal #inputLogin_2').val(),
@@ -187,7 +186,7 @@
         method: 'recoverPass',
         callback: function(data) {
           if(data.status) {
-            FW.showMessage('На Вашу почту пришло оповещение о смене пароля !');
+            FW.showMessage('На вашу почту пришло оповещение о смене пароля!');
             $('#pass_modal').modal('hide');
           } else {
             FW.showMessage(data.error);
@@ -342,11 +341,11 @@
         FW.ajax.send({
             model: 'user',
             method: 'registrate',
-            callback: function () {
-              $('#sign_ok').modal('show');
-              setTimeout(function(){
-                  $('#sign_ok').modal('hide');
-              }, 1000);
+            callback: function (data) {
+                if(data.status)
+                    window.location.href = '/?msg=На вашу почту отправлено письмо с подтверждением регистрации.';
+                else
+                    FW.showMessage(data.error, 1000);
             },
             data: {
               login: $('#inputLogin').val(),

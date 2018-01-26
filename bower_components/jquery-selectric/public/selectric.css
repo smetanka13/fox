@@ -12,24 +12,26 @@
 }
 
 .selectric {
-    transition: border-radius 0.1s ease;
+
   border: none;
   /*border-radius: 5px 5px;*/
-  background: #F7931E;
+  background: #f0f0f0;
   position: relative;
   overflow: hidden;
+  border-bottom: 2px solid #F7931E;
 }
 
 .selectric .label {
+    font-weight: normal !important;
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin: 0 38px 0 10px;
-  font-size: 12px;
-  line-height: 38px;
-  color: #fafafa;
-  height: 38px;
+  margin: 0 48px 0 10px;
+  font-size: 16px;
+  line-height: 40px;
+  color: #333;
+  height: 48px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -41,16 +43,12 @@
   position: absolute;
   right: 0;
   top: 0;
-  width: 38px;
-  height: 38px;
-  line-height: 38px;
-  transition: background-position 0.1s ease, color 0.1s ease;
-  background-size: 100% 200%;
-  background-image: -moz-linear-gradient(top, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
-  background-image: -webkit-linear-gradient(top, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
-  background-image: linear-gradient(to top, rgba(181,189,200,1) 0%,rgba(130,140,149,1) 36%,rgba(40,52,59,1) 100%);
-  box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.5);
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
+  transition: background 0.1s ease;
+  background: #F7931E;
   font: 0/0 a;
   *font: 20px/38px Lucida Sans Unicode, Arial Unicode MS, Arial;
 }
@@ -79,7 +77,7 @@
 }*/
 
 .selectric-hover .selectric .button {
-  background-position: 0 100%;
+    background: #F78400;
 }
 
 /*.selectric-hover .selectric .button:after {
@@ -87,12 +85,12 @@
 }*/
 
 .selectric-open {
-  z-index: 1;
+  z-index: 5;
 }
 
-.selectric-open .selectric {
+/* .selectric-open .selectric {
   border-radius: 5px 5px 0 0;
-}
+} */
 
 .selectric-open .selectric-items {
   display: block;

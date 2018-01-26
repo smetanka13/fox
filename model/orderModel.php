@@ -58,12 +58,15 @@ class Order {
             throw new InvalidArgumentException("Введите ваш номер телефона.");
         if(!preg_match("/^(\+([0-9]{1,2}) (\([0-9]{3}\)) ([0-9]{3})\-([0-9]{2})\-([0-9]{2}))$/is", $phone))
             throw new InvalidArgumentException("Неверный формат номера.");
-        if(empty(json_decode($_COOKIE['cart'], TRUE)))
+
+        $cart = json_decode($_COOKIE['cart'], TRUE);
+
+        if(empty($cart))
             throw new InvalidArgumentException("Карзина пустая.");
 
         require_once 'model/productModel.php';
 
-        FW::$DB->action(function() use($pay_way, $delivery_way, $public, $city, $address, $email, $phone, $text) {
+        FW::$DB->action(function() use($pay_way, $delivery_way, $public, $city, $address, $email, $phone, $text, $cart) {
 
             FW::$DB->insert('order', [
                 'public' => $public,
@@ -81,7 +84,7 @@ class Order {
             $id_order = FW::$DB->id();
 
             $query = [];
-            foreach(array_values(json_decode($_COOKIE['cart'], TRUE)) as $index => $value) {
+            foreach($cart as $value) {
                 $query[] = [
                     'id_order' => $id_order,
                     'id_prod' => $value['id_prod'],

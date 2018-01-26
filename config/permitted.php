@@ -1,7 +1,7 @@
 <?php
 
 $permitted_actions = [
-	'User::saveLogged',
+	'User::stayLogged',
 	'User::verify',
 	'User::registrate',
 	'User::recoverPass',
