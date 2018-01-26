@@ -1,6 +1,6 @@
 <?php
 
-define('URL', 'http://195.138.81.126/other/foxmotors/');
+define('URL', 'foxmotors.com.ua/');
 define('TIME', time());
 
 define('NAME', 'FoxMotors');
