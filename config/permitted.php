@@ -21,7 +21,7 @@ $logged_actions = [
 ];
 
 $admin_actions = [
-	'Exchange::set'
+	'Exchange::set',
 	'Callback::get',
 	'Callback::delete',
 	'Order::getUnaccepted',
