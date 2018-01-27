@@ -138,6 +138,20 @@
     <div id="values"></div>
     <button class="wth_boot_but confirm_but" onclick="updateProd()">Оформить</button>
 </div>
+<div id="exchange" class="col-md-12 cnt_all">
+    <h1 class="main_title">Изменить курс на сайте (по отношению к евро)</h1>
+    <div class="currencies">
+        <?php
+            require_once 'model/exchangeModel.php';
+            $course = Exchange::get();
+        ?>
+        <input value="<?= $course['UAH'] ?>" type="text" placeholder="Гривна" min="0" step="any">
+        <input value="<?= $course['USD'] ?>" type="text" placeholder="Доллар" min="0" step="any">
+        <input value="<?= $course['RUB'] ?>" type="text" placeholder="Рубль" min="0" step="any">
+    </div>
+
+    <button class="wth_boot_but confirm_but" onclick="updateExchange()">Изменить</button>
+</div>
 <div id="newcategory" class="col-md-12 cnt_all">
     <h1 class="main_title">Новая категория</h1>
     <input type="text" id="name" placeholder="Название категории">
@@ -154,10 +168,10 @@
             Убрать спецификацию
         </button>
     </div>
-    <div id="adm_dsc" class="form-group">
+    <!-- <div id="adm_dsc" class="form-group">
       <h1 class="main_title">Добавить скидку</h1>
       <input type="number" placeholder=""><span>%</span>
-    </div>
+    </div> -->
     <button class="wth_boot_but confirm_but" onclick="addCategory()">Создать</button>
 </div>
 <div id="newparams" class="col-md-12 cnt_all">
@@ -205,7 +219,7 @@
     <div id="values_cnt"></div>
     <button class="wth_boot_but confirm_but" onclick="updateValues()">Добавить</button>
 
-    <h1 class="main_title">Добавить скидку к существующему товару</h1>
+    <!-- <h1 class="main_title">Добавить скидку к существующему товару</h1>
     <div class="alert alert-danger" role="alert" style="display: none">
         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
         Товара с таким идентификатором не найдено.
@@ -215,7 +229,7 @@
       <h1 class="main_title">Добавить процент скидки</h1>
       <input type="number" placeholder=""><span>%</span>
     </div>
-    <button class="wth_boot_but confirm_but" onclick="updateValues()">Добавить</button>
+    <button class="wth_boot_but confirm_but" onclick="updateValues()">Добавить</button> -->
 </div>
 </div>
 

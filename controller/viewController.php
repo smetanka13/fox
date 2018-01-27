@@ -3,13 +3,18 @@
 	require_once 'model/categoryModel.php';
 
 	$private_view = [
-		'personal'
+		'personal_room'
+	];
+	$admin_view = [
+		'admin'
 	];
 
 	if(isset($_COOKIE['login']) && isset($_COOKIE['pass'])) {
 		User::login($_COOKIE['login'], $_COOKIE['pass']);
 	}
-	if(array_search(URI, $private_view) && !User::logged()) header('Location: '.URL);
+
+	if(array_search(URI, $private_view) !== FALSE && !User::logged()) header('Location: /');
+	if(array_search(URI, $admin_view) !== FALSE && User::get('id_user') != 1) header('Location: /');
 
 	if(method_exists('View', URI)) $_DATA = call_user_func('View::' . URI);
 ?>

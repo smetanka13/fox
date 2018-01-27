@@ -16,7 +16,9 @@ Cart.updateVisual = function() {
         model: 'product',
         method: 'getFullPriceCookie',
         callback: function(data) {
-            $('.header .cart ul li:eq(1)').html('&euro;: '+data.output.toFixed(2));
+            $('.header .cart .exchange-render').attr('data-exchange', data.output);
+            $('.header .cart .exchange-render .exchange-currency').html(Exchange.getCurrency());
+            $('.header .cart .exchange-render .exchange-val').html(Exchange.convert(data.output));
         },
         data: {
             cookie: cookie
@@ -110,7 +112,9 @@ Cart.remove = function(key, callback = function(){}) {
  *  Очищает карзину
  */
 Cart.empty = function() {
-    $('.header .cart .badge').html('0');
-    $('.header .cart ul li:eq(1)').html('&euro;: 0');
+    $('.header .cart .exchange-render').attr('data-exchange', 0);
+    $('.header .cart .exchange-render .exchange-val').html(0);
     $.removeCookie('cart');
 };
+
+Cart.updateVisual();

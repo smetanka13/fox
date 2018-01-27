@@ -11,12 +11,17 @@ $permitted_actions = [
 	'Callback::add',
 	'Search::find',
 	'Product::getFullPriceCookie',
-	#
+	'Exchange::get'
+];
 
+$logged_actions = [
 	'User::updateFavorite',
 	'User::getFavorite',
 	'User::getOrders',
-	#
+];
+
+$admin_actions = [
+	'Exchange::set'
 	'Callback::get',
 	'Callback::delete',
 	'Order::getUnaccepted',
@@ -38,12 +43,4 @@ $permitted_actions = [
 	'Category::addParams',
 	'Category::newCategory',
 	'Article::upload'
-];
-
-$logged_actions = [
-
-];
-
-$admin_actions = [
-
 ];

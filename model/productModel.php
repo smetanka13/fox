@@ -244,7 +244,7 @@ class Product {
 
         $price = 0;
         foreach($prods as $index => $prod) {
-            $price += ($prod['price'] * (1 - ($prod['discount_percent'] / 100))) * $cookie[$index]['quantity'];
+            $price += self::parseDiscount($prod['price'], $prod['discount_percent']) * $cookie[$index]['quantity'];
         }
         return $price;
     }
@@ -290,5 +290,9 @@ class Product {
         ], [
             'id_prod' => $id_prod
         ]);
+    }
+    public static function parseDiscount($val, $percent) {
+
+        return $val * (1 - ($percent / 100));
     }
 }

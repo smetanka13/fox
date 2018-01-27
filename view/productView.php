@@ -19,18 +19,34 @@
 			<ul class="list-unstyled">
 				<li class="pr_name"><?= $_DATA['prod']['title'] ?></li>
 				<li class="code_name">Код товара : <?= $_DATA['prod']['articule'] ?><small></small></li>
-				<li>
-					Цена : <b><?= $_DATA['prod']['price'] ?></b> &euro;
-					<?php if($_DATA['prod']['discount']) { ?>
-					<span id="sec_price">
+				<?php if($_DATA['prod']['discount']) { ?>
+				<li class="exchange-render" data-exchange="<?= Product::parseDiscount($_DATA['prod']['price'], $_DATA['prod']['discount_percent']) ?>">
+					Цена :
+					<b class="exchange-val"></b>
+					<span class="exchange-currency"></span>
+					<span id="sec_price" class="exchange-render" data-exchange="<?= $_DATA['prod']['price'] ?>">
 						<div></div>
-						<?= round($_DATA['prod']['price'] * ($_DATA['prod']['discount_percent'] / 100), 2) ?></b> &euro;
+						<span class="exchange-val"></span></b>
+						<span class="exchange-currency"></span>
 					</span>
-					<?php } ?>
 				</li>
+				<?php } else { ?>
+				<li class="exchange-render" data-exchange="<?= $_DATA['prod']['price'] ?>">
+					Цена :
+					<b class="exchange-val"></b>
+					<span class="exchange-currency"></span>
+				</li>
+				<?php } ?>
 				<li><a href="delivery"><i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i> Условия доставки</a></li>
+				<?php if(!empty($_DATA['prod']['video'])) { ?>
 				<li><a href="#"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i> Видео на YouTube</a></li>
-				<li><span id="like" onclick="updateFavorite('<?= $_DATA['prod']['category'] ?>', <?= $_DATA['prod']['id_prod'] ?>)"><i class="fa fa-heart fa-lg fa-fw" aria-hidden="true"></i> В избранное</span></li>
+				<?php } ?>
+				<li>
+					<span id="like" onclick="updateFavorite('<?= $_DATA['prod']['category'] ?>', <?= $_DATA['prod']['id_prod'] ?>)">
+						<i class="fa fa-heart fa-lg fa-fw" aria-hidden="true"></i>
+						В избранное
+					</span>
+				</li>
 				<?php
 					if($_GET['category'] == 'Масла') {
 

@@ -244,9 +244,9 @@ class User {
                 'key' => $key
             ]);
 
-        	header("Location: ".URL."?msg=Вы успешно зарегистрировались.");
+        	header("Location: /?msg=Вы успешно зарегистрировались.");
         } else {
-        	header("Location: ".URL."?msg=Возникла проблема, попробуйте позже.");
+        	header("Location: /?msg=Возникла проблема, попробуйте позже.");
         }
     }
 

@@ -65,13 +65,12 @@ FW.ajax.error = function(str) {
 };
 
 FW.ajax.animate = function(mode) {
-    var block = $("#ajax_load");
-    if(mode) {
-        block.show();
-        block.css("top", "calc(100% - 128px)");
+    let parent = document.querySelector('.fw-addons #ajax_load');
+    let classes = parent.classList;
+    if(!mode) {
+        classes.remove('pop');
     } else {
-        block.hide();
-        block.css("top", "100%");
+        classes.add('pop');
     }
 };
 
@@ -115,7 +114,7 @@ FW.ajax.send = function(params, files = null) {
         processData: false,
         error: function() {
             FW.ajax.animate(false);
-            FW.ajax.error('Server error.');
+            FW.ajax.error('Ошибка сервера, попробуйте позже.');
         },
         success: function(json) {
             console.log(json);

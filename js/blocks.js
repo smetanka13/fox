@@ -7,10 +7,12 @@ function prodBlock(data) {
             params += param + ': ' + data.params[param] + '<br>';
     }
 
-    if(data.discount == 1)
-        var discount = '<div class="discount"></div>';
-    else
-        var discount = '';
+    var discount = '';
+
+    if(data.discount == 1) {
+        data.price = data.price * (data.discount_percent / 100);
+        discount = '<div class="discount"></div>';
+    }
 
     return `
         <div class="prods_cnt">
@@ -21,7 +23,10 @@ function prodBlock(data) {
                 <p>${params}</p>
                 <div class="prods_bottom">
                     <a href="product?category=${data.category}&id=${data.id_prod}"><button>Купить</button></a>
-                    <h4>${data.price} &euro;</h4>
+                    <div class="exchange-render" data-exchange="${data.price}">
+                        <span class="exchange-val">${Exchange.convert(data.price)}</span>
+                        <span class="exchange-currency">${Exchange.getCurrency()}</span>
+                    </div>
                 </div>
             </div>
         </div>

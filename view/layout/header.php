@@ -16,7 +16,7 @@
 
                 <form class="visible-xs xs_form">
                   <div class="form-group">
-                    <input type="search" value="<?= isset($_GET['srch']) ? $_GET['srch'] : '' ?>" class="form-control"  placeholder="Нажмите для поиска">
+                    <input type="search" class="form-control"  placeholder="Нажмите для поиска">
                     <img src="images/icons/search.svg">
                   </div>
                   <div id="callback_mob" class="form-group tel">
@@ -37,9 +37,15 @@
                 <div><span class="badge">0</span></div>
                 <ul class="list-unstyled">
                     <li>Корзина</li>
-                    <li>&euro;: 0.00</li>
+                    <li class="exchange-render" data-exchange="0">
+                        <span class="exchange-val"></span>
+                        <span class="exchange-currency"></span>
+                    </li>
                 </ul>
-                <p class="visible-xs">&euro;: 0.00</p>
+                <p class="visible-xs exchange-render" data-exchange="0">
+                    <span class="exchange-val"></span>
+                    <span class="exchange-currency"></span>
+                </p>
             </div></a>
 
         </div><!-- /.navbar-collapse -->
@@ -111,8 +117,6 @@
 <script src="bower_components/jquery-mask-plugin/dist/jquery.mask.min.js"></script>
 <script type="text/javascript">
     $( document ).ready(function() {
-
-        Cart.updateVisual();
 
     	$('.table #callback').mask("+38 (099) 999-99-99", {autoclear: false});
       $('#callback_mob input').mask("+38 (099) 999-99-99", {autoclear: false});

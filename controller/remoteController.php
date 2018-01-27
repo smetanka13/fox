@@ -46,12 +46,20 @@ if(ARGS_ARRAY) $_DATA = [$_DATA];
 
 if(array_search(ACTION, $permitted_actions) !== FALSE) {
 	if(array_search(ACTION, $logged_actions) !== FALSE) {
-		if(User::login($_COOKIE['login'], $_COOKIE['pass'])) {
+		if(isset($_COOKIE['login']) && isset($_COOKIE['pass']) && User::login($_COOKIE['login'], $_COOKIE['pass'])) {
 
-			# ...
+			if(array_search(ACTION, $admin_actions) !== FALSE) {
+				if(User::get('id_user') == 1) {
+
+					# ...
+
+				} else {
+					JSON::write('permission', 'Вы не администратор.');
+				}
+			}
 
 		} else {
-			JSON::write('permission', 'You are not logged.');
+			JSON::write('permission', 'Вы не авторизированы.');
 		}
 	}
 
@@ -69,7 +77,7 @@ if(array_search(ACTION, $permitted_actions) !== FALSE) {
 		}
 	}
 } else {
-	JSON::write('permission', 'Something wrong, maybe update the page.');
+	JSON::write('permission', 'Что-то не так, перезагрузите страницу.');
 }
 
 JSON::pop(TRUE);

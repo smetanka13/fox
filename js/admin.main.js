@@ -125,6 +125,33 @@ function updateProd() {
     })
 }
 
+function updateExchange() {
+
+    var uah = $('#exchange .currencies input:eq(0)').val();
+    var usd = $('#exchange .currencies input:eq(1)').val();
+    var rub = $('#exchange .currencies input:eq(2)').val();
+
+    var input = {
+        'UAH': uah,
+        'USD': usd,
+        'RUB': rub
+    };
+
+    FW.ajax.send({
+        model: 'exchange',
+        method: 'set',
+        callback: callback,
+        data: {
+            data: input
+        },
+        decoder: {
+            data: 'JSON'
+        }
+
+    })
+
+}
+
 $(document).ready(function() {
 
     $('#newparamvalues #category').change(function() {

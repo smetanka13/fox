@@ -76,7 +76,8 @@
 			</div>
 		</div>
 		<div class="c_price">
-			<p class="main_title"><?= $product['price'] ?> &euro;</p>
+			<!-- <p class="main_title"><?= $product['price'] ?> &euro;</p> -->
+			<p class="main_title exchange-render" data-exchange="<?= $product['price'] ?>"><span class="exchange-val"></span> <span class="exchange-currency"></span></p>
 			<a href="product?category=<?= $product['category'] ?>&id=<?= $product['id_prod'] ?>">
 				<button class="wth_boot_but confirm_but">Подробнее</button>
 			</a>
@@ -91,11 +92,10 @@
   <div class="modal-dialog">
     <div class="modal-content siglog_window">
       <div class="modal-header">
-        <h4 class="modal-title main_title">Ваш заказ принят!
+        <h4 class="modal-title main_title">
+			Ваш заказ принят!
 			<?php if(User::logged()) { ?>
-
 			<br>Подробнее вы можете просмотреть в личном кабинете!
-
 			<?php } ?>
 		</h4>
       </div>
@@ -142,7 +142,7 @@
 							$('#order_modal').modal('hide');
 						}, 2000);
 						Cart.empty();
-						location.href = "/?msg=Заказ принят!";
+						location.href = "/?msg=Заказ принят! В ближайшее время с вами свяжется наш оператор. Ожидайте звонка.";
 					} else {
 						// data.error - текст ошибки
 						// Cart.empty();

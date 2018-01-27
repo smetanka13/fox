@@ -7,7 +7,8 @@
 		<div class="cnt"><div class="content"></div></div>
 	</div>
 
-	<i id="ajax_load" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+	<div id="ajax_load" class=""></div>
+
 	<script>
 		window.onload = function() {<?= (isset($_GET['msg']) ? "FW.showMessage('{$_GET['msg']}')" : '') ?>};
 	</script>

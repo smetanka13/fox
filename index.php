@@ -1,5 +1,9 @@
 <?php
 
+ini_set("log_errors", 1);
+ini_set("error_log", "./error.log");
+error_reporting(E_ALL);
+
 mb_internal_encoding('UTF-8');
 
 require_once 'vendor/autoload.php';

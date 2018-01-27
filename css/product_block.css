@@ -119,13 +119,16 @@
 	background: #F78400;
 }
 /* --- Цена --- */
-.prods_cnt .prods_bottom h4 {
-	line-height: 150%;
-	font-size: 13px;
-	color: #fafafa;
+.prods_cnt .prods_bottom div {
 	float: left;
-	margin: 5px;
+	margin: 0 0 0 10px;
 	cursor: default;
+	height: 100%;
+}
+.prods_cnt .prods_bottom div span {
+	color: #fafafa;
+	line-height: 30px;
+	font-size: 13px;
 }
 .prods_cnt:hover .prods_bottom {
 	bottom: 0;

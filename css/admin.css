@@ -145,6 +145,9 @@ table td {
   position: relative;
   top: 3px;
 }
+.cnt_all {
+    border-bottom: 1px solid silver;
+}
 
 @media (max-width:768px) {
   #accept_order_table .order_ord{
