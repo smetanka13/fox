@@ -7,8 +7,14 @@ Cart.updateVisual = function() {
 
     var cookie = $.cookie('cart');
     if(cookie != null) {
-        var cart = JSON.parse(cookie);
-        $('.header .cart .badge').html(Object.keys(cart).length);
+        let quantity = Object.keys(JSON.parse(cookie)).length;
+        $('.header .cart .badge').html(quantity);
+        if(quantity <= 0) {
+            $('.header .cart').attr('href', 'javascript:void(0)');
+            $('.header .cart').onclick(function() {
+                FW.ajax.error('Корзина пустая.');
+            });
+        }
     } else {
         return;
     }
@@ -16,9 +22,11 @@ Cart.updateVisual = function() {
         model: 'product',
         method: 'getFullPriceCookie',
         callback: function(data) {
+
             $('.header .cart .exchange-render').attr('data-exchange', data.output);
             $('.header .cart .exchange-render .exchange-currency').html(Exchange.getCurrency());
             $('.header .cart .exchange-render .exchange-val').html(Exchange.convert(data.output));
+
         },
         data: {
             cookie: cookie

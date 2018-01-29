@@ -96,11 +96,11 @@ class Search {
 
             foreach($params as $param) {
                 Category::checkParam($category, $param);
+                if(!is_array($values[$param])) $values[$param] = [$values[$param]];
                 $query .= ' AND (';
-                $exploaded_values = explode('/', $values[$param]);
-                foreach($exploaded_values as $i => $value) {
+                foreach($values[$param] as $i => $value) {
                     if($i > 0) $query .= ' OR ';
-                    $query .= "`$param` REGEXP " . FW::$DB->quote("^$value$|^$value/|/$value$|/$value/");
+                    $query .= "`$param` = " . FW::$DB->quote($value);
                 }
                 $query .= ')';
             }
@@ -150,22 +150,6 @@ class Search {
             ORDER BY $sort $direction
             LIMIT $from, $to
         ")->fetchAll();
-
-        // echo("
-        //     SELECT * FROM  $category
-        //     WHERE (
-        //         ($query_title)
-        //         $query_params
-        //     ) OR (
-        //         ($query_text)
-        //         $query_params
-        //     ) OR (
-        //         $params_scan
-        //     )
-        //     AND `discount` = '".intval($discount)."'
-        //     ORDER BY $sort $direction
-        //     LIMIT $from, $to
-        // ");
 
         $important_part = Product::processProdParams(array_slice($result, 0, $finds), TRUE);
 

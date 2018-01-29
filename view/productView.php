@@ -7,10 +7,10 @@
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 			<a href="<?=!empty($_DATA['prod']['image']) ? 'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] : 'images/icons/no_photo.svg'?>" data-lightbox="image-1">
 				<div class="pr_img cent_img">
-						<img src="<?=!empty($_DATA['prod']['image']) ? 'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] : 'images/icons/no_photo.svg'?>">
-						<?php if($_DATA['prod']['discount']) { ?>
-						<span class="discount_deg badge badge-pill badge-danger">-<?= $_DATA['prod']['discount_percent'] ?>%</span>
-						<?php } ?>
+					<img src="<?=!empty($_DATA['prod']['image']) ? 'material/catalog/'.$_DATA['prod']['category'].'/'.$_DATA['prod']['image'] : 'images/icons/no_photo.svg'?>">
+					<?php if($_DATA['prod']['discount']) { ?>
+					<span class="discount_deg badge badge-pill badge-danger">-<?= $_DATA['prod']['discount_percent'] ?>%</span>
+					<?php } ?>
 				</div>
 			</a>
 		</div>
@@ -42,7 +42,7 @@
 				<li><a href="#"><i class="fa fa-youtube-play fa-lg fa-fw" aria-hidden="true"></i> Видео на YouTube</a></li>
 				<?php } ?>
 				<li>
-					<span id="like" onclick="updateFavorite('<?= $_DATA['prod']['category'] ?>', <?= $_DATA['prod']['id_prod'] ?>)">
+					<span id="like" class="<?= User::checkFavorite($_DATA['prod']['category'], $_DATA['prod']['id_prod']) ? 'red' : '' ?>" onclick="updateFavorite('<?= $_DATA['prod']['category'] ?>', <?= $_DATA['prod']['id_prod'] ?>)">
 						<i class="fa fa-heart fa-lg fa-fw" aria-hidden="true"></i>
 						В избранное
 					</span>

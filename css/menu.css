@@ -8,6 +8,21 @@
     transition: left 0.3s ease;
     left: -330px;
 }
+#menu .menu-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+#menu .currency-selector {
+    width: 100%;
+    height: 40px;
+}
+#menu .currency-selector button {
+    height: 100%;
+    width: 25%;
+    border: 0;
+    float: left;
+}
 #menu.opened {
     left: 0;
 }
@@ -22,7 +37,7 @@
     background: #F7931E;
     transition: background 0.3s ease, right 0.1s ease;
     cursor: pointer;
-    z-index: -1;
+    z-index: 40px;
 }
 #menu #close_butt::after, #menu #close_butt::before {
     left: 10px;
@@ -55,6 +70,7 @@
 }
 
 #menu .heading {
+    margin-bottom: 20px;
     font-weight: bold;
     width: 100%;
     height: 50px;

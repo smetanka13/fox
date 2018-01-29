@@ -9,10 +9,40 @@ class View {
     ];
 
     public static function index() {
-        //self::$head['title'] = 'Hello world!';
+        self::$head['title'] = NAME . ' - ' . 'интернет-магазин автозапчастей';
     }
 
+    public static function blog() {
+        self::$head['title'] = NAME . ' - ' . 'новости';
+    }
 
+    public static function cart() {
+        self::$head['title'] = NAME . ' - ' . 'корзина';
+    }
+
+    public static function delivery() {
+        self::$head['title'] = NAME . ' - ' . 'доставка';
+    }
+
+    public static function contacts() {
+        self::$head['title'] = NAME . ' - ' . 'контакты';
+    }
+
+    public static function guarantee() {
+        self::$head['title'] = NAME . ' - ' . 'гарантия';
+    }
+
+    public static function callback() {
+        self::$head['title'] = NAME . ' - ' . 'отзывы';
+    }
+
+    public static function privacy() {
+        self::$head['title'] = NAME . ' - ' . 'политика конфиденциальности';
+    }
+
+    public static function personal() {
+        self::$head['title'] = NAME . ' - ' . 'личный кабинет';
+    }
 
     public static function product() {
 
@@ -31,18 +61,15 @@ class View {
         $rand_related_spec = [
             $rand_spec => $prod['params'][$rand_spec]
         ];
-        $related_prods = json_encode(
-    		Search::find(
-    			0,
-    			'',
-    			$prod['category'],
-    			$rand_related_spec,
-    			'bought',
-    			'ASC',
-    			10
-    		)['search_result'],
-    		JSON_UNESCAPED_UNICODE
-    	);
+        $related_prods = Search::find(
+            0,
+            '',
+            $prod['category'],
+            $rand_related_spec,
+            'bought',
+            'ASC',
+            10
+        )['search_result'];
 
         foreach ($related_prods as $i => $rel_prod) {
             if($rel_prod['id_prod'] == $_GET['id']) {
@@ -54,7 +81,7 @@ class View {
         self::$head['title'] = NAME . ' - ' . $prod['title'];
 
         return [
-            'related' => $related_prods,
+            'related' => json_encode($related_prods, JSON_UNESCAPED_UNICODE),
             'prod' => $prod
         ];
     }

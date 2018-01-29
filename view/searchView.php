@@ -117,10 +117,8 @@
         $('.sider ul li button .check').removeClass('selected');
 
         for(let i in Search.settings.val) {
-            let exploaded_params = Search.settings.val[i].split('/');
-
-            for(let j in exploaded_params) {
-                let param = $('.sider ul li button[data-param="'+i+'"][data-value="'+exploaded_params[j]+'"]');
+            for(let j in Search.settings.val[i]) {
+                let param = $('.sider ul li button[data-param="'+i+'"][data-value="'+Search.settings.val[i][j]+'"]');
                 if(param != null) {
                     param.find('.check').addClass('selected');
                 }

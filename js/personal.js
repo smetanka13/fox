@@ -73,12 +73,10 @@ function updateFavorite(category, id_prod) {
     callback: function (data) {
 			$( document ).ready(function () {
 				if (data.output == 'added') {
-					$('.pr_description #like').empty();
-					$('.pr_description #like').append('<i class="fa fa-heart fa-lg fa-fw" aria-hidden="true"></i> Удалить из избранного</span>');
+					$('.pr_description #like').html('<i class="fa fa-heart fa-lg fa-fw" aria-hidden="true"></i> Удалить из избранного</span>');
 					$('.pr_description #like').addClass('red');
 	    	}else{
-					$('.pr_description #like').empty();
-					$('.pr_description #like').append('<i class="fa fa-heart fa-lg fa-fw" aria-hidden="true"></i> В избранное</span>');
+					$('.pr_description #like').html('<i class="fa fa-heart fa-lg fa-fw" aria-hidden="true"></i> В избранное</span>');
 					$('.pr_description #like').removeClass('red');
 				}
 				if (data.status == 'false') {

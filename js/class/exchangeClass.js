@@ -3,7 +3,8 @@ Exchange = new Object();
 Exchange.layout = {
     UAH: 'грн.',
     RUB: 'руб.',
-    USD: '$',
+    USD: '&dollar;',
+    EUR: '&euro;',
 };
 Exchange.data = {};
 Exchange.selected_currency = ($.cookie('currency') != null) ? $.cookie('currency') : 'UAH';

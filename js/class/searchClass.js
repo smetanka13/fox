@@ -20,9 +20,9 @@ Search.settings = {
  */
 Search.settings.add = function (param, value) {
     if(typeof(Search.settings.val[param]) != 'undefined') {
-        Search.settings.val[param] += '/' + value;
+        Search.settings.val[param].push(value);
     } else {
-        Search.settings.val[param] = value;
+        Search.settings.val[param] = [value];
     }
 };
 
@@ -40,12 +40,13 @@ Search.settings.empty = function (param, value) {
  * @param value - value of parameter
  */
 Search.settings.delete = function (param, value) {
-    var tmp = Search.settings.val[param].split("/");
-    if(Object.keys(tmp).length == 1) {
+
+    let dummy = Search.settings.val[param];
+
+    if(dummy.length == 1) {
         delete Search.settings.val[param];
     } else {
-        tmp.splice(tmp.indexOf(value), 1);
-        Search.settings.val[param] = tmp.join('/');
+        Search.settings.val[param].splice(dummy.indexOf(value), 1);
     }
 };
 

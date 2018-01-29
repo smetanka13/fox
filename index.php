@@ -21,7 +21,7 @@ $pages = [
     'cart',
     'admin',
     'blog',
-    'personal_room',
+    'personal',
     'contacts',
     'remote',
     'delivery',

@@ -12,7 +12,7 @@
         </div>
         <!-- nav_menu -->
         <div class="collapse navbar-collapse color_head" id="header_menu">
-            <a href="pick"><div class="oil_parce"><span>ПОДБОР МАСЛА</span><img src="images/icons/drop.svg"></div></a>
+            <a href="javascript:void(0)" onclick="FW.ajax.error('Подбор масел находится на стадии тестирования.')"><div class="oil_parce"><span>ПОДБОР МАСЛА</span><img src="images/icons/drop.svg"></div></a>
 
                 <form class="visible-xs xs_form">
                   <div class="form-group">
@@ -76,7 +76,7 @@
                             <?php if(!User::logged()) { ?>
                             <span data-toggle='modal' data-target='#signin_modal'>Вход/Регистрация</span>
                             <?php } else { ?>
-                            <a href="personal_room"><span>Личный кабинет</span></a>
+                            <a href="personal"><span>Личный кабинет</span></a>
                             <?php } ?>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
     $( document ).ready(function() {
 
     	$('.table #callback').mask("+38 (099) 999-99-99", {autoclear: false});
-      $('#callback_mob input').mask("+38 (099) 999-99-99", {autoclear: false});
+        $('#callback_mob input').mask("+38 (099) 999-99-99", {autoclear: false});
 
         $(window).scroll(function(){
 

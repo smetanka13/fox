@@ -35,6 +35,14 @@ class User {
         ]);
     }
 
+    public static function checkFavorite($category, $id_prod) {
+        return FW::$DB->has('user_favorite', [
+            'category' => $category,
+            'id_prod' => $id_prod,
+            'id_user' => self::get('id_user')
+        ]);
+    }
+
     public static function updateFavorite($category, $id_prod) {
 
         require_once 'model/productModel.php';
@@ -42,11 +50,7 @@ class User {
         if(!Product::getById($category, $id_prod))
             throw new InvalidArgumentException("В категории '$category' нет продукта с айди $id_prod.");
 
-        if(FW::$DB->has('user_favorite', [
-            'category' => $category,
-            'id_prod' => $id_prod,
-            'id_user' => self::get('id_user')
-        ])) {
+        if(self::checkFavorite($category, $id_prod)) {
 
             FW::$DB->delete('user_favorite', [
                 'category' => $category,
@@ -106,7 +110,7 @@ class User {
         ]);
 
         if(empty($id_user))
-            throw new InvalidArgumentException("No user found with that email.");
+            throw new InvalidArgumentException("Пользователь с такой почтой не найден.");
 
         $key = FW::generateKey();
 
@@ -131,16 +135,16 @@ class User {
         self::checkPass($pass);
 
         if($confirm != $pass)
-            throw new InvalidArgumentException("Repeat password correctly.");
+            throw new InvalidArgumentException("Повторите пароль верно.");
         if(empty($confirm))
-            throw new InvalidArgumentException("Repeat password.");
+            throw new InvalidArgumentException("Повторите пароль.");
 
         $id_user = FW::$DB->get('recover', 'id_user', [
             'key' => $key
         ]);
 
         if(empty($id_user))
-            throw new InvalidArgumentException("Wrong key.");
+            throw new InvalidArgumentException("Неверный ключ.");
 
         FW::$DB->update('user', [
             'pass' => self::hashPass($login, $pass)
@@ -159,9 +163,9 @@ class User {
         self::checkPass($pass);
 
         if($confirm != $pass)
-            throw new InvalidArgumentException("Repeat password correctly.");
+            throw new InvalidArgumentException("Повторите пароль верно.");
         if(empty($confirm))
-            throw new InvalidArgumentException("Repeat password.");
+            throw new InvalidArgumentException("Повторите пароль.");
 
 
         FW::$DB->update('user', [
@@ -178,7 +182,7 @@ class User {
 
     public static function registrate($login, $email, $pass, $confirm) {
 
-        if(!preg_match("/^([a-z0-9_\.\-]{1,20})@([a-z0-9\.\-]{1,20})\.([a-z]{2,4})$/is", $email))
+        if(!preg_match("/^([a-z0-9_\.\-]){1,}@([a-z0-9\.\-]){1,}\.([a-z0-9\.\-]){1,}$/is", $email))
             throw new InvalidArgumentException("Неверный формат почты.");
 
         if(FW::$DB->has('user_verify', [
@@ -217,7 +221,7 @@ class User {
 
             $subject = "[".NAME."] Регистрация.";
             $headers = 'From: '.NAME. "\r\n";
-            $message = "Что бы активировать ваш аккаунт пройдите по ссылке: ".URL."/remote?model=user&method=verify&key=$key";
+            $message = "Что бы активировать ваш аккаунт пройдите по ссылке: ".URL."remote?model=user&method=verify&key=$key";
             if(!mail($email, $subject, $message, $headers)) {
                 throw new RuntimeException('Error sending mail.');
             }

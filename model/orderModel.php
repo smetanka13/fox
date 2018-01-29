@@ -44,6 +44,11 @@ class Order {
     }
     public static function add($pay_way, $delivery_way, $public, $city, $address, $email, $phone, $text) {
 
+        if(FW::$DB->has('order', [
+            'ip' => $_SERVER['REMOTE_ADDR']
+        ]))
+            throw new InvalidArgumentException("Вы уже отправили заказ, ожидайте звонка.");
+
         if(empty($public))
             throw new InvalidArgumentException("Введите ФИО.");
         if(empty($pay_way))
@@ -78,7 +83,8 @@ class Order {
                 'phone' => $phone,
                 'text' => $text,
                 'date' => TIME,
-                'price' => Product::getFullPriceCookie($_COOKIE['cart'])
+                'price' => Product::getFullPriceCookie($_COOKIE['cart']),
+                'ip' => $_SERVER['REMOTE_ADDR']
             ]);
 
             $id_order = FW::$DB->id();
