@@ -131,7 +131,7 @@ class View {
 
         $result['found'] = $result['pages_left'] * $result['found'];
 
-        self::$head['title'] = NAME . ' - ' . "найдено более {$result['found']} товаров в категории '$category'";
+        self::$head['title'] = NAME . ' - ' . "поиск в категории '$category'";
 
         return [
             'prods' => $result['search_result'],
